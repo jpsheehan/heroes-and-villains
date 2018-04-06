@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Denotes the type of area an Area object is.

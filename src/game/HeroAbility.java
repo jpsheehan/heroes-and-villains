@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Represents the different kinds of abilities that Heroes can have.

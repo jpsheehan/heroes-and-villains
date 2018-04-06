@@ -1,5 +1,6 @@
+package game;
 
-public class GuessTheNumber extends Minigame {
+public class PaperScissorsRock extends Minigame {
 
 	@Override
 	public void initialise(Ability[] abilities) {

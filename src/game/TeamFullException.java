@@ -1,3 +1,4 @@
+package game;
 
 public class TeamFullException extends Exception {
 

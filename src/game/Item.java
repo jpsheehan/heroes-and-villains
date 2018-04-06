@@ -1,3 +1,4 @@
+package game;
 
 public abstract class Item implements Buyable, Nameable {
 	

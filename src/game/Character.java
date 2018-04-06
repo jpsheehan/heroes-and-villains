@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Represents any character in the game.

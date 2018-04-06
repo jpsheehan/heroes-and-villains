@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Represents a Map as described in section 2.3 of the specification.

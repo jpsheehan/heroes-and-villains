@@ -1,3 +1,4 @@
+package game;
 
 public enum ItemAbility implements Ability {
 	WIN_ON_DRAW, // for dice game and paper scissors rock

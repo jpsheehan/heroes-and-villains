@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Represents a Hero as described in section 3.2 of the specification.

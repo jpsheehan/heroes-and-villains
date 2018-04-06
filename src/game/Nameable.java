@@ -1,3 +1,4 @@
+package game;
 
 /**
  * An interface that specifies the object has a name.

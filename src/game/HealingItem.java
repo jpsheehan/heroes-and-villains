@@ -1,3 +1,4 @@
+package game;
 
 /**
  * The HealingItem class as described in section 3.6 of the specification.

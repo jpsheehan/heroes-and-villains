@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Represents an Area within a City. A City has five Areas.

@@ -1,3 +1,4 @@
+package game;
 
 /**
  * Denotes the type of minigame a Minigame instance is.

@@ -1,3 +1,4 @@
+package game;
 
 /**
  * The types of Heroes that exist in the game.
