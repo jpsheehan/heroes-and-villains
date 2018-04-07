@@ -11,7 +11,7 @@ public final class TextUserInterfaceHelpers {
 	}
 	
 	public static boolean showYesNo(String question) {
-		
+		return false;
 	}
 	
 	public static int showChoice(String message, String[] options) {
