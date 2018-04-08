@@ -7,14 +7,74 @@ import java.nio.charset.Charset;
 
 public class TextUserInterfaceHelpers {
 	
-	public static void showMessage(String message) {
+	/**
+	 * An array of Strings that mean "yes".
+	 */
+	private static String[] affirmativeStrings = new String[] {
+		"yes",
+		"y",
+		"please"
+	};
+	
+	/**
+	 * An array of Strings that mean "no";
+	 */
+	private static String[] negativeStrings = new String[] {
+		"no",
+		"n",
+		"nah",
+		"nope"
+	};
+	
+	/**
+	 * Returns 2 if the input string is truthy, returns 1 if it's falsey and returns 0 if it's something else.
+	 * @param input The String to test against
+	 * @return
+	 */
+	private static int getYesNoUnknown(String input) {
 		
-		System.out.println(message);
+		for (String str : affirmativeStrings) {
+			if (str.equals(input))
+				return 2;
+		}
+		
+		for (String str : negativeStrings) {
+			if (str.equals(input)) {
+				return 1;
+			}
+		}
+		
+		return 0;
 		
 	}
 	
+	/**
+	 * Shows a yes/no question to the user.
+	 * @param question The question to prompt them with
+	 * @return Returns true if the user said yes.
+	 */
 	public static boolean showYesNo(String question) {
-		return false;
+		
+		int choice = 0;
+		
+		// Print the question
+		System.out.println(question);
+		
+		// Prompt for and read the user's input
+		System.out.print("> ");
+		String input = readLine().toLowerCase();
+		
+		// Keep asking while the input is invalid.
+		while ((choice = getYesNoUnknown(input)) == 0) {
+			
+			System.out.print("> ");
+			input = readLine().toLowerCase();
+			
+		}
+		
+		// Return the correct value
+		return choice == 2;
+		
 	}
 	
 	/**
@@ -128,21 +188,18 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
+	/**
+	 * Appends a String with a particular character until it is a certain length.
+	 * @param str The String to pad.
+	 * @param pad The padding character.
+	 * @param width The width of the desired String.
+	 * @return Returns a new padded String.
+	 */
 	public static String padRight(String str, Character pad, int width) {
 		
 		int numberOfPads = width - str.length();
 		
 		return str + repeatString(pad.toString(), numberOfPads);
-	}
-	
-	public static void main(String[] args) {
-		
-		String[] options = new String[] {"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
-		
-		int choice = showChoice("What is your favourite number?", options);
-		
-		System.out.println(choice);
-		
 	}
 	
 }
