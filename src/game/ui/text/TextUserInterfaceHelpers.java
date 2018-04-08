@@ -47,4 +47,20 @@ public final class TextUserInterfaceHelpers {
 		
 	}
 	
+	/**
+	 * Returns a copy of a String repeated n times.
+	 * @param str The String to repeat.
+	 * @param n The number of times to repeat the String.
+	 * @return
+	 */
+	public String repeatString(String str, Integer n) {
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = 0; i < n; i++) {
+			builder.append(str);
+		}
+		
+		return builder.toString();
+	}
+	
 }
