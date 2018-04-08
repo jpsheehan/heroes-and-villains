@@ -6,7 +6,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
-public final class TextUserInterfaceHelpers {
+public class TextUserInterfaceHelpers {
 	
 	public static void showMessage(String message) {
 		
@@ -65,7 +65,7 @@ public final class TextUserInterfaceHelpers {
 			CharBuffer charBuffer = Charset.forName("UTF-8").decode(byteBuffer);
 			
 			// Return the resulting String
-			return charBuffer.toString();
+			return charBuffer.toString().trim();
 			
 		} catch (IOException e) {
 			
