@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.util.Scanner;
 
 public class TextUserInterfaceHelpers {
 	
@@ -18,28 +17,41 @@ public class TextUserInterfaceHelpers {
 		return false;
 	}
 	
+	/**
+	 * Prompts the user to select an item from an array.
+	 * @param message The message to show to the user.
+	 * @param options The options to display.
+	 * @return Returns the index of the Array that the user chose.
+	 */
 	public static int showChoice(String message, String[] options) {
 		
+		// Print the message
 		System.out.println(message);
 		
+		// Print the options
 		for (int i = 0; i < options.length; i++) {
 			
-			System.out.println(String.format("  %d) %s", i + 1, options[i]));
+			// Create a string that has a length of 4 with the number "right aligned"
+			String numberString = padLeft(new Integer(i + 1).toString(), ' ', 4);
+			
+			// Print the option
+			System.out.println(String.format("%s) %s", numberString, options[i]));
 			
 		}
 		
-		Scanner scanner = new Scanner(System.in);
-		
+		// Prompt for and read the user's choice
 		System.out.print("> ");
-		int choice = scanner.nextInt();
+		int choice = Integer.parseInt(readLine());
 		
-		while (choice < 1 || choice >= options.length) {
-
+		// While the user's choice is invalid, keep asking them
+		while (choice < 1 || choice > options.length) {
+			
 			System.out.print("> ");
-			choice = scanner.nextInt();
+			choice = Integer.parseInt(readLine());
 			
 		}
 		
+		// Return the index of the String array that the user chose.
 		return choice - 1;
 		
 	}
@@ -99,6 +111,38 @@ public class TextUserInterfaceHelpers {
 		}
 		
 		return builder.toString();
+	}
+	
+	/**
+	 * Prepends a String with a particular character until it is a certain length.
+	 * @param str The String to pad.
+	 * @param pad The padding character
+	 * @param width The width of the desired String
+	 * @return Returns a new padded String.
+	 */
+	public static String padLeft(String str, Character pad, int width) {
+		
+		int numberOfPads = width - str.length();
+		
+		return repeatString(pad.toString(), numberOfPads) + str;
+		
+	}
+	
+	public static String padRight(String str, Character pad, int width) {
+		
+		int numberOfPads = width - str.length();
+		
+		return str + repeatString(pad.toString(), numberOfPads);
+	}
+	
+	public static void main(String[] args) {
+		
+		String[] options = new String[] {"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
+		
+		int choice = showChoice("What is your favourite number?", options);
+		
+		System.out.println(choice);
+		
 	}
 	
 }
