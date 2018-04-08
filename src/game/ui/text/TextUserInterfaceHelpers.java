@@ -44,7 +44,9 @@ public final class TextUserInterfaceHelpers {
 	 * Clears the screen.
 	 */
 	public static void clear() {
-		
+		// the terminal will likely be 25 lines high
+		// TODO: find a reliable method for detecting console height
+		System.out.println(repeatString("\n", 25));
 	}
 	
 	/**
@@ -53,7 +55,7 @@ public final class TextUserInterfaceHelpers {
 	 * @param n The number of times to repeat the String.
 	 * @return
 	 */
-	public String repeatString(String str, Integer n) {
+	public static String repeatString(String str, Integer n) {
 		StringBuilder builder = new StringBuilder();
 		
 		for (int i = 0; i < n; i++) {
