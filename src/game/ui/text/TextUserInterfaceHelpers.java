@@ -85,6 +85,8 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static int showChoice(String message, String[] options) {
 		
+		int choice;
+		
 		// Print the message
 		System.out.println(message);
 		
@@ -99,17 +101,7 @@ public class TextUserInterfaceHelpers {
 			
 		}
 		
-		// Prompt for and read the user's choice
-		System.out.print("> ");
-		int choice = Integer.parseInt(readLine());
-		
-		// While the user's choice is invalid, keep asking them
-		while (choice < 1 || choice > options.length) {
-			
-			System.out.print("> ");
-			choice = Integer.parseInt(readLine());
-			
-		}
+		choice = getNumberWithBounds(1, options.length);
 		
 		// Return the index of the String array that the user chose.
 		return choice - 1;
@@ -202,4 +194,80 @@ public class TextUserInterfaceHelpers {
 		return str + repeatString(pad.toString(), numberOfPads);
 	}
 	
+	
+	/**
+	 * Prompts the user to enter a number between min and max (inclusive).
+	 * @param min The minimum bound (inclusive).
+	 * @param max The maximum bound (inclusive).
+	 * @return Returns the entered number.
+	 */
+	public static Integer getNumberWithBounds(Integer min, Integer max) {
+		
+		return getNumberWithBounds(min, max, "> ");
+		
+	}
+	
+	/**
+	 * Prompts the user to enter a number between min and max (inclusive).
+	 * @param min The minimum bound (inclusive).
+	 * @param max The maximum bound (inclusive).
+	 * @param prelude The prompt beginning each line.
+	 * @return Returns the entered number.
+	 */
+	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) {
+		
+		int choice;
+		
+		// Check for any erroneous arguments
+		if (min > max) {
+			
+			throw new IllegalArgumentException("min cannot be greater than max");
+			
+		}
+
+		// Get the first input
+		System.out.print(prelude);
+		
+		try {
+		
+			choice = Integer.parseInt(readLine());
+			
+		}
+		catch (NumberFormatException err) {
+			
+			choice = min - 1;
+			
+		}
+		
+		// Keep getting input until it is valid.
+		while (choice < min || choice > max) {
+			
+			System.out.print(prelude);
+			
+			try {
+				
+				choice = Integer.parseInt(readLine());
+				
+			}
+			catch (NumberFormatException err) {
+				
+				choice = min - 1;
+				
+			}
+		}
+		
+		return choice;
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		String[] colours = new String[] { "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "Grey", "White" };
+		
+		int index = showChoice("Select your favourite colour:", colours);
+		
+		System.out.println("You selected " + (index + 1));
+		System.out.println("colours[" + index + "] = \"" + colours[index] + "\"");
+		
+	}
 }
