@@ -2,16 +2,8 @@ package game;
 
 public class PaperScissorsRock extends Minigame {
 
-	@Override
-	public void initialise(Ability[] abilities) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public MinigameState getState() {
-		// TODO Auto-generated method stub
-		return null;
+	public PaperScissorsRock(Ability[] abilities) {
+		super(abilities);
 	}
 
 	@Override
@@ -36,6 +28,12 @@ public class PaperScissorsRock extends Minigame {
 	public int getRemainingTurns() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public MinigameType getType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
