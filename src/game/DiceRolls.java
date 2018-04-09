@@ -2,7 +2,7 @@ package game;
 
 import java.util.Random;
 
-public class DiceRolls extends Minigame {
+public class DiceRolls extends Minigame<Object, Integer> {
 	
 	private int heroRoll;
 	private int villainRoll;
@@ -89,12 +89,12 @@ public class DiceRolls extends Minigame {
 	}
 
 	@Override
-	public Object getHeroLastTurn() {
+	public Integer getHeroLastTurn() {
 		return heroRoll;
 	}
 
 	@Override
-	public Object getVillainLastTurn() {
+	public Integer getVillainLastTurn() {
 		return villainRoll;
 	}
 
