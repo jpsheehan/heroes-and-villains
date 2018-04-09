@@ -4,10 +4,11 @@ package game;
  * A parent class of all the games.
  * @author jesse
  *
- * @param <S> The argument type passed in to the doTurn method.
- * @param <T> The return type of the getHeroLastTurn and getVillainLastTurn methods.
+ * @param <C> The argument type passed in to the doTurn method.
+ * @param <H> The return type of the getHeroLastTurn method.
+ * @param <V> The return type of the getVillainLastTurn method.
  */
-public abstract class Minigame<S, T> {
+public abstract class Minigame<C, H, V> {
 	
 	private Ability[] abilities;
 	protected MinigameState state;
@@ -34,11 +35,11 @@ public abstract class Minigame<S, T> {
 		return this.state;
 	}
 	
-	public abstract void doTurn(S choice);
+	public abstract void doTurn(C choice);
 	
-	public abstract T getHeroLastTurn();
+	public abstract H getHeroLastTurn();
 	
-	public abstract T getVillainLastTurn();
+	public abstract V getVillainLastTurn();
 	
 	public abstract int getRemainingTurns();
 	
