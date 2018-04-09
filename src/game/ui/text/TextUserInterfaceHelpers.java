@@ -13,7 +13,9 @@ public class TextUserInterfaceHelpers {
 	private static String[] affirmativeStrings = new String[] {
 		"yes",
 		"y",
-		"please"
+		"1",
+		"yup",
+		"yeah"
 	};
 	
 	/**
@@ -22,8 +24,9 @@ public class TextUserInterfaceHelpers {
 	private static String[] negativeStrings = new String[] {
 		"no",
 		"n",
-		"nah",
-		"nope"
+		"0",
+		"nope",
+		"nah"
 	};
 	
 	/**
@@ -33,17 +36,20 @@ public class TextUserInterfaceHelpers {
 	 */
 	private static int getYesNoUnknown(String input) {
 		
+		// Return 2 if the input is in the affirmativeStrings array
 		for (String str : affirmativeStrings) {
 			if (str.equals(input))
 				return 2;
 		}
 		
+		// Return 1 if the input is in the negativeStrings array
 		for (String str : negativeStrings) {
 			if (str.equals(input)) {
 				return 1;
 			}
 		}
 		
+		// Otherwise return 0
 		return 0;
 		
 	}
@@ -58,7 +64,7 @@ public class TextUserInterfaceHelpers {
 		int choice = 0;
 		
 		// Print the question
-		System.out.println(question);
+		System.out.println(question + " (y/n)");
 		
 		// Prompt for and read the user's input
 		System.out.print("> ");
@@ -123,6 +129,13 @@ public class TextUserInterfaceHelpers {
 			
 			// Read the bytes from the System.in
 			int bytesRead = System.in.read(buffer);
+			
+			// Return an empty string if we are at the end of the stream
+			if (bytesRead == -1) {
+				
+				return "";
+				
+			}
 			
 			// Create a ByteBuffer from the byte array and convert to a UTF-8 CharBuffer
 			ByteBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, bytesRead);
@@ -260,14 +273,4 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
-	public static void main(String[] args) {
-		
-		String[] colours = new String[] { "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Black", "Grey", "White" };
-		
-		int index = showChoice("Select your favourite colour:", colours);
-		
-		System.out.println("You selected " + (index + 1));
-		System.out.println("colours[" + index + "] = \"" + colours[index] + "\"");
-		
-	}
 }
