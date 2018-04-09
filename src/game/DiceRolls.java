@@ -2,7 +2,7 @@ package game;
 
 import java.util.Random;
 
-public class DiceRolls extends Minigame<Object, Integer> {
+public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	
 	/**
 	 * The number the hero rolls.
