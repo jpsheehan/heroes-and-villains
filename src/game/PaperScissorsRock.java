@@ -40,6 +40,7 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 	/*might be useful to have a list of options
 	String toString() {
 		return availableChoices;
+		
 	}*/
 	
 	@Override
