@@ -40,7 +40,24 @@ public class Hero extends Character {
 	 * Returns the ability of the Hero (depends on its type).
 	 */
 	public HeroAbility getAbility() {
-		return null; // TODO: stub
+		switch (this.type) {
+		case ARTS_STUDENT:
+			return HeroAbility.WITTY_PHRASES;
+		case COMMERCE_STUDENT:
+			return HeroAbility.CHEAPER_ITEMS;
+		case COMPUTER_SCIENCE_STUDENT:
+			return HeroAbility.TELEPORT;
+		case ENGINEERING_STUDENT:
+			return HeroAbility.VILLAINS_LESS_20_HEALTH;
+		case LAW_STUDENT:
+			return HeroAbility.PREVENTS_ROBBERY;
+		case MATHS_STUDENT:
+			return HeroAbility.IMPROVED_ODDS;
+		case SCIENCE_STUDENT:
+			return HeroAbility.INCREASED_RECOVERY_RATE;
+		default:
+			throw new AssertionError("You shouldn't get this. Is there another HeroType that we don't know about?");	
+		}
 	}
 	
 	/**
