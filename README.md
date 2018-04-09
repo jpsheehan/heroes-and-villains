@@ -25,9 +25,15 @@ There are several different types of Students in our game. Each student has a na
 
 ### **Arts**
 
-**Flavour Text:** TODO (some sort of poem?)
+**Flavour Text:**
 
-**Ability:** *Throw Money* - Literally throws money away, having no effect on the game whatsoever. No one knows why they keep doing it. May occassionally have an additional effect *Waste Time* that hangs the game for several seconds.
+    There once was a fella named Terry,
+    Who thought that English sounded rather cheery.
+    The top of his class,
+    He easily passed.
+    And now he works down at the dairy.
+
+**Ability:** *Throw Money* - Literally throws money away, having no positive effect on the game whatsoever. No one knows why they keep doing it. May occassionally have an additional effect *Waste Time* that hangs the game for several seconds.
 
 ### **Mathematics/Statistics**
 
