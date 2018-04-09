@@ -3,12 +3,14 @@ package game;
 public abstract class Minigame {
 	
 	private Ability[] abilities;
+	protected MinigameState state;
 
 	public Minigame(Ability[] abilities) {
 		this.abilities = abilities;
+		state = MinigameState.PLAYING;
 	}
 	
-	public boolean hasAbility(Ability ability) {
+	public final boolean hasAbility(Ability ability) {
 		
 		for (Ability ourAbility : abilities) {
 			
@@ -21,7 +23,9 @@ public abstract class Minigame {
 		
 	}
 	
-	public abstract MinigameState getState();
+	public final MinigameState getState()  {
+		return this.state;
+	}
 	
 	public abstract void doTurn(Object choice);
 	
