@@ -17,7 +17,7 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 	}
 
 	/**
-	 * String array contains game options: paper, scissors, rock
+	 * String array contains game options: Paper, Scissors, Rock
 	 */
 	// what about a Joker?
 	private String[] availableChoices = new String[3];
@@ -37,6 +37,11 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 	 */
 	private String villainChoice = availableChoices[rand.nextInt(2)];
 	
+	/*might be useful to have a list of options
+	String toString() {
+		return availableChoices;
+	}*/
+	
 	@Override
 	public void doTurn(String choice) {
 		heroChoice = choice;
@@ -47,6 +52,7 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 		if (state == MinigameState.PLAYING) {
 			
 			//currently these are hardcoded, would be better to make variables / constants
+			// hmmm these are all hardcoded with leading capitals
 			if (heroChoice == "Paper") {
 				if (villainChoice == "Scissors") {
 					state = MinigameState.LOST;
