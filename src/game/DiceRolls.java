@@ -4,9 +4,20 @@ import java.util.Random;
 
 public class DiceRolls extends Minigame<Object, Integer> {
 	
+	/**
+	 * The number the hero rolls.
+	 */
 	private int heroRoll;
+	
+	/**
+	 * The number the villain rolls.
+	 */
 	private int villainRoll;
 	
+	/**
+	 * Creates a new DiceRolls game
+	 * @param abilities The abilities to include in the game.
+	 */
 	public DiceRolls(Ability[] abilities) {
 		super(abilities);
 	}
@@ -22,8 +33,18 @@ public class DiceRolls extends Minigame<Object, Integer> {
 		
 	}
 	
+	/**
+	 * Performs the turn for the hero.
+	 * @param choice Must be null as it is not used.
+	 */
 	@Override
 	public void doTurn(Object choice) {
+		
+		if (choice != null) {
+			
+			throw new IllegalArgumentException("choice should be null for DiceRolls game.");
+			
+		}
 		
 		if (state == MinigameState.PLAYING) {
 			
@@ -88,29 +109,53 @@ public class DiceRolls extends Minigame<Object, Integer> {
 
 	}
 
+	/**
+	 * Returns the number the hero rolled.
+	 */
 	@Override
 	public Integer getHeroLastTurn() {
 		return heroRoll;
 	}
 
+	/**
+	 * Returns the number the villain rolled.
+	 */
 	@Override
 	public Integer getVillainLastTurn() {
 		return villainRoll;
 	}
 
+	/**
+	 * Returns the number of turns remaining.
+	 */
 	@Override
 	public int getRemainingTurns() {
-		return 0;
+		
+		if (state == MinigameState.PLAYING) {
+			
+			return 1;
+			
+		} else {
+			
+			return 0;
+			
+		}
 	}
 
+	/**
+	 * Returns MinigameType.DICE_ROLLS.
+	 */
 	@Override
 	public MinigameType getType() {
 		return MinigameType.DICE_ROLLS;
 	}
 	
+	/**
+	 * An isolated test of the DiceRolls minigame.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
-		// Add the abilities that you want to start the game with here:
 		Ability[] abilities = new Ability[] {
 			// HeroAbility.IMPROVED_ODDS,
 			// ItemAbility.WIN_ON_DRAW
