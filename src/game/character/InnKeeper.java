@@ -5,14 +5,14 @@ public class InnKeeper extends Character {
 	/**
 	 * The dialogue the InnKeeper will use.
 	 */
-	private ShopDialogue dialogue;
+	private Dialogue dialogue;
 	
 	/**
 	 * Create's a new InnKeeper with a name and a ShopDialogue.
 	 * @param name The name of the InnKeeper.
 	 * @param dialogue The dialogue that the InnKeeper will use.
 	 */
-	public InnKeeper(String name, ShopDialogue dialogue) {
+	public InnKeeper(String name, Dialogue dialogue) {
 		super(name);
 		
 		this.dialogue = dialogue;
@@ -21,7 +21,7 @@ public class InnKeeper extends Character {
 	/**
 	 * Returns the ShopDialogue of the InnKeeper
 	 */
-	public ShopDialogue getDialogue() {
+	public Dialogue getDialogue() {
 		return this.dialogue;
 	}
 
