@@ -1,4 +1,6 @@
-package game;
+package game.item;
+
+import game.minigame.MinigameType;
 
 /**
  * Represents a PowerUpItem as described in section 3.5 of the specification.

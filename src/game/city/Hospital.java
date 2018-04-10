@@ -1,4 +1,4 @@
-package game;
+package game.city;
 
 /**
  * Represents the Hospital as described on section 2.3.4 of the specification.

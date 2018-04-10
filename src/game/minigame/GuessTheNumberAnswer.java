@@ -1,4 +1,4 @@
-package game;
+package game.minigame;
 
 /**
  * Denotes whether the player guessed too high, too low or correctly.

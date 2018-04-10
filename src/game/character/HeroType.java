@@ -1,4 +1,4 @@
-package game;
+package game.character;
 
 /**
  * The types of Heroes that exist in the game.

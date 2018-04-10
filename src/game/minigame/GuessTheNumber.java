@@ -1,7 +1,10 @@
-package game;
+package game.minigame;
 
 import java.util.Random;
 
+import game.Ability;
+import game.character.HeroAbility;
+import game.item.ItemAbility;
 import game.ui.text.TextUserInterfaceHelpers;
 
 public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAnswer> {

@@ -1,4 +1,4 @@
-package game;
+package game.character;
 
 public class InnKeeper extends Character {
 	

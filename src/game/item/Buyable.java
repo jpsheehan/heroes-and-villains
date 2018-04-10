@@ -1,4 +1,4 @@
-package game;
+package game.item;
 
 /**
  * Represents something that can be bought with money in the Shop.

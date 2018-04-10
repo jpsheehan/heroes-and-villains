@@ -1,4 +1,4 @@
-package game;
+package game.minigame;
 
 /**
  * Represents the state of a game. All games begin as PLAYING.

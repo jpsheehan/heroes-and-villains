@@ -1,4 +1,6 @@
-package game;
+package game.character;
+
+import game.Nameable;
 
 /**
  * Represents any character in the game.

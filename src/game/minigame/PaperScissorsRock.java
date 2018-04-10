@@ -1,4 +1,4 @@
-package game;
+package game.minigame;
 
 /*
  * 2018_04_07
@@ -9,6 +9,9 @@ package game;
  */
 
 import java.util.Random;
+
+import game.Ability;
+import game.item.ItemAbility;
 import game.ui.text.TextUserInterfaceHelpers;
 import java.util.Scanner;
 

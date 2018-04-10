@@ -1,6 +1,10 @@
-package game;
+package game.minigame;
 
 import java.util.Random;
+
+import game.Ability;
+import game.character.HeroAbility;
+import game.item.ItemAbility;
 
 public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	

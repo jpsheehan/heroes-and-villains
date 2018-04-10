@@ -1,4 +1,4 @@
-package game;
+package game.minigame;
 
 /**
  * Denotes the type of minigame a Minigame instance is.

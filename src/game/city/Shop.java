@@ -1,6 +1,9 @@
-package game;
+package game.city;
 
 import java.util.ArrayList;
+
+import game.character.InnKeeper;
+import game.item.Item;
 
 /**
  * The Shop class as described in section 2.3.2 of the specification.

@@ -1,4 +1,6 @@
-package game;
+package game.item;
+
+import game.Nameable;
 
 public abstract class Item implements Buyable, Nameable {
 	

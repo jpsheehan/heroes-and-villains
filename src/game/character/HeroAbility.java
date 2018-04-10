@@ -1,4 +1,6 @@
-package game;
+package game.character;
+
+import game.Ability;
 
 /**
  * Represents the different kinds of abilities that Heroes can have.

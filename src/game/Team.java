@@ -1,6 +1,8 @@
 package game;
 import java.util.ArrayList;
 
+import game.character.Hero;
+
 public class Team implements Nameable {
 
 	private String name;

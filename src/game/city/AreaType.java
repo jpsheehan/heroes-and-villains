@@ -1,4 +1,4 @@
-package game;
+package game.city;
 
 /**
  * Denotes the type of area an Area object is.

@@ -1,4 +1,6 @@
-package game;
+package game.minigame;
+
+import game.Ability;
 
 /**
  * A parent class of all the games.
