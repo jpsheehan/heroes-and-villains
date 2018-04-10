@@ -1,6 +1,6 @@
 package game.ui.text;
 
-import game.UserInterface;
+import game.ui.UserInterface;
 
 public class TextUserInterface extends UserInterface {
 
