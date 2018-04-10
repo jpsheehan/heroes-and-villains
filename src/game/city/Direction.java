@@ -1,4 +1,4 @@
-package game;
+package game.city;
 /**
  * The direction an area resides in. The home base always resides in the centre.
  *
