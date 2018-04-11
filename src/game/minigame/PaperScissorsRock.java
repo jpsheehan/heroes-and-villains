@@ -171,7 +171,7 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 		
 		while (game.getState() == MinigameState.PLAYING) {
 			
-			String input = TextUserInterfaceHelpers.readLine();
+			String input = TextUserInterfaceHelpers.readLine("> ");
 			PaperScissorsRockMove move = PaperScissorsRockMove.fromString(input);
 			
 			// get input again if necessary
@@ -185,6 +185,7 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 			System.out.println(String.format("The Villain chose: " + game.getVillainLastTurn().toString()));
 			System.out.println(String.format("The game was %s!", game.getState().toString().toLowerCase()));
 			
+			// Print the abilities
 			String[] abilityStrings = new String[abilities.length];
 			
 			for (int i = 0; i < abilities.length; i++) {

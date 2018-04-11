@@ -119,6 +119,15 @@ public class TextUserInterfaceHelpers {
 	 * @return
 	 */
 	public static String readLine() {
+		return readLine("");
+	}
+	
+	/**
+	 * Returns one line of text from the standard input.
+	 * @param prelude The text to place before entering something.
+	 * @return
+	 */
+	public static String readLine(String prelude) {
 		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
@@ -126,6 +135,8 @@ public class TextUserInterfaceHelpers {
 		byte[] buffer = new byte[BUFFER_SIZE];
 		
 		try {
+			
+			System.out.print(prelude);
 			
 			// Read the bytes from the System.in
 			int bytesRead = System.in.read(buffer);
