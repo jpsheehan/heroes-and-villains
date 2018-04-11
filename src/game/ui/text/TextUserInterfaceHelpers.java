@@ -7,6 +7,41 @@ import java.nio.charset.Charset;
 
 public class TextUserInterfaceHelpers {
 	
+	private static int consoleWidth = 80, consoleHeight = 25;
+	
+	public static void setConsoleWidth(int width) {
+		TextUserInterfaceHelpers.consoleWidth = width;
+	}
+	
+	public static void setConsoleHeight(int height) {
+		TextUserInterfaceHelpers.consoleHeight = height;
+	}
+	
+	public static int getConsoleWidth() {
+		return TextUserInterfaceHelpers.consoleWidth;
+	}
+
+	public static int getConsoleHeight() {
+		return TextUserInterfaceHelpers.consoleHeight;
+	}
+	
+	public static void printLineCentred(String line) {
+		
+		int numberOfPads = (int)((getConsoleWidth() - line.length()) / 2.0);
+		
+		System.out.println(repeatString(" ", numberOfPads) + line);
+		
+	}
+	
+	public static void printHorizontalRule() {
+		printHorizontalRule('=');
+	}
+	
+	public static void printHorizontalRule(Character rule) {
+		System.out.println(repeatString(rule.toString(), getConsoleWidth() - 1));
+	}
+	
+	
 	/**
 	 * An array of Strings that mean "yes".
 	 */
@@ -168,9 +203,30 @@ public class TextUserInterfaceHelpers {
 	 * Clears the screen.
 	 */
 	public static void clear() {
-		// the terminal will likely be 25 lines high
-		// TODO: find a reliable method for detecting console height
-		System.out.println(repeatString("\n", 25));
+		System.out.println(repeatString("\n", getConsoleHeight()));
+
+//		try {
+//			
+//			// UNIX clear
+//			Runtime.getRuntime().exec("clear");
+//			
+//		} catch (IOException e) {
+//			
+//			try {
+//				
+//				// Windows Clear
+//				Runtime.getRuntime().exec("cls");
+//				
+//			}
+//			catch (IOException e2) {
+//				
+//				// fallback to printing newlines
+//				System.out.println(repeatString("\n", getConsoleHeight()));
+//				
+//			}
+//			
+//		}
+		
 	}
 	
 	/**
