@@ -4,12 +4,32 @@ import java.util.ArrayList;
 
 import game.GameWonException;
 
+/**
+ * Generates all cities in the game and holds references to them.
+ * @author jesse
+ *
+ */
 public class CityController {
 	
+	/**
+	 * A list of cities in the game.
+	 */
 	private City[] cities;
+	
+	/**
+	 * The current city index.
+	 */
 	private int cityIndex;
+	
+	/**
+	 * The total number of cities in this game.
+	 */
 	private int numberOfCities;
 	
+	/**
+	 * Creates a new CityController.
+	 * @param numberOfCities The number of cities to have in this game.
+	 */
 	public CityController(int numberOfCities) {
 		
 		this.cityIndex = 0;
@@ -19,8 +39,12 @@ public class CityController {
 		
 	}
 	
+	/**
+	 * Randomly generates the order of the cities. Erskine is always last.
+	 */
 	private void generateCities() {
 		
+		// Validate the numberOfCities
 		if (numberOfCities < 3) {
 			
 			throw new IllegalArgumentException("You need at least 3 cities.");
@@ -57,28 +81,39 @@ public class CityController {
 		
 	}
 	
+	/**
+	 * Gets the index of the current city.
+	 * @return
+	 */
 	public int getCityIndex() {
 		
 		return this.cityIndex;
 		
 	}
 	
+	/**
+	 * Gets the current City.
+	 */
 	public City getCurrentCity() {
 		
 		return this.cities[this.cityIndex];
 		
 	}
 	
+	/**
+	 * Advances the Team to the next city.
+	 * @throws GameWonException if the game has been won.
+	 */
 	public void goToNextCity() throws GameWonException {
 		
-		this.cityIndex++;
 		
-		if (this.cityIndex > this.cities.length) {
+		if (this.cityIndex + 1 >= this.cities.length) {
 			
 			throw new game.GameWonException();
 			
 		}
-		
+
+		this.cityIndex++;
 	}
 
 }

@@ -1,5 +1,10 @@
 package game;
 
+/**
+ * The exception that is thrown when the game is lost.
+ * @author jesse
+ *
+ */
 public class GameOverException extends Exception {
 
 	/**
