@@ -7,24 +7,60 @@ import java.nio.charset.Charset;
 
 public class TextUserInterfaceHelpers {
 	
-	private static int consoleWidth = 80, consoleHeight = 25;
+	/**
+	 * The width of the console.
+	 */
+	private static int consoleWidth = 80;
 	
+	/**
+	 * The height of the console.
+	 */
+	private static int consoleHeight = 25;
+	
+	/**
+	 * Set the console width.
+	 * @param width The width.
+	 */
 	public static void setConsoleWidth(int width) {
+		
 		TextUserInterfaceHelpers.consoleWidth = width;
+		
 	}
 	
+	/**
+	 * Set the console height.
+	 * @param height The height.
+	 */
 	public static void setConsoleHeight(int height) {
+		
 		TextUserInterfaceHelpers.consoleHeight = height;
+		
 	}
 	
+	/**
+	 * Gets the console width.
+	 * @return The width of the console.
+	 */
 	public static int getConsoleWidth() {
+		
 		return TextUserInterfaceHelpers.consoleWidth;
+		
 	}
 
+	/**
+	 * Gets the console height.
+	 * @return The height of the console.
+	 */
 	public static int getConsoleHeight() {
+		
 		return TextUserInterfaceHelpers.consoleHeight;
+		
 	}
 	
+	/**
+	 * Prints the string centered in the console
+	 * @param line The string to print.
+	 */
 	public static void printLineCentred(String line) {
 		
 		int numberOfPads = (int)((getConsoleWidth() - line.length()) / 2.0);
@@ -33,12 +69,23 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
+	/**
+	 * Prints a horizontal rule with a default character. Defaults to '#'.
+	 */
 	public static void printHorizontalRule() {
+		
 		printHorizontalRule('=');
+		
 	}
 	
+	/**
+	 * Print a horizontal rule with the specified character.
+	 * @param rule The character to use.
+	 */
 	public static void printHorizontalRule(Character rule) {
+		
 		System.out.println(repeatString(rule.toString(), getConsoleWidth() - 1));
+		
 	}
 	
 	
