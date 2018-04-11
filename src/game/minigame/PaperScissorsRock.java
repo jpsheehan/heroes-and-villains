@@ -10,11 +10,17 @@ package game.minigame;
 
 import game.Ability;
 import game.GeneralHelpers;
-import game.item.ItemAbility;
-import java.util.Scanner;
+import game.item.ItemAbility; 
+import game.ui.text.TextUserInterfaceHelpers;
 
-public class PaperScissorsRock extends Minigame<String, String, String> {
+public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScissorsRockMove, PaperScissorsRockMove> {
 
+	private static PaperScissorsRockMove[] availableMoves = new PaperScissorsRockMove[] {
+		PaperScissorsRockMove.ROCK,
+		PaperScissorsRockMove.PAPER,
+		PaperScissorsRockMove.SCISSORS
+	};
+	
 	/**
 	 * Creates a new PaperScissorsRock game
 	 * Paper beats rock, Scissors beat paper, Rock beats Scissors.
@@ -22,127 +28,139 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 	 */
 	public PaperScissorsRock(Ability[] abilities) {
 		super(abilities);
-		availableChoices[0] = "paper";
-		availableChoices[1] = "scissors";
-		availableChoices[2] = "rock";
 	}
-
-	/**
-	 * String array contains game options: Paper, Scissors, Rock
-	 */
-	// what about a Joker?
-	private String[] availableChoices = new String[3];
-	
-	/**
-	 * constants for user selectable options:
-	 * userOption1 = paper, userOption2 = scissors, userOption3 = rock.  
-	 */
-	protected String userOption1 = "paper";
-	protected String userOption2 = "scissors";
-	protected String userOption3 = "rock";
 		
 	/**
 	 * The game option the hero chooses.
 	 */
-	private String heroChoice;
+	private PaperScissorsRockMove heroChoice;
 		
 	/**
 	 * The game option the villain chooses.
 	 */
-	private String villainChoice; // = availableChoices[rand.nextInt(3)];
-
-	/*might be useful to have a list of options
-	String toString() {
-		return availableChoices;
-	}*/
+	private PaperScissorsRockMove villainChoice;
 	
-	private int getOptionNumber() {
-		return GeneralHelpers.getRandom().nextInt(2) + 1;
+	private PaperScissorsRockMove getVillainMove() {
+		
+		return availableMoves[GeneralHelpers.getRandom().nextInt(3)];
+		
 	}
 	
 	@Override
-	public void doTurn(String choice) {
-		heroChoice = choice;
+	public void doTurn(PaperScissorsRockMove choice) {
+		
+		this.heroChoice = choice;
+		
 		if (choice == null) {
 			
 			throw new IllegalArgumentException("choice should not be null for PaperScissorsRock game.");
 		}
-		if (state == MinigameState.PLAYING) {
+		
+		
+		if (this.state == MinigameState.PLAYING) {
 			
-			villainChoice = availableChoices[getOptionNumber()];
-			if (heroChoice.equals(userOption1)) {					//implemented the equals statement, now working
-				/*These lines for testing only
-				 * System.out.println("If statement 1, Hero chose: "+ userOption1);
-				System.out.println("If statement 1, Villain chose"+ villainChoice);*/
-
-				if (villainChoice.equals(userOption2)) {
-					state = MinigameState.LOST;
-				}
-				if (villainChoice.equals(userOption3)) {
-					state = MinigameState.WON;
-				}
-			}
-
-			if (heroChoice.equals(userOption2)) {
-				if (villainChoice.equals(userOption3)) {
-					state = MinigameState.LOST;
-				}
-				if (villainChoice.equals(userOption1)) {
-					state = MinigameState.WON;
-				}
-			}
+			this.villainChoice = getVillainMove();
 			
-			if (heroChoice.equals(userOption3)) {
-				if (villainChoice.equals(userOption1)) {
-					state = MinigameState.LOST;
-				}
-				if (villainChoice.equals(userOption2)) {
-					state = MinigameState.WON;
-				}
-			}
-			
-			if (heroChoice.equals(villainChoice)) {
+			// Decide if the game is won via a draw
+			if (this.heroChoice == this.villainChoice) {
 				
-				// If the hero choice is the same as the villain and they have the WIN_ON_DRAW ability, the hero wins.
 				if (hasAbility(ItemAbility.WIN_ON_DRAW)) {
 					
-					state = MinigameState.WON;	
-				} 
-				else {		
-					state = MinigameState.DRAWN;
+					this.state = MinigameState.WON;
+					
+				} else {
+					
+					this.state = MinigameState.DRAWN;
+					
+				}
+				
+			} else {
+			
+				switch (this.heroChoice) {
+				
+				case ROCK:
+					
+					if (this.villainChoice == PaperScissorsRockMove.PAPER) {
+						
+						this.state = MinigameState.LOST;
+						
+					} else {
+						
+						this.state = MinigameState.WON;
+						
+					}
+					
+					break;
+					
+				case PAPER:
+					
+					if (villainChoice == PaperScissorsRockMove.ROCK) {
+						
+						this.state = MinigameState.WON;
+						
+					} else {
+						
+						this.state = MinigameState.LOST;
+						
+					}
+					
+					break;
+					
+				case SCISSORS:
+					
+					if (villainChoice == PaperScissorsRockMove.PAPER) {
+						
+						this.state = MinigameState.WON;
+						
+					} else {
+						
+						this.state = MinigameState.LOST;
+						
+					}
+					
+					break;
+				
 				}
 			}
 		}
 	}
 
 	@Override
-	public String getHeroLastTurn() {
-		// TODO Auto-generated method stub
+	public PaperScissorsRockMove getHeroLastTurn() {
 		return heroChoice;
 	}
 
 	@Override
-	public String getVillainLastTurn() {
-		// TODO Auto-generated method stub
+	public PaperScissorsRockMove getVillainLastTurn() {
 		return villainChoice;
 	}
 
 	@Override
 	public int getRemainingTurns() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		if (this.state == MinigameState.PLAYING || this.state == MinigameState.DRAWN) {
+			
+			return 1;
+			
+		} else {
+			
+			return 0;
+			
+		}
+		
 	}
 
 	@Override
 	public MinigameType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return MinigameType.PAPER_SCISSORS_ROCK;
+		
 	}
 
 	public static void main(String[] args) {
 		
 		Ability[] abilities = new Ability[] {
-				ItemAbility.WIN_ON_DRAW
+			// ItemAbility.WIN_ON_DRAW
 		};
 		
 		PaperScissorsRock game = new PaperScissorsRock(abilities);
@@ -152,19 +170,25 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 		
 		while (game.getState() == MinigameState.PLAYING) {
 			
-			Scanner user_input = new Scanner( System.in );
-			
-			String userSelection;
-			userSelection = user_input.next( );
+			String input = TextUserInterfaceHelpers.readLine();
+			PaperScissorsRockMove move = PaperScissorsRockMove.fromString(input);
 					
-			game.doTurn(userSelection);
+			game.doTurn(move);
 			
-			System.out.println(String.format("Your Hero chose: "+ (String)game.getHeroLastTurn()));
-			System.out.println(String.format("The Villain chose: "+ (String)game.getVillainLastTurn()));
+			System.out.println(String.format("Your Hero chose: " + game.getHeroLastTurn().toString()));
+			System.out.println(String.format("The Villain chose: " + game.getVillainLastTurn().toString()));
 			System.out.println(String.format("The game was %s!", game.getState().toString().toLowerCase()));
-			System.out.println(String.format("Your Hero has: "+ abilities)); //could do with a toString override
 			
-			user_input.close();
+			String[] abilityStrings = new String[abilities.length];
+			
+			for (int i = 0; i < abilities.length; i++) {
+				
+				abilityStrings[i] = abilities.toString();
+				
+			}
+			
+			System.out.println(String.format("Your Hero has: " + String.join(", ", abilityStrings))); //could do with a toString override
+			
 		}
 	}
 }
