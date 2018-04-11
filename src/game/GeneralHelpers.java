@@ -47,13 +47,11 @@ public final class GeneralHelpers {
 		@SuppressWarnings("unchecked")
 		ArrayList<T> copy = (ArrayList<T>)list.clone();
 		
-		Random rand = new Random();
-		
 		ArrayList<T> newList = new ArrayList<T>();
 		
 		while (!copy.isEmpty()) {
 			
-			newList.add(copy.remove(rand.nextInt(copy.size())));
+			newList.add(copy.remove(GeneralHelpers.getRandom().nextInt(copy.size())));
 			
 		}
 		

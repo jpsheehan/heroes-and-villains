@@ -8,11 +8,9 @@ package game.minigame;
  * 3) Removed hard-coding and used protected variables in the if statements
  */
 
-import java.util.Random;
-
 import game.Ability;
+import game.GeneralHelpers;
 import game.item.ItemAbility;
-import game.ui.text.TextUserInterfaceHelpers;
 import java.util.Scanner;
 
 public class PaperScissorsRock extends Minigame<String, String, String> {
@@ -42,11 +40,6 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 	protected String userOption1 = "paper";
 	protected String userOption2 = "scissors";
 	protected String userOption3 = "rock";
-	
-	/**
-	 * Random number generator for villains choice
-	 */
-	private Random rand = new Random();
 		
 	/**
 	 * The game option the hero chooses.
@@ -64,8 +57,7 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 	}*/
 	
 	private int getOptionNumber() {
-		Random rand = new Random();
-		return rand.nextInt(2) + 1;
+		return GeneralHelpers.getRandom().nextInt(2) + 1;
 	}
 	
 	@Override
@@ -147,30 +139,32 @@ public class PaperScissorsRock extends Minigame<String, String, String> {
 		return null;
 	}
 
-public static void main(String[] args) {
-	
-	Ability[] abilities = new Ability[] {
-			ItemAbility.WIN_ON_DRAW
-	};
-	
-	PaperScissorsRock game = new PaperScissorsRock(abilities);
-	
-	System.out.println(String.format("Enter paper scissors or rock: "));
-	
-	
-	while (game.getState() == MinigameState.PLAYING) {
+	public static void main(String[] args) {
 		
-		Scanner user_input = new Scanner( System.in );
+		Ability[] abilities = new Ability[] {
+				ItemAbility.WIN_ON_DRAW
+		};
 		
-		String userSelection;
-		userSelection = user_input.next( );
-				
-		game.doTurn(userSelection);
+		PaperScissorsRock game = new PaperScissorsRock(abilities);
 		
-		System.out.println(String.format("Your Hero chose: "+ (String)game.getHeroLastTurn()));
-		System.out.println(String.format("The Villain chose: "+ (String)game.getVillainLastTurn()));
-		System.out.println(String.format("The game was %s!", game.getState().toString().toLowerCase()));
-		System.out.println(String.format("Your Hero has: "+ abilities)); //could do with a toString override
+		System.out.println(String.format("Enter paper scissors or rock: "));
+		
+		
+		while (game.getState() == MinigameState.PLAYING) {
+			
+			Scanner user_input = new Scanner( System.in );
+			
+			String userSelection;
+			userSelection = user_input.next( );
+					
+			game.doTurn(userSelection);
+			
+			System.out.println(String.format("Your Hero chose: "+ (String)game.getHeroLastTurn()));
+			System.out.println(String.format("The Villain chose: "+ (String)game.getVillainLastTurn()));
+			System.out.println(String.format("The game was %s!", game.getState().toString().toLowerCase()));
+			System.out.println(String.format("Your Hero has: "+ abilities)); //could do with a toString override
+			
+			user_input.close();
 		}
 	}
 }

@@ -1,8 +1,7 @@
 package game.minigame;
 
-import java.util.Random;
-
 import game.Ability;
+import game.GeneralHelpers;
 import game.character.HeroAbility;
 import game.item.ItemAbility;
 import game.ui.text.TextUserInterfaceHelpers;
@@ -43,9 +42,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	 */
 	private Integer generateRandomNumber() {
 		
-		Random rand = new Random();
-		int number = rand.nextInt(maxNumber) + 1;
-		
+		int number = GeneralHelpers.getRandom().nextInt(maxNumber) + 1;
 		return number;
 		
 	}
