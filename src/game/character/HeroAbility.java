@@ -14,5 +14,38 @@ public enum HeroAbility implements Ability {
 	WITTY_PHRASES, // (useless) arts students
 	IMPROVED_ODDS, // (for dice game and guess the number) maths students
 	PREVENTS_ROBBERY, // law students
-	TELEPORT // (allows the team to teleport to the next city (single use)) compsoc students
+	TELEPORT; // (allows the team to teleport to the next city (single use)) compsoc students
+	
+	@Override
+	public String toString() {
+		
+		switch (this) {
+		
+		case CHEAPER_ITEMS:
+			return "cheaper items";
+			
+		case IMPROVED_ODDS:
+			return "improved odds";
+			
+		case INCREASED_RECOVERY_RATE:
+			return "increased recovery rate";
+			
+		case PREVENTS_ROBBERY:
+			return "prevents robbery";
+			
+		case TELEPORT:
+			return "teleport";
+			
+		case VILLAINS_LESS_20_HEALTH:
+			return "villains less 20% health";
+			
+		case WITTY_PHRASES:
+			return "witty phrases";
+			
+		default:
+			return "null";
+			
+		}
+		
+	}
 }

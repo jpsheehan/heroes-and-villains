@@ -10,6 +10,7 @@ package game.minigame;
 
 import game.Ability;
 import game.GeneralHelpers;
+import game.character.HeroAbility;
 import game.item.ItemAbility; 
 import game.ui.text.TextUserInterfaceHelpers;
 
@@ -160,7 +161,7 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 	public static void main(String[] args) {
 		
 		Ability[] abilities = new Ability[] {
-			// ItemAbility.WIN_ON_DRAW
+			ItemAbility.WIN_ON_DRAW
 		};
 		
 		PaperScissorsRock game = new PaperScissorsRock(abilities);
@@ -172,7 +173,12 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 			
 			String input = TextUserInterfaceHelpers.readLine();
 			PaperScissorsRockMove move = PaperScissorsRockMove.fromString(input);
-					
+			
+			// get input again if necessary
+			if (move == null) {
+				continue;
+			}
+			
 			game.doTurn(move);
 			
 			System.out.println(String.format("Your Hero chose: " + game.getHeroLastTurn().toString()));
@@ -183,7 +189,17 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 			
 			for (int i = 0; i < abilities.length; i++) {
 				
-				abilityStrings[i] = abilities.toString();
+				Ability ability = abilities[i];
+				
+				if (ability.getClass() == HeroAbility.class) {
+					
+					abilityStrings[i] = ((HeroAbility)ability).toString();
+					
+				} else {
+					
+					abilityStrings[i] = ((ItemAbility)ability).toString();
+					
+				}
 				
 			}
 			
