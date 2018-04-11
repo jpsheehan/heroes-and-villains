@@ -203,29 +203,19 @@ public class TextUserInterfaceHelpers {
 	 * Clears the screen.
 	 */
 	public static void clear() {
-		System.out.println(repeatString("\n", getConsoleHeight()));
-
-//		try {
-//			
-//			// UNIX clear
-//			Runtime.getRuntime().exec("clear");
-//			
-//		} catch (IOException e) {
-//			
-//			try {
-//				
-//				// Windows Clear
-//				Runtime.getRuntime().exec("cls");
-//				
-//			}
-//			catch (IOException e2) {
-//				
-//				// fallback to printing newlines
-//				System.out.println(repeatString("\n", getConsoleHeight()));
-//				
-//			}
-//			
-//		}
+		
+		if (game.GeneralHelpers.isRunningInEclipse()) {
+			
+			// if the game is being run in eclipse, use this hack to "clear" the screen.
+			System.out.println(repeatString("\n", getConsoleHeight()));
+			
+		} else {
+		
+			// otherwise assume we are running in a terminal
+			System.out.print("\033[H\033[2J");  
+			System.out.flush();
+			
+		}
 		
 	}
 	

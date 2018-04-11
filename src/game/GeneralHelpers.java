@@ -4,6 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public final class GeneralHelpers {
+	
+	public static void setProgramArgs(String[] args) {
+		
+		
+		
+	}
+	
+	public static boolean isRunningInEclipse() {
+		
+		return ("true".equalsIgnoreCase(System.getProperty("runningInEclipse")));
+		
+	}
 
 	/**
 	 * The random state used for the game.
