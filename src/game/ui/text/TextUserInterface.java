@@ -58,7 +58,10 @@ public class TextUserInterface extends UserInterface {
 		TextUserInterfaceHelpers.printLineCentred("CREATE A NEW GAME");
 		TextUserInterfaceHelpers.printHorizontalRule();
 		
-		System.out.println("Do something here...");
+		System.out.println();
+		int cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight? (select between 3 and 6)");
+		System.out.println(String.format("You have selected %d villains.", cityCount));
+		
 		TextUserInterfaceHelpers.readLine("Press <Enter> to continue...");
 		
 		
