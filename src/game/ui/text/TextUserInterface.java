@@ -53,23 +53,34 @@ public class TextUserInterface extends UserInterface {
 	@Override
 	public void showGameCreationScreen() {
 		
-		TextUserInterfaceHelpers.clear();
-		TextUserInterfaceHelpers.printHorizontalRule();
-		TextUserInterfaceHelpers.printLineCentred("CREATE A NEW GAME");
-		TextUserInterfaceHelpers.printHorizontalRule();
+		boolean keepLooping = true;
 		
-		System.out.println();
-		int cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight? (select between 3 and 6)");
-		System.out.println(String.format("You have selected %d villains.", cityCount));
+		while (keepLooping) {
+			
+			int cityCount;
+			
+			TextUserInterfaceHelpers.clear();
+			TextUserInterfaceHelpers.printHorizontalRule();
+			TextUserInterfaceHelpers.printLineCentred("CREATE A NEW GAME");
+			TextUserInterfaceHelpers.printHorizontalRule();
+			System.out.println();
+			
+			cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight (3-6)? ");
+			
+			keepLooping = !TextUserInterfaceHelpers.showYesNo(
+				String.format("You have selected %d villains. Is this OK?", cityCount)
+			);
+					
+		}
 		
-		TextUserInterfaceHelpers.readLine("Press <Enter> to continue...");
-		
+		showTeamCreationScreen();
 		
 	}
 
 	@Override
 	public void showTeamCreationScreen() {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 	
