@@ -15,26 +15,26 @@ public class Inventory {
 	/**
 	 * List of PowerUps
 	 */
-	private ArrayList<PowerUpItem> listPowerups;
+	private ArrayList<Item> listPowerups;
 	
 	/**
 	 * list of maps
 	 */
-	private ArrayList<Map> listMaps;
+	private ArrayList<Item> listMaps;
 
 	/**
 	 * List of healing items
 	 */
-	private ArrayList<HealingItem> listHealingItems;
+	private ArrayList<Item> listHealingItems;
 
 	/**
 	 * Creates a new inventory.
 	 * No items in the list(s)at initialisation
 	 */
 	public Inventory() {
-		listPowerups = new ArrayList<PowerUpItem>( );
-		listMaps = new ArrayList<Map>( );
-		listHealingItems = new ArrayList<HealingItem>( );
+		listPowerups = new ArrayList<Item>( );
+		listMaps = new ArrayList<Item>( );
+		listHealingItems = new ArrayList<Item>( );
 	}
 	
 	/**
@@ -50,18 +50,55 @@ public class Inventory {
 	 * Adds an item to the inventory
 	 * @param Item, whichList
 	 */
-	public void addInventoryItem(String Item, String whichList) {
+	public void addInventoryItem(Item Item, String whichList) {
 		// check not null, add to list
-		//
+		if (Item == null) {
+				throw new IllegalArgumentException("choice should be null for an item to be added to the inventory.");
+		}
+		switch(whichList) {
+			case "PowerUpItems" :
+				listPowerups.add(Item);
+				break;
+			case "Healingitem" :
+				listHealingItems.add(Item);
+				break;
+			case "Map" :
+				listMaps.add(Item);
+				break;
+			default :
+				System.out.println("Item not added");
+		}
 	}
+
 	/**
 	 * Removes an item from the inventory
 	 * @param Item, whichList
 	 */
-	public void removeInventoryItem(String Item) {
-		// check not null, iterate through array to find item index, 
-		// a check and respond if not in the list, then remove item.
-		//
+	public void removeInventoryItem(Item Item, String whichList) {
+		// check not null, 
+		if (Item == null) {
+			throw new IllegalArgumentException("choice should be null for an item to be removed from the inventory.");
+		}
+		//check which list the item belongs in
+		switch(whichList) {
+			case "PowerUpItems" :
+				if (listPowerups.contains(Item)) {			//check if already in the list
+					listPowerups.remove(Item);
+					}
+				break;
+			case "Healingitem" :
+				if (listHealingItems.contains(Item)) {
+					listHealingItems.remove(Item);
+				}
+				break;
+			case "Map" :
+				if (listMaps.contains(Item)) {
+					listMaps.remove(Item);
+				}
+				break;
+			default :
+				System.out.println("Item not removed");
+		}
 	}
 	
 }
