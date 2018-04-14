@@ -10,31 +10,36 @@ public class Inventory {
  * The Inventory class holds lists of items for the teams and the shop as referenced in section 2.3.3 of the specification.
  *
  */
+	/**
+	 * Arraylist to hold objects of type Item (HealingItem, Map, PowerUps, )  
+	 */
+	private ArrayList<Item> inventoryList;
 	
 	//Three separate lists for each specific item. (May change to one list for all items?)
 	/**
 	 * List of PowerUps
 	 */
-	private ArrayList<Item> listPowerups;
+	//private ArrayList<Item> listPowerups;
 	
 	/**
 	 * list of maps
 	 */
-	private ArrayList<Item> listMaps;
+	//private ArrayList<Item> listMaps;
 
 	/**
 	 * List of healing items
 	 */
-	private ArrayList<Item> listHealingItems;
+	//private ArrayList<Item> listHealingItems;
 
 	/**
 	 * Creates a new inventory.
 	 * No items in the list(s)at initialisation
 	 */
 	public Inventory() {
-		listPowerups = new ArrayList<Item>( );
-		listMaps = new ArrayList<Item>( );
-		listHealingItems = new ArrayList<Item>( );
+		inventoryList = new ArrayList<Item>();
+		//listPowerups = new ArrayList<Item>( );
+		//listMaps = new ArrayList<Item>( );
+		//listHealingItems = new ArrayList<Item>( );
 	}
 	
 	/**
@@ -46,59 +51,68 @@ public class Inventory {
 		return "List";
 	}
 	
+	/*
+	 * @override
+	 */
+	public String toString() {
+		StringBuffer listBuffer = new StringBuffer();
+		for (int i = 0; i < inventoryList.size(); i++) {
+			listBuffer.append(inventoryList.get(i).getName());
+			listBuffer.append(", ");
+		}
+		return(listBuffer.toString());
+	}
+	
 	/**
 	 * Adds an item to the inventory
-	 * @param Item, whichList
+	 * @param Item
 	 */
-	public void addInventoryItem(Item Item, String whichList) {
+	public void addInventoryItem(Item Item) {
+
+	//public void addInventoryItem(Item Item, String whichList) {
 		// check not null, add to list
 		if (Item == null) {
 				throw new IllegalArgumentException("choice should be null for an item to be added to the inventory.");
 		}
-		switch(whichList) {
-			case "PowerUpItems" :
-				listPowerups.add(Item);
-				break;
-			case "Healingitem" :
-				listHealingItems.add(Item);
-				break;
-			case "Map" :
-				listMaps.add(Item);
-				break;
-			default :
-				System.out.println("Item not added");
-		}
+		inventoryList.add(Item);
 	}
 
 	/**
 	 * Removes an item from the inventory
-	 * @param Item, whichList
+	 * @param Item
 	 */
-	public void removeInventoryItem(Item Item, String whichList) {
+	public void removeInventoryItem(Item Item) {
 		// check not null, 
 		if (Item == null) {
 			throw new IllegalArgumentException("choice should be null for an item to be removed from the inventory.");
 		}
-		//check which list the item belongs in
-		switch(whichList) {
-			case "PowerUpItems" :
-				if (listPowerups.contains(Item)) {			//check if already in the list
-					listPowerups.remove(Item);
-					}
-				break;
-			case "Healingitem" :
-				if (listHealingItems.contains(Item)) {
-					listHealingItems.remove(Item);
-				}
-				break;
-			case "Map" :
-				if (listMaps.contains(Item)) {
-					listMaps.remove(Item);
-				}
-				break;
-			default :
-				System.out.println("Item not removed");
+		if (inventoryList.contains(Item)) {			//check if already in the list
+			inventoryList.remove(Item);				// and if so remove
 		}
+		else System.out.println("Item not removed"); // return something else (e.g. boolean false and tell user elsewhere?)
 	}
+
+	public static void main(String[] args) {
 	
+	Inventory teamInventory = new Inventory();
+	
+	Map engBuilding = new Map("Engineering City", 25);
+	Map erskineBuilding = new Map("Computer Science City", 25);
+	HealingItem health25 = new HealingItem("Health25%", 2, 1, 5);
+	HealingItem health50 = new HealingItem("Health50%", 5, 2, 10);
+	HealingItem health75 = new HealingItem("Health75%", 10, 3, 20);
+	
+	teamInventory.addInventoryItem(health25);
+	teamInventory.addInventoryItem(engBuilding);
+	teamInventory.addInventoryItem(erskineBuilding);
+	teamInventory.addInventoryItem(health50);
+	System.out.println(teamInventory);
+	
+	teamInventory.removeInventoryItem(health75);
+	teamInventory.addInventoryItem(health75);
+
+	System.out.println(teamInventory);
+	}
 }
+	
+
