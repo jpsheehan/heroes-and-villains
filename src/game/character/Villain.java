@@ -1,14 +1,16 @@
 package game.character;
 
-/**
- * Represents a Villain as described in section 3.3 of the specification.
- */
-public class Villain extends Character {
+import game.character.VillainType;
 
-// games
-// list of taunt phrases
-// taunt phrase, randomly chosen from the list of taunts
-// strength ??
+/**
+	 * Represents a Villain as described in section 3.3 of the specification.
+	 */
+	public class Villain extends Character {
+
+	// games
+	// list of taunt phrases
+	// taunt phrase, randomly chosen from the list of taunts
+	// strength ??
 
 	/**
 	 * Creates a new Villain.
@@ -16,14 +18,14 @@ public class Villain extends Character {
 	 * @param type The type of Villain.
 	 * @param int The number of (minigame) wins required to defeat the Villain  
 	 */
-public Villain(String name, VillainType type, int winsToBeat) {
-		super(name);
-		this.type = type;
-		this.winsToBeat = winsToBeat;
-		this.timesBeaten = 0;
+	public Villain(String name, VillainType type, int winsToDefeat, int strength) {
+	super(name);
+	this.type = type;
+	this.winsToDefeat = winsToDefeat;
+	this.timesBeaten = 0;
+	this.strength = strength;
 	}
 	
-	//return taunt
 	//return favourite game, or if a list of games randomly choose a game and return it
 
 	/**
@@ -32,19 +34,25 @@ public Villain(String name, VillainType type, int winsToBeat) {
 	private VillainType type;
 
 	/**
- 	* The numbers of wins required to beat the Villain.
+ 	* The numbers of wins required to defeat the Villain.
  	*/
-	private Integer winsToBeat;
+	private Integer winsToDefeat;
 
 	/**
  	* The numbers of wins required to beat the Villain.
  	*/
 	private Integer timesBeaten;
-
+	
 	/**
+ 	* The strength level of the Villain.
+ 	* Scale of 1-10: 10 doing greatest damage, 1 doing least damage.
+ 	*/
+	private Integer strength;
+	
+	/*/**
 	 * The Villans's taunt phrase
 	 */
-	private String taunt;
+	//private String taunt;
 	
 	/**
 	 * Returns the type of Villain.
@@ -58,13 +66,13 @@ public Villain(String name, VillainType type, int winsToBeat) {
 	 * Returns the number of wins required to defeat the Villain.
 	 * @return
 	 */
-	public int getWinsToBeat() {
-		return this.winsToBeat;
+	public int getWinsToDefeat() {
+		return this.winsToDefeat;
 	}
 	
 	//Not sure if need this
 	/**
-	 * Returns the number of wins required to defeat the Villain.
+	 * Returns the number of times the Villain has been beaten.
 	 * @return
 	 */
 	public int getTimesBeaten() {
@@ -72,35 +80,79 @@ public Villain(String name, VillainType type, int winsToBeat) {
 	}
 	
 	/**
-	 * Returns the Villain's taunt phrase.
+	 * Returns the strength of the Villain.
+	 * @return
+	 */
+	public int getStrength() {
+		return this.strength;
+	}
+	
+	/**
+	 * Returns the Villain's taunt phrase (depends on Villain Type).
+	 * Currently hardcoded in this class to Villain Type.
 	 * @return
 	 */
 	public String getTaunt() {
-		return taunt;
+		switch (this.type) {
+		case OVERPRICED_TEXTBOOK:
+			return "That'll be $476.97 please. Paying by eftpos? There is %4 surcharge for credit cards";
+		case LIBRARIAN:
+			return "Don't you know the Dewey Decimal System? What, you've never heard of the Library of Congress either?";
+		case ADMINISTRATION:
+			return "All courses are full. No you cannot change modules. You'll need to apply in writing within five workign days.";
+		case RICHARD_LOBB:
+			return "Richard strikes again!";
+		case SIMON_BROWN:
+			return "Physics is fun!";
+		case RORY_THE_BUILDER:
+			return "Building schmilding. Bet you don't have tools like mine!";
+		default :
+			return ("You suck big time!");								//shoudn't get this but could throw an exception
+		}
 	}
 	
-/**
- * Returns the ability of the Hero (depends on its type).
- */
-/*
-public HeroAbility getAbility() {
-	switch (this.type) {
-	case ARTS_STUDENT:
-		return HeroAbility.WITTY_PHRASES;
-	case COMMERCE_STUDENT:
-		return HeroAbility.CHEAPER_ITEMS;
-	case COMPUTER_SCIENCE_STUDENT:
-		return HeroAbility.TELEPORT;
-	case ENGINEERING_STUDENT:
-		return HeroAbility.VILLAINS_LESS_20_HEALTH;
-	case LAW_STUDENT:
-		return HeroAbility.PREVENTS_ROBBERY;
-	case MATHS_STUDENT:
-		return HeroAbility.IMPROVED_ODDS;
-	case SCIENCE_STUDENT:
-		return HeroAbility.INCREASED_RECOVERY_RATE;
-	default:
-		throw new AssertionError("You shouldn't get this. Is there another HeroType that we don't know about?");	
+	/**
+	 * Updates the number of times the Villain has been beaten.
+	 * @return
+	 */
+	public void decreaseTimesBeaten() {
+		this.timesBeaten-=1;
 	}
-	*/
+	
+	
+public static void main(String[] args) {
+	
+    	//create some Villains
+	Villain v1 = new Villain("Front Desk", LIBRARIAN, 3, 1);
+	Villain v2 = new Villain("Level 5 ECE Support", ADMINISTRATION, 3, 2);
+	Villain v3 = new Villain("I'll Lobb you", RICHARD_LOBB, 3, 6);
+	Villain v4 = new Villain("Ker-ching", OVERPRICED_TEXTBOOK, 3, 5);
+	Villain v5 = new Villain("Sssss-simon", SIMON_BROWN, 3, 8);
+	Villain v6 = new Villain("Level 5 ECE Support", RORY_THE_BUILDER, 3, 4);
+	
+	//print names
+	System.out.println(v1.getName());
+	System.out.println(v2.getName());
+	System.out.println(v3.getName());
+	System.out.println(v4.getName());
+	System.out.println(v5.getName());
+	System.out.println(v6.getName());
+
+	
+	//print strength and wins to defeat
+	System.out.println(v1.getStrength()+v1.getWinsToDefeat());
+	System.out.println(v2.getStrength()+v2.getWinsToDefeat());
+	System.out.println(v3.getStrength()+v3.getWinsToDefeat());
+	System.out.println(v4.getStrength()+v4.getWinsToDefeat());
+	System.out.println(v5.getStrength()+v5.getWinsToDefeat());
+	System.out.println(v6.getStrength()+v6.getWinsToDefeat());
+	
+	//print taunts
+	System.out.println(v1.getTaunt());
+	System.out.println(v2.getTaunt());
+	System.out.println(v3.getTaunt());
+	System.out.println(v4.getTaunt());
+	System.out.println(v5.getTaunt());
+	System.out.println(v6.getTaunt());
+	}
 }
