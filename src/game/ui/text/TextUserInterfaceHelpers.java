@@ -598,4 +598,22 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
+	public static void showMessageDialog(String message, String title) throws UserQuitException {
+		
+		printTitleBlock(title, '#');
+		
+		printLineCentred(message);
+		
+		System.out.println();
+		
+		try {
+			
+			System.out.println("Press <Enter> to continue...");
+			readLine("");
+			
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+		
+	}
 }
