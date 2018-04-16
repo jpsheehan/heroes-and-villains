@@ -51,13 +51,13 @@ public class TextUserInterface extends UserInterface {
 	}
 
 	@Override
-	public void showGameCreationScreen() {
+	public Integer showGameCreationScreen() {
 		
 		boolean keepLooping = true;
 		
+		int cityCount = 0;
+		
 		while (keepLooping) {
-			
-			int cityCount;
 			
 			TextUserInterfaceHelpers.clear();
 			TextUserInterfaceHelpers.printHorizontalRule();
@@ -70,10 +70,10 @@ public class TextUserInterface extends UserInterface {
 			keepLooping = !TextUserInterfaceHelpers.showYesNo(
 				String.format("You have selected %d villains. Is this OK?", cityCount)
 			);
-					
+
 		}
 		
-		showTeamCreationScreen();
+		return cityCount;
 		
 	}
 
