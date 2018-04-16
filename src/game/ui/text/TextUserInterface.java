@@ -11,14 +11,11 @@ public class TextUserInterface extends UserInterface {
 		
 		while (keepLooping) {
 		
-			TextUserInterfaceHelpers.clear();
-			
-			TextUserInterfaceHelpers.printHorizontalRule();
-			TextUserInterfaceHelpers.printLineCentred("HEROES AND VILLAINS - CAMPUS EDITION");
-			TextUserInterfaceHelpers.printLineCentred("by Manu Hamblyn & Jesse Sheehan");
-			TextUserInterfaceHelpers.printHorizontalRule();
-			
-			System.out.println("");
+			TextUserInterfaceHelpers.printTitleBlock(new String[] {
+				"HEROES AND VILLAINS - CAMPUS EDITION",
+				"by Manu Hamblyn & Jesse Sheehan",
+				"Copyright (c) 2018"
+			}, '#');
 			
 			String[] options = new String[] {
 				"New Game",
@@ -59,11 +56,7 @@ public class TextUserInterface extends UserInterface {
 		
 		while (keepLooping) {
 			
-			TextUserInterfaceHelpers.clear();
-			TextUserInterfaceHelpers.printHorizontalRule();
-			TextUserInterfaceHelpers.printLineCentred("CREATE A NEW GAME");
-			TextUserInterfaceHelpers.printHorizontalRule();
-			System.out.println();
+			TextUserInterfaceHelpers.printTitleBlock("CREATE A NEW GAME", '#');
 			
 			cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight (3-6)? ");
 			

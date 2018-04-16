@@ -63,9 +63,7 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static void printLineCentred(String line) {
 		
-		int numberOfPads = (int)((getConsoleWidth() - line.length()) / 2.0);
-		
-		System.out.println(repeatString(" ", numberOfPads) + line);
+		printLineCentredBordered(line, ' ');
 		
 	}
 	
@@ -374,6 +372,63 @@ public class TextUserInterfaceHelpers {
 		}
 		
 		return choice;
+		
+	}
+	
+	/**
+	 * Prints a centered line with a border on the horizontal edges
+	 * @param line The text to centre.
+	 * @param border The character to print as the border.
+	 */
+	public static void printLineCentredBordered(String line, Character border) {
+		
+		int numberOfPads = (int)((getConsoleWidth() - line.length()) / 2.0) - 1;
+		int evenPadFix = 0;
+		
+		// account for even length strings
+		if (line.length() % 2 == 0) {
+			
+			evenPadFix -= 1;
+			
+		}
+		
+		System.out.println(
+				border + repeatString(" ", numberOfPads) + 
+				line + repeatString(" ", numberOfPads + evenPadFix) + 
+				border);
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param title The string to use as the title.
+	 * @param border The border character.
+	 */
+	public static void printTitleBlock(String title, Character border) {
+		
+		printTitleBlock(new String[] {title}, border);
+		
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param titles The string array of titles.
+	 * @param border The border character.
+	 */
+	public static void printTitleBlock(String[] titles, Character border) {
+		
+		clear();
+		printHorizontalRule(border);
+		
+		for (String title : titles) {
+			
+			printLineCentredBordered(title, border);
+			
+		}
+		
+		printHorizontalRule(border);
+		System.out.println();
 		
 	}
 	
