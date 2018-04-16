@@ -5,6 +5,9 @@ import game.GeneralHelpers;
 import game.character.HeroAbility;
 import game.item.ItemAbility;
 import game.ui.text.TextUserInterfaceHelpers;
+import game.ui.text.UserCancelException;
+import game.ui.text.UserContinueException;
+import game.ui.text.UserQuitException;
 
 public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAnswer> {
 	
@@ -185,7 +188,20 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 			
 			int guess;
 			
-			guess = TextUserInterfaceHelpers.getNumberWithBounds(game.getMinNumber(), game.getMaxNumber());
+			try {
+				
+				guess = TextUserInterfaceHelpers.getNumberWithBounds(game.getMinNumber(), game.getMaxNumber());
+				
+			} catch (UserCancelException | UserQuitException e) {
+				
+				return; // the user wants to quit
+				
+			} catch (UserContinueException e) {
+				
+				System.out.println(String.format("Guess a number between %d and %d:", game.getMinNumber(), game.getMaxNumber()));
+				continue;
+				
+			}
 			
 			game.doTurn(guess);
 			

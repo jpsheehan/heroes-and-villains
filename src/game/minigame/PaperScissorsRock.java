@@ -13,6 +13,9 @@ import game.GeneralHelpers;
 import game.character.HeroAbility;
 import game.item.ItemAbility; 
 import game.ui.text.TextUserInterfaceHelpers;
+import game.ui.text.UserCancelException;
+import game.ui.text.UserContinueException;
+import game.ui.text.UserQuitException;
 
 public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScissorsRockMove, PaperScissorsRockMove> {
 
@@ -171,7 +174,23 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 		
 		while (game.getState() == MinigameState.PLAYING) {
 			
-			String input = TextUserInterfaceHelpers.readLine("> ");
+			String input;
+			
+			try {
+				
+				input = TextUserInterfaceHelpers.readLine("> ");
+				
+			} catch (UserQuitException | UserCancelException e) {
+				
+				return; // The user wants to quit.
+				
+			} catch (UserContinueException e) {
+				
+				System.out.println(String.format("Enter paper scissors or rock: "));
+				continue;
+				
+			}
+			
 			PaperScissorsRockMove move = PaperScissorsRockMove.fromString(input);
 			
 			// get input again if necessary
