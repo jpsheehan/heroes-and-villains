@@ -136,25 +136,95 @@ public class TextUserInterfaceHelpers {
 	
 	/**
 	 * Shows a yes/no question to the user.
-	 * @param question The question to prompt them with
-	 * @return Returns true if the user said yes.
+	 * @param question The question to prompt them with.
+	 * @return True if the user said yes.
+	 * @throws UserCancelException 
+	 * @throws UserQuitException 
 	 */
-	public static boolean showYesNo(String question) {
+	public static boolean showYesNo(String question) throws UserQuitException, UserCancelException {
+		
+		return showYesNo(question, false);
+		
+	}
+	
+	/**
+	 * Shows a yes/no question to the user.
+	 * @param question The question to prompt them with
+	 * @param suppressQuit Used internally for the readLine method.
+	 * @return Returns true if the user said yes.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
+	 */
+	private static boolean showYesNo(String question, boolean suppressQuit) throws UserQuitException, UserCancelException {
 		
 		int choice = 0;
+		String input;
 		
 		// Print the question
 		System.out.println(question + " (y/n)");
 		
 		// Prompt for and read the user's input
 		System.out.print("> ");
-		String input = readLine().toLowerCase();
+		
+		// Handle UserQuitException and UserCancelException appropriately.
+		// Rethrow them if suppressQuit is false, otherwise return false.
+		try {
+			
+			input = readLine().toLowerCase();
+			
+		} catch (UserQuitException e) {
+			
+			if (suppressQuit) {
+				
+				return false;
+				
+			}
+			
+			throw e;
+			
+		} catch (UserCancelException e) {
+			
+			if (suppressQuit) {
+				
+				return false;
+				
+			}
+			
+			throw e;
+			
+		}
 		
 		// Keep asking while the input is invalid.
 		while ((choice = getYesNoUnknown(input)) == 0) {
 			
 			System.out.print("> ");
-			input = readLine().toLowerCase();
+			
+			// Handle the exceptions again
+			try {
+				
+				input = readLine().toLowerCase();
+				
+			} catch (UserQuitException e) {
+				
+				if (suppressQuit) {
+					
+					return false;
+					
+				}
+				
+				throw e;
+				
+			} catch (UserCancelException e) {
+				
+				if (suppressQuit) {
+					
+					return false;
+					
+				}
+				
+				throw e;
+				
+			}
 			
 		}
 		
@@ -168,8 +238,10 @@ public class TextUserInterfaceHelpers {
 	 * @param message The message to show to the user.
 	 * @param options The options to display.
 	 * @return Returns the index of the Array that the user chose.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
 	 */
-	public static int showChoice(String message, String[] options) {
+	public static int showChoice(String message, String[] options) throws UserCancelException, UserQuitException {
 		
 		int choice;
 		
@@ -197,8 +269,10 @@ public class TextUserInterfaceHelpers {
 	/**
 	 * Returns one line of text from the standard input.
 	 * @return
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
 	 */
-	public static String readLine() {
+	public static String readLine() throws UserCancelException, UserQuitException {
 		return readLine("");
 	}
 	
@@ -206,8 +280,10 @@ public class TextUserInterfaceHelpers {
 	 * Returns one line of text from the standard input.
 	 * @param prelude The text to place before entering something.
 	 * @return
+	 * @throws UserCancelException 
+	 * @throws UserQuitException 
 	 */
-	public static String readLine(String prelude) {
+	public static String readLine(String prelude) throws UserCancelException, UserQuitException {
 		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
@@ -232,8 +308,30 @@ public class TextUserInterfaceHelpers {
 			ByteBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, bytesRead);
 			CharBuffer charBuffer = Charset.forName("UTF-8").decode(byteBuffer);
 			
-			// Return the resulting String
-			return charBuffer.toString().trim();
+			String input = charBuffer.toString().trim();
+			
+			switch (input.toLowerCase()) {
+			
+			case "c":
+				
+				throw new UserCancelException();
+			
+			case "q":
+				
+				boolean shouldQuit = showYesNo("Are you sure you want to quit?", true);
+				
+				if (shouldQuit) {
+					
+					throw new UserQuitException();
+					
+				}
+			
+			default:
+				
+				// Return the resulting String
+				return input;
+				
+			}
 			
 		} catch (IOException e) {
 			
@@ -315,8 +413,10 @@ public class TextUserInterfaceHelpers {
 	 * @param min The minimum bound (inclusive).
 	 * @param max The maximum bound (inclusive).
 	 * @return Returns the entered number.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
 	 */
-	public static Integer getNumberWithBounds(Integer min, Integer max) {
+	public static Integer getNumberWithBounds(Integer min, Integer max) throws UserCancelException, UserQuitException {
 		
 		return getNumberWithBounds(min, max, "> ");
 		
@@ -328,8 +428,10 @@ public class TextUserInterfaceHelpers {
 	 * @param max The maximum bound (inclusive).
 	 * @param prelude The prompt beginning each line.
 	 * @return Returns the entered number.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
 	 */
-	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) {
+	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) throws UserCancelException, UserQuitException {
 		
 		int choice;
 		

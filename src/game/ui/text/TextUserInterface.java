@@ -10,6 +10,8 @@ public class TextUserInterface extends UserInterface {
 		boolean keepLooping = true;
 		
 		while (keepLooping) {
+			
+			int choice = -1;
 		
 			TextUserInterfaceHelpers.printTitleBlock(new String[] {
 				"HEROES AND VILLAINS - CAMPUS EDITION",
@@ -23,12 +25,35 @@ public class TextUserInterface extends UserInterface {
 				"Quit"
 			};
 			
-			int choice = TextUserInterfaceHelpers.showChoice("Select an option:", options);
+			try {
+				
+				choice = TextUserInterfaceHelpers.showChoice("Select an option:", options);
+				
+			} catch (UserCancelException e) {
+				
+				
+				
+			} catch (UserQuitException e) {
+				
+				keepLooping = false;
+				break;
+				
+			}
 		
 			switch (choice) {
 			
 			case 0:
-				showGameCreationScreen();
+				
+				try {
+					
+					showGameCreationScreen();
+					
+				} catch (UserQuitException e) {
+					
+					keepLooping = false;
+					
+				}
+				
 				break;
 				
 			case 1:
@@ -48,7 +73,7 @@ public class TextUserInterface extends UserInterface {
 	}
 
 	@Override
-	public Integer showGameCreationScreen() {
+	public Integer showGameCreationScreen() throws UserQuitException {
 		
 		boolean keepLooping = true;
 		
@@ -58,11 +83,19 @@ public class TextUserInterface extends UserInterface {
 			
 			TextUserInterfaceHelpers.printTitleBlock("CREATE A NEW GAME", '#');
 			
-			cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight (3-6)? ");
+			try {
+				
+				cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight (3-6)? ");
+				
+				keepLooping = !TextUserInterfaceHelpers.showYesNo(
+					String.format("You have selected %d villains. Is this OK?", cityCount)
+				);
 			
-			keepLooping = !TextUserInterfaceHelpers.showYesNo(
-				String.format("You have selected %d villains. Is this OK?", cityCount)
-			);
+			} catch (UserCancelException e) {
+				
+				break;
+				
+			}
 
 		}
 		
