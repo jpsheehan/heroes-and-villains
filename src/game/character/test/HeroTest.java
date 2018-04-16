@@ -7,13 +7,14 @@ import game.character.Hero;
 import game.character.HeroAbility;
 import game.character.HeroType;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+
 
 class HeroTest {
 	
 	private Hero hero_1, hero_2, hero_3, hero_4, hero_5, hero_6, hero_7;
 	
-	@BeforeAll
+	@BeforeEach
 	void setup() {
 		hero_1 = new Hero("Sir Bob the Brave", HeroType.MATHS_STUDENT);
 		hero_2 = new Hero("Hero 2", HeroType.ARTS_STUDENT);
@@ -48,7 +49,9 @@ class HeroTest {
 
 	@Test
 	void testGetRecoveryRate() {
+		
 		fail("Not yet implemented");
+		
 	}
 
 	@Test

@@ -76,15 +76,6 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 	}
 	
 	@Test
-	void testClear() {
-		
-		clear();
-		
-		assertEquals("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", outputStream.toString());
-		
-	}
-	
-	@Test
 	void testGetNumberWithBounds() {
 		
 		setInputStream("1\n");
