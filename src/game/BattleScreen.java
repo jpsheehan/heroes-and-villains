@@ -3,8 +3,11 @@ package game;
 import game.character.Hero;
 import game.character.HeroAbility;
 import game.character.Villain;
+import game.minigame.DiceRolls;
+import game.minigame.GuessTheNumber;
 import game.minigame.Minigame;
 import game.minigame.MinigameType;
+import game.minigame.PaperScissorsRock;
 import game.GeneralHelpers;
 
 public class BattleScreen {
@@ -40,6 +43,11 @@ public class BattleScreen {
 	 */
 	private Minigame minigame;
 	
+	/**
+	 * Creates a new BattleScreen.
+	 * @param villain The villain the hero is to battle.
+	 * @param cityIndex The index of the city the team is in.
+	 */
 	public BattleScreen(Villain villain, int cityIndex) {
 		
 		this.villain = villain;
@@ -115,7 +123,45 @@ public class BattleScreen {
 	 */
 	private void setMinigame(MinigameType type) {
 		
-		// TODO: Finish
+		if (this.villain.getFavouriteGames().contains(type)) {
+			
+			Ability[] abilities = this.calculateAbilities();
+			
+			switch (type) {
+			
+				case DICE_ROLLS:
+					this.minigame = new DiceRolls(abilities);
+					break;
+				
+				case GUESS_THE_NUMBER:
+					this.minigame = new GuessTheNumber(abilities);
+					break;
+				
+				case PAPER_SCISSORS_ROCK:
+					this.minigame = new PaperScissorsRock(abilities);
+					break;
+				
+				default:
+					throw new Error("Minitype is not valid!");
+					
+			}
+			
+		} else {
+		
+			throw new Error("Villain does not have this minigame as one of their favourites.");
+			
+		}
+		
+	}
+	
+	
+	/**
+	 * Calculates the abilities from the Hero and Team.
+	 * @return Returns an array of active abilities.
+	 */
+	private Ability[] calculateAbilities() {
+		
+		// TODO: Find a way of doing this.
 		
 	}
 	
