@@ -79,21 +79,33 @@ public class TextUserInterface extends UserInterface {
 		
 		int cityCount = 0;
 		
+		TextUserInterfaceHelpers.printTitleBlock("CREATE A NEW GAME", '#');
+		
+		System.out.println("How many villains do you want to fight? " + TextUserInterfaceHelpers.getInputOptions("3-6"));
+		
 		while (keepLooping) {
-			
-			TextUserInterfaceHelpers.printTitleBlock("CREATE A NEW GAME", '#');
 			
 			try {
 				
-				cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6, "How many villains do you want to fight (3-6)? ");
+				cityCount = TextUserInterfaceHelpers.getNumberWithBounds(3, 6);
 				
 				keepLooping = !TextUserInterfaceHelpers.showYesNo(
 					String.format("You have selected %d villains. Is this OK?", cityCount)
 				);
+				
+				if (keepLooping) {
+					
+					System.out.println("How many villains do you want to fight? " + TextUserInterfaceHelpers.getInputOptions("3-6"));
+					
+				}
 			
 			} catch (UserCancelException e) {
 				
 				break;
+				
+			} catch (UserContinueException e) {
+				
+				System.out.println("How many villains do you want to fight? " + TextUserInterfaceHelpers.getInputOptions("3-6"));
 				
 			}
 

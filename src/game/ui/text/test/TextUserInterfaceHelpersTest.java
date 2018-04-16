@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 
 import game.ui.text.TextUserInterfaceHelpers;
 import game.ui.text.UserCancelException;
+import game.ui.text.UserContinueException;
 import game.ui.text.UserQuitException;
 
 class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
@@ -78,7 +79,7 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 	}
 	
 	@Test
-	void testGetNumberWithBounds() throws UserCancelException, UserQuitException {
+	void testGetNumberWithBounds() throws UserCancelException, UserQuitException, UserContinueException {
 		
 		setInputStream("1\n");
 		
@@ -97,7 +98,7 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 	}
 	
 	@Test
-	void testReadLine() throws UserCancelException, UserQuitException {
+	void testReadLine() throws UserCancelException, UserQuitException, UserContinueException {
 		
 		setInputStream("Hello, World!\n");
 		assertEquals("Hello, World!", readLine());

@@ -158,10 +158,10 @@ public class TextUserInterfaceHelpers {
 	private static boolean showYesNo(String question, boolean suppressQuit) throws UserQuitException, UserCancelException {
 		
 		int choice = 0;
-		String input;
+		String input = "";
 		
 		// Print the question
-		System.out.println(question + " (y/n)");
+		System.out.println(question + " " + getInputOptions(new String[] {"y", "n"}));
 		
 		// Prompt for and read the user's input
 		System.out.print("> ");
@@ -191,6 +191,11 @@ public class TextUserInterfaceHelpers {
 			}
 			
 			throw e;
+			
+		} catch (UserContinueException e) {
+			
+			// Print the question again
+			System.out.println(question + " " + getInputOptions(new String[] {"y", "n"}));
 			
 		}
 		
@@ -224,6 +229,11 @@ public class TextUserInterfaceHelpers {
 				
 				throw e;
 				
+			} catch (UserContinueException e) {
+				
+				// Print the question again
+				System.out.println(question + " " + getInputOptions(new String[] {"y", "n"}));
+				
 			}
 			
 		}
@@ -243,10 +253,11 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static int showChoice(String message, String[] options) throws UserCancelException, UserQuitException {
 		
-		int choice;
+		int choice = 0;
+		boolean keepLooping = true;
 		
 		// Print the message
-		System.out.println(message);
+		System.out.println(message + " " + getInputOptions("1-" + options.length));
 		
 		// Print the options
 		for (int i = 0; i < options.length; i++) {
@@ -259,7 +270,20 @@ public class TextUserInterfaceHelpers {
 			
 		}
 		
-		choice = getNumberWithBounds(1, options.length);
+		while (keepLooping) {
+			
+			try {
+				
+				choice = getNumberWithBounds(1, options.length);
+				keepLooping = false;
+				
+			} catch (UserContinueException e) {
+				
+				// Print the message again
+				System.out.println(message + " " + getInputOptions("1-" + options.length));
+				
+			}
+		}
 		
 		// Return the index of the String array that the user chose.
 		return choice - 1;
@@ -271,8 +295,9 @@ public class TextUserInterfaceHelpers {
 	 * @return
 	 * @throws UserQuitException 
 	 * @throws UserCancelException 
+	 * @throws UserContinueException 
 	 */
-	public static String readLine() throws UserCancelException, UserQuitException {
+	public static String readLine() throws UserCancelException, UserQuitException, UserContinueException {
 		return readLine("");
 	}
 	
@@ -282,8 +307,9 @@ public class TextUserInterfaceHelpers {
 	 * @return
 	 * @throws UserCancelException 
 	 * @throws UserQuitException 
+	 * @throws UserContinueException 
 	 */
-	public static String readLine(String prelude) throws UserCancelException, UserQuitException {
+	public static String readLine(String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
@@ -323,6 +349,10 @@ public class TextUserInterfaceHelpers {
 				if (shouldQuit) {
 					
 					throw new UserQuitException();
+					
+				} else {
+				
+					throw new UserContinueException();
 					
 				}
 			
@@ -369,13 +399,17 @@ public class TextUserInterfaceHelpers {
 	 * @return
 	 */
 	public static String repeatString(String str, Integer n) {
+		
 		StringBuilder builder = new StringBuilder();
 		
 		for (int i = 0; i < n; i++) {
+			
 			builder.append(str);
+			
 		}
 		
 		return builder.toString();
+		
 	}
 	
 	/**
@@ -415,8 +449,9 @@ public class TextUserInterfaceHelpers {
 	 * @return Returns the entered number.
 	 * @throws UserQuitException 
 	 * @throws UserCancelException 
+	 * @throws UserContinueException 
 	 */
-	public static Integer getNumberWithBounds(Integer min, Integer max) throws UserCancelException, UserQuitException {
+	public static Integer getNumberWithBounds(Integer min, Integer max) throws UserCancelException, UserQuitException, UserContinueException {
 		
 		return getNumberWithBounds(min, max, "> ");
 		
@@ -430,8 +465,9 @@ public class TextUserInterfaceHelpers {
 	 * @return Returns the entered number.
 	 * @throws UserQuitException 
 	 * @throws UserCancelException 
+	 * @throws UserContinueException 
 	 */
-	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) throws UserCancelException, UserQuitException {
+	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
 		int choice;
 		
@@ -531,6 +567,34 @@ public class TextUserInterfaceHelpers {
 		
 		printHorizontalRule(border);
 		System.out.println();
+		
+	}
+	
+	public static String getInputOptions(String options) {
+		return getInputOptions(new String[] {options });
+	}
+	
+	/**
+	 * Returns the input options available for this input dialog.
+	 * @param options A string list of input options.
+	 * @return
+	 */
+	public static String getInputOptions(String[] options) {
+		
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("(");
+		builder.append(String.join(", ", options));
+		
+		if (options.length > 0) {
+			
+			builder.append(", ");
+			
+		}
+		
+		builder.append("c, q");
+		builder.append(")");
+		return builder.toString();
 		
 	}
 	
