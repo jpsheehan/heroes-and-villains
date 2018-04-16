@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import game.character.Hero;
 import game.character.HeroAbility;
+import game.character.HeroDeadException;
 import game.character.HeroType;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +58,33 @@ class HeroTest {
 	@Test
 	void testGetHealth() {
 	
-		fail("Not yet implemented");
+		try {
+			hero_1.takeDamage(10);
+			assertEquals(new Integer(90), hero_1.getHealth());
+			
+			hero_1.takeDamage(80);
+			assertEquals(new Integer(10), hero_1.getHealth());
+			
+		} catch (HeroDeadException e) {
+			fail("Shouldn't have thrown an exception here.");
+		}
+		
+		try {
+			hero_2.takeDamage(-20);
+			fail("Should have thrown an exception!");
+		} catch (IllegalArgumentException e) {
+			assertTrue(true, "Caught the IllegalArgumentException.");
+		} catch (HeroDeadException e) {
+			fail("Hero is still alive, not dead!");
+		}
+		
+		try {
+			hero_3.takeDamage(300);
+			fail("Should have thrown an exception here.");
+		} catch (HeroDeadException e) {
+			assertEquals(new Integer(0), hero_3.getHealth());
+			assertFalse(hero_3.isAlive());
+		}
 	}
 
 	@Test
