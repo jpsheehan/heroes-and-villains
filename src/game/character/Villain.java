@@ -123,12 +123,12 @@ import game.character.VillainType;
 public static void main(String[] args) {
 	
     	//create some Villains
-	Villain v1 = new Villain("Front Desk", LIBRARIAN, 3, 1);
-	Villain v2 = new Villain("Level 5 ECE Support", ADMINISTRATION, 3, 2);
-	Villain v3 = new Villain("I'll Lobb you", RICHARD_LOBB, 3, 6);
-	Villain v4 = new Villain("Ker-ching", OVERPRICED_TEXTBOOK, 3, 5);
-	Villain v5 = new Villain("Sssss-simon", SIMON_BROWN, 3, 8);
-	Villain v6 = new Villain("Level 5 ECE Support", RORY_THE_BUILDER, 3, 4);
+	Villain v1 = new Villain("Front Desk", VillainType.LIBRARIAN, 3, 1);
+	Villain v2 = new Villain("Level 5 ECE Support", VillainType.ADMINISTRATION, 3, 2);
+	Villain v3 = new Villain("I'll Lobb you", VillainType.RICHARD_LOBB, 3, 6);
+	Villain v4 = new Villain("Ker-ching", VillainType.OVERPRICED_TEXTBOOK, 3, 5);
+	Villain v5 = new Villain("Sssss-simon", VillainType.SIMON_BROWN, 3, 8);
+	Villain v6 = new Villain("Level 5 ECE Support", VillainType.RORY_THE_BUILDER, 3, 4);
 	
 	//print names
 	System.out.println(v1.getName());
