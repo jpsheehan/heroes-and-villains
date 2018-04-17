@@ -5,6 +5,15 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
+/**
+ * A class containing only static helper methods for creating text-based user interfaces.
+ * I recommend import like so:
+ * 
+ * 		import static game.ui.text.TextUserInterfaceHelpers.*;
+ * 
+ * @author jesse
+ *
+ */
 public class TextUserInterfaceHelpers {
 	
 	/**
@@ -85,7 +94,6 @@ public class TextUserInterfaceHelpers {
 		System.out.println(repeatString(rule.toString(), getConsoleWidth() - 1));
 		
 	}
-	
 	
 	/**
 	 * An array of Strings that mean "yes".

@@ -28,7 +28,7 @@ public class TextUserInterface extends UserInterface {
 				"HEROES AND VILLAINS - CAMPUS EDITION",
 				"by Manu Hamblyn & Jesse Sheehan",
 				"Copyright (c) 2018"
-			}, '#');
+			});
 			
 			printLineCentred("Hint: You can type 'c' for 'cancel' or 'q' for 'quit' at any time.");
 			System.out.println();
@@ -93,7 +93,7 @@ public class TextUserInterface extends UserInterface {
 		
 		int cityCount = 0;
 		
-		printTitleBlock("CREATE A NEW GAME", '#');
+		printTitleBlock("CREATE A NEW GAME");
 		
 		System.out.println("How many villains do you want to fight? " + getInputOptions("3-6"));
 		
@@ -141,7 +141,7 @@ public class TextUserInterface extends UserInterface {
 			
 			int choice = 0;
 			
-			printTitleBlock("CREATE A TEAM", '#');
+			printTitleBlock("CREATE A TEAM");
 			
 			if (heroes.size() > 0) {
 				
@@ -227,8 +227,12 @@ public class TextUserInterface extends UserInterface {
 	}
 	
 	private boolean showConfirmGameScreen(int cityCount, Hero[] heroes) throws UserQuitException {
+		
+		// TODO: Do properly!
 		showMessageDialog("Confirm", "Information");
+		
 		return false;
+		
 	}
 	
 	public Hero showHeroSelectionMenu(String message, Hero[] heroes) throws UserQuitException {
@@ -252,7 +256,7 @@ public class TextUserInterface extends UserInterface {
 		
 		while (keepLooping) {
 			
-			printTitleBlock(title, '#');
+			printTitleBlock(title);
 			
 			try {
 				
