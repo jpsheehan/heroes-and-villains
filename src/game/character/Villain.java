@@ -1,5 +1,8 @@
 package game.character;
 
+import java.util.ArrayList;
+import game.minigame.*;
+
 import game.character.VillainType;
 
 /**
@@ -7,23 +10,23 @@ import game.character.VillainType;
 	 */
 	public class Villain extends Character {
 
-	// games
-	// list of taunt phrases
-	// taunt phrase, randomly chosen from the list of taunts
-	// strength ??
-
+	// 20180416 To Do
+	// get favourite games
+	// test
+		
 	/**
 	 * Creates a new Villain.
 	 * @param name The name of the Villain.
 	 * @param type The type of Villain.
-	 * @param int The number of (minigame) wins required to defeat the Villain  
+	 * @param int The number of (minigame) wins required to defeat the Villain 
+	 * @param MiniGame one of more minigames the villain plays 
 	 */
-	public Villain(String name, VillainType type, int winsToDefeat, int strength) {
-	super(name);
-	this.type = type;
-	this.winsToDefeat = winsToDefeat;
-	this.timesBeaten = 0;
-	this.strength = strength;
+	public Villain(String name, VillainType type, ArrayList<Minigame> games, int winsToDefeat) {
+		super(name);
+		this.type = type;
+		this.winsToDefeat = winsToDefeat;
+		this.timesBeaten = 0;
+		this.favouriteGame = games;
 	}
 	
 	//return favourite game, or if a list of games randomly choose a game and return it
@@ -48,6 +51,11 @@ import game.character.VillainType;
  	* Scale of 1-10: 10 doing greatest damage, 1 doing least damage.
  	*/
 	private Integer strength;
+	
+	/**
+	 * Favourite game (if only one entry) or (multiple) games the Villain plays.
+	 */
+	private ArrayList<Minigame> favouriteGame;
 	
 	/*/**
 	 * The Villans's taunt phrase
@@ -107,10 +115,18 @@ import game.character.VillainType;
 		case RORY_THE_BUILDER:
 			return "Building schmilding. Bet you don't have tools like mine!";
 		default :
-			return ("You suck big time!");								//shoudn't get this but could throw an exception
+			return ("You suck big time!");						//shoudn't get this, but could change to throw an exception
 		}
 	}
 	
+	/**
+	 * Returns (single) favourite game or (multiple) games the Villain plays.
+	 * @return
+	 */
+	public ArrayList<Minigame> getFavouriteGame() {
+		return favouriteGame;
+	}
+
 	/**
 	 * Updates the number of times the Villain has been beaten.
 	 * @return
@@ -119,8 +135,10 @@ import game.character.VillainType;
 		this.timesBeaten-=1;
 	}
 	
-	
 public static void main(String[] args) {
+	
+	//create some Minigames, create some Arraylists of minigames
+	// add the Minigames into the ArrayLists 
 	
     	//create some Villains
 	Villain v1 = new Villain("Front Desk", VillainType.LIBRARIAN, 3, 1);
