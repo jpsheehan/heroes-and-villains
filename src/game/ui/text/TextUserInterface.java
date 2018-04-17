@@ -14,6 +14,12 @@ public class TextUserInterface extends UserInterface {
 		
 		boolean keepLooping = true;
 		
+		String[] options = new String[] {
+			"New Game",
+			"Load Game",
+			"Quit"
+		};
+		
 		while (keepLooping) {
 			
 			int choice = -1;
@@ -24,21 +30,14 @@ public class TextUserInterface extends UserInterface {
 				"Copyright (c) 2018"
 			}, '#');
 			
-			String[] options = new String[] {
-				"New Game",
-				"Load Game",
-				"Quit"
-			};
+			printLineCentred("Hint: You can type 'c' for 'cancel' or 'q' for 'quit' at any time.");
+			System.out.println();
 			
 			try {
 				
 				choice = showChoice("Select an option:", options);
 				
-			} catch (UserCancelException e) {
-				
-				
-				
-			} catch (UserQuitException e) {
+			} catch (UserCancelException | UserQuitException e) {
 				
 				keepLooping = false;
 				break;
@@ -63,6 +62,10 @@ public class TextUserInterface extends UserInterface {
 					
 					keepLooping = false;
 					
+				} catch (UserCancelException e) {
+					
+					continue;
+					
 				}
 				
 				break;
@@ -84,7 +87,7 @@ public class TextUserInterface extends UserInterface {
 	}
 
 	@Override
-	public Integer showGameCreationScreen() throws UserQuitException {
+	public Integer showGameCreationScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
 		
@@ -110,10 +113,6 @@ public class TextUserInterface extends UserInterface {
 					
 				}
 			
-			} catch (UserCancelException e) {
-				
-				break;
-				
 			} catch (UserContinueException e) {
 				
 				System.out.println("How many villains do you want to fight? " + getInputOptions("3-6"));
@@ -127,10 +126,16 @@ public class TextUserInterface extends UserInterface {
 	}
 
 	@Override
-	public Hero[] showTeamCreationScreen() throws UserQuitException {
+	public Hero[] showTeamCreationScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
 		ArrayList<Hero> heroes = new ArrayList<Hero>();
+
+		String[] options = new String[] {
+			"Add a Hero",
+			"Remove a Hero",
+			"Ready!"
+		};
 		
 		while (keepLooping) {
 			
@@ -152,21 +157,7 @@ public class TextUserInterface extends UserInterface {
 				
 			}
 			
-			String[] options = new String[] {
-				"Add a Hero",
-				"Remove a Hero",
-				"Ready!"
-			};
-			
-			try {
-				
-				choice = showChoice("Select an option:", options);
-				
-			} catch (UserCancelException e) {
-				
-				continue;
-				
-			}
+			choice = showChoice("Select an option:", options);
 			
 			switch (choice) {
 				
@@ -238,6 +229,49 @@ public class TextUserInterface extends UserInterface {
 	private boolean showConfirmGameScreen(int cityCount, Hero[] heroes) throws UserQuitException {
 		showMessageDialog("Confirm", "Information");
 		return false;
+	}
+	
+	public Hero showHeroSelectionMenu(String message, Hero[] heroes) throws UserQuitException {
+		
+		return showHeroSelectionMenu(message, "HERO SELECTION", heroes);
+		
+	}
+	
+	public static Hero showHeroSelectionMenu(String message, String title, Hero[] heroes) throws UserQuitException {
+		
+		boolean keepLooping = true;
+		int choice = -1;
+		
+		String[] heroStrings = new String[heroes.length];
+		
+		for (int i = 0; i < heroes.length; i++) {
+			
+			heroStrings[i] = heroes[i].toString();
+			
+		}
+		
+		while (keepLooping) {
+			
+			printTitleBlock(title, '#');
+			
+			try {
+				
+				choice = showChoice(message, heroStrings);
+				keepLooping = false;
+				
+			} catch (UserCancelException e) { }
+			
+		}
+		
+		if (choice > -1) {
+			
+			return heroes[choice];
+			
+		} else {
+			
+			return null;
+			
+		}
 	}
 	
 	public static void main(String[] args) {

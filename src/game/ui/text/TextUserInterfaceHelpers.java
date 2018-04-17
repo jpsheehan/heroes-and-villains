@@ -540,12 +540,32 @@ public class TextUserInterfaceHelpers {
 	/**
 	 * Prints a title block.
 	 * @param title The string to use as the title.
+	 */
+	public static void printTitleBlock(String title) {
+		
+		printTitleBlock(title, '#');
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param title The string to use as the title.
 	 * @param border The border character.
 	 */
 	public static void printTitleBlock(String title, Character border) {
 		
 		printTitleBlock(new String[] {title}, border);
 		
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param titles The string array to use as the titles.
+	 */
+	public static void printTitleBlock(String[] titles) {
+		
+		printTitleBlock(titles, '#');
 		
 	}
 	
@@ -570,14 +590,21 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
-	public static String getInputOptions(String options) {
-		return getInputOptions(new String[] {options });
+	/**
+	 * Returns a string containing all the input options.
+	 * @param option
+	 * @return The string containing all the input options including cancel and quit.
+	 */
+	public static String getInputOptions(String option) {
+		
+		return getInputOptions(new String[] { option });
+		
 	}
 	
 	/**
 	 * Returns the input options available for this input dialog.
 	 * @param options A string list of input options.
-	 * @return
+	 * @return Returns a string containing all the options for this input dialog (including quit and cancel).
 	 */
 	public static String getInputOptions(String[] options) {
 		
@@ -598,6 +625,23 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
+	/**
+	 * Displays a message.
+	 * @param message The message to show.
+	 * @throws UserQuitException If the user quits.
+	 */
+	public static void showMessageDialog(String message) throws UserQuitException {
+		
+		showMessageDialog(message, "INFORMATION");
+		
+	}
+	
+	/**
+	 * Displays a message.
+	 * @param message The message to show.
+	 * @param title The title to show.
+	 * @throws UserQuitException If the user quits.
+	 */
 	public static void showMessageDialog(String message, String title) throws UserQuitException {
 		
 		printTitleBlock(title, '#');
@@ -608,7 +652,7 @@ public class TextUserInterfaceHelpers {
 		
 		try {
 			
-			System.out.println("Press <Enter> to continue...");
+			printLineCentred("Press <Enter> to continue...");
 			readLine("");
 			
 		} catch (UserCancelException | UserContinueException e) {
