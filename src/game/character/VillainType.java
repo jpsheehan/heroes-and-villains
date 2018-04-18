@@ -11,4 +11,4 @@ public enum VillainType {
 	OVERPRICED_TEXTBOOK,
 	SIMON_BROWN,
 	RORY_THE_BUILDER,
-}
+} 
