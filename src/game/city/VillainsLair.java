@@ -26,23 +26,30 @@ public class VillainsLair extends Area {
 	 * @param name The name of the Home Base.
 	 */
 	public VillainsLair(String name, Villain villain, int cityIndex) {
+		
 		super(name, AreaType.VILLAINS_LAIR);
+		
 		this.villain = villain;
-		battleScreen = new BattleScreen(villain, cityIndex); 
+		this.battleScreen = new BattleScreen(villain, cityIndex);
+		
 	}
 
 	/**
 	 * @return the villain in this lair
 	 */
 	public Villain getVillain() {
+		
 		return villain;
+		
 	}
 
 	/**
 	 * @return the battleScreen
 	 */
 	public BattleScreen getBattleScreen() {
+		
 		return battleScreen;
+		
 	}
 				
 }
