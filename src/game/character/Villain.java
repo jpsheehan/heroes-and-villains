@@ -21,7 +21,7 @@ import game.character.VillainType;
 	 * @param int The number of (minigame) wins required to defeat the Villain 
 	 * @param MiniGame one of more minigames the villain plays 
 	 */
-	public Villain(String name, VillainType type, ArrayList<Minigame> games, int winsToDefeat) {
+	public Villain(String name, VillainType type, ArrayList<MinigameType> games, int winsToDefeat) {
 		super(name);
 		this.type = type;
 		this.winsToDefeat = winsToDefeat;
@@ -55,7 +55,7 @@ import game.character.VillainType;
 	/**
 	 * Favourite game (if only one entry) or (multiple) games the Villain plays.
 	 */
-	private ArrayList<Minigame> favouriteGame;
+	private ArrayList<MinigameType> favouriteGame;
 	
 	/*/**
 	 * The Villans's taunt phrase
@@ -123,7 +123,7 @@ import game.character.VillainType;
 	 * Returns (single) favourite game or (multiple) games the Villain plays.
 	 * @return
 	 */
-	public ArrayList<Minigame> getFavouriteGame() {
+	public ArrayList<MinigameType> getFavouriteGames() {
 		return favouriteGame;
 	}
 

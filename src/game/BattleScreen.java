@@ -66,7 +66,7 @@ public class BattleScreen {
 		
 		// Consider adding an ability that grants more money.
 		
-		return GeneralHelpers.getRandom().nextInt(100) * this.cityIndex;
+		return (int)(GeneralHelpers.getRandom().nextInt(100) * rewardMultiplier * (this.cityIndex + 1));
 		
 	}
 	
@@ -84,7 +84,7 @@ public class BattleScreen {
 			
 		}
 		
-		return (int)(GeneralHelpers.getRandom().nextInt(10) * this.cityIndex * damageMultiplier);
+		return (int)(GeneralHelpers.getRandom().nextInt(10) * (this.cityIndex + 1) * damageMultiplier);
 		
 	}
 	
@@ -162,6 +162,7 @@ public class BattleScreen {
 	private Ability[] calculateAbilities() {
 		
 		// TODO: Find a way of doing this.
+		return new Ability[] {};
 		
 	}
 	
