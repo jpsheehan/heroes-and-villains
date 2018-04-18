@@ -12,9 +12,9 @@ public enum HeroAbility implements Ability {
 	VILLAINS_LESS_20_HEALTH, // (20%) engineering students (body odour)
 	INCREASED_RECOVERY_RATE, // (for team) science students
 	WITTY_PHRASES, // (useless) arts students
-	IMPROVED_ODDS, // (for dice game and guess the number) maths students
+	IMPROVED_ODDS, // (for dice game and guess the number) mathematics students
 	PREVENTS_ROBBERY, // law students
-	TELEPORT; // (allows the team to teleport to the next city (single use)) compsoc students
+	TELEPORT; // (allows the team to teleport to the next city (one time use)) compsoc. students
 	
 	@Override
 	public String toString() {
@@ -45,7 +45,6 @@ public enum HeroAbility implements Ability {
 		default:
 			return "null";
 			
-		}
-		
+		}	
 	}
 }

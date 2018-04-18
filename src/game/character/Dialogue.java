@@ -6,7 +6,7 @@ package game.character;
 //20180417
 //A fixed and hardcoded list of phrases, will be concatenated with specific team lists, 
 //	perhaps in future a list of phrases for each category and randomly select per Inn / InnKeeper 
-
+ 
 /**
  * Provides the dialogue for the InnKeeper 
  *  
@@ -57,6 +57,11 @@ public class Dialogue {
 	 * text for Amount of money the team has
 	 */
 	 private String teamFunds;
+	 
+	 /**
+	 * text for buying drinks
+	 */
+	 private String drinks;
 
 		/*public Dialogue(String greeting, String farewell, String options, String purchase, String teamItems,
 			String teamAbilities, String teamFunds) { */
