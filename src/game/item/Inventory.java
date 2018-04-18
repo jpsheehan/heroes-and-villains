@@ -5,6 +5,10 @@ import java.util.ArrayList;
 //import game.minigame.*;
 
 //20180411
+//20180416 to do
+//convert back to 3 separate arraylists for powerups, healing, maps.
+//	parse into correct list on addition of an item.
+//		and return each separate list as a string on get (override toSting for each) 
 
 public class Inventory {
 
