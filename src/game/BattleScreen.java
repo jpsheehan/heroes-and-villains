@@ -113,9 +113,9 @@ public class BattleScreen {
 	 */
 	private void setMinigame() {
 		
-		MinigameType type = this.villain.getFavouriteGames().get(
-				GeneralHelpers.getRandom().nextInt(this.villain.getFavouriteGames().size())
-		);
+		MinigameType type = this.villain.getFavouriteGames()[
+				GeneralHelpers.getRandom().nextInt(this.villain.getFavouriteGames().length)
+		];
 		
 		this.setMinigame(type);
 		
@@ -127,7 +127,7 @@ public class BattleScreen {
 	 */
 	private void setMinigame(MinigameType type) {
 		
-		if (this.villain.getFavouriteGames().contains(type)) {
+		if (GeneralHelpers.doesArrayContain(this.villain.getFavouriteGames(), type)) {
 			
 			Ability[] abilities = this.calculateAbilities();
 			

@@ -71,4 +71,20 @@ public final class GeneralHelpers {
 		
 	}
 	
+	public static <T> boolean doesArrayContain(T[] array, T item) {
+		
+		for (T elem : array) {
+			
+			if (elem == item || elem.equals(item)) {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+		
+	}
+	
 }
