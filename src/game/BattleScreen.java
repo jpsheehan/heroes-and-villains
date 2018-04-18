@@ -19,7 +19,7 @@ public class BattleScreen {
 	
 	
 	/**
-	 * The index of the current city (used in money/damage calulcations)
+	 * The index of the current city (used in money/damage calculations)
 	 */
 	private int cityIndex;
 	
@@ -113,7 +113,11 @@ public class BattleScreen {
 	 */
 	private void setMinigame() {
 		
-		// TODO: Finish
+		MinigameType type = this.villain.getFavouriteGames().get(
+				GeneralHelpers.getRandom().nextInt(this.villain.getFavouriteGames().size())
+		);
+		
+		this.setMinigame(type);
 		
 	}
 	
