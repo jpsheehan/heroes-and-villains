@@ -22,18 +22,12 @@ public class VillainsLair extends Area {
 	private BattleScreen battleScreen;
 	
 	/**
-	 * The index of the current city (used in money/damage calculations)
-	 */
-	private int cityIndex;
-	
-	/**
 	 * Creates a new Villains Lair.
 	 * @param name The name of the Home Base.
 	 */
 	public VillainsLair(String name, Villain villain, int cityIndex) {
 		super(name, AreaType.VILLAINS_LAIR);
 		this.villain = villain;
-		this.cityIndex = cityIndex;
 		battleScreen = new BattleScreen(villain, cityIndex); 
 	}
 
@@ -49,13 +43,6 @@ public class VillainsLair extends Area {
 	 */
 	public BattleScreen getBattleScreen() {
 		return battleScreen;
-	}
-
-	/**
-	 * @return the cityIndex
-	 */
-	public int getCityIndex() {
-		return cityIndex;
 	}
 				
 }
