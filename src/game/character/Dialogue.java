@@ -5,7 +5,7 @@ package game.character;
 
 //20180417
 //A fixed and hardcoded list of phrases, will be concatenated with specific team lists, 
-//	perhaps in future a list of phrases for each category and randomly select per Inn / InnKeeper
+//	perhaps in future a list of phrases for each category and randomly select per Inn / InnKeeper 
 
 /**
  * Provides the dialogue for the InnKeeper 
