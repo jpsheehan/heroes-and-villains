@@ -5,9 +5,20 @@ import java.util.Random;
 
 public final class GeneralHelpers {
 	
-	public static void setProgramArgs(String[] args) {
+	public static String getString(String specifier) {
 		
+		throw new IllegalArgumentException(String.format("Invalid specifier \"%s\".", specifier));
 		
+	}
+	
+	/**
+	 * A wrapper for getString. Returns the associated string.
+	 * @param specifier The specifier that is associated with the string you want.
+	 * @return
+	 */
+	public static String $(String specifier) {
+		
+		return getString(specifier);
 		
 	}
 	
