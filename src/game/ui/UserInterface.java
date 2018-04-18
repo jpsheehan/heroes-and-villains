@@ -1,11 +1,13 @@
 package game.ui;
 
+import game.character.Hero;
+
 public abstract class UserInterface {
 
 	public abstract void showTitleScreen();
 	
-	public abstract void showGameCreationScreen();
+	public abstract Integer showGameCreationScreen() throws Exception;
 	
-	public abstract void showTeamCreationScreen();
+	public abstract Hero[] showTeamCreationScreen() throws Exception;
 	
 }

@@ -76,11 +76,40 @@ public class Hero extends Character {
 	}
 	
 	/**
-	 * Returns the recovery rate of the Hero (depends on its type).
+	 * Returns the recovery rate of the Hero (depends on its type). The recovery rate is the amount of health regained every 10 seconds.
+	 * @throws Exception 
 	 */
-	public Integer getRecoveryRate() {
+	public Integer getRecoveryRate() throws Exception {
 		
-		return null; // TODO: stub
+		// TODO: Change these:
+		
+		switch (this.type) {
+		
+			case ARTS_STUDENT:
+				return 2;
+			
+			case COMMERCE_STUDENT:
+				return 2;
+				
+			case COMPUTER_SCIENCE_STUDENT:
+				return 2;
+				
+			case ENGINEERING_STUDENT:
+				return 2;
+				
+			case LAW_STUDENT:
+				return 2;
+				
+			case MATHS_STUDENT:
+				return 2;
+				
+			case SCIENCE_STUDENT:
+				return 2;
+				
+				default:
+					throw new Exception("Invalid HeroType to get the recovery rate of.");
+			
+		}
 		
 	}
 	
@@ -100,6 +129,12 @@ public class Hero extends Character {
 	 * @throws HeroDeadException if the hero is dead.
 	 */
 	public void takeDamage(int damage) throws HeroDeadException {
+		
+		if (damage < 0) {
+			
+			throw new IllegalArgumentException("Damage should not be negative!");
+			
+		}
 		
 		this.health -= damage;
 		

@@ -5,6 +5,15 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
+/**
+ * A class containing only static helper methods for creating text-based user interfaces.
+ * I recommend import like so:
+ * 
+ * 		import static game.ui.text.TextUserInterfaceHelpers.*;
+ * 
+ * @author jesse
+ *
+ */
 public class TextUserInterfaceHelpers {
 	
 	/**
@@ -63,9 +72,7 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static void printLineCentred(String line) {
 		
-		int numberOfPads = (int)((getConsoleWidth() - line.length()) / 2.0);
-		
-		System.out.println(repeatString(" ", numberOfPads) + line);
+		printLineCentredBordered(line, ' ');
 		
 	}
 	
@@ -87,7 +94,6 @@ public class TextUserInterfaceHelpers {
 		System.out.println(repeatString(rule.toString(), getConsoleWidth() - 1));
 		
 	}
-	
 	
 	/**
 	 * An array of Strings that mean "yes".
@@ -138,25 +144,105 @@ public class TextUserInterfaceHelpers {
 	
 	/**
 	 * Shows a yes/no question to the user.
-	 * @param question The question to prompt them with
-	 * @return Returns true if the user said yes.
+	 * @param question The question to prompt them with.
+	 * @return True if the user said yes.
+	 * @throws UserCancelException 
+	 * @throws UserQuitException 
 	 */
-	public static boolean showYesNo(String question) {
+	public static boolean showYesNo(String question) throws UserQuitException, UserCancelException {
+		
+		return showYesNo(question, false);
+		
+	}
+	
+	/**
+	 * Shows a yes/no question to the user.
+	 * @param question The question to prompt them with
+	 * @param suppressQuit Used internally for the readLine method.
+	 * @return Returns true if the user said yes.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
+	 */
+	private static boolean showYesNo(String question, boolean suppressQuit) throws UserQuitException, UserCancelException {
 		
 		int choice = 0;
+		String input = "";
 		
 		// Print the question
-		System.out.println(question + " (y/n)");
+		System.out.println(question + " " + getInputOptions(new String[] {"y", "n"}));
 		
 		// Prompt for and read the user's input
 		System.out.print("> ");
-		String input = readLine().toLowerCase();
+		
+		// Handle UserQuitException and UserCancelException appropriately.
+		// Rethrow them if suppressQuit is false, otherwise return false.
+		try {
+			
+			input = readLine().toLowerCase();
+			
+		} catch (UserQuitException e) {
+			
+			if (suppressQuit) {
+				
+				return false;
+				
+			}
+			
+			throw e;
+			
+		} catch (UserCancelException e) {
+			
+			if (suppressQuit) {
+				
+				return false;
+				
+			}
+			
+			throw e;
+			
+		} catch (UserContinueException e) {
+			
+			// Print the question again
+			System.out.println(question + " " + getInputOptions(new String[] {"y", "n"}));
+			
+		}
 		
 		// Keep asking while the input is invalid.
 		while ((choice = getYesNoUnknown(input)) == 0) {
 			
 			System.out.print("> ");
-			input = readLine().toLowerCase();
+			
+			// Handle the exceptions again
+			try {
+				
+				input = readLine().toLowerCase();
+				
+			} catch (UserQuitException e) {
+				
+				if (suppressQuit) {
+					
+					return false;
+					
+				}
+				
+				throw e;
+				
+			} catch (UserCancelException e) {
+				
+				if (suppressQuit) {
+					
+					return false;
+					
+				}
+				
+				throw e;
+				
+			} catch (UserContinueException e) {
+				
+				// Print the question again
+				System.out.println(question + " " + getInputOptions(new String[] {"y", "n"}));
+				
+			}
 			
 		}
 		
@@ -170,13 +256,16 @@ public class TextUserInterfaceHelpers {
 	 * @param message The message to show to the user.
 	 * @param options The options to display.
 	 * @return Returns the index of the Array that the user chose.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
 	 */
-	public static int showChoice(String message, String[] options) {
+	public static int showChoice(String message, String[] options) throws UserCancelException, UserQuitException {
 		
-		int choice;
+		int choice = 0;
+		boolean keepLooping = true;
 		
 		// Print the message
-		System.out.println(message);
+		System.out.println(message + " " + getInputOptions("1-" + options.length));
 		
 		// Print the options
 		for (int i = 0; i < options.length; i++) {
@@ -189,7 +278,20 @@ public class TextUserInterfaceHelpers {
 			
 		}
 		
-		choice = getNumberWithBounds(1, options.length);
+		while (keepLooping) {
+			
+			try {
+				
+				choice = getNumberWithBounds(1, options.length);
+				keepLooping = false;
+				
+			} catch (UserContinueException e) {
+				
+				// Print the message again
+				System.out.println(message + " " + getInputOptions("1-" + options.length));
+				
+			}
+		}
 		
 		// Return the index of the String array that the user chose.
 		return choice - 1;
@@ -199,8 +301,11 @@ public class TextUserInterfaceHelpers {
 	/**
 	 * Returns one line of text from the standard input.
 	 * @return
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
+	 * @throws UserContinueException 
 	 */
-	public static String readLine() {
+	public static String readLine() throws UserCancelException, UserQuitException, UserContinueException {
 		return readLine("");
 	}
 	
@@ -208,8 +313,11 @@ public class TextUserInterfaceHelpers {
 	 * Returns one line of text from the standard input.
 	 * @param prelude The text to place before entering something.
 	 * @return
+	 * @throws UserCancelException 
+	 * @throws UserQuitException 
+	 * @throws UserContinueException 
 	 */
-	public static String readLine(String prelude) {
+	public static String readLine(String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
@@ -234,8 +342,34 @@ public class TextUserInterfaceHelpers {
 			ByteBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, bytesRead);
 			CharBuffer charBuffer = Charset.forName("UTF-8").decode(byteBuffer);
 			
-			// Return the resulting String
-			return charBuffer.toString().trim();
+			String input = charBuffer.toString().trim();
+			
+			switch (input.toLowerCase()) {
+			
+			case "c":
+				
+				throw new UserCancelException();
+			
+			case "q":
+				
+				boolean shouldQuit = showYesNo("Are you sure you want to quit?", true);
+				
+				if (shouldQuit) {
+					
+					throw new UserQuitException();
+					
+				} else {
+				
+					throw new UserContinueException();
+					
+				}
+			
+			default:
+				
+				// Return the resulting String
+				return input;
+				
+			}
 			
 		} catch (IOException e) {
 			
@@ -273,13 +407,17 @@ public class TextUserInterfaceHelpers {
 	 * @return
 	 */
 	public static String repeatString(String str, Integer n) {
+		
 		StringBuilder builder = new StringBuilder();
 		
 		for (int i = 0; i < n; i++) {
+			
 			builder.append(str);
+			
 		}
 		
 		return builder.toString();
+		
 	}
 	
 	/**
@@ -317,8 +455,11 @@ public class TextUserInterfaceHelpers {
 	 * @param min The minimum bound (inclusive).
 	 * @param max The maximum bound (inclusive).
 	 * @return Returns the entered number.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
+	 * @throws UserContinueException 
 	 */
-	public static Integer getNumberWithBounds(Integer min, Integer max) {
+	public static Integer getNumberWithBounds(Integer min, Integer max) throws UserCancelException, UserQuitException, UserContinueException {
 		
 		return getNumberWithBounds(min, max, "> ");
 		
@@ -330,8 +471,11 @@ public class TextUserInterfaceHelpers {
 	 * @param max The maximum bound (inclusive).
 	 * @param prelude The prompt beginning each line.
 	 * @return Returns the entered number.
+	 * @throws UserQuitException 
+	 * @throws UserCancelException 
+	 * @throws UserContinueException 
 	 */
-	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) {
+	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
 		int choice;
 		
@@ -377,4 +521,151 @@ public class TextUserInterfaceHelpers {
 		
 	}
 	
+	/**
+	 * Prints a centered line with a border on the horizontal edges
+	 * @param line The text to centre.
+	 * @param border The character to print as the border.
+	 */
+	public static void printLineCentredBordered(String line, Character border) {
+		
+		int numberOfPads = (int)((getConsoleWidth() - line.length()) / 2.0) - 1;
+		int evenPadFix = 0;
+		
+		// account for even length strings
+		if (line.length() % 2 == 0) {
+			
+			evenPadFix -= 1;
+			
+		}
+		
+		System.out.println(
+				border + repeatString(" ", numberOfPads) + 
+				line + repeatString(" ", numberOfPads + evenPadFix) + 
+				border);
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param title The string to use as the title.
+	 */
+	public static void printTitleBlock(String title) {
+		
+		printTitleBlock(title, '#');
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param title The string to use as the title.
+	 * @param border The border character.
+	 */
+	public static void printTitleBlock(String title, Character border) {
+		
+		printTitleBlock(new String[] {title}, border);
+		
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param titles The string array to use as the titles.
+	 */
+	public static void printTitleBlock(String[] titles) {
+		
+		printTitleBlock(titles, '#');
+		
+	}
+	
+	/**
+	 * Prints a title block.
+	 * @param titles The string array of titles.
+	 * @param border The border character.
+	 */
+	public static void printTitleBlock(String[] titles, Character border) {
+		
+		clear();
+		printHorizontalRule(border);
+		
+		for (String title : titles) {
+			
+			printLineCentredBordered(title, border);
+			
+		}
+		
+		printHorizontalRule(border);
+		System.out.println();
+		
+	}
+	
+	/**
+	 * Returns a string containing all the input options.
+	 * @param option
+	 * @return The string containing all the input options including cancel and quit.
+	 */
+	public static String getInputOptions(String option) {
+		
+		return getInputOptions(new String[] { option });
+		
+	}
+	
+	/**
+	 * Returns the input options available for this input dialog.
+	 * @param options A string list of input options.
+	 * @return Returns a string containing all the options for this input dialog (including quit and cancel).
+	 */
+	public static String getInputOptions(String[] options) {
+		
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("(");
+		builder.append(String.join(", ", options));
+		
+		if (options.length > 0) {
+			
+			builder.append(", ");
+			
+		}
+		
+		builder.append("c, q");
+		builder.append(")");
+		return builder.toString();
+		
+	}
+	
+	/**
+	 * Displays a message.
+	 * @param message The message to show.
+	 * @throws UserQuitException If the user quits.
+	 */
+	public static void showMessageDialog(String message) throws UserQuitException {
+		
+		showMessageDialog(message, "INFORMATION");
+		
+	}
+	
+	/**
+	 * Displays a message.
+	 * @param message The message to show.
+	 * @param title The title to show.
+	 * @throws UserQuitException If the user quits.
+	 */
+	public static void showMessageDialog(String message, String title) throws UserQuitException {
+		
+		printTitleBlock(title, '#');
+		
+		printLineCentred(message);
+		
+		System.out.println();
+		
+		try {
+			
+			printLineCentred("Press <Enter> to continue...");
+			readLine("");
+			
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+		
+	}
 }
