@@ -130,6 +130,32 @@
 	"Matariki.InnKeeper.Dialogue.Farewell": "",
 	"Matariki.InnKeeper.Dialogue.Purchase": "",
 	"Matariki.Villain.Name": "",
-	"Matariki.Villain.Taunt": ""
+	"Matariki.Villain.Taunt": "",
+	
+	"Ability.Hero.CheaperItems.Name": "",
+	"Ability.Hero.CheaperItems.Flavour": "",
+	"Ability.Hero.ImprovedOdds.Name": "",
+	"Ability.Hero.ImprovedOdds.Flavour": "",
+	"Ability.Hero.IncreasedRecoveryRate.Name": "",
+	"Ability.Hero.IncreasedRecoveryRate.Flavour": "",
+	"Ability.Hero.HackMainframe.Name": "",
+	"Ability.Hero.HackMainframe.Flavour": "",
+	"Ability.Hero.PreventsRobbery.Name": "",
+	"Ability.Hero.PreventsRobbery.Flavour": "",
+	"Ability.Hero.DamageReduction.Name": "",
+	"Ability.Hero.DamageReduction.Flavour": "",
+	"Ability.Hero.ThrowMoney.Name": "",
+	"Ability.Hero.ThrowMoney.Flavour": "",
+	
+	"Ability.Item.DamageProtection.Name": "",
+	"Ability.Item.DamageProtection.Flavour": "",
+	"Ability.Item.DecreaseRobberyChance.Name": "",
+	"Ability.Item.DecreaseRobberyChance.Flavour": "",
+	"Ability.Item.FourAttemptsAtGuessTheNumber.Name": "",
+	"Ability.Item.FourAttemptsAtGuessTheNumber.Flavour": "",
+	"Ability.Item.IncreaseGiftChance.Name": "",
+	"Ability.Item.IncreaseGiftChance.Flavour": "",
+	"Ability.Item.WinOnDraw.Name": "",
+	"Ability.Item.WinOnDraw.Flavour": ""
 	
 }
