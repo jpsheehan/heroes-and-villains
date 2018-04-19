@@ -236,24 +236,45 @@ public class BattleScreen {
 					this.villainHealth = 0;
 					throw new VillainDeadException(this.villain);
 				}
-				
+
+				this.destroyHeroItem();
 				this.setMinigame();
 				break;
 				
 			case LOST:
 				// Deal damage to the hero and begin a new game.
 				this.hero.takeDamage(this.calculateDamage());
+				this.destroyHeroItem();
 				this.setMinigame();
 				break;
 				
 			case DRAWN:
 				
 				// Play the same game again.
+				// this.destroyHeroItem(); // don't destroy the power up if it's a draw??
 				this.setMinigame(this.getMinigameType());
 				break;
 			
 			default:
 				// do nothing...
+		}
+		
+	}
+	
+	/**
+	 * Destroys the hero's power up item if it is being used in the current game.
+	 * To be called after the game is over.
+	 */
+	private void destroyHeroItem() {
+		
+		if (
+				hero != null &&
+				hero.hasPowerUpItem() &&
+				(hero.getPowerUpItem().getAppliesTo() == MinigameType.ALL ||
+				hero.getPowerUpItem().getAppliesTo() == this.getMinigameType())) {
+			
+			this.hero.destroyPowerUpItem();
+			
 		}
 		
 	}
