@@ -1,15 +1,62 @@
 package game;
 
+import java.io.InputStream;
+
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 public final class GeneralHelpers {
 	
+	/**
+	 * Gets the associated string from the strings.json file.
+	 * @param specifier The string to get.
+	 * @returns
+	 */
 	public static String getString(String specifier) {
+		
+		loadStrings();
+		
+		if (GeneralHelpers.strings.containsKey(specifier)) {
+			
+			return GeneralHelpers.strings.get(specifier);
+			
+		}
 		
 		throw new IllegalArgumentException(String.format("Invalid specifier \"%s\".", specifier));
 		
 	}
+	
+	/**
+	 * Loads the strings from the strings.json file.
+	 */
+	private static void loadStrings() {
+		
+		if (GeneralHelpers.strings == null) {
+			
+			// Read the strings.json file into a String
+			InputStream stream = GeneralHelpers.class.getClassLoader().getResourceAsStream("strings.json");
+			Scanner scanner = new Scanner(stream);
+			scanner.useDelimiter("\\A");
+			
+			String fileString = scanner.hasNext() ? scanner.next() : "";
+			
+			scanner.close();
+			
+			// Convert that string into a Map<String, String>
+			Gson gson = new Gson();
+			GeneralHelpers.strings = gson.fromJson(fileString, new TypeToken<Map<String, String>>(){}.getType());
+
+		}
+		
+	}
+	
+	private static Map<String, String> strings = null;
 	
 	/**
 	 * A wrapper for getString. Returns the associated string.
