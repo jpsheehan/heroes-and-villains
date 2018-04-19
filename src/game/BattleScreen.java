@@ -146,13 +146,13 @@ public class BattleScreen {
 					break;
 				
 				default:
-					throw new Error("Minitype is not valid!");
+					throw new AssertionError("MinigameType is invalid.");
 					
 			}
 			
 		} else {
 		
-			throw new Error("Villain does not have this minigame as one of their favourites.");
+			throw new IllegalArgumentException("Villain does not have this minigame as one of their favourites.");
 			
 		}
 		

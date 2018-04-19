@@ -6,7 +6,6 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
