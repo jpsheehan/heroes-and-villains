@@ -11,6 +11,9 @@ import game.minigame.Minigame;
 import game.minigame.MinigameState;
 import game.minigame.MinigameType;
 import game.minigame.PaperScissorsRock;
+
+import java.util.ArrayList;
+
 import game.GeneralHelpers;
 
 public class BattleScreen {
@@ -132,7 +135,7 @@ public class BattleScreen {
 		
 		if (GeneralHelpers.doesArrayContain(this.villain.getFavouriteGames(), type)) {
 			
-			Ability[] abilities = this.calculateAbilities();
+			Ability[] abilities = this.calculateAbilities(type);
 			
 			switch (type) {
 			
@@ -163,13 +166,25 @@ public class BattleScreen {
 	
 	
 	/**
-	 * Calculates the abilities from the Hero and Team.
+	 * Calculates the abilities from the Hero and Team, based on the type of minigame being run. 
 	 * @return Returns an array of active abilities.
 	 */
-	private Ability[] calculateAbilities() {
+	private Ability[] calculateAbilities(MinigameType type) {
 		
-		// TODO: Find a way of doing this.
-		return new Ability[] {};
+		ArrayList<Ability> abilities = new ArrayList<Ability>();
+		
+		if (this.hero.hasPowerUpItem() &&
+				(this.hero.getPowerUpItem().getAppliesTo() == MinigameType.ALL ||
+				this.hero.getPowerUpItem().getAppliesTo() == type)
+			) {
+			
+			abilities.add((Ability)this.hero.getPowerUpItem());
+			
+		}
+		
+		abilities.add((Ability)this.hero.getAbility());
+		
+		return (Ability[]) abilities.toArray();
 		
 	}
 	

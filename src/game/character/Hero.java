@@ -1,5 +1,7 @@
 package game.character;
 
+import game.item.PowerUpItem;
+
 /**
  * Represents a Hero as described in section 3.2 of the specification.
  *
@@ -15,6 +17,11 @@ public class Hero extends Character {
 	 * The current health of the Hero.
 	 */
 	private Integer health;
+	
+	/**
+	 * The power up item the Hero is using/holding.
+	 */
+	private PowerUpItem item = null;
 	
 	/**
 	 * Creates a new Hero.
@@ -157,4 +164,42 @@ public class Hero extends Character {
 		
 	}
 	
+	/**
+	 * To be called when the team is in a power up den. Applies an item to a hero.
+	 * @param item The item to apply.
+	 */
+	public void usePowerUpItem(PowerUpItem item) {
+		
+		this.item = item;
+		
+	}
+	
+	/**
+	 * Returns true if the hero is holding an item.
+	 * @return
+	 */
+	public boolean hasPowerUpItem() {
+		
+		return this.item != null;
+		
+	}
+	
+	/**
+	 * Removes the power up item after it has been "used". Called internally by the BattleScreen after the battle is over.
+	 */
+	public void destroyPowerUpItem() {
+		
+		this.item = null;
+		
+	}
+	
+	/**
+	 * Returns the power up item.
+	 * @return
+	 */
+	public PowerUpItem getPowerUpItem() {
+		
+		return this.item;
+		
+	}
 }
