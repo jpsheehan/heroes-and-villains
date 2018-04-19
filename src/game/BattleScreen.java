@@ -78,7 +78,7 @@ public class BattleScreen {
 		
 		float damageMultiplier = 1.0f;
 		
-		if (hero.getAbility() == HeroAbility.VILLAINS_LESS_20_HEALTH) {
+		if (hero.getAbility() == HeroAbility.DAMAGE_REDUCTION) {
 			
 			damageMultiplier = 0.8f;
 			

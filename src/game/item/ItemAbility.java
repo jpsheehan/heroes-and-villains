@@ -1,6 +1,7 @@
 package game.item;
 
 import game.Ability;
+import static game.GeneralHelpers.getString;
 
 public enum ItemAbility implements Ability {
 	WIN_ON_DRAW, // for dice game and paper scissors rock
@@ -14,23 +15,23 @@ public enum ItemAbility implements Ability {
 		
 		switch (this) {
 		
-		case DAMAGE_PROTECTION:
-			return "damage protection";
-			
-		case DECREASE_ROBBERY_CHANCE:
-			return "decrease robbery chance";
-			
-		case FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER:
-			return "four attempts at guess the number";
-			
-		case INCREASE_GIFT_CHANCE:
-			return "increased gift chance";
-			
-		case WIN_ON_DRAW:
-			return "win on draw";
-			
-		default:
-			return "null";
+			case DAMAGE_PROTECTION:
+				return getString("Ability.Item.DamageProtection.Name");
+				
+			case DECREASE_ROBBERY_CHANCE:
+				return getString("Ability.Item.DecreaseRobberyChance.Name");
+				
+			case FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER:
+				return getString("Ability.Item.FourAttemptsAtGuessTheNumber.Name");
+				
+			case INCREASE_GIFT_CHANCE:
+				return getString("Ability.Item.IncreaseGiftChance.Name");
+				
+			case WIN_ON_DRAW:
+				return getString("Ability.Item.WinOnDraw.Name");
+				
+			default:
+				return "null";
 		
 		}
 		

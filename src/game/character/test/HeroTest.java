@@ -40,10 +40,10 @@ class HeroTest {
 	@Test
 	void testGetAbility() {
 		assertEquals(HeroAbility.IMPROVED_ODDS, hero_1.getAbility());
-		assertEquals(HeroAbility.WITTY_PHRASES, hero_2.getAbility());
+		assertEquals(HeroAbility.THROW_MONEY, hero_2.getAbility());
 		assertEquals(HeroAbility.CHEAPER_ITEMS, hero_3.getAbility());
-		assertEquals(HeroAbility.TELEPORT, hero_4.getAbility());
-		assertEquals(HeroAbility.VILLAINS_LESS_20_HEALTH, hero_5.getAbility());
+		assertEquals(HeroAbility.HACK_MAINFRAME, hero_4.getAbility());
+		assertEquals(HeroAbility.DAMAGE_REDUCTION, hero_5.getAbility());
 		assertEquals(HeroAbility.PREVENTS_ROBBERY, hero_6.getAbility());
 		assertEquals(HeroAbility.INCREASED_RECOVERY_RATE, hero_7.getAbility());
 	}
