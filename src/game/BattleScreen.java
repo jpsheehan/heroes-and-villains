@@ -2,10 +2,13 @@ package game;
 
 import game.character.Hero;
 import game.character.HeroAbility;
+import game.character.HeroDeadException;
 import game.character.Villain;
+import game.character.VillainDeadException;
 import game.minigame.DiceRolls;
 import game.minigame.GuessTheNumber;
 import game.minigame.Minigame;
+import game.minigame.MinigameState;
 import game.minigame.MinigameType;
 import game.minigame.PaperScissorsRock;
 import game.GeneralHelpers;
@@ -197,6 +200,46 @@ public class BattleScreen {
 	public int getVillainHealth() {
 		
 		return this.villainHealth;
+		
+	}
+	
+	/**
+	 * To be called after running getMinigame().doTurn(). Checks what actions should be taken depending on the outcome of the minigame.
+	 * @throws VillainDeadException 
+	 * @throws HeroDeadException 
+	 */
+	public void minigameStateChecker() throws VillainDeadException, HeroDeadException {
+		
+		switch (this.minigame.getState()) {
+		
+			case WON:
+				// Deal "damage" to the villain and check if they are dead.
+				this.villainHealth--;
+				
+				if (this.villainHealth <= 0) {
+					
+					this.villainHealth = 0;
+					throw new VillainDeadException(this.villain);
+				}
+				
+				this.setMinigame();
+				break;
+				
+			case LOST:
+				// Deal damage to the hero and begin a new game.
+				this.hero.takeDamage(this.calculateDamage());
+				this.setMinigame();
+				break;
+				
+			case DRAWN:
+				
+				// Play the same game again.
+				this.setMinigame(this.getMinigameType());
+				break;
+			
+			default:
+				// do nothing...
+		}
 		
 	}
 	
