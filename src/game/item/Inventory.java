@@ -130,12 +130,12 @@ public class Inventory {
 	Inventory teamInventory = new Inventory();
 	
 	//create some Maps
-	Map engBuilding = new Map("Engineering City", 25);
-	Map erskineBuilding = new Map("Computer Science City", 25);
+	Map engBuilding = new Map("Engineering City", "", 25);
+	Map erskineBuilding = new Map("Computer Science City", "", 25);
 	//Create some Healing items
-	HealingItem health25 = new HealingItem("Health25%", 2, 1, 5);
-	HealingItem health50 = new HealingItem("Health50%", 5, 2, 10);
-	HealingItem health75 = new HealingItem("Health75%", 10, 3, 20);
+	HealingItem health25 = new HealingItem("Health25%", "Heals 25% of your health", 2, 1, 5);
+	HealingItem health50 = new HealingItem("Health50%", "Heals 50% of your health", 5, 2, 10);
+	HealingItem health75 = new HealingItem("Health75%", "Heals 75% of your health", 10, 3, 20);
 	//Create some power ups
 	//PowerUpItem alwaysRollSix = new PowerUpItem("Roll 6", 10, "Always Roll 6", DiceRolls);
 

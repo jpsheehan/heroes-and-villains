@@ -1,8 +1,9 @@
 package game.item;
 
+import game.Describable;
 import game.Nameable;
 
-public abstract class Item implements Buyable, Nameable {
+public abstract class Item implements Buyable, Nameable, Describable {
 	
 	/**
 	 * The name of the Item.
@@ -15,12 +16,18 @@ public abstract class Item implements Buyable, Nameable {
 	private Integer price;
 	
 	/**
+	 * The description of the item.
+	 */
+	private String flavourText;
+	
+	/**
 	 * Creates a new Item.
 	 * @param name The name of the Item.
 	 * @param price The price of the Item.
 	 */
-	public Item(String name, Integer price) {
+	public Item(String name, String flavourText, Integer price) {
 		this.name = name;
+		this.flavourText = flavourText;
 		this.price = price;
 	}
 
@@ -38,6 +45,14 @@ public abstract class Item implements Buyable, Nameable {
 	@Override
 	public final Integer getPrice() {
 		return this.price;
+	}
+	
+	/**
+	 * Returns the flavour text describing this item.
+	 */
+	@Override
+	public final String getFlavourText() {
+		return this.flavourText;
 	}
 
 }

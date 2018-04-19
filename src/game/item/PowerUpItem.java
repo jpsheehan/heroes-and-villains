@@ -25,8 +25,8 @@ public class PowerUpItem extends Item {
 	 * @param ability The ability the PowerUpItem has.
 	 * @param appliesTo The game(s) that the ability applies to.
 	 */
-	public PowerUpItem(String name, Integer price, ItemAbility ability, MinigameType appliesTo) {
-		super(name, price);
+	public PowerUpItem(String name, String flavourText, Integer price, ItemAbility ability, MinigameType appliesTo) {
+		super(name, flavourText, price);
 		
 		this.ability = ability;
 		this.appliesTo = appliesTo;
