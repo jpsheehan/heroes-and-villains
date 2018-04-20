@@ -58,25 +58,19 @@ public class Dialogue {
 	 */
 	 private String teamFunds;
 	 
-	 /**
-	 * text for buying drinks
-	 */
-	 private String drinks;
-
-		/*public Dialogue(String greeting, String farewell, String options, String purchase, String teamItems,
-			String teamAbilities, String teamFunds) { */
-	public Dialogue() { 
-		greeting = "Welcome to my humble Inn. Make yourself at home can I get you a drink? ";
-		farewell = "Farewell my friends. May your studies go well ";
-		options = "You can buy drinks, power ups, healing item and maps. You can relax too."+ "\n"+ 
+	
+	 public Dialogue() { 
+		 greeting = "Welcome to my humble Inn. Make yourself at home can I get you a drink? ";
+		 farewell = "Farewell my friends. May your studies go well ";
+		 options = "You can buy drinks, power ups, healing item and maps. You can relax too."+ "\n"+ 
 				"Would you like to ";
-		purchase = "Itmes available for purcahse are: ";
-		teamItems = "Your team items are: ";
-		teamAbilities = "Your team abilites are: ";
-		teamFunds = "Your team finances aren't looking too flash at: ";
-		itemAttributes = "Items (if avilable) can do the following: ";
-		vPlate = "Are you all students? Prove it, do you have a vPlate? ";
-	}
+		 purchase = "Itmes available for purcahse are: ";
+		 teamItems = "Your team items are: ";
+		 teamAbilities = "Your team abilites are: ";
+		 teamFunds = "Your team finances aren't looking too flash at: ";
+		 itemAttributes = "Items (if avilable) can do the following: ";
+		 vPlate = "Are you all students? Prove it, do you have a vPlate? ";
+	 }
 	
 	/**
 	 * @return the greeting
