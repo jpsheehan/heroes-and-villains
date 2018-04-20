@@ -168,7 +168,7 @@ public class Villain extends Character {
 		this.timesBeaten--;
 		
 	}
-	
+	/*
 	public static void main(String[] args) {
 		
 		//create some Minigames, create some Arraylists of minigames
@@ -190,7 +190,6 @@ public class Villain extends Character {
 		System.out.println(v5.getName());
 		System.out.println(v6.getName());
 	
-		
 		//print strength and wins to defeat
 		System.out.println(v1.getStrength()+v1.getWinsToDefeat());
 		System.out.println(v2.getStrength()+v2.getWinsToDefeat());
@@ -207,4 +206,5 @@ public class Villain extends Character {
 		System.out.println(v5.getTaunt());
 		System.out.println(v6.getTaunt());
 	}
+	*/
 }
