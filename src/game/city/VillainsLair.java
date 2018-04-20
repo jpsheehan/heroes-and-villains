@@ -10,7 +10,7 @@ public class VillainsLair extends Area {
 	// getters and setters
 	
 	//20180417
-	// added Villain, battlescreen. getters
+	// added Villain, battlescreen, getters
 	/**
 	 * The villain
 	 */
@@ -23,7 +23,7 @@ public class VillainsLair extends Area {
 	
 	/**
 	 * Creates a new Villains Lair.
-	 * @param name The name of the Home Base.
+	 * @param name The name of the Villains Lair.
 	 */
 	public VillainsLair(String name, Villain villain, int cityIndex) {
 		
