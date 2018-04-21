@@ -1,13 +1,29 @@
 package game.ui;
 
-import game.Team;
+import game.GameEnvironment;
 
 public abstract class UserInterface {
 
-	public abstract void showTitleScreen();
+	private GameEnvironment env;
 	
-	public abstract Integer showGameCreationScreen() throws Exception;
+	public UserInterface(GameEnvironment env) {
+		
+		this.env = env;
+		
+	}
 	
-	public abstract Team showTeamCreationScreen() throws Exception;
+	public GameEnvironment getGameEnvironment() {
+		
+		return this.env;
+		
+	}
+	
+	public abstract void start();
+	
+//	public abstract void showTitleScreen();
+//	
+//	public abstract Integer showGameCreationScreen() throws Exception;
+//	
+//	public abstract Team showTeamCreationScreen() throws Exception;
 	
 }

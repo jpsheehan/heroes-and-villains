@@ -5,13 +5,19 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 
 import java.util.ArrayList;
 
+import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
 
 public class TextUserInterface extends UserInterface {
 
-	@Override
+	public TextUserInterface(GameEnvironment env) {
+		
+		super(env);
+		
+	}
+	
 	public void showTitleScreen() {
 		
 		boolean keepLooping = true;
@@ -88,7 +94,6 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	@Override
 	public Integer showGameCreationScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
@@ -127,7 +132,6 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	@Override
 	public Team showTeamCreationScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
@@ -296,11 +300,12 @@ public class TextUserInterface extends UserInterface {
 			
 		}
 	}
-	
-	public static void main(String[] args) {
-		TextUserInterface ui = new TextUserInterface();
+
+	@Override
+	public void start() {
 		
-		ui.showTitleScreen();
+		this.showTitleScreen();
+		
 	}
 
 }

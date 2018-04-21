@@ -6,8 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		TextUserInterface ui = new TextUserInterface();
-		ui.showTitleScreen();
+		new GameEnvironment(TextUserInterface.class).run();
 
 	}
 
