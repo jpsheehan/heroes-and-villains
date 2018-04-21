@@ -1,6 +1,6 @@
 package game.ui;
 
-import game.character.Hero;
+import game.Team;
 
 public abstract class UserInterface {
 
@@ -8,6 +8,6 @@ public abstract class UserInterface {
 	
 	public abstract Integer showGameCreationScreen() throws Exception;
 	
-	public abstract Hero[] showTeamCreationScreen() throws Exception;
+	public abstract Team showTeamCreationScreen() throws Exception;
 	
 }
