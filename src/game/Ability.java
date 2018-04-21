@@ -7,4 +7,6 @@ package game;
  */
 public interface Ability {
 	
+	public String toString();
+	
 }
