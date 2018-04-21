@@ -8,5 +8,32 @@ public enum Direction {
 	SOUTH,
 	EAST,
 	WEST,
-	CENTRE
+	CENTRE;
+	
+	public String toString() {
+		
+		switch (this) {
+			
+			case CENTRE:
+				return "Centre";
+				
+			case EAST:
+				return "East";
+				
+			case NORTH:
+				return "North";
+				
+			case SOUTH:
+				return "South";
+				
+			case WEST:
+				return "West";
+			
+			default:
+				return "null";
+		
+		}
+		
+	}
+	
 }
