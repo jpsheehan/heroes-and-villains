@@ -16,6 +16,11 @@ public class Team implements Nameable {
 	private ArrayList<Hero> heroes;
 	
 	/**
+	 * The amount of money the heroes have.
+	 */
+	private int money;
+	
+	/**
 	 * Creates a new Team.
 	 * @param name The name of the team.
 	 */
@@ -110,6 +115,54 @@ public class Team implements Nameable {
 	public String getName() {
 		
 		return this.name;
+		
+	}
+	
+	/**
+	 * Returns the amount of money the heroes have.
+	 * @return
+	 */
+	public int getMoney() {
+		
+		return this.money;
+		
+	}
+	
+	/**
+	 * Gives the team an amount of money.
+	 * @param amount
+	 */
+	public void giveMoney(int amount) {
+		
+		if (amount < 0 ) {
+			
+			throw new IllegalArgumentException("Amount cannot be less than zero.");
+			
+		}
+		
+		this.money += amount;
+		
+	}
+	
+	/**
+	 * Removes some amount of money from the team's money count.
+	 * @param amount
+	 */
+	public void spendMoney(int amount) {
+		
+		if (amount < 0) {
+			
+			throw new IllegalArgumentException("Amount cannot be less than zero.");
+			
+		}
+		
+		if (amount > this.money) {
+			
+			throw new IllegalArgumentException("Amount cannot be greater than the amount of money the team has.");
+			
+		}
+		
+		this.money -= amount;
 		
 	}
 }
