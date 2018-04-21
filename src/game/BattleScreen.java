@@ -8,7 +8,6 @@ import game.character.VillainDeadException;
 import game.minigame.DiceRolls;
 import game.minigame.GuessTheNumber;
 import game.minigame.Minigame;
-import game.minigame.MinigameState;
 import game.minigame.MinigameType;
 import game.minigame.PaperScissorsRock;
 
@@ -47,6 +46,7 @@ public class BattleScreen {
 	/**
 	 * The minigame being played.
 	 */
+	@SuppressWarnings("rawtypes")
 	private Minigame minigame;
 	
 	/**
@@ -54,7 +54,7 @@ public class BattleScreen {
 	 * @param villain The villain the hero is to battle.
 	 * @param cityIndex The index of the city the team is in.
 	 */
-	public BattleScreen(Villain villain, int cityIndex) {
+	public BattleScreen(Villain villain, Team team, int cityIndex) {
 		
 		this.villain = villain;
 		this.cityIndex = cityIndex;
@@ -192,6 +192,7 @@ public class BattleScreen {
 	 * Returns the minigame being played.
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public Minigame getMinigame() {
 		
 		return this.minigame;
@@ -234,7 +235,7 @@ public class BattleScreen {
 				if (this.villainHealth <= 0) {
 					
 					this.villainHealth = 0;
-					throw new VillainDeadException(this.villain);
+					throw new VillainDeadException(this.villain, calculateMoneyReward());
 				}
 
 				this.destroyHeroItem();
