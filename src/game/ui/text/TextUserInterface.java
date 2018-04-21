@@ -10,6 +10,7 @@ import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
+import game.city.CityController;
 
 public class TextUserInterface extends UserInterface {
 	
@@ -59,12 +60,17 @@ public class TextUserInterface extends UserInterface {
 			switch (choice) {
 			
 				case 0:
+					// new game
 					
 					try {
 						
+						
 						showNewGameScreen();
 						
-						boolean confirm = showConfirmGameScreen();
+						this.getGameEnvironment().setCities(new CityController(cityCount));
+						this.getGameEnvironment().setTeam(team);
+						
+						this.gameLoop();
 						
 						return;
 						
@@ -82,10 +88,12 @@ public class TextUserInterface extends UserInterface {
 					
 				case 1:
 					// Load game!
+					
 					System.out.println("Load an existing game!");
 					break;
 					
 				case 2:
+					// quit game
 					System.out.println("Quit the game.");
 					keepLooping = false;
 					break;
@@ -242,19 +250,19 @@ public class TextUserInterface extends UserInterface {
 					// ready!
 					if (heroes.size() < 1) {
 						
-						showMessageDialog("You need at least one hero!", "Error");
+						showMessageDialog("You need at least one hero!", "New Game > Error");
 						
 					} else {
 						
 						if (heroes.size() > 3) {
 							
-							showMessageDialog("You cannot have more than three heroes!", "Error");
+							showMessageDialog("You cannot have more than three heroes!", "New Game > Error");
 							
 						} else {
 							
 							if (teamName.equals("")) {
 								
-								showMessageDialog("The team name cannot be empty!", "Error");
+								showMessageDialog("The team name cannot be empty!", "New Game > Error");
 								
 							} else {
 								
@@ -274,7 +282,11 @@ public class TextUserInterface extends UserInterface {
 									
 								}
 								
-								return;
+								if (showConfirmGameScreen()) {
+									
+									return;
+									
+								}
 								
 							}
 							
@@ -318,14 +330,12 @@ public class TextUserInterface extends UserInterface {
 	private boolean showConfirmGameScreen() throws UserQuitException {
 		
 		String heroString = getPrettyHeroesString((team.getHeroes()));
-		
-		showYesNoDialog(
+
+		return showYesNoDialog(
 				String.format(
 						"You will be fighting %d villains. Your team name is \"%s\". You have %d hero%s:\n%s\n\nIs this ok?",
 						cityCount, team.getName(), team.getHeroes().size(), team.getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)),
 				"New Game > Confirm");
-		
-		return false;
 		
 	}
 	
@@ -386,4 +396,9 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
+	private void gameLoop() throws UserQuitException {
+		
+		showMessageDialog("Main game should run now...");
+		
+	}
 }
