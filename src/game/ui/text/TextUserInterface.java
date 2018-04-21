@@ -5,6 +5,8 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 
 import java.util.ArrayList;
 
+import game.Team;
+import game.TeamFullException;
 import game.character.Hero;
 
 public class TextUserInterface extends UserInterface {
@@ -52,9 +54,9 @@ public class TextUserInterface extends UserInterface {
 					
 					int cityCount = showGameCreationScreen();
 					
-					Hero[] heroes = showTeamCreationScreen();
+					Team team = showTeamCreationScreen();
 					
-					boolean confirm = showConfirmGameScreen(cityCount, heroes);
+					boolean confirm = showConfirmGameScreen(cityCount, team);
 					
 					return;
 					
@@ -126,7 +128,7 @@ public class TextUserInterface extends UserInterface {
 	}
 
 	@Override
-	public Hero[] showTeamCreationScreen() throws UserQuitException, UserCancelException {
+	public Team showTeamCreationScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
 		ArrayList<Hero> heroes = new ArrayList<Hero>();
@@ -199,7 +201,24 @@ public class TextUserInterface extends UserInterface {
 							
 						} else {
 							
-							return (Hero[])heroes.toArray();
+							// TODO: Get the team name.
+							Team team = new Team("");
+							
+							for (Hero hero : heroes) {
+								
+								try {
+									
+									team.addHero(hero);
+									
+								} catch (TeamFullException e) {
+									
+									throw new AssertionError("The ui should check if too many heroes have been added.");
+									
+								}
+								
+							}
+							
+							return team;
 							
 						}
 						
@@ -226,7 +245,7 @@ public class TextUserInterface extends UserInterface {
 		return null;
 	}
 	
-	private boolean showConfirmGameScreen(int cityCount, Hero[] heroes) throws UserQuitException {
+	private boolean showConfirmGameScreen(int cityCount, Team team) throws UserQuitException {
 		
 		// TODO: Do properly!
 		showMessageDialog("Confirm", "Information");
