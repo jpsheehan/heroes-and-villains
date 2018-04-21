@@ -12,6 +12,9 @@ import game.character.Hero;
 import game.character.HeroType;
 
 public class TextUserInterface extends UserInterface {
+	
+	private int cityCount = 3;
+	private Team team;
 
 	public TextUserInterface(GameEnvironment env) {
 		
@@ -55,39 +58,37 @@ public class TextUserInterface extends UserInterface {
 		
 			switch (choice) {
 			
-			case 0:
-				
-				try {
+				case 0:
 					
-					int cityCount = showGameCreationScreen();
+					try {
+						
+						showNewGameScreen();
+						
+						boolean confirm = showConfirmGameScreen();
+						
+						return;
+						
+					} catch (UserQuitException e) {
+						
+						keepLooping = false;
+						
+					} catch (UserCancelException e) {
+						
+						continue;
+						
+					}
 					
-					Team team = showTeamCreationScreen();
+					break;
 					
-					boolean confirm = showConfirmGameScreen(cityCount, team);
+				case 1:
+					// Load game!
+					System.out.println("Load an existing game!");
+					break;
 					
-					return;
-					
-				} catch (UserQuitException e) {
-					
+				case 2:
+					System.out.println("Quit the game.");
 					keepLooping = false;
-					
-				} catch (UserCancelException e) {
-					
-					continue;
-					
-				}
-				
-				break;
-				
-			case 1:
-				// Load game!
-				System.out.println("Load an existing game!");
-				break;
-				
-			case 2:
-				System.out.println("Quit the game.");
-				keepLooping = false;
-				break;
+					break;
 			
 			}
 		}
@@ -95,13 +96,13 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	public Integer showGameCreationScreen() throws UserQuitException, UserCancelException {
+	public Integer showGetNumberOfVillainsScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
 		
 		int cityCount = 0;
 		
-		printTitleBlock("CREATE A NEW GAME");
+		printTitleBlock("New Game > Number of Villains");
 		
 		System.out.println("How many villains do you want to fight? " + getInputOptions("3-6"));
 		
@@ -111,15 +112,7 @@ public class TextUserInterface extends UserInterface {
 				
 				cityCount = getNumberWithBounds(3, 6);
 				
-				keepLooping = !showYesNo(
-					String.format("You have selected %d villains. Is this OK?", cityCount)
-				);
-				
-				if (keepLooping) {
-					
-					System.out.println("How many villains do you want to fight? " + getInputOptions("3-6"));
-					
-				}
+				break;
 			
 			} catch (UserContinueException e) {
 				
@@ -133,13 +126,14 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	public Team showTeamCreationScreen() throws UserQuitException, UserCancelException {
+	public void showNewGameScreen() throws UserQuitException, UserCancelException {
 		
 		boolean keepLooping = true;
 		ArrayList<Hero> heroes = new ArrayList<Hero>();
 		String teamName = "";
 
 		String[] options = new String[] {
+			"Change the number of Villains",
 			"Add a Hero",
 			"Remove a Hero",
 			"Name the Team",
@@ -150,7 +144,9 @@ public class TextUserInterface extends UserInterface {
 			
 			int choice = 0;
 			
-			printTitleBlock("CREATE A TEAM");
+			printTitleBlock("New Game");
+			
+			System.out.println(String.format("You will be fighting %d villains.\n", cityCount));
 			
 			if (teamName.equals("")) {
 				
@@ -175,13 +171,25 @@ public class TextUserInterface extends UserInterface {
 			choice = showChoice("Select an option:", options);
 			
 			switch (choice) {
-				
+			
 				case 0:
+					// change the number of Villains
+					int number = showGetNumberOfVillainsScreen();
+					
+					if (number != 0) {
+					
+						cityCount = number;
+						
+					}
+					
+					break;
+				
+				case 1:
 					// add a hero
 					
 					if (heroes.size() >= 3) {
 						
-						showMessageDialog("You can only have three heroes in your team!", "Error");
+						showMessageDialog("You can only have three heroes in your team!", "New Game > Error");
 						
 					} else {
 						
@@ -196,12 +204,12 @@ public class TextUserInterface extends UserInterface {
 					
 					break;
 					
-				case 1:
+				case 2:
 					// remove a hero
 					
 					if (heroes.size() == 0) {
 						
-						showMessageDialog("There are no heroes in your team to remove!", "Error");
+						showMessageDialog("There are no heroes in your team to remove!", "New Game > Error");
 						
 					} else {
 						
@@ -216,21 +224,21 @@ public class TextUserInterface extends UserInterface {
 					
 					break;
 					
-				case 2:
+				case 3:
 					// change the team name
-					String input = showInputDialog("Enter the team name:", "CHANGE TEAM NAME");
+					String input = showInputDialog("Enter the team name:", "New Game > Team Name");
 					
 					if (!input.equals("")) {
 						
 						teamName = input;
-						options[2] = "Rename the Team";
+						options[3] = "Rename the Team";
 						
 					}
 					
 					break;
 					
 					
-				case 3:
+				case 4:
 					// ready!
 					if (heroes.size() < 1) {
 						
@@ -250,7 +258,7 @@ public class TextUserInterface extends UserInterface {
 								
 							} else {
 								
-								Team team = new Team(teamName);
+								team = new Team(teamName);
 								
 								for (Hero hero : heroes) {
 									
@@ -266,7 +274,7 @@ public class TextUserInterface extends UserInterface {
 									
 								}
 								
-								return team;
+								return;
 								
 							}
 							
@@ -282,8 +290,6 @@ public class TextUserInterface extends UserInterface {
 			}
 			
 		}
-		
-		return null;
 		
 	}
 	
@@ -309,23 +315,17 @@ public class TextUserInterface extends UserInterface {
 		return heroes.remove(0);
 	}
 	
-	private boolean showConfirmGameScreen(int cityCount, Team team) throws UserQuitException {
+	private boolean showConfirmGameScreen() throws UserQuitException {
 		
 		String heroString = getPrettyHeroesString((team.getHeroes()));
 		
-		showMessageDialog(
+		showYesNoDialog(
 				String.format(
-						"You will be fighting %d villains. Your team, \"%s\", consists of:\n%s\nIs this ok?",
-						cityCount, team.getName(), String.join("\n", heroString)),
-				"Information");
+						"You will be fighting %d villains. Your team name is \"%s\". You have %d hero%s:\n%s\n\nIs this ok?",
+						cityCount, team.getName(), team.getHeroes().size(), team.getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)),
+				"New Game > Confirm");
 		
 		return false;
-		
-	}
-	
-	public Hero showHeroSelectionMenu(String message, Hero[] heroes) throws UserQuitException {
-		
-		return showHeroSelectionMenu(message, "HERO SELECTION", heroes);
 		
 	}
 	
@@ -344,7 +344,7 @@ public class TextUserInterface extends UserInterface {
 		
 		while (keepLooping) {
 			
-			printTitleBlock(title);
+			printTitleBlock(title + " > Hero Selection");
 			
 			try {
 				

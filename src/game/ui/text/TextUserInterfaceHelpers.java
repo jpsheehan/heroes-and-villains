@@ -697,4 +697,24 @@ public class TextUserInterfaceHelpers {
 		return input;
 		
 	}
+	
+	public static boolean showYesNoDialog(String prompt, String title) throws UserQuitException {
+		
+		while (true) {
+			
+			printTitleBlock(title);
+			
+			try {
+				
+				return showYesNo(prompt);
+				
+			} catch (UserCancelException e) {
+				
+				continue;
+				
+			}
+			
+		}
+		
+	}
 }
