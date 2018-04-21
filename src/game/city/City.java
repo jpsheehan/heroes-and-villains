@@ -1,7 +1,15 @@
 package game.city;
 
+import static game.GeneralHelpers.getString;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import game.character.Dialogue;
+import game.character.InnKeeper;
+import game.character.Villain;
+import game.character.VillainType;
+import game.item.Item;
+import game.minigame.MinigameType;
 
 public class City implements game.Nameable {
 	
@@ -44,7 +52,16 @@ public class City implements game.Nameable {
 		switch (type) {
 		
 		case RUTHERFORD:
-			// TODO: create the areas for Rutherford
+			// TODO: complete the areas for Rutherford
+			InnKeeper innKeeper = new InnKeeper(getString("Rutherford.InnKeeper.Name"), new Dialogue());
+			ArrayList<Item> items = new ArrayList<Item>();
+			Villain villain = new Villain(getString("Rutherford.Villain.Name"), VillainType.RORY_THE_BUILDER, MinigameType.ALL, 3);
+			
+			areaList.add(new Shop(getString("Rutherford.Shop.Name"), items, innKeeper));
+			areaList.add(new Hospital(getString("Rutherford.Hospital.Name")));
+			areaList.add(new PowerUpDen(getString("Rutherford.PowerUpDen.Name")));
+			areaList.add(new VillainsLair(getString("Rutherford.VillainsLair.Name"), villain, -1));
+			areaList.add(new HomeBase(getString("Rutherford.HomeBase.Name")));
 			break;
 			
 		case ENG_CORE:
