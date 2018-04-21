@@ -23,7 +23,19 @@ public final class GeneralHelpers {
 		
 		if (GeneralHelpers.strings.containsKey(specifier)) {
 			
-			return GeneralHelpers.strings.get(specifier);
+			String value = GeneralHelpers.strings.get(specifier);
+			
+			if (value.equals("")) {
+				
+				// return the specifier if value is empty.
+				return String.format("[%s]", value);
+				
+			} else {
+				
+				// return the value if it exists.
+				return value;
+				
+			}
 			
 		}
 		
