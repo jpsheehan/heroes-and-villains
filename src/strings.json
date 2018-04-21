@@ -156,6 +156,14 @@
 	"Ability.Item.IncreaseGiftChance.Name": "Increase Gift Chance",
 	"Ability.Item.IncreaseGiftChance.Flavour": "",
 	"Ability.Item.WinOnDraw.Name": "Win On Draw",
-	"Ability.Item.WinOnDraw.Flavour": ""
+	"Ability.Item.WinOnDraw.Flavour": "",
+	
+	"HeroType.Arts": "Arts",
+	"HeroType.Commerce": "Commerce",
+	"HeroType.Eng": "Engineering",
+	"HeroType.CompSci": "Computer Science",
+	"HeroType.Law": "Law",
+	"HeroType.Maths": "Maths/Stats",
+	"HeroType.Science": "Sciences"
 	
 }

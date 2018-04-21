@@ -449,7 +449,6 @@ public class TextUserInterfaceHelpers {
 		return str + repeatString(pad.toString(), numberOfPads);
 	}
 	
-	
 	/**
 	 * Prompts the user to enter a number between min and max (inclusive).
 	 * @param min The minimum bound (inclusive).
@@ -652,7 +651,7 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static void showMessageDialog(String message, String title) throws UserQuitException {
 		
-		printTitleBlock(title, '#');
+		printTitleBlock(title);
 		
 		printLineCentred(message);
 		
@@ -666,6 +665,36 @@ public class TextUserInterfaceHelpers {
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
+		
+	}
+	
+	public static String showInputDialog(String prompt, String title) throws UserQuitException {
+		
+		printTitleBlock(title);
+		
+		String input = "";
+		
+		while (input.equals("")) {
+			
+			System.out.println(prompt);
+			
+			try {
+				
+				input = readLine("> ");
+				
+			} catch (UserCancelException e) {
+				
+				return "";
+				
+			} catch (UserContinueException e) {
+				
+				return showInputDialog(prompt, title);
+				
+			}
+			
+		}
+		
+		return input;
 		
 	}
 }

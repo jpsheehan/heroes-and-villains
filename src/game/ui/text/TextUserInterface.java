@@ -9,6 +9,7 @@ import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
+import game.character.HeroType;
 
 public class TextUserInterface extends UserInterface {
 
@@ -136,10 +137,12 @@ public class TextUserInterface extends UserInterface {
 		
 		boolean keepLooping = true;
 		ArrayList<Hero> heroes = new ArrayList<Hero>();
+		String teamName = "";
 
 		String[] options = new String[] {
 			"Add a Hero",
 			"Remove a Hero",
+			"Name the Team",
 			"Ready!"
 		};
 		
@@ -149,19 +152,25 @@ public class TextUserInterface extends UserInterface {
 			
 			printTitleBlock("CREATE A TEAM");
 			
-			if (heroes.size() > 0) {
+			if (teamName.equals("")) {
 				
-				System.out.println(String.format("You have %d heroes in your team:", heroes.size()));
+				System.out.println("Your team has not been named yet.\n");
 				
-				for (Hero hero : heroes) {
-					
-					System.out.println(" - " + hero.getName());
-					
-				}
+			} else {
 				
-				System.out.println();
+				System.out.println(String.format("Your team name is \"%s\".\n", teamName));
 				
 			}
+			
+			System.out.println(String.format("You have %d hero%s in your team%s", heroes.size(), heroes.size() == 1 ? "" : "es", heroes.size() == 0 ? "." : ":"));
+			
+			if (heroes.size() > 0) {
+				
+				System.out.println(getPrettyHeroesString(heroes));
+				
+			}
+			
+			System.out.println();
 			
 			choice = showChoice("Select an option:", options);
 			
@@ -169,29 +178,59 @@ public class TextUserInterface extends UserInterface {
 				
 				case 0:
 					// add a hero
-					Hero newHero = showHeroCreationMenu();
 					
-					if (newHero != null) {
+					if (heroes.size() >= 3) {
 						
-						heroes.add(newHero);
+						showMessageDialog("You can only have three heroes in your team!", "Error");
 						
+					} else {
+						
+						Hero newHero = showHeroCreationMenu(heroes);
+						
+						if (newHero != null) {
+							
+							heroes.add(newHero);
+							
+						}
 					}
 					
 					break;
 					
 				case 1:
 					// remove a hero
-					Hero deleteHero = showHeroDeletionMenu();
 					
-					if (deleteHero != null) {
+					if (heroes.size() == 0) {
 						
-						heroes.remove(deleteHero);
+						showMessageDialog("There are no heroes in your team to remove!", "Error");
 						
+					} else {
+						
+						Hero deleteHero = showHeroDeletionMenu(heroes);
+						
+						if (deleteHero != null) {
+							
+							heroes.remove(deleteHero);
+							
+						}
 					}
 					
 					break;
 					
 				case 2:
+					// change the team name
+					String input = showInputDialog("Enter the team name:", "CHANGE TEAM NAME");
+					
+					if (!input.equals("")) {
+						
+						teamName = input;
+						options[2] = "Rename the Team";
+						
+					}
+					
+					break;
+					
+					
+				case 3:
 					// ready!
 					if (heroes.size() < 1) {
 						
@@ -205,24 +244,32 @@ public class TextUserInterface extends UserInterface {
 							
 						} else {
 							
-							// TODO: Get the team name.
-							Team team = new Team("");
-							
-							for (Hero hero : heroes) {
+							if (teamName.equals("")) {
 								
-								try {
+								showMessageDialog("The team name cannot be empty!", "Error");
+								
+							} else {
+								
+								// TODO: Get the team name.
+								Team team = new Team(teamName);
+								
+								for (Hero hero : heroes) {
 									
-									team.addHero(hero);
-									
-								} catch (TeamFullException e) {
-									
-									throw new AssertionError("The ui should check if too many heroes have been added.");
+									try {
+										
+										team.addHero(hero);
+										
+									} catch (TeamFullException e) {
+										
+										throw new AssertionError("The ui should check if too many heroes have been added.");
+										
+									}
 									
 								}
 								
+								return team;
+								
 							}
-							
-							return team;
 							
 						}
 						
@@ -241,18 +288,37 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 	
-	private Hero showHeroCreationMenu() {
-		return null;
+	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) {
+		
+		String name = "Test Hero";
+		HeroType type = HeroType.ARTS_STUDENT;
+		
+		for (Hero hero : heroes) {
+			
+			if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
+				
+				return null; // TODO: reprompt for name
+				
+			}
+			
+		}
+		
+		return new Hero(name, type);
 	}
 	
-	private Hero showHeroDeletionMenu() {
-		return null;
+	private Hero showHeroDeletionMenu(ArrayList<Hero> heroes) {
+		return heroes.remove(0);
 	}
 	
 	private boolean showConfirmGameScreen(int cityCount, Team team) throws UserQuitException {
 		
-		// TODO: Do properly!
-		showMessageDialog("Confirm", "Information");
+		String heroString = getPrettyHeroesString((team.getHeroes()));
+		
+		showMessageDialog(
+				String.format(
+						"You will be fighting %d villains. Your team, \"%s\", consists of:\n%s\nIs this ok?",
+						cityCount, team.getName(), String.join("\n", heroString)),
+				"Information");
 		
 		return false;
 		
@@ -273,7 +339,7 @@ public class TextUserInterface extends UserInterface {
 		
 		for (int i = 0; i < heroes.length; i++) {
 			
-			heroStrings[i] = heroes[i].toString();
+			heroStrings[i] = String.format("%s (%s)", heroes[i].getName(), heroes[i].getType().toString());
 			
 		}
 		
@@ -299,6 +365,19 @@ public class TextUserInterface extends UserInterface {
 			return null;
 			
 		}
+	}
+	
+	private static String getPrettyHeroesString(Iterable<Hero> heroes) {
+		
+		ArrayList<String> heroStrings = new ArrayList<String>();
+		
+		for (Hero hero : heroes) {
+			
+			heroStrings.add(String.format(" - %s (%s)", hero.getName(), hero.getType().toString()));
+			
+		}
+		
+		return String.join("\n", heroStrings);
 	}
 
 	@Override
