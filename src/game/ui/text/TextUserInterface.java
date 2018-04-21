@@ -250,7 +250,6 @@ public class TextUserInterface extends UserInterface {
 								
 							} else {
 								
-								// TODO: Get the team name.
 								Team team = new Team(teamName);
 								
 								for (Hero hero : heroes) {
