@@ -1,78 +1,126 @@
 package game.item;
 
 import java.util.ArrayList;
-
-//import game.minigame.*;
+import game.minigame.*;			//only needed for quick testing, to be removed later
 
 //20180411
-//20180416 to do
+// initial build
+//20180422
 //convert back to 3 separate arraylists for powerups, healing, maps.
 //	parse into correct list on addition of an item.
-//		and return each separate list as a string on get (override toSting for each) 
-
-public class Inventory {
+//		and return each separate list as a string on get
+//		override toString to get the entire inventory
 
 /**
  * The Inventory class holds lists of items for the teams and the shop as referenced in section 2.3.3 of the specification.
  *
  */
-	/**
-	 * Arraylist to hold objects of type Item (HealingItem, Map, PowerUps, )  
-	 */
-	private ArrayList<Item> inventoryList;
+public class Inventory {
 	
 	/**
-	 * Creates a new inventory.
-	 * No items in the list(s)at initialisation
+	 * Arraylist to hold objects of type PowerUpItem  
+	 */
+	private ArrayList<Item> listPowerups;
+	
+	/**
+	 * Arraylist to hold objects of type Map 
+	 */
+	private ArrayList<Item> listMaps;
+	
+	/**
+	 * Arraylist to hold objects of type HealingItem
+	 */
+	private ArrayList<Item> listHealingItems;
+	
+	
+	/**
+	 * Creates a new inventory, three ArrayLists
+	 * No items in the lists on initialisation
 	 */
 	public Inventory() {
-		inventoryList = new ArrayList<Item>();
-		//listPowerups = new ArrayList<Item>( );
-		//listMaps = new ArrayList<Item>( );
-		//listHealingItems = new ArrayList<Item>( );
+		listPowerups = new ArrayList<Item>();
+		listMaps = new ArrayList<Item>();
+		listHealingItems = new ArrayList<Item>();
 	}
 	
 	/**
 	 * Adds an item to the inventory
+	 * Checks item type and adds to the appropriate list 
 	 * @param Item
 	 */
-	public void addInventoryItem(Item Item) {
+	public void addInventoryItem(Item item) {
 
-	//public void addInventoryItem(Item Item, String whichList) {
-		// check not null, add to list
-		if (Item == null) {
-				throw new IllegalArgumentException("choice should be null for an item to be added to the inventory.");
+		// check not null
+		if (item == null) {
+				throw new IllegalArgumentException("choice should not be null for an item to be added to the inventory.");
 		}
-		inventoryList.add(Item);
-		System.out.println(Item.getName()+ " added");
+		
+		if (item instanceof HealingItem) {
+			listHealingItems.add(item);
+		}
+		
+		if (item instanceof Map) {
+			listMaps.add(item);
+		}
+		
+		if (item instanceof PowerUpItem) {
+			listPowerups.add(item);
+		}
+				
+		//System.out.println(item.getName()+ " added");		//only for testing
 	}
 
 	/**
 	 * Removes an item from the inventory
+	 * Checks item type, checks if already in appropriate list, if true removes from appropriate list
 	 * @param Item
 	 */
-	public void removeInventoryItem(Item Item) {
-		// check not null, 
-		if (Item == null) {
-			throw new IllegalArgumentException("choice should be null for an item to be removed from the inventory.");
+	public void removeInventoryItem(Item item) {
+		boolean validItem = false;
+		// check not null,
+		if (item == null) {
+			throw new IllegalArgumentException("choice should not be null for an item to be removed from the inventory.");
 		}
-		if (inventoryList.contains(Item)) {			//check if already in the list
-			inventoryList.remove(Item);				// and if so remove
+		if (item instanceof HealingItem) {
+			if (listHealingItems.contains(item)) {	//check if already in the list
+				listHealingItems.remove(item);		// and if so remove
+				//System.out.println("Item "+ item.getName()+ " removed");		//for testing
+				validItem = true;
+			}
 		}
-		else System.out.println("Item"+ Item.getName()+ " not removed"); // return something else (e.g. boolean false and tell user elsewhere?)
+		if (item instanceof Map) {
+			if (listMaps.contains(item)) {
+				listMaps.remove(item);
+				//System.out.println("Item "+ item.getName()+ " removed");
+				validItem = true;
+			}
+		}
+		
+		if (item instanceof PowerUpItem) {
+			if (listPowerups.contains(item)) {
+				listPowerups.remove(item);
+				//System.out.println("Item "+ item.getName()+ " removed");
+				validItem = true;
+			}
+		}
+		
+		/*
+		if (validItem == false) {										//for testing
+			System.out.println("Item "+ item.getName()+ " not removed"); // return something else (e.g. boolean false and tell user elsewhere?)
+		}
+		*/
 	}
 	
 	/**
-	 * return a String containing list of Healing Items 
+	 * @return String containing list of Healing Items
+	 * Formated to "Healing Items: itemName, itemName, "etc
 	 */
 	public String getHealingItems() {
 		//Iterate through the Arraylist, identify item type, add to appropriate stringbuffer
 		StringBuffer healingBuffer = new StringBuffer();
-		for (int i = 0 ; i < inventoryList.size(); i++) {	
-			if (inventoryList.get(i) instanceof HealingItem) {
-				healingBuffer.append(inventoryList.get(i).getName());
-				healingBuffer.append(", ");
-				}
+		for (int i = 0 ; i < listHealingItems.size(); i++) {	
+			healingBuffer.append(listHealingItems.get(i).getName());
+			healingBuffer.append(", ");
 			}
 		// if not empty remove the last comma and space
 			if (healingBuffer.length() != 0) {
@@ -82,33 +130,30 @@ public class Inventory {
 	}
 	
 	/**
-	 * return a String containing list of PowerUp Item names 
+	 * @return String containing list of PowerUp Items
+	 * Formated to "PowerUp Items: itemName, itemName, "etc
 	 */
 	public String getPowerUpItems() {
 		StringBuffer powerUpBuffer = new StringBuffer();
-		for (int i = 0 ; i < inventoryList.size(); i++) {	
-			if (inventoryList.get(i) instanceof PowerUpItem) {
-				powerUpBuffer.append(inventoryList.get(i).getName());
-				powerUpBuffer.append(", ");
-				}
+		for (int i = 0 ; i < listPowerups.size(); i++) {	
+			powerUpBuffer.append(listPowerups.get(i).getName());
+			powerUpBuffer.append(", ");
 			}
 			if (powerUpBuffer.length() != 0) {
 				powerUpBuffer.deleteCharAt(powerUpBuffer.length()-2);
 			}
 			return("PowerUp Items: "+ powerUpBuffer.toString());
 	}
-	
-	
+		
 	/**
-	 * return a String containing list of Map Item names 
+	 * return a String containing list of Map Item names
+	 * Formated to "PowerUp Items: itemName, itemName, "etc
 	 */
 	public String getMapItems() {
 		StringBuffer mapBuffer = new StringBuffer();		
-		for (int i = 0 ; i < inventoryList.size(); i++) {	
-			if (inventoryList.get(i) instanceof Map) {
-				mapBuffer.append(inventoryList.get(i).getName());
-				mapBuffer.append(", ");
-				}
+		for (int i = 0 ; i < listMaps.size(); i++) {	
+			mapBuffer.append(listMaps.get(i).getName());
+			mapBuffer.append(", ");
 			}
 			if (mapBuffer.length() != 0) {
 				mapBuffer.deleteCharAt(mapBuffer.length()-2);
@@ -117,7 +162,7 @@ public class Inventory {
 	}
 	
 	/**
-	 * Returns the contents of the inventory.
+	 * Returns the entire contents of the inventory.
 	 * Separated by item type (Healing, Map, PowerUp
 	 * @override
 	 */
@@ -137,31 +182,37 @@ public class Inventory {
 	HealingItem health50 = new HealingItem("Health50%", "Heals 50% of your health", 5, 2, 10);
 	HealingItem health75 = new HealingItem("Health75%", "Heals 75% of your health", 10, 3, 20);
 	//Create some power ups
-	//PowerUpItem alwaysRollSix = new PowerUpItem("Roll 6", 10, "Always Roll 6", DiceRolls);
+	PowerUpItem winOnDraw = new PowerUpItem("Win on equal number", "Improved ondds", 10, ItemAbility.WIN_ON_DRAW, MinigameType.DICE_ROLLS);
+	PowerUpItem fourGuesses = new PowerUpItem("More attemtps", "More chances", 10, ItemAbility.FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER, MinigameType.GUESS_THE_NUMBER);
 
+	//1
 	teamInventory.addInventoryItem(health25);
 	teamInventory.addInventoryItem(engBuilding);
+	teamInventory.addInventoryItem(winOnDraw);
 	System.out.println(teamInventory);
 	System.out.println("\n");
-	
+	//2
 	teamInventory.addInventoryItem(erskineBuilding);
 	teamInventory.addInventoryItem(health50);
+	teamInventory.addInventoryItem(fourGuesses);
 	System.out.println(teamInventory);
 	System.out.println("\n");
 	
+	//3
 	teamInventory.removeInventoryItem(health75);
 	teamInventory.addInventoryItem(health75);
+	teamInventory.removeInventoryItem(fourGuesses);
 	System.out.println(teamInventory);
 	System.out.println("\n");
 	
 	teamInventory.removeInventoryItem(health75);
+	teamInventory.removeInventoryItem(fourGuesses);
 	System.out.println(teamInventory);
 	System.out.println("\n");
 	
+	teamInventory.removeInventoryItem(erskineBuilding);
 	System.out.println(teamInventory.getHealingItems());
 	System.out.println(teamInventory.getMapItems());
 	System.out.println(teamInventory.getPowerUpItems());
 	}
 }
-	
-
