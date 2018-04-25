@@ -6,8 +6,6 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 import java.util.ArrayList;
 
 import game.GameEnvironment;
-import game.GameOverException;
-import game.GameWonException;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
@@ -16,51 +14,72 @@ import game.city.Area;
 import game.city.City;
 import game.city.CityController;
 
+/**
+ * Represents the user interface shown to the user in text format.
+ * This is to run in the terminal/command line.
+ * @author jesse
+ *
+ */
 public class TextUserInterface extends UserInterface {
 	
+	/**
+	 * The number of cities that the user wants to go to.
+	 */
 	private int cityCount = 3;
+	
+	/**
+	 * A reference to the Team of heroes.
+	 */
 	private Team team;
 
+	/**
+	 * Create a new TextUserInterface object.
+	 * @param env A reference to the parent GameEnvironment.
+	 */
 	public TextUserInterface(GameEnvironment env) {
 		
 		super(env);
 		
 	}
 	
+	/**
+	 * Shows the title screen.
+	 */
 	public void showTitleScreen() {
 		
-		boolean keepLooping = true;
-		
+		// The possible choices for the main menu.
 		String[] options = new String[] {
 			"New Game",
 			"Load Game",
 			"Quit"
 		};
 		
-		while (keepLooping) {
+		// Run the rest of the function over and over, only exiting when the user decides to quit.
+		while (true) {
 			
 			int choice = -1;
 		
+			// Print the title
 			printTitleBlock(new String[] {
 				"HEROES AND VILLAINS - CAMPUS EDITION",
 				"by Manu Hamblyn & Jesse Sheehan",
 				"Copyright (c) 2018"
 			});
 			
-			printLineCentred("Hint: You can type 'c' for 'cancel' or 'q' for 'quit' at any time.");
-			System.out.println();
+			printLineCentred("Hint: You can type 'c' for 'cancel' or 'q' for 'quit' at any time.\n");
 			
+			// Get some input from the user, handling the quit and cancel exceptions
 			try {
 				
 				choice = showChoice("Select an option:", options);
 				
 			} catch (UserCancelException | UserQuitException e) {
 				
-				keepLooping = false;
-				break;
+				return;
 				
 			}
 		
+			// Make a decision based on what the user chose to do.
 			switch (choice) {
 			
 				case 0:
@@ -68,19 +87,18 @@ public class TextUserInterface extends UserInterface {
 					
 					try {
 						
-						
+						// Create a new game, setting the CityController and Team in the parent GameEnvironment
 						showNewGameScreen();
 						
 						this.getGameEnvironment().setCities(new CityController(cityCount));
 						this.getGameEnvironment().setTeam(team);
 						
+						// Run the game loop (basically, plays the game proper).
 						this.gameLoop();
-						
-						return;
 						
 					} catch (UserQuitException e) {
 						
-						keepLooping = false;
+						return;
 						
 					} catch (UserCancelException e) {
 						
@@ -93,48 +111,48 @@ public class TextUserInterface extends UserInterface {
 				case 1:
 					// Load game!
 					
+					// TODO: Implement loading of games from the main menu.
 					System.out.println("Load an existing game!");
 					break;
 					
 				case 2:
 					// quit game
-					System.out.println("Quit the game.");
-					keepLooping = false;
-					break;
+					return;
 			
 			}
 		}
-		
 		
 	}
 
-	public Integer showGetNumberOfVillainsScreen() throws UserQuitException, UserCancelException {
+	/**
+	 * Shows a prompt for letting the user decide how many cities/villains to fight.
+	 * @return
+	 * @throws UserQuitException
+	 * @throws UserCancelException
+	 */
+	public void showGetNumberOfVillainsScreen() throws UserQuitException, UserCancelException {
 		
-		boolean keepLooping = true;
-		
-		int cityCount = 0;
+		String prompt = "How many villains do you want to fight? " + getInputOptions("3-6");
 		
 		printTitleBlock("New Game > Number of Villains");
 		
-		System.out.println("How many villains do you want to fight? " + getInputOptions("3-6"));
+		System.out.println(prompt);
 		
-		while (keepLooping) {
+		// Keep prompting the user a valid number.
+		while (true) {
 			
 			try {
 				
-				cityCount = getNumberWithBounds(3, 6);
-				
-				break;
+				this.cityCount = getNumberWithBounds(3, 6);
+				return;
 			
 			} catch (UserContinueException e) {
 				
-				System.out.println("How many villains do you want to fight? " + getInputOptions("3-6"));
+				System.out.println(prompt);
 				
 			}
 
 		}
-		
-		return cityCount;
 		
 	}
 
@@ -186,11 +204,15 @@ public class TextUserInterface extends UserInterface {
 			
 				case 0:
 					// change the number of Villains
-					int number = showGetNumberOfVillainsScreen();
 					
-					if (number != 0) {
+					int oldCityCount = this.cityCount;
 					
-						cityCount = number;
+					showGetNumberOfVillainsScreen();
+					
+					// make sure that the number the user chose was valid. Otherwise restore the old cityCount.
+					if (this.cityCount == 0) {
+					
+						this.cityCount = oldCityCount;
 						
 					}
 					
@@ -211,6 +233,8 @@ public class TextUserInterface extends UserInterface {
 							
 							heroes.add(newHero);
 							
+							showMessageDialog(String.format("You have added the hero \"%s\" (%s) to your team!", newHero.getName(), newHero.getType().toString()), "New Game > Hero Added"); 
+							
 						}
 					}
 					
@@ -225,11 +249,13 @@ public class TextUserInterface extends UserInterface {
 						
 					} else {
 						
-						Hero deleteHero = showHeroDeletionMenu(heroes);
+						Hero deletedHero = showHeroDeletionMenu(heroes);
 						
-						if (deleteHero != null) {
+						if (deletedHero != null) {
 							
-							heroes.remove(deleteHero);
+							heroes.remove(deletedHero);
+							
+							showMessageDialog(String.format("You have removed the hero \"%s\" (%s) from your team!", deletedHero.getName(), deletedHero.getType().toString()), "New Game > Hero Removed"); 
 							
 						}
 					}
@@ -238,12 +264,13 @@ public class TextUserInterface extends UserInterface {
 					
 				case 3:
 					// change the team name
-					String input = showInputDialog("Enter the team name:", "New Game > Team Name");
+					
+					String input = showInputDialog("Enter the team name:", "New Game > Change Team Name");
 					
 					if (!input.equals("")) {
 						
 						teamName = input;
-						options[3] = "Rename the Team";
+						options[3] = "Rename the Team"; // change the menu string from "Name the Team" to "Rename the Team"
 						
 					}
 					
@@ -252,6 +279,7 @@ public class TextUserInterface extends UserInterface {
 					
 				case 4:
 					// ready!
+					
 					if (heroes.size() < 1) {
 						
 						showMessageDialog("You need at least one hero!", "New Game > Error");
@@ -269,6 +297,9 @@ public class TextUserInterface extends UserInterface {
 								showMessageDialog("The team name cannot be empty!", "New Game > Error");
 								
 							} else {
+								
+								// Everything seems to be in order.
+								// Assemble the team.
 								
 								team = new Team(teamName);
 								
@@ -301,7 +332,7 @@ public class TextUserInterface extends UserInterface {
 					break;
 					
 				default:
-					throw new AssertionError("Invalid option.");
+					throw new AssertionError("Invalid option. This should never be reached!");
 			
 			}
 			
@@ -309,13 +340,18 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 	
+	/**
+	 * Returns the Hero that is to be added to the Team. Doesn't actually add the Hero to the Team, just returns it.
+	 * @param heroes A list of heroes in the Team. Can be used to check that the new hero's name is unique.
+	 * @return
+	 */
 	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) {
 		
+		// Create a test hero.
 		String name = "Test Hero";
 		HeroType type = HeroType.ARTS_STUDENT;
 		
-		
-		
+		// Checks if the hero's name is unique.
 		for (Hero hero : heroes) {
 			
 			if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
@@ -326,13 +362,24 @@ public class TextUserInterface extends UserInterface {
 			
 		}
 		
+		// Return the new Hero
 		return new Hero(name, type);
 	}
 	
+	/**
+	 * Returns the Hero object to remove from the Team. Doesn't actually remove the Hero from the Team, just returns it.
+	 * @param heroes A list of heroes to choose from.
+	 * @return
+	 */
 	private Hero showHeroDeletionMenu(ArrayList<Hero> heroes) {
 		return heroes.remove(0);
 	}
 	
+	/**
+	 * Displays a confirmation dialog to the user. Should give a general summary of the game settings and the team.
+	 * @return Returns true if the user wants to play the game, false otherwise.
+	 * @throws UserQuitException
+	 */
 	private boolean showConfirmGameScreen() throws UserQuitException {
 		
 		String heroString = getPrettyHeroesString((team.getHeroes()));
@@ -340,14 +387,22 @@ public class TextUserInterface extends UserInterface {
 		return showYesNoDialog(
 				String.format(
 						"You will be fighting %d villains. Your team name is \"%s\". You have %d hero%s:\n%s\n\nIs this ok?",
-						cityCount, team.getName(), team.getHeroes().size(), team.getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)),
+						cityCount, team.getName(), team.getHeroes().size(),
+						team.getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)), // pluralise the word "hero" if there is more than one hero in the team
 				"New Game > Confirm");
 		
 	}
 	
+	/**
+	 * Displays a list of heroes to choose from. Returns the hero that the user chose.
+	 * @param message A message to prompt the user with.
+	 * @param title The title of the dialog
+	 * @param heroes A list of heroes to choose from.
+	 * @return
+	 * @throws UserQuitException
+	 */
 	public static Hero showHeroSelectionMenu(String message, String title, Hero[] heroes) throws UserQuitException {
 		
-		boolean keepLooping = true;
 		int choice = -1;
 		
 		String[] heroStrings = new String[heroes.length];
@@ -358,19 +413,20 @@ public class TextUserInterface extends UserInterface {
 			
 		}
 		
-		while (keepLooping) {
+		while (true) {
 			
 			printTitleBlock(title + " > Hero Selection");
 			
 			try {
 				
 				choice = showChoice(message, heroStrings);
-				keepLooping = false;
+				break;
 				
 			} catch (UserCancelException e) { }
 			
 		}
 		
+		// return the Hero the user chose or null if something went wrong.
 		if (choice > -1) {
 			
 			return heroes[choice];
@@ -382,6 +438,11 @@ public class TextUserInterface extends UserInterface {
 		}
 	}
 	
+	/**
+	 * Returns a string with the heroes prettily formatted.
+	 * @param heroes The list or array of heroes to display.
+	 * @return
+	 */
 	private static String getPrettyHeroesString(Iterable<Hero> heroes) {
 		
 		ArrayList<String> heroStrings = new ArrayList<String>();
@@ -395,6 +456,9 @@ public class TextUserInterface extends UserInterface {
 		return String.join("\n", heroStrings);
 	}
 
+	/**
+	 * Starts the user interface.
+	 */
 	@Override
 	public void start() {
 		
