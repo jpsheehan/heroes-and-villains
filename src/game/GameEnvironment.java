@@ -116,7 +116,7 @@ public class GameEnvironment {
 	 * Sets the cities. To be called from the UserInterface.
 	 * @param cities
 	 */
-	public void setCities(CityController cities) {
+	public void setCityController(CityController cities) {
 		
 		this.cityController = cities;
 		

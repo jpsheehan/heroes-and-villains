@@ -24,16 +24,6 @@ import game.city.IllegalMoveException;
  *
  */
 public class TextUserInterface extends UserInterface {
-	
-	/**
-	 * The number of cities that the user wants to go to.
-	 */
-	private int cityCount = 3;
-	
-	/**
-	 * A reference to the Team of heroes.
-	 */
-	private Team team;
 
 	/**
 	 * Create a new TextUserInterface object.
@@ -90,11 +80,11 @@ public class TextUserInterface extends UserInterface {
 					
 					try {
 						
-						// Create a new game, setting the CityController and Team in the parent GameEnvironment
-						showNewGameScreen();
+						// Create a new game, and set the team and city controller in the game environment.
+						NewGameParameters params = showNewGameScreen();
 						
-						this.getGameEnvironment().setCities(new CityController(cityCount));
-						this.getGameEnvironment().setTeam(team);
+						this.getGameEnvironment().setCityController(new CityController(params.getCityCount()));
+						this.getGameEnvironment().setTeam(params.getTeam());
 						
 						// Run the game loop (basically, plays the game proper).
 						this.gameLoop();
@@ -133,7 +123,9 @@ public class TextUserInterface extends UserInterface {
 	 * @throws UserQuitException
 	 * @throws UserCancelException
 	 */
-	public void showGetNumberOfVillainsScreen() throws UserQuitException, UserCancelException {
+	public int showGetNumberOfVillainsScreen() throws UserQuitException, UserCancelException {
+		
+		int cityCount = 0;
 		
 		String prompt = "How many villains do you want to fight? " + getInputOptions("3-6");
 		
@@ -146,8 +138,8 @@ public class TextUserInterface extends UserInterface {
 			
 			try {
 				
-				this.cityCount = getNumberWithBounds(3, 6);
-				return;
+				cityCount = getNumberWithBounds(3, 6);
+				return cityCount;
 			
 			} catch (UserContinueException e) {
 				
@@ -159,9 +151,17 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	public void showNewGameScreen() throws UserQuitException, UserCancelException {
+	/**
+	 * Displays a menu that is used to start a new game. Offers the user options of setting the number of villains, team name and adding/removing heroes.
+	 * Upon returning, the game is started.
+	 * @throws UserQuitException
+	 * @throws UserCancelException
+	 */
+	public NewGameParameters showNewGameScreen() throws UserQuitException, UserCancelException {
 		
-		boolean keepLooping = true;
+		// The number of cities that the user wants to go to.
+		int cityCount = 3;
+		
 		ArrayList<Hero> heroes = new ArrayList<Hero>();
 		String teamName = "";
 
@@ -173,14 +173,16 @@ public class TextUserInterface extends UserInterface {
 			"Ready!"
 		};
 		
-		while (keepLooping) {
+		while (true) {
 			
 			int choice = 0;
 			
 			printTitleBlock("New Game");
 			
+			// Print some information about villains.
 			System.out.println(String.format("You will be fighting %d villains.\n", cityCount));
 			
+			// Print some information about the team name.
 			if (teamName.equals("")) {
 				
 				System.out.println("Your team has not been named yet.\n");
@@ -191,8 +193,10 @@ public class TextUserInterface extends UserInterface {
 				
 			}
 			
+			// Print some information about the number of heroes in your team.
 			System.out.println(String.format("You have %d hero%s in your team%s", heroes.size(), heroes.size() == 1 ? "" : "es", heroes.size() == 0 ? "." : ":"));
 			
+			// Print a list of heroes in your team.
 			if (heroes.size() > 0) {
 				
 				System.out.println(getPrettyHeroesString(heroes));
@@ -201,6 +205,7 @@ public class TextUserInterface extends UserInterface {
 			
 			System.out.println();
 			
+			// Display a list of options and switch on the user's choice.
 			choice = showChoice("Select an option:", options);
 			
 			switch (choice) {
@@ -208,14 +213,14 @@ public class TextUserInterface extends UserInterface {
 				case 0:
 					// change the number of Villains
 					
-					int oldCityCount = this.cityCount;
+					int oldCityCount = cityCount;
 					
-					showGetNumberOfVillainsScreen();
+					cityCount = showGetNumberOfVillainsScreen();
 					
 					// make sure that the number the user chose was valid. Otherwise restore the old cityCount.
-					if (this.cityCount == 0) {
+					if (cityCount == 0) {
 					
-						this.cityCount = oldCityCount;
+						cityCount = oldCityCount;
 						
 					}
 					
@@ -304,7 +309,7 @@ public class TextUserInterface extends UserInterface {
 								// Everything seems to be in order.
 								// Assemble the team.
 								
-								team = new Team(teamName);
+								Team team = new Team(teamName);
 								
 								for (Hero hero : heroes) {
 									
@@ -320,9 +325,12 @@ public class TextUserInterface extends UserInterface {
 									
 								}
 								
-								if (showConfirmGameScreen()) {
+								// Create the parameters for the new game and confirm that this is what the user wants to start the game with.
+								NewGameParameters params = new NewGameParameters(cityCount, team);
+								
+								if (showConfirmGameScreen(params)) {
 									
-									return;
+									return params;
 									
 								}
 								
@@ -383,15 +391,15 @@ public class TextUserInterface extends UserInterface {
 	 * @return Returns true if the user wants to play the game, false otherwise.
 	 * @throws UserQuitException
 	 */
-	private boolean showConfirmGameScreen() throws UserQuitException {
+	private boolean showConfirmGameScreen(NewGameParameters params) throws UserQuitException {
 		
-		String heroString = getPrettyHeroesString((team.getHeroes()));
+		String heroString = getPrettyHeroesString((params.getTeam().getHeroes()));
 
 		return showYesNoDialog(
 				String.format(
 						"You will be fighting %d villains. Your team name is \"%s\". You have %d hero%s:\n%s\n\nIs this ok?",
-						cityCount, team.getName(), team.getHeroes().size(),
-						team.getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)), // pluralise the word "hero" if there is more than one hero in the team
+						params.getCityCount(), params.getTeam().getName(), params.getTeam().getHeroes().size(),
+						params.getTeam().getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)), // pluralise the word "hero" if there is more than one hero in the team
 				"New Game > Confirm");
 		
 	}
@@ -643,7 +651,7 @@ public class TextUserInterface extends UserInterface {
 		GeneralHelpers.setIsRunningInEclipse(true);
 		GameEnvironment ge = new GameEnvironment(TextUserInterface.class);
 		TextUserInterface ui = new TextUserInterface(ge);
-		ge.setCities(new CityController(3));
+		ge.setCityController(new CityController(3));
 		
 //		try {
 //			ge.getCityController().move(Direction.SOUTH);
