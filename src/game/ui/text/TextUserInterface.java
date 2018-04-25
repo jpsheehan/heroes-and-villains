@@ -418,7 +418,7 @@ public class TextUserInterface extends UserInterface {
 		
 		while (true) {
 			
-			printTitleBlock(title + " > Hero Selection");
+			printTitleBlock(title);
 			
 			try {
 				
@@ -606,7 +606,7 @@ public class TextUserInterface extends UserInterface {
 		
 		System.out.println(sb.toString());
 		
-		printLineCentred("Key:");
+		printLineCentred("Legend:");
 		System.out.println();
 		
 		printLineCentred("B - Home Base \u2503 S - Shop \u2503 H - Hospital \u2503 P - Power Up Den \u2503 V - Villain's Lair");
