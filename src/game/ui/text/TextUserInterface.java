@@ -6,10 +6,13 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 import java.util.ArrayList;
 
 import game.GameEnvironment;
+import game.GameOverException;
+import game.GameWonException;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
+import game.city.Area;
 import game.city.CityController;
 
 public class TextUserInterface extends UserInterface {
@@ -400,7 +403,42 @@ public class TextUserInterface extends UserInterface {
 
 	private void gameLoop() throws UserQuitException {
 		
-		showMessageDialog("Main game should run now...");
+		try {
+		
+			while (true) {
+				
+				displayAreaScreen(this.getGameEnvironment().getCities().getCurrentArea());
+				
+			}
+		
+//		} catch (GameWonException e) {
+//			
+//			showMessageDialog("Congratulations! You have won the game!");
+//			
+//		} catch (GameOverException e) {
+//			
+//			showMessageDialog("Sorry! You lost the game!");
+		
+		} catch (UserQuitException e) {
+			
+			throw e; // Bubble this back up
+			
+		} catch (Exception e) {
+			
+			showMessageDialog(e.getMessage(), "Critical Application Error");
+			
+		}
 		
 	}
+
+	private void displayAreaScreen(Area area) throws UserQuitException {
+		
+		showMessageDialog("Test", String.format("%s > %s",
+				this.getGameEnvironment().getCities().getCurrentCity().getName(),
+				this.getGameEnvironment().getCities().getCurrentArea().getName()));
+		
+		
+		
+	}
+
 }

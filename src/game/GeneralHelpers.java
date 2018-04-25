@@ -28,7 +28,7 @@ public final class GeneralHelpers {
 			if (value.equals("")) {
 				
 				// return the specifier if value is empty.
-				return String.format("[%s]", value);
+				return String.format("[%s]", specifier);
 				
 			} else {
 				

@@ -27,6 +27,11 @@ public class CityController {
 	private int numberOfCities;
 	
 	/**
+	 * The current direction that the player is in.
+	 */
+	private Direction direction;
+	
+	/**
 	 * Creates a new CityController.
 	 * @param numberOfCities The number of cities to have in this game.
 	 */
@@ -34,6 +39,7 @@ public class CityController {
 		
 		this.cityIndex = 0;
 		this.numberOfCities = numberOfCities;
+		this.direction = Direction.CENTRE;
 		
 		generateCities();
 		
@@ -101,6 +107,48 @@ public class CityController {
 	}
 	
 	/**
+	 * Returns the current area in the current city.
+	 * @return
+	 */
+	public Area getCurrentArea() {
+		
+		return this.cities[this.cityIndex].getArea(direction);
+		
+	}
+	
+	/**
+	 * Returns the current direction in the current city. 
+	 */
+	public Direction getDirection() {
+		
+		return this.direction;
+		
+	}
+	
+	/**
+	 * Moves in a particular direction within the city.
+	 * @param newDirection
+	 * @throws IllegalMoveException 
+	 */
+	public void move(Direction newDirection) throws IllegalMoveException {
+		
+		if (newDirection == null) {
+			
+			throw new NullPointerException("Direction cannot be null.");
+			
+		}
+		
+		if ((this.direction == Direction.CENTRE && newDirection == Direction.CENTRE) || (this.direction != Direction.CENTRE && newDirection != Direction.CENTRE)) {
+			
+			throw new IllegalMoveException(this.direction, newDirection);
+			
+		}
+		
+		this.direction = newDirection;
+		
+	}
+	
+	/**
 	 * Advances the Team to the next city.
 	 * @throws GameWonException if the game has been won.
 	 */
@@ -114,6 +162,7 @@ public class CityController {
 		}
 
 		this.cityIndex++;
+		this.direction = Direction.CENTRE;
 	}
 
 }
