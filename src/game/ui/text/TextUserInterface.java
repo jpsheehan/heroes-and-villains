@@ -407,7 +407,7 @@ public class TextUserInterface extends UserInterface {
 		
 			while (true) {
 				
-				displayAreaScreen(this.getGameEnvironment().getCities().getCurrentArea());
+				displayAreaScreen(this.getGameEnvironment().getCityController().getCurrentArea());
 				
 			}
 		
@@ -434,8 +434,8 @@ public class TextUserInterface extends UserInterface {
 	private void displayAreaScreen(Area area) throws UserQuitException {
 		
 		showMessageDialog("Test", String.format("%s > %s",
-				this.getGameEnvironment().getCities().getCurrentCity().getName(),
-				this.getGameEnvironment().getCities().getCurrentArea().getName()));
+				this.getGameEnvironment().getCityController().getCurrentCity().getName(),
+				this.getGameEnvironment().getCityController().getCurrentArea().getName()));
 		
 		
 		

@@ -28,7 +28,7 @@ public class GameEnvironment {
 	/**
 	 * The city controller.
 	 */
-	private CityController cities;
+	private CityController cityController;
 	
 	/**
 	 * The user interface to use.
@@ -96,9 +96,9 @@ public class GameEnvironment {
 	 * Gets the city controller.
 	 * @return
 	 */
-	public CityController getCities() {
+	public CityController getCityController() {
 		
-		return this.cities;
+		return this.cityController;
 		
 	}
 	
@@ -118,7 +118,7 @@ public class GameEnvironment {
 	 */
 	public void setCities(CityController cities) {
 		
-		this.cities = cities;
+		this.cityController = cities;
 		
 	}
 	
