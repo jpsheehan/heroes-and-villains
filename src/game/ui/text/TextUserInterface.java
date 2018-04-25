@@ -6,6 +6,7 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 import java.util.ArrayList;
 
 import game.GameEnvironment;
+import game.GeneralHelpers;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
@@ -13,6 +14,8 @@ import game.character.HeroType;
 import game.city.Area;
 import game.city.City;
 import game.city.CityController;
+import game.city.Direction;
+import game.city.IllegalMoveException;
 
 /**
  * Represents the user interface shown to the user in text format.
@@ -517,5 +520,137 @@ public class TextUserInterface extends UserInterface {
 				area.getType().toString()));
 		
 	}
+	
+	/**
+	 * Prints the map of the current city to the screen. Displays any areas that have already been discovered or if the player has used a Map.
+	 */
+	private void drawMap() {
+		
+		int leftMargin = (getConsoleWidth() - 31) / 2;
+		
+		StringBuilder sb = new StringBuilder();
+		
+		// Setup some constants to use to draw the lines.
+		Character tl = '\u259B'; // top-left corner
+		Character tr = '\u259C'; // top-right corner
+		Character bl = '\u2599'; // bottom-left corner
+		Character br = '\u259F'; // bottom-right corner
+		Character vl = '\u258C'; // vertical left bar
+		Character vr = '\u2590'; // vertical right bar
+		Character ht = '\u2580'; // horizontal top bar
+		Character hb = '\u2584'; // horizontal bottom bar
 
+		City city = this.getGameEnvironment().getCityController().getCurrentCity();
+		Direction direction = this.getGameEnvironment().getCityController().getDirection();
+		
+		Character northChar = getAreaLetter(city.getArea(Direction.NORTH));
+		Character westChar = getAreaLetter(city.getArea(Direction.WEST));
+		Character centreChar = getAreaLetter(city.getArea(Direction.CENTRE));
+		Character eastChar = getAreaLetter(city.getArea(Direction.EAST));
+		Character southChar = getAreaLetter(city.getArea(Direction.SOUTH));
+		
+		String occupiedAcrossTop = " \u250F" + repeatString("\u2501", 5) + "\u2513 ";
+		String occupiedAcrossBottom = " \u2517" + repeatString("\u2501", 5) + "\u251B ";
+		String occupiedUp = "\u2503";
+		String unoccupiedAcross = repeatString(" ", 9);
+		String unoccupiedUp = " ";
+		
+		// north room
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(tl + repeatString(ht.toString(), 9) + tr + '\n');
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(vl + (direction == Direction.NORTH ? occupiedAcrossTop : unoccupiedAcross) + vr + '\n');
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(vl + " " + (direction == Direction.NORTH ? occupiedUp : unoccupiedUp) + "  " + northChar + "  " + (direction == Direction.NORTH ? occupiedUp : unoccupiedUp) + " " + vr + '\n');
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(vl + (direction == Direction.NORTH ? occupiedAcrossBottom : unoccupiedAcross) + vr + '\n');
+		
+		// west, centre and east rooms
+		sb.append(repeatString(" ", leftMargin));
+		sb.append(tl + repeatString(ht.toString(), 9));
+		sb.append(tl + repeatString(ht.toString(), 9) + tr);
+		sb.append(repeatString(ht.toString(), 9) + tr + '\n');
+		
+		sb.append(repeatString(" ", leftMargin));
+		sb.append(vl + (direction == Direction.WEST ? occupiedAcrossTop : unoccupiedAcross));
+		sb.append(vl + (direction == Direction.CENTRE ? occupiedAcrossTop : unoccupiedAcross) + vr);
+		sb.append((direction == Direction.EAST ? occupiedAcrossTop : unoccupiedAcross) + vr + '\n');
+		
+		sb.append(repeatString(" ", leftMargin));
+		sb.append(vl + " " + (direction == Direction.WEST ? occupiedUp : unoccupiedUp) + "  " + westChar + "  " + (direction == Direction.WEST ? occupiedUp : unoccupiedUp) + " ");
+		sb.append(vl + " " + (direction == Direction.CENTRE ? occupiedUp : unoccupiedUp) + "  " + centreChar + "  " + (direction == Direction.CENTRE ? occupiedUp : unoccupiedUp) + " " + vr);
+		sb.append(" " + (direction == Direction.EAST ? occupiedUp : unoccupiedUp) + "  " + eastChar + "  " + (direction == Direction.EAST ? occupiedUp : unoccupiedUp) + " " + vr + "\n");
+		
+		sb.append(repeatString(" ", leftMargin));
+		sb.append(vl + (direction == Direction.WEST ? occupiedAcrossBottom : unoccupiedAcross));
+		sb.append(vl + (direction == Direction.CENTRE ? occupiedAcrossBottom : unoccupiedAcross) + vr);
+		sb.append((direction == Direction.EAST ? occupiedAcrossBottom : unoccupiedAcross) + vr + '\n');
+		
+		sb.append(repeatString(" ", leftMargin));
+		sb.append(bl + repeatString(hb.toString(), 9));
+		sb.append(bl + repeatString(hb.toString(), 9) + br);
+		sb.append(repeatString(hb.toString(), 9) + br + '\n');
+		
+		// south room
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(vl + (direction == Direction.SOUTH ? occupiedAcrossTop : unoccupiedAcross) + vr + '\n');
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(vl + " " + (direction == Direction.SOUTH ? occupiedUp : unoccupiedUp) + "  " + southChar + "  " + (direction == Direction.SOUTH ? occupiedUp : unoccupiedUp) + " " + vr + '\n');
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(vl + (direction == Direction.SOUTH ? occupiedAcrossBottom : unoccupiedAcross) + vr + '\n');
+		sb.append(repeatString(" ", 10 + leftMargin));
+		sb.append(bl + repeatString(hb.toString(), 9) + br + '\n');
+		
+		// Print everything to the terminal
+		printTitleBlock("Map > " + city.getName());
+		
+		System.out.println(sb.toString());
+		
+		printLineCentred("Key:");
+		System.out.println();
+		
+		printLineCentred("B - Home Base \u2503 S - Shop \u2503 H - Hospital \u2503 P - Power Up Den \u2503 V - Villain's Lair");
+		System.out.println();
+		
+		printLineCentred("Press <Enter> to continue...");
+		
+		try {
+			readLine();
+		} catch (UserCancelException | UserQuitException | UserContinueException e) {}
+	}
+	
+	/**
+	 * Returns the letter that corresponds to the area (for the drawMap method).
+	 * @param area The area to get the letter of.
+	 * @return
+	 */
+	private Character getAreaLetter(Area area) {
+		
+		switch (area.getType()) {
+			
+			case HOME_BASE: return 'B';
+			case HOSPITAL: return 'H';
+			case POWER_UP_DEN: return 'P';
+			case SHOP: return 'S';
+			case VILLAINS_LAIR: return 'V';
+			default: return 'X';
+		
+		}
+	}
+
+	public static void main(String[] args) {
+		
+		GeneralHelpers.setIsRunningInEclipse(true);
+		GameEnvironment ge = new GameEnvironment(TextUserInterface.class);
+		TextUserInterface ui = new TextUserInterface(ge);
+		ge.setCities(new CityController(3));
+		
+//		try {
+//			ge.getCityController().move(Direction.SOUTH);
+//		} catch (IllegalMoveException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		ui.drawMap();
+	}
 }
