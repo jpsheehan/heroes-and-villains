@@ -1,7 +1,5 @@
 package game.city;
 
-import static game.GeneralHelpers.getString;
-
 public enum CityType {
 	
 	JAMES_HIGHT,
@@ -18,25 +16,25 @@ public enum CityType {
 		switch (this) {
 		
 			case ENG_CORE:
-				return getString("EngCore.Name");
+				return "EngCore";
 				
 			case ERSKINE:
-				return getString("Erskine.Name");
+				return "Erskine";
 				
 			case JAMES_HIGHT:
-				return getString("JamesHight.Name");
+				return "JamesHight";
 				
 			case LAW:
-				return getString("Law.Name");
+				return "Law";
 				
 			case MATARIKI:
-				return getString("Matariki.Name");
+				return "Matariki";
 				
 			case PSYCH:
-				return getString("Psych.Name");
+				return "Psych";
 				
 			case RUTHERFORD:
-				return getString("Rutherford.Name");
+				return "Rutherford";
 			
 			default:
 				return "null";

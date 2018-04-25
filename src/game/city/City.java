@@ -47,51 +47,22 @@ public class City implements game.Nameable {
 	 */
 	private static ArrayList<Area> getAreaList(CityType type) {
 		
+		String buildingName = type.toString();
+		
 		ArrayList<Area> areaList = new ArrayList<Area>();
+
+		InnKeeper innKeeper = new InnKeeper(getString(String.format("%s.InnKeeper.Name", buildingName)), new Dialogue());
 		
-		switch (type) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		// TODO: Add items for shop?
 		
-		case RUTHERFORD:
-			// TODO: complete the areas for Rutherford
-			InnKeeper innKeeper = new InnKeeper(getString("Rutherford.InnKeeper.Name"), new Dialogue());
-			ArrayList<Item> items = new ArrayList<Item>();
-			Villain villain = new Villain(getString("Rutherford.Villain.Name"), VillainType.RORY_THE_BUILDER, MinigameType.ALL, 3);
-			
-			areaList.add(new Shop(getString("Rutherford.Shop.Name"), items, innKeeper));
-			areaList.add(new Hospital(getString("Rutherford.Hospital.Name")));
-			areaList.add(new PowerUpDen(getString("Rutherford.PowerUpDen.Name")));
-			areaList.add(new VillainsLair(getString("Rutherford.VillainsLair.Name"), villain, -1));
-			areaList.add(new HomeBase(getString("Rutherford.HomeBase.Name")));
-			break;
-			
-		case ENG_CORE:
-			// TODO: create the areas for Engineering Core
-			break;
-			
-		case ERSKINE:
-			// TODO: create the areas for Jack Erskine
-			break;
-			
-		case JAMES_HIGHT:
-			// TODO: create the areas for James Hight
-			break;
-			
-		case LAW:
-			// TODO: create the areas for Law and Business
-			break;
-			
-		case MATARIKI:
-			// TODO: create the areas for Matariki
-			break;
-			
-		case PSYCH:
-			// TODO: create the areas for Psychology/Sociology
-			break;
-			
-		default:
-			throw new AssertionError("Invalid CityType to generate.");
+		Villain villain = new Villain(getString(String.format("%s.Villain.Name", buildingName)), VillainType.RORY_THE_BUILDER, MinigameType.ALL, 3);
 		
-		}
+		areaList.add(new Shop(getString(String.format("%s.Shop.Name", buildingName)), items, innKeeper));
+		areaList.add(new Hospital(getString(String.format("%s.Hospital.Name", buildingName))));
+		areaList.add(new PowerUpDen(getString(String.format("%s.PowerUpDen.Name", buildingName))));
+		areaList.add(new VillainsLair(getString(String.format("%s.VillainsLair.Name", buildingName)), villain, -1));
+		areaList.add(new HomeBase(getString(String.format("%s.HomeBase.Name", buildingName))));
 		
 		return areaList;
 	}
@@ -105,29 +76,29 @@ public class City implements game.Nameable {
 		
 		switch (type) {
 		
-		case ENG_CORE:
-			return "Engineering Core";
-		
-		case ERSKINE:
-			return "Jack Erskine";
+			case ENG_CORE:
+				return getString("EngCore.Name");
+				
+			case ERSKINE:
+				return getString("Erskine.Name");
+				
+			case JAMES_HIGHT:
+				return getString("JamesHight.Name");
+				
+			case LAW:
+				return getString("Law.Name");
+				
+			case MATARIKI:
+				return getString("Matariki.Name");
+				
+			case PSYCH:
+				return getString("Psych.Name");
+				
+			case RUTHERFORD:
+				return getString("Rutherford.Name");
 			
-		case JAMES_HIGHT:
-			return "James Hight";
-			
-		case LAW:
-			return "Law & Business";
-			
-		case MATARIKI:
-			return "Matariki";
-			
-		case PSYCH:
-			return "Psychology/Sociology";
-			
-		case RUTHERFORD:
-			return "Ernest Rutherford";
-			
-		default:
-			throw new AssertionError("Invalid CityType enum for name.");
+			default:
+				return "null";
 		
 		}
 		

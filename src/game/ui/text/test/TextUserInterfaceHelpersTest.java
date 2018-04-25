@@ -7,9 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.Rule;
 import org.junit.jupiter.api.AfterEach;
 
 import game.ui.text.TextUserInterfaceHelpers;
@@ -22,9 +20,6 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 	private ByteArrayOutputStream outputStream;
 	private ByteArrayInputStream inputStream;
 	
-
-	@Rule
-	private final ExpectedException exception = ExpectedException.none();
 	
 	@BeforeEach
 	void setupOutputStream() {

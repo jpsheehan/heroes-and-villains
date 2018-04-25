@@ -310,6 +310,8 @@ public class TextUserInterface extends UserInterface {
 		String name = "Test Hero";
 		HeroType type = HeroType.ARTS_STUDENT;
 		
+		
+		
 		for (Hero hero : heroes) {
 			
 			if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
