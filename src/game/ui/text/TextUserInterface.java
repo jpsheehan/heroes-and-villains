@@ -13,6 +13,7 @@ import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
 import game.city.Area;
+import game.city.City;
 import game.city.CityController;
 
 public class TextUserInterface extends UserInterface {
@@ -401,13 +402,17 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
+	/**
+	 * Runs the main game loop. Calling the function to display the area and handling any exceptions that come from it.
+	 * @throws UserQuitException
+	 */
 	private void gameLoop() throws UserQuitException {
 		
 		try {
 		
 			while (true) {
 				
-				displayAreaScreen(this.getGameEnvironment().getCityController().getCurrentArea());
+				displayAreaScreen();
 				
 			}
 		
@@ -425,19 +430,27 @@ public class TextUserInterface extends UserInterface {
 			
 		} catch (Exception e) {
 			
+			// Handle all errors that shouldn't happen here:
 			showMessageDialog(e.getMessage(), "Critical Application Error");
 			
 		}
 		
 	}
 
-	private void displayAreaScreen(Area area) throws UserQuitException {
+	/**
+	 * Displays an area on the screen, presenting the user with information and a list of options.
+	 * @throws UserQuitException
+	 */
+	private void displayAreaScreen() throws UserQuitException {
 		
-		showMessageDialog("Test", String.format("%s > %s",
-				this.getGameEnvironment().getCityController().getCurrentCity().getName(),
-				this.getGameEnvironment().getCityController().getCurrentArea().getName()));
+		City city = this.getGameEnvironment().getCityController().getCurrentCity();
+		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
 		
-		
+		// Just a test: In reality we need to offer the user the chance to enter some input
+		showMessageDialog(area.getFlavourText(), String.format("%s > %s (%s)",
+				city.getName(),
+				area.getName(),
+				area.getType().toString()));
 		
 	}
 

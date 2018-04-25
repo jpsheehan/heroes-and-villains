@@ -1,12 +1,13 @@
 package game.city;
 
+import game.Describable;
 import game.Nameable;
 
 /**
  * Represents an Area within a City. A City has five Areas.
  *
  */
-public abstract class Area implements Nameable {
+public abstract class Area implements Nameable, Describable {
 
 	/**
 	 * The name of the Area.
@@ -19,13 +20,20 @@ public abstract class Area implements Nameable {
 	private AreaType type;
 	
 	/**
+	 * The description of the Area.
+	 */
+	private String description;
+	
+	/**
 	 * Creates a new Area.
 	 * @param name The name of the Area.
+	 * @param description The description of the Area.
 	 * @param type The type of the Area.
 	 */
-	public Area(String name, AreaType type) {
+	public Area(String name, String description, AreaType type) {
 		this.name = name;
 		this.type = type;
+		this.description = description;
 	}
 	
 	/**
@@ -41,6 +49,14 @@ public abstract class Area implements Nameable {
 	 */
 	public final AreaType getType() {
 		return this.type;
+	}
+	
+	/**
+	 * Returns the description of the Area.
+	 * @return
+	 */
+	public final String getFlavourText() {
+		return this.description;
 	}
 	
 }

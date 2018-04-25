@@ -43,6 +43,8 @@ public final class GeneralHelpers {
 		
 	}
 	
+	private static boolean runningInEclipse;
+	
 	/**
 	 * Loads the strings from the strings.json file.
 	 */
@@ -69,21 +71,14 @@ public final class GeneralHelpers {
 	
 	private static Map<String, String> strings = null;
 	
-	/**
-	 * A wrapper for getString. Returns the associated string.
-	 * @param specifier The specifier that is associated with the string you want.
-	 * @return
-	 */
-	public static String $(String specifier) {
+	public static boolean isRunningInEclipse() {
 		
-		return getString(specifier);
+		return ("true".equalsIgnoreCase(System.getProperty("runningInEclipse")) || runningInEclipse);
 		
 	}
 	
-	public static boolean isRunningInEclipse() {
-		
-		return ("true".equalsIgnoreCase(System.getProperty("runningInEclipse")));
-		
+	public static void setIsRunningInEclipse(boolean value) {
+		runningInEclipse = value;
 	}
 
 	/**

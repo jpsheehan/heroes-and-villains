@@ -58,11 +58,11 @@ public class City implements game.Nameable {
 		
 		Villain villain = new Villain(getString(String.format("%s.Villain.Name", buildingName)), VillainType.RORY_THE_BUILDER, MinigameType.ALL, 3);
 		
-		areaList.add(new Shop(getString(String.format("%s.Shop.Name", buildingName)), items, innKeeper));
-		areaList.add(new Hospital(getString(String.format("%s.Hospital.Name", buildingName))));
-		areaList.add(new PowerUpDen(getString(String.format("%s.PowerUpDen.Name", buildingName))));
-		areaList.add(new VillainsLair(getString(String.format("%s.VillainsLair.Name", buildingName)), villain, -1));
-		areaList.add(new HomeBase(getString(String.format("%s.HomeBase.Name", buildingName))));
+		areaList.add(new Shop(getString(String.format("%s.Shop.Name", buildingName)), getString(String.format("%s.Shop.Flavour", buildingName)), items, innKeeper));
+		areaList.add(new Hospital(getString(String.format("%s.Hospital.Name", buildingName)), getString(String.format("%s.Hospital.Flavour", buildingName))));
+		areaList.add(new PowerUpDen(getString(String.format("%s.PowerUpDen.Name", buildingName)), getString(String.format("%s.PowerUpDen.Flavour", buildingName))));
+		areaList.add(new VillainsLair(getString(String.format("%s.VillainsLair.Name", buildingName)), getString(String.format("%s.VillainsLair.Flavour", buildingName)), villain, -1));
+		areaList.add(new HomeBase(getString(String.format("%s.HomeBase.Name", buildingName)), getString(String.format("%s.HomeBase.Flavour", buildingName))));
 		
 		return areaList;
 	}

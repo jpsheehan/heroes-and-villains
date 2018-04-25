@@ -6,8 +6,8 @@ public class PowerUpDen extends Area {
 	 * Creates a new Power Up Den.
 	 * @param name The name of the area.
 	 */
-	public PowerUpDen(String name) {
-		super(name, AreaType.POWER_UP_DEN);
+	public PowerUpDen(String name, String description) {
+		super(name, description, AreaType.POWER_UP_DEN);
 	}
 
 }
