@@ -391,8 +391,15 @@ public class TextUserInterface extends UserInterface {
 	 * @param heroes A list of heroes to choose from.
 	 * @return
 	 */
-	private Hero showHeroDeletionMenu(ArrayList<Hero> heroes) {
-		return heroes.remove(0);
+	private Hero showHeroDeletionMenu(ArrayList<Hero> heroes) throws UserQuitException {
+		
+		Hero[] heroArray = new Hero[heroes.size()];
+		//get each hero from ArrayList into an Array.
+		// loop through ArrayList (containing Hero) add each Hero to an Array (containing hero) 
+		for (int i = 0; i<heroes.size(); i++ ) {
+			heroArray[i] = heroes.get(i);
+		}
+		return (showHeroSelectionMenu("Select a hereo to remove from the team", "New Game > Remove Hero", heroArray));
 	}
 	
 	/**

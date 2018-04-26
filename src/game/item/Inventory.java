@@ -1,7 +1,7 @@
 package game.item;
 
 import java.util.ArrayList;
-import game.minigame.*;			//only needed for quick testing, to be removed later
+//import game.minigame.*;			//only needed for quick testing, to be removed later
 
 //20180411
 // initial build
@@ -170,6 +170,7 @@ public class Inventory {
 		return(getPowerUpItems()+ "\n"+ getMapItems()+ "\n"+ getHealingItems());
 	}
 
+	/* Only used for testing
 	public static void main(String[] args) {
 	
 	Inventory teamInventory = new Inventory();
@@ -215,4 +216,5 @@ public class Inventory {
 	System.out.println(teamInventory.getMapItems());
 	System.out.println(teamInventory.getPowerUpItems());
 	}
+	*/
 }
