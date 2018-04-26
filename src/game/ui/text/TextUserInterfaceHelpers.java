@@ -40,6 +40,12 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static void setConsoleWidth(int width) {
 		
+		if (width <= 0) {
+			
+			throw new IllegalArgumentException("Width must be positive.");
+			
+		}
+		
 		TextUserInterfaceHelpers.consoleWidth = width;
 		
 	}
@@ -49,6 +55,12 @@ public class TextUserInterfaceHelpers {
 	 * @param height The height.
 	 */
 	public static void setConsoleHeight(int height) {
+		
+		if (height <= 0) {
+			
+			throw new IllegalArgumentException("Height must be positive.");
+			
+		}
 		
 		TextUserInterfaceHelpers.consoleHeight = height;
 		
@@ -104,53 +116,6 @@ public class TextUserInterfaceHelpers {
 	}
 	
 	/**
-	 * An array of Strings that mean "yes".
-	 */
-	private static String[] affirmativeStrings = new String[] {
-		"yes",
-		"y",
-		"1",
-		"yup",
-		"yeah"
-	};
-	
-	/**
-	 * An array of Strings that mean "no";
-	 */
-	private static String[] negativeStrings = new String[] {
-		"no",
-		"n",
-		"0",
-		"nope",
-		"nah"
-	};
-	
-	/**
-	 * Returns 2 if the input string is truthy, returns 1 if it's falsey and returns 0 if it's something else.
-	 * @param input The String to test against
-	 * @return
-	 */
-	private static int getYesNoUnknown(String input) {
-		
-		// Return 2 if the input is in the affirmativeStrings array
-		for (String str : affirmativeStrings) {
-			if (str.equals(input))
-				return 2;
-		}
-		
-		// Return 1 if the input is in the negativeStrings array
-		for (String str : negativeStrings) {
-			if (str.equals(input)) {
-				return 1;
-			}
-		}
-		
-		// Otherwise return 0
-		return 0;
-		
-	}
-	
-	/**
 	 * Shows a yes/no question to the user.
 	 * @param question The question to prompt them with.
 	 * @return True if the user said yes.
@@ -171,9 +136,9 @@ public class TextUserInterfaceHelpers {
 	 * @throws UserQuitException 
 	 * @throws UserCancelException 
 	 */
-	private static boolean showYesNo(String question, boolean suppressQuit) throws UserQuitException, UserCancelException {
+	protected static boolean showYesNo(String question, boolean suppressQuit) throws UserQuitException, UserCancelException {
 		
-		int choice = 0;
+		Affirmation choice = Affirmation.UNKNOWN;
 		String input = "";
 		
 		// Print the question
@@ -216,7 +181,7 @@ public class TextUserInterfaceHelpers {
 		}
 		
 		// Keep asking while the input is invalid.
-		while ((choice = getYesNoUnknown(input)) == 0) {
+		while ((choice = Affirmation.fromString(input)) == Affirmation.UNKNOWN) {
 			
 			System.out.print("> ");
 			
@@ -255,7 +220,7 @@ public class TextUserInterfaceHelpers {
 		}
 		
 		// Return the correct value
-		return choice == 2;
+		return choice == Affirmation.YES;
 		
 	}
 	
@@ -270,7 +235,6 @@ public class TextUserInterfaceHelpers {
 	public static int showChoice(String message, String[] options) throws UserCancelException, UserQuitException {
 		
 		int choice = 0;
-		boolean keepLooping = true;
 		
 		// Print the message
 		System.out.println(message + " " + getInputOptions("1-" + options.length));
@@ -286,12 +250,12 @@ public class TextUserInterfaceHelpers {
 			
 		}
 		
-		while (keepLooping) {
+		while (true) {
 			
 			try {
 				
 				choice = getNumberWithBounds(1, options.length);
-				keepLooping = false;
+				break;
 				
 			} catch (UserContinueException e) {
 				
@@ -343,25 +307,12 @@ public class TextUserInterfaceHelpers {
 			
 		}
 		
-		// Pull a string from the leftoverInput string if it exists.
-		if (!TextUserInterfaceHelpers.leftoverInput.isEmpty()) {
-			
-			String[] lines = TextUserInterfaceHelpers.leftoverInput.split("\n", 2);
-			
-			// if there is at least one newline, return the portion before the newline and then set the leftoverInput to be everything after the newline.
-			if (lines.length == 2) {
-				
-				TextUserInterfaceHelpers.leftoverInput = lines[1];
-				return lines[0];
-				
-			}
-			
-		}
-		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
 		int BUFFER_SIZE = 1024;
 		byte[] buffer = new byte[BUFFER_SIZE];
+		
+		String input;
 		
 		try {
 			
@@ -374,26 +325,23 @@ public class TextUserInterfaceHelpers {
 			if (bytesRead == -1) {
 				
 				// clear and return any leftover string
-				String temp = TextUserInterfaceHelpers.leftoverInput;
+				input = TextUserInterfaceHelpers.leftoverInput;
 				TextUserInterfaceHelpers.leftoverInput = "";
-				return temp;
+				
+			} else {
+				
+				// Create a ByteBuffer from the byte array and convert to a UTF-8 CharBuffer
+				ByteBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, bytesRead);
+				CharBuffer charBuffer = Charset.forName("UTF-8").decode(byteBuffer);
+				
+				input = charBuffer.toString().trim();
+				
+				// prepend any leftover data to the input
+				input = TextUserInterfaceHelpers.leftoverInput + input;
 				
 			}
 			
-			// Create a ByteBuffer from the byte array and convert to a UTF-8 CharBuffer
-			ByteBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, bytesRead);
-			CharBuffer charBuffer = Charset.forName("UTF-8").decode(byteBuffer);
-			
-			String input = charBuffer.toString().trim();
-			
-			// prepend any leftover data to the input
-			input = TextUserInterfaceHelpers.leftoverInput + input;
-			
 			String[] lines = input.split("\n", 2);
-			
-			if (lines.length == 0) {
-				return "";
-			}
 			
 			switch (lines[0].toLowerCase()) {
 			
@@ -405,7 +353,7 @@ public class TextUserInterfaceHelpers {
 				case "q":
 					// user might want to quit
 					
-					// set any leftover input
+					// set any leftover input so that it can be grabbed by the showYesNo method
 					if (lines.length == 2) {
 						
 						TextUserInterfaceHelpers.leftoverInput = lines[1];
