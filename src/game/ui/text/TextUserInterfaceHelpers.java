@@ -17,6 +17,11 @@ import java.nio.charset.Charset;
 public class TextUserInterfaceHelpers {
 	
 	/**
+	 * Contains any remaining input from the readLine method.
+	 */
+	private static String leftoverInput = "";
+	
+	/**
 	 * The width of the console.
 	 */
 	private static int consoleWidth = 80;
@@ -319,6 +324,21 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static String readLine(String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
+		// Pull a string from the leftoverInput string if it exists.
+		if (!TextUserInterfaceHelpers.leftoverInput.isEmpty()) {
+			
+			String[] lines = TextUserInterfaceHelpers.leftoverInput.split("\n", 2);
+			
+			// if there is at least one newline, return the portion before the newline and then set the leftoverInput to be everything after the newline.
+			if (lines.length == 2) {
+				
+				TextUserInterfaceHelpers.leftoverInput = lines[1];
+				return lines[0];
+				
+			}
+			
+		}
+		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
 		int BUFFER_SIZE = 1024;
@@ -366,7 +386,33 @@ public class TextUserInterfaceHelpers {
 			
 			default:
 				
-				// Return the resulting String
+				// prepend any leftover data to the input
+				input = TextUserInterfaceHelpers.leftoverInput + input;
+				
+				String[] lines = input.split("\n", 2);
+				
+				if (lines.length == 2) {
+					
+					// store the leftovers and set the input to the first line
+					TextUserInterfaceHelpers.leftoverInput = lines[1];
+					input = lines[0];
+					
+				} else {
+					
+					if (lines.length == 1) {
+						
+						// clear the leftovers
+						TextUserInterfaceHelpers.leftoverInput = "";
+						input = lines[0];
+						
+					} else {
+						
+						// input string was empty
+						
+					}
+					
+				}
+				
 				return input;
 				
 			}

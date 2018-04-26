@@ -15,8 +15,6 @@ import game.city.Area;
 import game.city.City;
 import game.city.CityController;
 import game.city.Direction;
-import game.city.IllegalMoveException;
-import game.item.Map;
 
 /**
  * Represents the user interface shown to the user in text format.
