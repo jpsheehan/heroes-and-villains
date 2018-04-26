@@ -133,11 +133,13 @@ public class CityController {
 	}
 	
 	/**
-	 * Moves in a particular direction within the city.
+	 * Moves in a particular direction relative to the current area within the city.
 	 * @param newDirection
 	 * @throws IllegalMoveException 
 	 */
 	public void move(Direction newDirection) throws IllegalMoveException {
+
+		Direction absoluteDirection;
 		
 		if (newDirection == null) {
 			
@@ -145,13 +147,34 @@ public class CityController {
 			
 		}
 		
-		if ((this.direction == Direction.CENTRE && newDirection == Direction.CENTRE) || (this.direction != Direction.CENTRE && newDirection != Direction.CENTRE)) {
+		if (newDirection == Direction.CENTRE) {
 			
 			throw new IllegalMoveException(this.direction, newDirection);
+		}
+		
+		// If the current direction is in the centre then everything is valid.
+		if (this.direction != Direction.CENTRE) {
+			
+			if (this.direction == Direction.NORTH && newDirection != Direction.SOUTH ||
+					this.direction == Direction.WEST && newDirection != Direction.EAST ||
+					this.direction == Direction.SOUTH && newDirection != Direction.NORTH ||
+					this.direction == Direction.EAST && newDirection != Direction.WEST) {
+				
+				throw new IllegalMoveException(this.direction, newDirection);
+				
+			} else {
+			
+				absoluteDirection = Direction.CENTRE;
+				
+			}
+			
+		} else {
+			
+			absoluteDirection = newDirection;
 			
 		}
 		
-		this.direction = newDirection;
+		this.direction = absoluteDirection;
 		
 		if (!hasVisitedDirection(this.direction) ) {
 			
