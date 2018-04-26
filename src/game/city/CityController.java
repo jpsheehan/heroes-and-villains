@@ -32,6 +32,11 @@ public class CityController {
 	private Direction direction;
 	
 	/**
+	 * A list of directions visited in this city.
+	 */
+	private ArrayList<Direction> visitedDirections;
+	
+	/**
 	 * Creates a new CityController.
 	 * @param numberOfCities The number of cities to have in this game.
 	 */
@@ -40,6 +45,8 @@ public class CityController {
 		this.cityIndex = 0;
 		this.numberOfCities = numberOfCities;
 		this.direction = Direction.CENTRE;
+		this.visitedDirections = new ArrayList<Direction>();
+		this.visitedDirections.add(Direction.CENTRE);
 		
 		generateCities();
 		
@@ -146,6 +153,12 @@ public class CityController {
 		
 		this.direction = newDirection;
 		
+		if (!hasVisitedDirection(this.direction) ) {
+			
+			this.visitedDirections.add(this.direction);
+			
+		}
+		
 	}
 	
 	/**
@@ -163,6 +176,19 @@ public class CityController {
 
 		this.cityIndex++;
 		this.direction = Direction.CENTRE;
+		this.visitedDirections = new ArrayList<Direction>();
+		this.visitedDirections.add(Direction.CENTRE);
+	}
+	
+	/**
+	 * Returns true if the team has visited a particular direction in this city.
+	 * @param direction The direction to check.
+	 * @return
+	 */
+	public boolean hasVisitedDirection(Direction direction) {
+		
+		return this.visitedDirections.contains(direction);
+		
 	}
 
 }
