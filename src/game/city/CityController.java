@@ -3,6 +3,7 @@ package game.city;
 import java.util.ArrayList;
 
 import game.GameWonException;
+import game.item.Map;
 
 /**
  * Generates all cities in the game and holds references to them.
@@ -32,6 +33,11 @@ public class CityController {
 	private Direction direction;
 	
 	/**
+	 * True if the team has used a map in this city.
+	 */
+	private boolean _hasUsedMap;
+	
+	/**
 	 * A list of directions visited in this city.
 	 */
 	private ArrayList<Direction> visitedDirections;
@@ -47,6 +53,7 @@ public class CityController {
 		this.direction = Direction.CENTRE;
 		this.visitedDirections = new ArrayList<Direction>();
 		this.visitedDirections.add(Direction.CENTRE);
+		this._hasUsedMap = false;
 		
 		generateCities();
 		
@@ -176,7 +183,7 @@ public class CityController {
 		
 		this.direction = absoluteDirection;
 		
-		if (!hasVisitedDirection(this.direction) ) {
+		if (!hasVisitedDirection(this.direction)) {
 			
 			this.visitedDirections.add(this.direction);
 			
@@ -201,6 +208,8 @@ public class CityController {
 		this.direction = Direction.CENTRE;
 		this.visitedDirections = new ArrayList<Direction>();
 		this.visitedDirections.add(Direction.CENTRE);
+		this._hasUsedMap = false;
+		
 	}
 	
 	/**
@@ -210,8 +219,39 @@ public class CityController {
 	 */
 	public boolean hasVisitedDirection(Direction direction) {
 		
-		return this.visitedDirections.contains(direction);
+		return this.visitedDirections.contains(direction) || this._hasUsedMap;
 		
 	}
-
+	
+	/**
+	 * Uses the map in the current area.
+	 * @param map The map to use.
+	 */
+	public void useMap(Map map) {
+		
+		if (map == null) {
+			
+			throw new IllegalArgumentException("Map cannot be null.");
+			
+		}
+		
+		if (this._hasUsedMap) {
+			
+			throw new AssertionError("Cannot use map while already using a map.");
+			
+		}
+		
+		this._hasUsedMap = true;
+		
+	}
+	
+	/**
+	 * Check whether or not the map has been used in this area.
+	 * @return
+	 */
+	public boolean hasUsedMap() {
+		
+		return this._hasUsedMap;
+		
+	}
 }

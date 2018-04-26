@@ -16,6 +16,7 @@ import game.city.City;
 import game.city.CityController;
 import game.city.Direction;
 import game.city.IllegalMoveException;
+import game.item.Map;
 
 /**
  * Represents the user interface shown to the user in text format.
@@ -551,11 +552,13 @@ public class TextUserInterface extends UserInterface {
 		City city = this.getGameEnvironment().getCityController().getCurrentCity();
 		Direction direction = this.getGameEnvironment().getCityController().getDirection();
 		
-		Character northChar = getAreaLetter(city.getArea(Direction.NORTH));
-		Character westChar = getAreaLetter(city.getArea(Direction.WEST));
-		Character centreChar = getAreaLetter(city.getArea(Direction.CENTRE));
-		Character eastChar = getAreaLetter(city.getArea(Direction.EAST));
-		Character southChar = getAreaLetter(city.getArea(Direction.SOUTH));
+		// set the character in the centre of each room to either be the letter legend of the room (if the team has visited the room)
+		// or the '?' symbol (if the team hasn't visited the room).
+		Character northChar = this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.NORTH) ? getAreaLetter(city.getArea(Direction.NORTH)) : '?';
+		Character westChar = this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.WEST) ? getAreaLetter(city.getArea(Direction.WEST)) : '?';
+		Character centreChar = this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.CENTRE) ? getAreaLetter(city.getArea(Direction.CENTRE)) : '?';
+		Character eastChar = this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.EAST) ? getAreaLetter(city.getArea(Direction.EAST)) : '?';
+		Character southChar = this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.SOUTH) ? getAreaLetter(city.getArea(Direction.SOUTH)) : '?';
 		
 		String occupiedAcrossTop = " \u250F" + repeatString("\u2501", 5) + "\u2513 ";
 		String occupiedAcrossBottom = " \u2517" + repeatString("\u2501", 5) + "\u251B ";
@@ -576,17 +579,52 @@ public class TextUserInterface extends UserInterface {
 		// west, centre and east rooms
 		sb.append(repeatString(" ", leftMargin));
 		sb.append(tl + repeatString(ht.toString(), 9));
-		sb.append(tl + repeatString(ht.toString(), 9) + tr);
-		sb.append(repeatString(ht.toString(), 9) + tr + '\n');
 		
+		// print an open "door" if the team has visited the north area 
+		if (this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.NORTH)) {
+			
+			sb.append(tl + repeatString(ht.toString(), 3) + "   " + repeatString(ht.toString(), 3) + tr);
+			
+		} else {
+
+			sb.append(tl + repeatString(ht.toString(), 9) + tr);
+			
+		}
+		
+		sb.append(repeatString(ht.toString(), 9) + tr + '\n');
 		sb.append(repeatString(" ", leftMargin));
-		sb.append(vl + (direction == Direction.WEST ? occupiedAcrossTop : unoccupiedAcross));
+		
+		sb.append(vl + (direction == Direction.WEST ? occupiedAcrossTop : unoccupiedAcross));		
 		sb.append(vl + (direction == Direction.CENTRE ? occupiedAcrossTop : unoccupiedAcross) + vr);
 		sb.append((direction == Direction.EAST ? occupiedAcrossTop : unoccupiedAcross) + vr + '\n');
 		
 		sb.append(repeatString(" ", leftMargin));
 		sb.append(vl + " " + (direction == Direction.WEST ? occupiedUp : unoccupiedUp) + "  " + westChar + "  " + (direction == Direction.WEST ? occupiedUp : unoccupiedUp) + " ");
-		sb.append(vl + " " + (direction == Direction.CENTRE ? occupiedUp : unoccupiedUp) + "  " + centreChar + "  " + (direction == Direction.CENTRE ? occupiedUp : unoccupiedUp) + " " + vr);
+		
+		// print an open "door" if the team has visited the west area
+		if (this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.WEST)) {
+			
+			sb.append(" ");
+			
+		} else {
+			
+			sb.append(vl);
+			
+		}
+		
+		sb.append(" " + (direction == Direction.CENTRE ? occupiedUp : unoccupiedUp) + "  " + centreChar + "  " + (direction == Direction.CENTRE ? occupiedUp : unoccupiedUp) + " ");
+		
+		// print an open "door" if the team has visited the east area
+		if (this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.EAST)) {
+			
+			sb.append(" ");
+			
+		} else {
+			
+			sb.append(vr);
+			
+		}
+		
 		sb.append(" " + (direction == Direction.EAST ? occupiedUp : unoccupiedUp) + "  " + eastChar + "  " + (direction == Direction.EAST ? occupiedUp : unoccupiedUp) + " " + vr + "\n");
 		
 		sb.append(repeatString(" ", leftMargin));
@@ -596,7 +634,18 @@ public class TextUserInterface extends UserInterface {
 		
 		sb.append(repeatString(" ", leftMargin));
 		sb.append(bl + repeatString(hb.toString(), 9));
-		sb.append(bl + repeatString(hb.toString(), 9) + br);
+		
+		// print the "door" if the team has visited the area 
+		if (this.getGameEnvironment().getCityController().hasVisitedDirection(Direction.NORTH)) {
+
+			sb.append(bl + repeatString(hb.toString(), 3) + "   " + repeatString(hb.toString(), 3)  + br);
+			
+		} else {
+
+			sb.append(bl + repeatString(hb.toString(), 9) + br);
+			
+		}
+		
 		sb.append(repeatString(hb.toString(), 9) + br + '\n');
 		
 		// south room
@@ -653,12 +702,8 @@ public class TextUserInterface extends UserInterface {
 		TextUserInterface ui = new TextUserInterface(ge);
 		ge.setCityController(new CityController(3));
 		
-//		try {
-//			ge.getCityController().move(Direction.SOUTH);
-//		} catch (IllegalMoveException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// ge.getCityController().useMap(new Map("Cool Map", "It's made of paper!", 10));
+			
 		ui.drawMap();
 	}
 }
