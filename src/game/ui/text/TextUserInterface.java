@@ -274,11 +274,21 @@ public class TextUserInterface extends UserInterface {
 					
 					String input = showInputDialog("Enter the team name:", "New Game > Change Team Name");
 					
-					if (!input.equals("")) {
+					if (!input.isEmpty()) {
 						
-						teamName = input;
-						options[3] = "Rename the Team"; // change the menu string from "Name the Team" to "Rename the Team"
-						
+						// Validate the input
+						if (input.length() < 2 || input.length() >= 10) {
+							
+							showMessageDialog("Sorry, the team name must be between 2 and 10 characters long.", "New Game > Change Team Name > Error");
+							
+						} else {
+							
+							teamName = input;
+							
+							// change the menu string from "Name the Team" to "Rename the Team"
+							options[3] = "Rename the Team";
+							
+						}
 					}
 					
 					break;
