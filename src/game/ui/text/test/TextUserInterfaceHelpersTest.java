@@ -4,12 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
+import game.ui.text.Affirmation;
 import game.ui.text.TextUserInterfaceHelpers;
 import game.ui.text.UserCancelException;
 import game.ui.text.UserContinueException;
@@ -38,6 +43,74 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		System.setIn(inputStream);
 	}
 	
+	String getOutputStream() {
+		byte[] bArray = outputStream.toByteArray();
+		CharBuffer buffer = Charset.forName("UTF-8").decode(ByteBuffer.wrap(bArray, 0, bArray.length));
+		String output = buffer.toString();
+
+		setupOutputStream();
+		
+		return output;
+	}
+	
+	@Test
+	void testSetConsoleWidth() {
+		
+		setConsoleWidth(40);
+		assertEquals(40, getConsoleWidth());
+
+		assertThrows(IllegalArgumentException.class, () -> setConsoleWidth(-1));
+		assertThrows(IllegalArgumentException.class, () -> setConsoleWidth(0));
+		
+		setConsoleWidth(80);
+		assertEquals(80, getConsoleWidth());
+		
+	}
+	
+	@Test
+	void testSetConsoleHeight() {
+		
+		setConsoleHeight(10);
+		assertEquals(10, getConsoleHeight());
+
+		assertThrows(IllegalArgumentException.class, () -> setConsoleHeight(-1));
+		assertThrows(IllegalArgumentException.class, () -> setConsoleHeight(0));
+		
+		setConsoleHeight(25);
+		assertEquals(25, getConsoleHeight());
+		
+	}
+	
+	@Test
+	void testPrintHorizontalRule() {
+		
+		setConsoleWidth(10);
+		
+		printHorizontalRule();
+		assertEquals("=========\n", getOutputStream());
+		
+		printHorizontalRule('@');
+		assertEquals("@@@@@@@@@\n", getOutputStream());
+		
+		setConsoleWidth(80);
+		
+	}
+	
+	@Test
+	void testPrintLineCentred() {
+		
+		setConsoleWidth(3);
+		printLineCentred("J");
+		assertEquals(" J \n", getOutputStream());
+		
+		setConsoleWidth(4);
+		printLineCentred("J");
+		assertEquals(" J \n", getOutputStream());
+		
+		setConsoleWidth(80);
+		
+	}
+		
 	@Test
 	void testRepeatString() {
 		
@@ -77,18 +150,21 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 	void testGetNumberWithBounds() throws UserCancelException, UserQuitException, UserContinueException {
 		
 		setInputStream("1\n");
-		
 		assertEquals(new Integer(1), getNumberWithBounds(1, 10));
 		
 		setInputStream("10\n");
-		
 		assertEquals(new Integer(10), getNumberWithBounds(1, 10));
 		
 		setInputStream("0500\n");
-		
 		assertEquals(new Integer(500), getNumberWithBounds(250, 750));
 		
 		assertThrows(IllegalArgumentException.class, () -> getNumberWithBounds(10, 1));
+		
+		setInputStream("What?!\n5\n");
+		assertEquals(new Integer(5), getNumberWithBounds(1, 10));
+		
+		setInputStream("Really?\nNot a number!\n7\n");
+		assertEquals(new Integer(7), getNumberWithBounds(1, 10));
 		
 	}
 	
@@ -113,39 +189,19 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		assertEquals("Third Line", readLine());
 		
 		setInputStream("c\n");
-		try {
-			readLine();
-			assertFalse(true, "Should have caught a UserCancelException");
-		} catch (UserCancelException e) {
-			assertTrue(true, "Caught the UserCancelException.");
-		} catch (Exception e) {
-			assertTrue(false, "Caught some other Exception.");
-		}
+		assertThrows(UserCancelException.class, () -> readLine());
 		
 		setInputStream("q\ny");
-		try {
-			readLine();
-			assertFalse(true, "Did not catch the UserQuitException.");
-		} catch (UserQuitException e) {
-			assertTrue(true, "Caught the UserQuitException.");
-		} catch (Exception e) {
-			assertTrue(false, "Caught some other Exception.");
-		}
+		assertThrows(UserQuitException.class, () -> readLine());
 		
 		setInputStream("q\nn");
-		try {
-			readLine();
-			assertFalse(true, "Did not catch the userCancelException.");
-		} catch (UserContinueException e) {
-			assertTrue(true, "Caught the UserCancelException.");
-		} catch (Exception e) {
-			assertTrue(false, "Caught some other Exception.");
-		}
+		assertThrows(UserContinueException.class, () -> readLine());
 		
 		setInputStream("First Line\nSecond Line");
 		assertEquals("First Line", readLine());
 		setInputStream("Cool Beans!");
 		assertEquals("Cool Beans!", readLine());
+		
 	}
 	
 	@Test
@@ -156,8 +212,10 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		};
 		
 		setInputStream("1\n");
-		
 		assertEquals(0, showChoice("Test Choice 1:", options));
+		
+		setInputStream("q\nn\n2");
+		assertEquals(1, showChoice("Test Choice 2:", options));
 		
 	}
 	
@@ -176,6 +234,58 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		setInputStream("no\n");
 		assertFalse(showYesNo("Test 4"));
 		
+		setInputStream("???\nyes");
+		assertTrue(showYesNo("Test 5"));
+		
+		setInputStream("q\ny\n");
+		try {
+			showYesNo("Test 6");
+			assertFalse(true, "Did not throw a UserQuitException.");
+		} catch (UserQuitException e) {
+			assertTrue(true, "Caught a UserQuitException.");
+		}
+		
+		setInputStream("q\ny\n");
+		assertFalse(showYesNo("Test 9", true));
+		
+		setInputStream("q\nn\ny");
+		assertTrue(showYesNo("Test 7"));
+		
+		setInputStream("c\n");
+		try {
+			showYesNo("Test 8");
+			assertFalse(true, "Did not throw a UserCancelException");
+		} catch (UserCancelException e) {
+			assertTrue(true, "Caught a UserCancelException");
+		}
+		
+		setInputStream("c\n");
+		assertFalse(showYesNo("Test 10", true));
+		
+		setInputStream("???\nc\n");
+		try {
+			showYesNo("Test 11");
+			assertFalse(true, "Did not throw a UserCancelException");
+		} catch (UserCancelException e) {
+			assertTrue(true, "Caught a UserCancelException");
+		}
+		
+		setInputStream("???\nc\n");
+		assertFalse(showYesNo("Test 12", true));
+		
+		setInputStream("???\nq\ny\n");
+		try {
+			showYesNo("Test 13");
+			assertFalse(true, "Did not throw a UserQuitException");
+		} catch (UserQuitException e) {
+			assertTrue(true, "Caught a UserQuitException");
+		}
+		
+		setInputStream("???\nq\ny\n");
+		assertFalse(showYesNo("Test 15", true));
+		
+		setInputStream("???\nq\nn\ny");
+		assertTrue(showYesNo("Test 14"));
 	}
 	
 }
