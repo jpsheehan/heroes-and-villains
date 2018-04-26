@@ -367,6 +367,14 @@ public class TextUserInterface extends UserInterface {
 	 */
 	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) {
 		
+		/*
+		 * for (i = 0; i < numberHeroTypes ; i++) {
+		 * 	
+		 * 	print out the hero type and ability
+		 *  
+		 * }
+		 */
+		
 		// Create a test hero.
 		String name = "Test Hero";
 		HeroType type = HeroType.ARTS_STUDENT;
@@ -389,13 +397,14 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Returns the Hero object to remove from the Team. Doesn't actually remove the Hero from the Team, just returns it.
 	 * @param heroes A list of heroes to choose from.
-	 * @return
+	 * @return Hero
 	 */
 	private Hero showHeroDeletionMenu(ArrayList<Hero> heroes) throws UserQuitException {
 		
 		Hero[] heroArray = new Hero[heroes.size()];
-		//get each hero from ArrayList into an Array.
-		// loop through ArrayList (containing Hero) add each Hero to an Array (containing hero) 
+		
+		//get each hero from the ArrayList into an Array.
+		// loop through ArrayList (containing Hero) add each Hero into Array (containing hero) 
 		for (int i = 0; i<heroes.size(); i++ ) {
 			heroArray[i] = heroes.get(i);
 		}
