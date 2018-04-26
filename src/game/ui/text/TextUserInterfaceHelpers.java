@@ -1,6 +1,7 @@
 package game.ui.text;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
@@ -20,6 +21,8 @@ public class TextUserInterfaceHelpers {
 	 * Contains any remaining input from the readLine method.
 	 */
 	private static String leftoverInput = "";
+	
+	private static InputStream previousStdIn = null;
 	
 	/**
 	 * The width of the console.
@@ -324,6 +327,22 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static String readLine(String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
+		// Check whether System.in has been changed. If so, clear the leftovers.
+		if (TextUserInterfaceHelpers.previousStdIn == null) {
+			
+			TextUserInterfaceHelpers.previousStdIn = System.in;
+			
+		} else {
+			
+			if (TextUserInterfaceHelpers.previousStdIn != System.in) {
+				
+				TextUserInterfaceHelpers.previousStdIn = System.in;
+				TextUserInterfaceHelpers.leftoverInput = "";
+				
+			}
+			
+		}
+		
 		// Pull a string from the leftoverInput string if it exists.
 		if (!TextUserInterfaceHelpers.leftoverInput.isEmpty()) {
 			
@@ -351,10 +370,13 @@ public class TextUserInterfaceHelpers {
 			// Read the bytes from the System.in
 			int bytesRead = System.in.read(buffer);
 			
-			// Return an empty string if we are at the end of the stream
+			// End of the stream
 			if (bytesRead == -1) {
 				
-				return "";
+				// clear and return any leftover string
+				String temp = TextUserInterfaceHelpers.leftoverInput;
+				TextUserInterfaceHelpers.leftoverInput = "";
+				return temp;
 				
 			}
 			
@@ -364,56 +386,61 @@ public class TextUserInterfaceHelpers {
 			
 			String input = charBuffer.toString().trim();
 			
-			switch (input.toLowerCase()) {
+			// prepend any leftover data to the input
+			input = TextUserInterfaceHelpers.leftoverInput + input;
 			
-			case "c":
-				
-				throw new UserCancelException();
+			String[] lines = input.split("\n", 2);
 			
-			case "q":
-				
-				boolean shouldQuit = showYesNo("Are you sure you want to quit?", true);
-				
-				if (shouldQuit) {
-					
-					throw new UserQuitException();
-					
-				} else {
-				
-					throw new UserContinueException();
-					
-				}
+			if (lines.length == 0) {
+				return "";
+			}
 			
-			default:
-				
-				// prepend any leftover data to the input
-				input = TextUserInterfaceHelpers.leftoverInput + input;
-				
-				String[] lines = input.split("\n", 2);
-				
-				if (lines.length == 2) {
+			switch (lines[0].toLowerCase()) {
+			
+				case "c":
+					// user wants to cancel
 					
-					// store the leftovers and set the input to the first line
-					TextUserInterfaceHelpers.leftoverInput = lines[1];
-					input = lines[0];
+					throw new UserCancelException();
+				
+				case "q":
+					// user might want to quit
 					
-				} else {
+					// set any leftover input
+					if (lines.length == 2) {
+						
+						TextUserInterfaceHelpers.leftoverInput = lines[1];
+						
+					}
 					
-					if (lines.length == 1) {
+					boolean shouldQuit = showYesNo("Are you sure you want to quit?", true);
+					
+					if (shouldQuit) {
+						
+						throw new UserQuitException();
+						
+					} else {
+					
+						throw new UserContinueException();
+						
+					}
+				
+				default:
+					
+					if (lines.length == 2) {
+						
+						// store the leftovers and set the input to the first line
+						TextUserInterfaceHelpers.leftoverInput = lines[1];
+						input = lines[0];
+						
+					} else {
 						
 						// clear the leftovers
 						TextUserInterfaceHelpers.leftoverInput = "";
 						input = lines[0];
 						
-					} else {
-						
-						// input string was empty
-						
 					}
 					
-				}
-				
-				return input;
+					return input;
 				
 			}
 			

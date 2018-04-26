@@ -107,6 +107,45 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		setInputStream("");
 		assertEquals("", readLine());
 		
+		setInputStream("First Line\nSecond Line\nThird Line");
+		assertEquals("First Line", readLine());
+		assertEquals("Second Line", readLine());
+		assertEquals("Third Line", readLine());
+		
+		setInputStream("c\n");
+		try {
+			readLine();
+			assertFalse(true, "Should have caught a UserCancelException");
+		} catch (UserCancelException e) {
+			assertTrue(true, "Caught the UserCancelException.");
+		} catch (Exception e) {
+			assertTrue(false, "Caught some other Exception.");
+		}
+		
+		setInputStream("q\ny");
+		try {
+			readLine();
+			assertFalse(true, "Did not catch the UserQuitException.");
+		} catch (UserQuitException e) {
+			assertTrue(true, "Caught the UserQuitException.");
+		} catch (Exception e) {
+			assertTrue(false, "Caught some other Exception.");
+		}
+		
+		setInputStream("q\nn");
+		try {
+			readLine();
+			assertFalse(true, "Did not catch the userCancelException.");
+		} catch (UserContinueException e) {
+			assertTrue(true, "Caught the UserCancelException.");
+		} catch (Exception e) {
+			assertTrue(false, "Caught some other Exception.");
+		}
+		
+		setInputStream("First Line\nSecond Line");
+		assertEquals("First Line", readLine());
+		setInputStream("Cool Beans!");
+		assertEquals("Cool Beans!", readLine());
 	}
 	
 	@Test
