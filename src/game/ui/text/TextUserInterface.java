@@ -367,7 +367,42 @@ public class TextUserInterface extends UserInterface {
 	 */
 	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) {
 		
+		//can get them into a string buffer
+		String[] heroesArray; // = new String[];
+		StringBuffer hereosBuffer = new StringBuffer();
+		for(HeroType c : HeroType.values()) {
+			hereosBuffer.append(c);
+			hereosBuffer.append(", ");
+			//heroesArray.add(toString(c));
+		}
+		// if not empty remove the last comma
+			if (hereosBuffer.length() != 0) {
+				hereosBuffer.deleteCharAt(hereosBuffer.length()-2);
+			}
+		System.out.println(hereosBuffer); //only for testing
+		
+		System.out.println(""); //testing
+		
+		// this works for printing them out
+		for(HeroType heroType : HeroType.values()){
+			System.out.println("Hero Type: " + heroType);
+		}
+		System.out.println(""); //only for testing
+
 		/*
+		for(HeroType heroType : HeroType.values()){
+			heroesArray = heroType.toString();
+		}
+		*/
+		
+		// get the enum values into an array of strings attempt 3
+		String[] typesOfHeroes = new String[HeroType.values().length];
+		for (int i = 0; i < HeroType.values().length ; i++) {
+			typesOfHeroes[i] = HeroType.values().toString();
+			}
+		System.out.println(typesOfHeroes); //only for testing
+		
+		 /*
 		 * for (i = 0; i < numberHeroTypes ; i++) {
 		 * 	
 		 * 	print out the hero type and ability
