@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
-import game.ui.text.Affirmation;
 import game.ui.text.TextUserInterfaceHelpers;
 import game.ui.text.UserCancelException;
 import game.ui.text.UserContinueException;
@@ -238,12 +236,7 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		assertTrue(showYesNo("Test 5"));
 		
 		setInputStream("q\ny\n");
-		try {
-			showYesNo("Test 6");
-			assertFalse(true, "Did not throw a UserQuitException.");
-		} catch (UserQuitException e) {
-			assertTrue(true, "Caught a UserQuitException.");
-		}
+		assertThrows(UserQuitException.class, () -> showYesNo("Test 6"));
 		
 		setInputStream("q\ny\n");
 		assertFalse(showYesNo("Test 9", true));
@@ -252,34 +245,19 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		assertTrue(showYesNo("Test 7"));
 		
 		setInputStream("c\n");
-		try {
-			showYesNo("Test 8");
-			assertFalse(true, "Did not throw a UserCancelException");
-		} catch (UserCancelException e) {
-			assertTrue(true, "Caught a UserCancelException");
-		}
+		assertThrows(UserCancelException.class, () -> showYesNo("Test 8"));
 		
 		setInputStream("c\n");
 		assertFalse(showYesNo("Test 10", true));
 		
 		setInputStream("???\nc\n");
-		try {
-			showYesNo("Test 11");
-			assertFalse(true, "Did not throw a UserCancelException");
-		} catch (UserCancelException e) {
-			assertTrue(true, "Caught a UserCancelException");
-		}
+		assertThrows(UserCancelException.class, () -> showYesNo("Test 11"));
 		
 		setInputStream("???\nc\n");
 		assertFalse(showYesNo("Test 12", true));
 		
 		setInputStream("???\nq\ny\n");
-		try {
-			showYesNo("Test 13");
-			assertFalse(true, "Did not throw a UserQuitException");
-		} catch (UserQuitException e) {
-			assertTrue(true, "Caught a UserQuitException");
-		}
+		assertThrows(UserQuitException.class, () -> showYesNo("Test 13"));
 		
 		setInputStream("???\nq\ny\n");
 		assertFalse(showYesNo("Test 15", true));
