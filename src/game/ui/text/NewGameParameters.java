@@ -1,5 +1,6 @@
 package game.ui.text;
 
+import game.GeneralHelpers;
 import game.Team;
 
 /**
@@ -25,6 +26,24 @@ public class NewGameParameters {
 	 * @param team The team of heroes the player has chosen.
 	 */
 	public NewGameParameters (int cityCount, Team team) {
+		
+		if (team == null) {
+			
+			throw new NullPointerException("Team cannot be null.");
+			
+		}
+		
+		if (cityCount < GeneralHelpers.getInt("Game.Cities.Min") ||
+				cityCount > GeneralHelpers.getInt("Game.Cities.Max")) {
+			
+			throw new IllegalArgumentException(
+					String.format("The number of cities must be between %d and %d (inclusive).",
+							GeneralHelpers.getInt("Game.Cities.Min"), GeneralHelpers.getInt("Game.Cities.Max")
+							)
+					);
+			
+		}
+		
 		this.cityCount = cityCount;
 		this.team = team;
 	}

@@ -43,6 +43,25 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Gets the associated integer from the strings.json file.
+	 * @param specifier The integer to get.
+	 * @return
+	 */
+	public static int getInt(String specifier) {
+		
+		try {
+			
+			return (int)Integer.parseInt(getString(specifier));
+			
+		} catch (NumberFormatException e) {
+			
+			throw new IllegalArgumentException(String.format("Invalid integer for specifier \"%s\".", specifier));
+			
+		}
+		
+	}
+	
 	private static boolean runningInEclipse;
 	
 	/**

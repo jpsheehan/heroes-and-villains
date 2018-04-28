@@ -164,6 +164,11 @@
 	"HeroType.CompSci": "Computer Science",
 	"HeroType.Law": "Law",
 	"HeroType.Maths": "Maths/Stats",
-	"HeroType.Science": "Sciences"
+	"HeroType.Science": "Sciences",
+
+    "Game.Heroes.Min": "1",
+    "Game.Heroes.Max": "3",
+    "Game.Cities.Min": "3",
+    "Game.Cities.Max": "6"
 	
 }
