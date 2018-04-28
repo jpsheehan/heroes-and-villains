@@ -18,6 +18,9 @@ public enum Affirmation {
 	 */
 	public static Affirmation fromString(String input) {
 		
+		// take the lower case of the input.
+		input = input.toLowerCase();
+		
 		// Return 2 if the input is in the affirmativeStrings array
 		for (String str : affirmativeStrings) {
 			if (str.equals(input))
