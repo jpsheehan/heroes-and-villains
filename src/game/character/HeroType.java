@@ -15,6 +15,8 @@ public enum HeroType {
 	COMMERCE_STUDENT,
 	SCIENCE_STUDENT;
 	
+	public static int HERO_TYPE_COUNT = HeroType.values().length;
+	
 	@Override
 	public String toString() {
 		
