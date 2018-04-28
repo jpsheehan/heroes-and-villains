@@ -1,6 +1,5 @@
 package game.ui.text;
 
-import game.GeneralHelpers;
 import game.Settings;
 import game.Team;
 

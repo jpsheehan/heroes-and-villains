@@ -113,8 +113,8 @@ public class Hero extends Character {
 			case SCIENCE_STUDENT:
 				return 2;
 				
-				default:
-					return null;
+			default:
+				throw new AssertionError("You shouldn't get this. Is there another HeroType that we don't know about?");
 			
 		}
 		
