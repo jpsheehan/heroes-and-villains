@@ -365,10 +365,11 @@ public class TextUserInterface extends UserInterface {
 	 * @param heroes A list of heroes in the Team. Can be used to check that the new hero's name is unique.
 	 * @return
 	 */
-	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) {
+	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) throws UserQuitException, UserCancelException {
 		
-		//can get them into a string buffer
-		String[] heroesArray; // = new String[];
+		//create a String array, for passing TextUserInterfaceHelpers
+		String[] heroesArray = new String[HeroType.HERO_TYPE_COUNT];
+		/*
 		StringBuffer hereosBuffer = new StringBuffer();
 		for(HeroType c : HeroType.values()) {
 			hereosBuffer.append(c);
@@ -380,44 +381,38 @@ public class TextUserInterface extends UserInterface {
 				hereosBuffer.deleteCharAt(hereosBuffer.length()-2);
 			}
 		System.out.println(hereosBuffer); //only for testing
-		
 		System.out.println(""); //testing
-		
-		// this works for printing them out
-		for(HeroType heroType : HeroType.values()){
-			System.out.println("Hero Type: " + heroType);
-		}
-		System.out.println(""); //only for testing
-
-		/*
-		for(HeroType heroType : HeroType.values()){
-			heroesArray = heroType.toString();
-		}
 		*/
 		
-		// get the enum values into an array of strings attempt 3
-		String[] typesOfHeroes = new String[HeroType.values().length];
-		for (int i = 0; i < HeroType.values().length ; i++) {
-			typesOfHeroes[i] = HeroType.values().toString();
-			}
-		System.out.println(typesOfHeroes); //only for testing
+		// getting the Strings from the enum into the String array 
+		int index = 0;
+		for(HeroType heroType : HeroType.values()){
+			System.out.println("Hero Type: " + heroType);
+			heroesArray[index++] = heroType.toString();
+		}
 		
-		 /*
-		 * for (i = 0; i < numberHeroTypes ; i++) {
-		 * 	
-		 * 	print out the hero type and ability
-		 *  
-		 * }
+		/*
+		System.out.println(""); //only for testing
+		System.out.println("Now follows the heroesArray print out"); //only for testing
+		for (int i = 0; i < heroesArray.length; i++ ) {
+			System.out.println(heroesArray[i]);
+			}
+		System.out.println(""); //only for testing
 		 */
+		int selectedHero = TextUserInterfaceHelpers.showChoice("Select a Hero Type", heroesArray);
+		String input = showInputDialog("Enter the Hero name:", "New Game > Add a Hero");
 		
 		// Create a test hero.
-		String name = "Test Hero";
-		HeroType type = HeroType.ARTS_STUDENT;
+		//String name = "Test Hero";
+		//HeroType type = HeroType.ARTS_STUDENT;
+		
+		String heroTypeName = heroesArray[selectedHero];
+		HeroType heroChoice = HeroType.valueOf(heroTypeName); 
 		
 		// Checks if the hero's name is unique.
 		for (Hero hero : heroes) {
 			
-			if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
+			if (hero.getName().toLowerCase().equals(heroTypeName.toLowerCase())) {
 				
 				return null; // TODO: reprompt for name
 				
@@ -426,7 +421,7 @@ public class TextUserInterface extends UserInterface {
 		}
 		
 		// Return the new Hero
-		return new Hero(name, type);
+		return new Hero(input, heroChoice);
 	}
 	
 	/**
