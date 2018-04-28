@@ -559,10 +559,6 @@ public class TextUserInterface extends UserInterface {
 //			
 //			showMessageDialog("Sorry! You lost the game!");
 		
-		} catch (UserQuitException e) {
-			
-			throw e; // Bubble this back up
-			
 		} catch (Exception e) {
 			
 			// Handle all errors that shouldn't happen here:
@@ -592,7 +588,7 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Prints the map of the current city to the screen. Displays any areas that have already been discovered or if the player has used a Map.
 	 */
-	private void drawMap() {
+	private void drawMap() throws UserQuitException {
 		
 		int leftMargin = (getConsoleWidth() - 31) / 2;
 		
@@ -732,7 +728,7 @@ public class TextUserInterface extends UserInterface {
 		
 		try {
 			readLine();
-		} catch (UserCancelException | UserQuitException | UserContinueException e) {}
+		} catch (UserCancelException | UserContinueException e) {}
 	}
 	
 	/**
@@ -762,7 +758,11 @@ public class TextUserInterface extends UserInterface {
 		ge.setCityController(new CityController(3));
 		
 		// ge.getCityController().useMap(new Map("Cool Map", "It's made of paper!", 10));
+		
+		try {
+			ui.drawMap();
+		} catch (UserQuitException e) {
 			
-		ui.drawMap();
+		}
 	}
 }
