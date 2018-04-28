@@ -51,7 +51,13 @@ class HeroTest {
 	@Test
 	void testGetRecoveryRate() {
 		
-		fail("Not yet implemented");
+		assertEquals(new Integer(2), hero_1.getRecoveryRate());
+		assertEquals(new Integer(2), hero_2.getRecoveryRate());
+		assertEquals(new Integer(2), hero_3.getRecoveryRate());
+		assertEquals(new Integer(2), hero_4.getRecoveryRate());
+		assertEquals(new Integer(2), hero_5.getRecoveryRate());
+		assertEquals(new Integer(2), hero_6.getRecoveryRate());
+		assertEquals(new Integer(2), hero_7.getRecoveryRate());
 		
 	}
 
@@ -69,22 +75,12 @@ class HeroTest {
 			fail("Shouldn't have thrown an exception here.");
 		}
 		
-		try {
-			hero_2.takeDamage(-20);
-			fail("Should have thrown an exception!");
-		} catch (IllegalArgumentException e) {
-			assertTrue(true, "Caught the IllegalArgumentException.");
-		} catch (HeroDeadException e) {
-			fail("Hero is still alive, not dead!");
-		}
+		assertThrows(IllegalArgumentException.class, () -> hero_2.takeDamage(-20));
 		
-		try {
-			hero_3.takeDamage(300);
-			fail("Should have thrown an exception here.");
-		} catch (HeroDeadException e) {
-			assertEquals(new Integer(0), hero_3.getHealth());
-			assertFalse(hero_3.isAlive());
-		}
+		assertThrows(HeroDeadException.class, () -> hero_3.takeDamage(300));
+		assertEquals(new Integer(0), hero_3.getHealth());
+		assertFalse(hero_3.isAlive());
+		
 	}
 
 	@Test

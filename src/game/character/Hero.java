@@ -86,7 +86,7 @@ public class Hero extends Character {
 	 * Returns the recovery rate of the Hero (depends on its type). The recovery rate is the amount of health regained every 10 seconds.
 	 * @throws Exception 
 	 */
-	public Integer getRecoveryRate() throws Exception {
+	public Integer getRecoveryRate() {
 		
 		// TODO: Change these:
 		
@@ -114,7 +114,7 @@ public class Hero extends Character {
 				return 2;
 				
 				default:
-					throw new Exception("Invalid HeroType to get the recovery rate of.");
+					return null;
 			
 		}
 		
