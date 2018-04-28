@@ -7,6 +7,9 @@ import game.character.Hero;
 import game.character.HeroAbility;
 import game.character.HeroDeadException;
 import game.character.HeroType;
+import game.item.ItemAbility;
+import game.item.PowerUpItem;
+import game.minigame.MinigameType;
 
 import org.junit.jupiter.api.BeforeEach;
 
@@ -76,6 +79,7 @@ class HeroTest {
 		}
 		
 		assertThrows(IllegalArgumentException.class, () -> hero_2.takeDamage(-20));
+		assertTrue(hero_2.isAlive());
 		
 		assertThrows(HeroDeadException.class, () -> hero_3.takeDamage(300));
 		assertEquals(new Integer(0), hero_3.getHealth());
@@ -92,6 +96,21 @@ class HeroTest {
 		assertEquals("Hero 5", hero_5.getName());
 		assertEquals("Hero 6", hero_6.getName());
 		assertEquals("Hero 7", hero_7.getName());
+	}
+	
+	@Test
+	void testPowerUpItem() {
+		
+		PowerUpItem item = new PowerUpItem("Cool Power Up", "Does something awesome...", 0, ItemAbility.DAMAGE_PROTECTION, MinigameType.ALL);
+		
+		assertFalse(hero_1.hasPowerUpItem());
+		hero_1.usePowerUpItem(item);
+		assertTrue(hero_1.hasPowerUpItem());
+		
+		assertEquals(item, hero_1.getPowerUpItem());
+		hero_1.destroyPowerUpItem();
+		assertFalse(hero_1.hasPowerUpItem());
+		
 	}
 
 }
