@@ -8,7 +8,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
 /**
- * Simplifies running tests on the text-based user interface.
+ * Simplifies running tests on a text-based user interface.
  * @author jesse
  *
  */
@@ -59,21 +59,34 @@ public class StreamHelpers {
 
 
 	/**
-	 * Gets the output stream as a string.
+	 * Gets the output stream as a string using UTF-8 encoding.
 	 * @return The string written to System.out.
 	 */
 	public static String getOutputStream() {
+		
+		return getOutputStream("UTF-8");
+		
+	}
+	
+	/**
+	 * Gets the output stream as a string.
+	 * @param encoding The encoding to decode with.
+	 * @return The string written to System.out.
+	 */
+	public static String getOutputStream(String encoding) {
 		
 		// Convert the output stream into a byte array and then a ByteBuffer.
 		byte[] bArray = outputStream.toByteArray();
 		ByteBuffer bBuffer = ByteBuffer.wrap(bArray, 0, bArray.length);
 		
-		// Convert the ByteBuffer into a CharBuffer using UTF-8 as the encoding.
-		CharBuffer cBuffer = Charset.forName("UTF-8").decode(bBuffer);
+		// Convert the ByteBuffer into a CharBuffer.
+		CharBuffer cBuffer = Charset.forName(encoding).decode(bBuffer);
 		
 		// Clears the output stream.
 		setupOutputStream();
 		
 		return cBuffer.toString();
+		
 	}
+	
 }
