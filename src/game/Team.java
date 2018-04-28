@@ -27,8 +27,11 @@ public class Team implements Nameable {
 	public Team(String name) {
 		
 		// implement constraint (section 2.1.1)
-		if (name.length() <= 2 || name.length() >= 10) {
-			throw new IllegalArgumentException("name must be between 2 and 10 characters long.");
+		if (name.length() < Settings.getTeamNameMin() || name.length() > Settings.getTeamNameMax()) {
+			
+			throw new IllegalArgumentException(String.format("Team name must be between %d and %d (inclusive) characters long.",
+					Settings.getTeamNameMin(), Settings.getTeamNameMax()));
+			
 		}
 		
 		this.name = name;
@@ -54,7 +57,7 @@ public class Team implements Nameable {
 	public void addHero(Hero hero) throws TeamFullException {
 		
 		// implement constraint (section 2.1.3)
-		if (this.heroes.size() >= 3) {
+		if (this.heroes.size() + 1 > Settings.getHeroesMax()) {
 			
 			throw new TeamFullException("Cannot add this Hero, there are too many Heroes in the Team.");
 			
@@ -94,11 +97,14 @@ public class Team implements Nameable {
 	 */
 	public void removeHero(String heroName) {
 		
-		for (Hero hero : this.heroes) {
+		for (int i = 0; i < this.heroes.size(); i++) {
+			
+			Hero hero = this.heroes.get(i);
 			
 			if (hero.getName().equals(heroName)) {
 				
 				this.heroes.remove(hero);
+				return;
 				
 			}
 			

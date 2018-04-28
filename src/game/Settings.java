@@ -53,4 +53,15 @@ public class Settings {
 		
 	}
 	
+	public static int getTeamNameMin() {
+		
+		return getInt("Game.Team.Name.Min");
+		
+	}
+	
+	public static int getTeamNameMax() {
+		
+		return getInt("Game.Team.Name.Max");
+		
+	}
 }
