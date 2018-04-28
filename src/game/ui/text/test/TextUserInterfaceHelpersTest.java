@@ -2,13 +2,6 @@ package game.ui.text.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -17,39 +10,20 @@ import game.ui.text.TextUserInterfaceHelpers;
 import game.ui.text.UserCancelException;
 import game.ui.text.UserContinueException;
 import game.ui.text.UserQuitException;
+import static game.ui.text.test.StreamHelpers.*;
 
 class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 	
-	private ByteArrayOutputStream outputStream;
-	private ByteArrayInputStream inputStream;
-	
-	
 	@BeforeEach
-	void setupOutputStream() {
-		outputStream = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outputStream));
+	void beforeEach() {
+		setupOutputStream();
 	}
 	
 	@AfterEach
-	void restoreStreams() {
-		System.setOut(System.out);
-		System.setIn(System.in);
+	void afterEach() {
+		restoreStreams();
 	}
 	
-	void setInputStream(String input) {
-		inputStream = new ByteArrayInputStream(input.getBytes());
-		System.setIn(inputStream);
-	}
-	
-	String getOutputStream() {
-		byte[] bArray = outputStream.toByteArray();
-		CharBuffer buffer = Charset.forName("UTF-8").decode(ByteBuffer.wrap(bArray, 0, bArray.length));
-		String output = buffer.toString();
-
-		setupOutputStream();
-		
-		return output;
-	}
 	
 	@Test
 	void testSetConsoleWidth() {
