@@ -1,6 +1,7 @@
 package game.ui.text;
 
 import game.GeneralHelpers;
+import game.Settings;
 import game.Team;
 
 /**
@@ -33,13 +34,11 @@ public class NewGameParameters {
 			
 		}
 		
-		if (cityCount < GeneralHelpers.getInt("Game.Cities.Min") ||
-				cityCount > GeneralHelpers.getInt("Game.Cities.Max")) {
+		if (cityCount < Settings.getCitiesMin() || cityCount > Settings.getCitiesMax()) {
 			
 			throw new IllegalArgumentException(
 					String.format("The number of cities must be between %d and %d (inclusive).",
-							GeneralHelpers.getInt("Game.Cities.Min"), GeneralHelpers.getInt("Game.Cities.Max")
-							)
+							Settings.getCitiesMin(), Settings.getCitiesMax())
 					);
 			
 		}
