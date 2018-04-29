@@ -37,7 +37,7 @@ public enum CityType {
 				return "Rutherford";
 			
 			default:
-				return "null";
+				throw new AssertionError();
 		
 		}
 		

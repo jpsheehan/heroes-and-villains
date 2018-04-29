@@ -74,33 +74,7 @@ public class City implements game.Nameable {
 	 */
 	private static String getCityName(CityType type) {
 		
-		switch (type) {
-		
-			case ENG_CORE:
-				return getString("EngCore.Name");
-				
-			case ERSKINE:
-				return getString("Erskine.Name");
-				
-			case JAMES_HIGHT:
-				return getString("JamesHight.Name");
-				
-			case LAW:
-				return getString("Law.Name");
-				
-			case MATARIKI:
-				return getString("Matariki.Name");
-				
-			case PSYCH:
-				return getString("Psych.Name");
-				
-			case RUTHERFORD:
-				return getString("Rutherford.Name");
-			
-			default:
-				return "null";
-		
-		}
+		return getString(type.toString() + ".Name");
 		
 	}
 	
