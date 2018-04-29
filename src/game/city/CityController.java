@@ -3,6 +3,7 @@ package game.city;
 import java.util.ArrayList;
 
 import game.GameWonException;
+import game.Settings;
 import game.item.Map;
 
 /**
@@ -65,13 +66,13 @@ public class CityController {
 	private void generateCities() {
 		
 		// Validate the numberOfCities
-		if (numberOfCities < 3) {
+		if (numberOfCities < Settings.getCitiesMin()) {
 			
 			throw new IllegalArgumentException("You need at least 3 cities.");
 			
 		}
 		
-		if (numberOfCities > 6) {
+		if (numberOfCities > Settings.getCitiesMax()) {
 			
 			throw new IllegalArgumentException("You can only have up to 6 cities.");
 			
