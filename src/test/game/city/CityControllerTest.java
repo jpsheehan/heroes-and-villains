@@ -37,7 +37,7 @@ class CityControllerTest {
 		
 		assertEquals(CityType.ERSKINE, ctrl.getCurrentCity().getType());
 		assertEquals(Direction.CENTRE, ctrl.getDirection());
-		assertEquals(AreaType.HOME_BASE, ctrl.getCurrentArea());
+		assertEquals(AreaType.HOME_BASE, ctrl.getCurrentArea().getType());
 		
 	}
 
