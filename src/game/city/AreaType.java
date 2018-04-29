@@ -32,8 +32,18 @@ public enum AreaType {
 				return "Villain's Lair";
 			
 			default:
-				return "null";
+				throw new AssertionError();
 		}
+		
+	}
+	
+	/**
+	 * Gets the AreaType as a string that can be used as a specifier in strings.json.
+	 * @return
+	 */
+	public String toProperString() {
+		
+		return this.toString().replaceAll(" ", "").replaceAll("'", "");
 		
 	}
 }
