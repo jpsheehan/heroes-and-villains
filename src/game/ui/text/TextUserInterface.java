@@ -10,6 +10,7 @@ import game.GeneralHelpers;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
+import game.character.HeroAbility;
 import game.character.HeroType;
 import game.city.Area;
 import game.city.AreaType;
@@ -369,26 +370,40 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Returns the Hero that is to be added to the Team. Doesn't actually add the Hero to the Team, just returns it.
 	 * @param heroes A list of heroes in the Team. Can be used to check that the new hero's name is unique.
-	 * @return
+	 * @return Hero
 	 */
 	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) throws UserQuitException, UserCancelException {
 		
 		//create a String array, for passing TextUserInterfaceHelpers
-		String[] heroesArray = new String[HeroType.HERO_TYPE_COUNT];
-
-		// getting the Strings from the enum into the String array 
-		int index = 0;
+		String[] heroTypeArray = new String[HeroType.HERO_TYPE_COUNT];
+		String[] heroAbilitiesArray = new String[HeroAbility.HERO_ABILITY_COUNT];
+		String[] combinedArray = new String[HeroType.HERO_TYPE_COUNT];
+		
+		// getting the HeroType Strings from the enum into the String array 
+		int typeIndex = 0;
 		for(HeroType heroType : HeroType.values()){
-			System.out.println("Hero Type: " + heroType);
-			heroesArray[index++] = heroType.toString();
+			//System.out.println("Hero Type: " + heroType); was only for testing
+			heroTypeArray[typeIndex++] = heroType.toString();
 		}
 		
-		int selectedHero = TextUserInterfaceHelpers.showChoice("Select a Hero Type", heroesArray);
+		// getting the HeroAbility Strings from the enum into the String array 
+		int abilityIndex = 0;
+		for(HeroAbility heroAbility : HeroAbility.values()){
+			//System.out.println("Hero Type: " + heroType);
+			heroAbilitiesArray[abilityIndex++] = heroAbility.toString();
+		}
+		
+		//Combining the two arrays. Must be a more elegant way! Needs HeroType and HeroAbility align.
+		for (int combinedIndex = 0 ; combinedIndex < HeroType.HERO_TYPE_COUNT ; combinedIndex++) {
+			combinedArray[combinedIndex] = heroTypeArray[combinedIndex]+ " Student, has the ability: "+ 
+				heroAbilitiesArray[combinedIndex] /* TODO add theflavour */;
+		}
+		
+				
+		int selectedHero = TextUserInterfaceHelpers.showChoice("Select a Hero Type", combinedArray);
 		HeroType selectedHeroType = HeroType.values()[selectedHero];
 		String input = showInputDialog("Enter the Hero name:", "New Game > Add a Hero");
-		
-		
-		String heroTypeName = heroesArray[selectedHero];
+		String heroTypeName = heroTypeArray[selectedHero];
 		
 		// Checks if the hero's name is unique.
 		for (Hero hero : heroes) {

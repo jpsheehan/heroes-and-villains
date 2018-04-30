@@ -17,6 +17,8 @@ public enum HeroAbility implements Ability {
 	PREVENTS_ROBBERY, // law students
 	HACK_MAINFRAME; // (allows the team to teleport to the next city (one time use)) compsoc. students
 	
+	public static int HERO_ABILITY_COUNT = HeroAbility.values().length;
+	
 	@Override
 	public String toString() {
 		
