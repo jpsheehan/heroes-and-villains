@@ -744,6 +744,61 @@ public class TextUserInterface extends UserInterface {
 		
 		}
 	}
+	
+	/**
+	 * Displays a Shop to the user and handles related inputs.
+	 */
+	private void showShopArea() throws UserQuitException {
+		// The area itself can be accessed via this.getGameEnvironment().getCityController().getCurrentArea()
+		// This function must
+		// - print the title block
+		// - offer some information about what is happening
+		// - let the user choose what to do
+	}
+	
+	/**
+	 * Displays a Power Up Den to the user and handles related inputs.
+	 */
+	private void showPowerUpDenArea() throws UserQuitException {
+		// The area itself can be accessed via this.getGameEnvironment().getCityController().getCurrentArea()
+		// This function must
+		// - print the title block
+		// - offer some information about what is happening
+		// - let the user choose what to do
+	}
+	
+	/**
+	 * Displays a Hospital to the user and handles related inputs.
+	 */
+	private void showHospitalArea() throws UserQuitException {
+		// The area itself can be accessed via this.getGameEnvironment().getCityController().getCurrentArea()
+		// This function must
+		// - print the title block
+		// - offer some information about what is happening
+		// - let the user choose what to do
+	}
+	
+	/**
+	 * Displays a Home Base to the user and handles related inputs.
+	 */
+	private void showHomeBaseArea() throws UserQuitException {
+		// The area itself can be accessed via this.getGameEnvironment().getCityController().getCurrentArea()
+		// This function must
+		// - print the title block
+		// - offer some information about what is happening
+		// - let the user choose what to do
+	}
+	
+	/**
+	 * Displays a Villain's Lair to the user and handles related inputs.
+	 */
+	private void showVillainsLairArea() throws UserQuitException {
+		// The area itself can be accessed via this.getGameEnvironment().getCityController().getCurrentArea()
+		// This function must
+		// - print the title block
+		// - offer some information about what is happening
+		// - let the user choose what to do
+	}
 
 	public static void main(String[] args) {
 		
