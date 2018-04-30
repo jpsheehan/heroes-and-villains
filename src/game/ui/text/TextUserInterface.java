@@ -12,9 +12,15 @@ import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
 import game.city.Area;
+import game.city.AreaType;
 import game.city.City;
 import game.city.CityController;
 import game.city.Direction;
+import game.city.HomeBase;
+import game.city.Hospital;
+import game.city.PowerUpDen;
+import game.city.Shop;
+import game.city.VillainsLair;
 
 /**
  * Represents the user interface shown to the user in text format.
@@ -537,21 +543,59 @@ public class TextUserInterface extends UserInterface {
 		}
 		
 	}
-
+	
+	/**
+	 * Prints a title block, based on where your are in the city and which city you are in.
+	 * @throws UserQuitException
+	 */
+	private void printContextualTitleBlock() throws UserQuitException {
+		
+		City city = this.getGameEnvironment().getCityController().getCurrentCity();
+		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
+		
+		// Just a test: In reality we need to offer the user the chance to enter some input
+		printTitleBlock(String.format("%s > %s (%s)",
+				city.getName(),
+				area.getName(),
+				area.getType().toString()));
+		
+	}
+	
 	/**
 	 * Displays an area on the screen, presenting the user with information and a list of options.
 	 * @throws UserQuitException
 	 */
 	private void displayAreaScreen() throws UserQuitException {
 		
-		City city = this.getGameEnvironment().getCityController().getCurrentCity();
 		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
 		
-		// Just a test: In reality we need to offer the user the chance to enter some input
-		showMessageDialog(area.getFlavourText(), String.format("%s > %s (%s)",
-				city.getName(),
-				area.getName(),
-				area.getType().toString()));
+		switch (area.getType()) {
+		
+			case HOME_BASE:
+				showHomeBaseArea((HomeBase)area);
+				break;
+			
+			case HOSPITAL:
+				showHospitalArea((Hospital)area);
+				break;
+				
+			case POWER_UP_DEN:
+				showPowerUpDenArea((PowerUpDen)area);
+				break;
+				
+			case SHOP:
+				showShopArea((Shop)area);
+				break;
+				
+			case VILLAINS_LAIR:
+				showVillainsLairArea((VillainsLair)area);
+				break;
+				
+			default:
+				throw new AssertionError();
+		
+		}
+				
 		
 	}
 	
@@ -718,6 +762,85 @@ public class TextUserInterface extends UserInterface {
 			default: return 'X';
 		
 		}
+	}
+	
+	/**
+	 * Displays a Shop to the user and handles related inputs.
+	 */
+	private void showShopArea(Shop shop) throws UserQuitException {
+		
+		printContextualTitleBlock();
+		
+		// the next 5 lines are placeholders. delete and put things here.
+		try {
+			readLine();
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+		
+	}
+	
+	/**
+	 * Displays a Power Up Den to the user and handles related inputs.
+	 */
+	private void showPowerUpDenArea(PowerUpDen powerUpDen) throws UserQuitException {
+		
+		printContextualTitleBlock();
+		
+		// the next 5 lines are placeholders. delete and put things here.
+		try {
+			readLine();
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+		
+	}
+	
+	/**
+	 * Displays a Hospital to the user and handles related inputs.
+	 */
+	private void showHospitalArea(Hospital hospital) throws UserQuitException {
+		
+		printContextualTitleBlock();
+		
+		// the next 5 lines are placeholders. delete and put things here.
+		try {
+			readLine();
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+	}
+	
+	/**
+	 * Displays a Home Base to the user and handles related inputs.
+	 */
+	private void showHomeBaseArea(HomeBase homeBase) throws UserQuitException {
+		
+		printContextualTitleBlock();
+		
+		// the next 5 lines are placeholders. delete and put things here.
+		try {
+			readLine();
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+		
+	}
+	
+	/**
+	 * Displays a Villain's Lair to the user and handles related inputs.
+	 */
+	private void showVillainsLairArea(VillainsLair villainsLair) throws UserQuitException {
+		
+		printContextualTitleBlock();
+		
+		// the next 5 lines are placeholders. delete and put things here.
+		try {
+			readLine();
+		} catch (UserCancelException | UserContinueException e) {
+			
+		}
+		
 	}
 
 	public static void main(String[] args) {

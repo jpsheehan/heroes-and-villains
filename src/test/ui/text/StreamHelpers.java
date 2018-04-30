@@ -85,7 +85,8 @@ public class StreamHelpers {
 		// Clears the output stream.
 		setupOutputStream();
 		
-		return cBuffer.toString();
+		// Replace Windows style new lines with Unix style.
+		return cBuffer.toString().replace("\r\n", "\n");
 		
 	}
 	
