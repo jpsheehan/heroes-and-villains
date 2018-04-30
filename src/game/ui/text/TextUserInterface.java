@@ -396,7 +396,7 @@ public class TextUserInterface extends UserInterface {
 		//Combining the two arrays. Must be a more elegant way! Needs HeroType and HeroAbility align.
 		for (int combinedIndex = 0 ; combinedIndex < HeroType.HERO_TYPE_COUNT ; combinedIndex++) {
 			combinedArray[combinedIndex] = heroTypeArray[combinedIndex]+ " Student, has the ability: "+ 
-				heroAbilitiesArray[combinedIndex] /* TODO add theflavour */;
+				heroAbilitiesArray[combinedIndex] /* TODO add the flavour */;
 		}
 		
 				
