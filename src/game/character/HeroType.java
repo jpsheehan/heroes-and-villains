@@ -19,8 +19,6 @@ public enum HeroType implements Nameable, Describable {
 	COMMERCE_STUDENT,
 	SCIENCE_STUDENT;
 	
-	public static int HERO_TYPE_COUNT = HeroType.values().length;
-	
 	@Override
 	public String getName() {
 		

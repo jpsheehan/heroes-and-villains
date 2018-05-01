@@ -375,9 +375,9 @@ public class TextUserInterface extends UserInterface {
 	private Hero showHeroCreationMenu(ArrayList<Hero> heroes) throws UserQuitException, UserCancelException {
 		
 		//create a String array, for passing TextUserInterfaceHelpers
-		String[] heroTypeArray = new String[HeroType.HERO_TYPE_COUNT];
-		String[] heroAbilitiesArray = new String[HeroAbility.HERO_ABILITY_COUNT];
-		String[] combinedArray = new String[HeroType.HERO_TYPE_COUNT];
+		String[] heroTypeArray = new String[HeroType.values().length];
+		String[] heroAbilitiesArray = new String[HeroAbility.values().length];
+		String[] combinedArray = new String[HeroType.values().length];
 		
 		// getting the HeroType Strings from the enum into the String array 
 		int typeIndex = 0;
@@ -394,7 +394,7 @@ public class TextUserInterface extends UserInterface {
 		}
 		
 		//Combining the two arrays. Must be a more elegant way! Needs HeroType and HeroAbility align.
-		for (int combinedIndex = 0 ; combinedIndex < HeroType.HERO_TYPE_COUNT ; combinedIndex++) {
+		for (int combinedIndex = 0 ; combinedIndex < HeroType.values().length ; combinedIndex++) {
 			combinedArray[combinedIndex] = heroTypeArray[combinedIndex]+ " Student, has the ability: "+ 
 				heroAbilitiesArray[combinedIndex] /* TODO add the flavour */;
 		}
