@@ -1,6 +1,9 @@
 package game.character;
 
 import game.Ability;
+import game.Describable;
+import game.Nameable;
+
 import static game.GeneralHelpers.getString;
 
 /**
@@ -8,7 +11,7 @@ import static game.GeneralHelpers.getString;
  * TODO: The exact abilities will need to be discussed.
  *
  */
-public enum HeroAbility implements Ability {
+public enum HeroAbility implements Ability, Nameable, Describable {
 	CHEAPER_ITEMS, // for commerce students
 	DAMAGE_REDUCTION, // (20%) engineering students (body odour)
 	INCREASED_RECOVERY_RATE, // (for team) science students
@@ -17,37 +20,50 @@ public enum HeroAbility implements Ability {
 	PREVENTS_ROBBERY, // law students
 	HACK_MAINFRAME; // (allows the team to teleport to the next city (one time use)) compsoc. students
 	
-	public static int HERO_ABILITY_COUNT = HeroAbility.values().length;
-	
-	@Override
-	public String toString() {
+	public String getProperName() {
 		
 		switch (this) {
 		
 			case CHEAPER_ITEMS:
-				return getString("Ability.Hero.CheaperItems.Name");
+				return ("Ability.Hero.CheaperItems");
 				
 			case IMPROVED_ODDS:
-				return getString("Ability.Hero.ImprovedOdds.Name");
+				return ("Ability.Hero.ImprovedOdds");
 				
 			case INCREASED_RECOVERY_RATE:
-				return getString("Ability.Hero.IncreasedRecoveryRate.Name");
+				return ("Ability.Hero.IncreasedRecoveryRate");
 				
 			case PREVENTS_ROBBERY:
-				return getString("Ability.Hero.PreventsRobbery.Name");
+				return ("Ability.Hero.PreventsRobbery");
 				
 			case HACK_MAINFRAME:
-				return getString("Ability.Hero.HackMainframe.Name");
+				return ("Ability.Hero.HackMainframe");
 				
 			case DAMAGE_REDUCTION:
-				return getString("Ability.Hero.DamageReduction.Name");
+				return ("Ability.Hero.DamageReduction");
 				
 			case THROW_MONEY:
-				return getString("Ability.Hero.ThrowMoney.Name");
+				return ("Ability.Hero.ThrowMoney");
 				
 			default:
-				return "null";
+				throw new AssertionError();
 			
-		}	
+		}
+		
 	}
+	
+	@Override
+	public String getName() {
+		
+		return getString(this.getProperName() + ".Name");
+		
+	}
+	
+	@Override
+	public String getFlavourText() {
+		
+		return getString(this.getProperName() + ".Flavour");
+		
+	}
+	
 }
