@@ -2,11 +2,15 @@ package game.character;
 
 import static game.GeneralHelpers.getString;
 
+import game.Describable;
+
+import game.Nameable;
+
 /**
  * The types of Heroes that exist in the game.
  *
  */
-public enum HeroType {
+public enum HeroType implements Nameable, Describable {
 	ENGINEERING_STUDENT,
 	COMPUTER_SCIENCE_STUDENT,
 	ARTS_STUDENT,
@@ -18,30 +22,43 @@ public enum HeroType {
 	public static int HERO_TYPE_COUNT = HeroType.values().length;
 	
 	@Override
-	public String toString() {
+	public String getName() {
+		
+		return getString(this.getProperName() + ".Name");
+		
+	}
+	
+	@Override
+	public String getFlavourText() {
+		
+		return getString(this.getProperName() + ".Flavour");
+		
+	}
+	
+	public String getProperName() {
 		
 		switch (this) {
 		
 			case ARTS_STUDENT:
-				return getString("HeroType.Arts");
+				return ("HeroType.Arts");
 				
 			case COMMERCE_STUDENT:
-				return getString("HeroType.Commerce");
+				return ("HeroType.Commerce");
 				
 			case COMPUTER_SCIENCE_STUDENT:
-				return getString("HeroType.CompSci");
+				return ("HeroType.CompSci");
 				
 			case ENGINEERING_STUDENT:
-				return getString("HeroType.Eng");
+				return ("HeroType.Eng");
 				
 			case LAW_STUDENT:
-				return getString("HeroType.Law");
+				return ("HeroType.Law");
 				
 			case MATHS_STUDENT:
-				return getString("HeroType.Maths");
+				return ("HeroType.Maths");
 				
 			case SCIENCE_STUDENT:
-				return getString("HeroType.Science");
+				return ("HeroType.Science");
 			
 			default:
 				throw new AssertionError();
