@@ -383,20 +383,23 @@ public class TextUserInterface extends UserInterface {
 		int typeIndex = 0;
 		for(HeroType heroType : HeroType.values()){
 			//System.out.println("Hero Type: " + heroType); was only for testing
-			heroTypeArray[typeIndex++] = heroType.toString();
+			heroTypeArray[typeIndex++] = heroType.getName();
 		}
 		
 		// getting the HeroAbility Strings from the enum into the String array 
 		int abilityIndex = 0;
 		for(HeroAbility heroAbility : HeroAbility.values()){
 			//System.out.println("Hero Type: " + heroType);
-			heroAbilitiesArray[abilityIndex++] = heroAbility.toString();
+			heroAbilitiesArray[abilityIndex++] = heroAbility.getName();
 		}
 		
 		//Combining the two arrays. Must be a more elegant way! Needs HeroType and HeroAbility align.
 		for (int combinedIndex = 0 ; combinedIndex < HeroType.values().length ; combinedIndex++) {
-			combinedArray[combinedIndex] = heroTypeArray[combinedIndex]+ " Student, has the ability: "+ 
-				heroAbilitiesArray[combinedIndex] /* TODO add the flavour */;
+			
+			HeroType hType = HeroType.values()[combinedIndex];
+			
+			combinedArray[combinedIndex] = hType.getName() + " Student\n\tHas the ability: "+ 
+				hType.getAbility().getName() + "\n"/* TODO add the flavour */;
 		}
 		
 				
@@ -785,7 +788,6 @@ public class TextUserInterface extends UserInterface {
 	private void showShopArea(Shop shop) throws UserQuitException {
 		
 		printContextualTitleBlock();
-		
 		// the next 5 lines are placeholders. delete and put things here.
 		try {
 			readLine();
@@ -824,7 +826,7 @@ public class TextUserInterface extends UserInterface {
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
-	}
+	} // JESSE TO DO HOMEBASE AND SHOP!!
 	
 	/**
 	 * Displays a Home Base to the user and handles related inputs.
@@ -858,13 +860,14 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UserQuitException, UserCancelException {
 		
 		GeneralHelpers.setIsRunningInEclipse(true);
 		GameEnvironment ge = new GameEnvironment(TextUserInterface.class);
 		TextUserInterface ui = new TextUserInterface(ge);
 		ge.setCityController(new CityController(3));
 		
+		ui.showHeroCreationMenu(new ArrayList<Hero>());
 		// ge.getCityController().useMap(new Map("Cool Map", "It's made of paper!", 10));
 		
 		try {
