@@ -572,11 +572,14 @@ public class TextUserInterface extends UserInterface {
 //		} catch (GameOverException e) {
 //			
 //			showMessageDialog("Sorry! You lost the game!");
-		
+		} catch (UserQuitException e) {
+			
+			throw e;
+			
 		} catch (Exception e) {
 			
 			// Handle all errors that shouldn't happen here:
-			showMessageDialog(e.getMessage(), "Critical Application Error");
+			showMessageDialog(e.toString(), "Critical Application Error");
 			
 		}
 		
@@ -766,7 +769,7 @@ public class TextUserInterface extends UserInterface {
 		sb.append(bl + repeatString(hb.toString(), 9) + br + '\n');
 		
 		// Print everything to the terminal
-		printTitleBlock("Map > " + city.getName());
+		printTitleBlock("Map of " + city.getName());
 		
 		System.out.println(sb.toString());
 		
@@ -823,6 +826,11 @@ public class TextUserInterface extends UserInterface {
 			case "s":
 			case "south":
 				throw new TeamMovementException(Direction.SOUTH);
+				
+			case "m":
+			case "map":
+				drawMap();
+				throw new UserContinueException();
 		
 		}
 		
