@@ -318,6 +318,14 @@ public class TextUserInterfaceHelpers {
 			
 			System.out.print(prelude);
 			
+			// wait a little bit for new data to become available
+			// this is required by the TextGui
+			while (System.in.available() == 0) {
+				
+				Thread.yield();
+				
+			}
+			
 			// Read the bytes from the System.in
 			int bytesRead = System.in.read(buffer);
 			
@@ -414,7 +422,8 @@ public class TextUserInterfaceHelpers {
 		} else {
 		
 			// otherwise assume we are running in a terminal
-			System.out.print("\033[H\033[2J");  
+			//System.out.print("\033[H\033[2J");
+			System.out.println("!!!NEWLINE~HACKY~CHARACTER!!!");
 			System.out.flush();
 			
 		}

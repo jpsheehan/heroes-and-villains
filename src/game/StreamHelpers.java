@@ -90,4 +90,10 @@ public class StreamHelpers {
 		
 	}
 	
+	public static int getAvailableOutput() {
+		
+		return outputStream.toByteArray().length;
+		
+	}
+	
 }
