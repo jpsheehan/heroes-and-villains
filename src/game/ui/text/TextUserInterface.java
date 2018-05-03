@@ -13,14 +13,15 @@ import game.character.Hero;
 import game.character.HeroAbility;
 import game.character.HeroType;
 import game.city.Area;
-import game.city.AreaType;
 import game.city.City;
 import game.city.CityController;
 import game.city.Direction;
 import game.city.HomeBase;
 import game.city.Hospital;
+import game.city.IllegalMoveException;
 import game.city.PowerUpDen;
 import game.city.Shop;
+import game.city.TeamMovementException;
 import game.city.VillainsLair;
 
 /**
@@ -541,7 +542,23 @@ public class TextUserInterface extends UserInterface {
 		
 			while (true) {
 				
-				displayAreaScreen();
+				try {
+					
+					displayAreaScreen();
+					
+				} catch (TeamMovementException e) {
+					
+					try {
+						
+						this.getGameEnvironment().getCityController().move(e.getIntendedDirection());
+						
+					} catch (IllegalMoveException e2) {
+						
+						showMessageDialog("Could not move in that direction from here!", "Error");
+						
+					}
+					
+				}
 				
 			}
 		
@@ -583,7 +600,7 @@ public class TextUserInterface extends UserInterface {
 	 * Displays an area on the screen, presenting the user with information and a list of options.
 	 * @throws UserQuitException
 	 */
-	private void displayAreaScreen() throws UserQuitException {
+	private void displayAreaScreen() throws UserQuitException, TeamMovementException {
 		
 		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
 		
@@ -782,15 +799,46 @@ public class TextUserInterface extends UserInterface {
 		}
 	}
 	
+	private String parseMovementInput() throws UserCancelException, UserQuitException, UserContinueException, TeamMovementException {
+		
+		String input = readLine();
+		
+		switch (input.toLowerCase()) {
+			
+			case "w":
+			case "west":
+				throw new TeamMovementException(Direction.WEST);
+			
+			case "e":
+			case "east":
+				throw new TeamMovementException(Direction.EAST);
+				
+			case "n":
+			case "north":
+				throw new TeamMovementException(Direction.NORTH);
+				
+			case "s":
+			case "south":
+				throw new TeamMovementException(Direction.SOUTH);
+		
+		}
+		
+		return input;
+		
+	}
+	
 	/**
 	 * Displays a Shop to the user and handles related inputs.
 	 */
-	private void showShopArea(Shop shop) throws UserQuitException {
+	private void showShopArea(Shop shop) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
+		
+		String input;
+		
 		// the next 5 lines are placeholders. delete and put things here.
 		try {
-			readLine();
+			input = parseMovementInput();
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
@@ -800,13 +848,14 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Displays a Power Up Den to the user and handles related inputs.
 	 */
-	private void showPowerUpDenArea(PowerUpDen powerUpDen) throws UserQuitException {
+	private void showPowerUpDenArea(PowerUpDen powerUpDen) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
+		String input;
 		
 		// the next 5 lines are placeholders. delete and put things here.
 		try {
-			readLine();
+			input = parseMovementInput();
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
@@ -816,13 +865,14 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Displays a Hospital to the user and handles related inputs.
 	 */
-	private void showHospitalArea(Hospital hospital) throws UserQuitException {
+	private void showHospitalArea(Hospital hospital) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
+		String input;
 		
 		// the next 5 lines are placeholders. delete and put things here.
 		try {
-			readLine();
+			input = parseMovementInput();
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
@@ -831,13 +881,14 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Displays a Home Base to the user and handles related inputs.
 	 */
-	private void showHomeBaseArea(HomeBase homeBase) throws UserQuitException {
+	private void showHomeBaseArea(HomeBase homeBase) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
+		String input;
 		
 		// the next 5 lines are placeholders. delete and put things here.
 		try {
-			readLine();
+			input = parseMovementInput();
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
@@ -847,13 +898,14 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Displays a Villain's Lair to the user and handles related inputs.
 	 */
-	private void showVillainsLairArea(VillainsLair villainsLair) throws UserQuitException {
+	private void showVillainsLairArea(VillainsLair villainsLair) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
+		String input;
 		
 		// the next 5 lines are placeholders. delete and put things here.
 		try {
-			readLine();
+			input = parseMovementInput();
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
