@@ -1,14 +1,16 @@
 package test.game.item;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
+
+import game.item.Map;
 
 class MapTest {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testMap() {
+		
+		new Map("Old map", "It's torn", 10);
+		
 	}
 
 }
