@@ -29,6 +29,18 @@ public class PowerUpItem extends Item {
 	public PowerUpItem(String name, String flavourText, Integer price, ItemAbility ability, MinigameType appliesTo) {
 		super(name, flavourText, price);
 		
+		if (ability == null) {
+			
+			throw new NullPointerException("ability cannot be null");
+			
+		}
+		
+		if (appliesTo == null) {
+			
+			throw new NullPointerException("appliesTo cannot be null");
+			
+		}
+		
 		this.ability = ability;
 		this.appliesTo = appliesTo;
 	}
