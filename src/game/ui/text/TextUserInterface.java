@@ -380,51 +380,43 @@ public class TextUserInterface extends UserInterface {
 		
 		//create a String array, for passing TextUserInterfaceHelpers
 		String[] heroTypeArray = new String[HeroType.values().length];
-		String[] heroAbilitiesArray = new String[HeroAbility.values().length];
-		String[] combinedArray = new String[HeroType.values().length];
 		
 		// getting the HeroType Strings from the enum into the String array 
-		int typeIndex = 0;
-		for(HeroType heroType : HeroType.values()){
+		int i = 0;
+		
+		for (HeroType heroType : HeroType.values()) {
 			//System.out.println("Hero Type: " + heroType); was only for testing
-			heroTypeArray[typeIndex++] = heroType.getName();
+			heroTypeArray[i++] = String.format("%s Major: %s\n\tAbility: %s - %s\n", heroType.getName(), heroType.getFlavourText(), heroType.getAbility().getName(), heroType.getAbility().getFlavourText());
 		}
-		
-		// getting the HeroAbility Strings from the enum into the String array 
-		int abilityIndex = 0;
-		for(HeroAbility heroAbility : HeroAbility.values()){
-			//System.out.println("Hero Type: " + heroType);
-			heroAbilitiesArray[abilityIndex++] = heroAbility.getName();
-		}
-		
-		//Combining the two arrays. Must be a more elegant way! Needs HeroType and HeroAbility align.
-		for (int combinedIndex = 0 ; combinedIndex < HeroType.values().length ; combinedIndex++) {
-			
-			HeroType hType = HeroType.values()[combinedIndex];
-			
-			combinedArray[combinedIndex] = hType.getName() + " Student\n\tHas the ability: "+ 
-				hType.getAbility().getName() + "\n"/* TODO add the flavour */;
-		}
-		
 				
-		int selectedHero = TextUserInterfaceHelpers.showChoice("Select a Hero Type", combinedArray);
-		HeroType selectedHeroType = HeroType.values()[selectedHero];
-		String input = showInputDialog("Enter the Hero name:", "New Game > Add a Hero");
-		String heroTypeName = heroTypeArray[selectedHero];
+		int selectedHeroTypeIndex = TextUserInterfaceHelpers.showChoice("Select a the type of hero you want:", heroTypeArray);
+		HeroType selectedHeroType = HeroType.values()[selectedHeroTypeIndex];
 		
-		// Checks if the hero's name is unique.
-		for (Hero hero : heroes) {
+		String name = "";
+		while (true) {
 			
-			if (hero.getName().toLowerCase().equals(heroTypeName.toLowerCase())) {
+			name = showInputDialog("Enter your hero's name:", "New Game > Add a Hero");
+		
+			// Checks if the hero's name is unique.
+			for (Hero hero : heroes) {
 				
-				return null; // TODO: reprompt for name
+				if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
+					
+					continue;
+					
+				}
 				
 			}
+			
+			// name is unique and not empty!
+			// TODO: verify name length
+			if (!name.trim().isEmpty())
+				break;
 			
 		}
 		
 		// Return the new Hero
-		return new Hero(input, selectedHeroType);
+		return new Hero(name, selectedHeroType);
 	}
 	
 	/**
@@ -438,10 +430,14 @@ public class TextUserInterface extends UserInterface {
 		
 		//get each hero from the ArrayList into an Array.
 		// loop through ArrayList (containing Hero) add each Hero into Array (containing hero) 
-		for (int i = 0; i<heroes.size(); i++ ) {
+		for (int i = 0; i < heroes.size(); i++) {
+			
 			heroArray[i] = heroes.get(i);
+			
 		}
-		return (showHeroSelectionMenu("Select a hereo to remove from the team", "New Game > Remove Hero", heroArray));
+		
+		return (showHeroSelectionMenu("Select a hero to remove from the team:", "New Game > Remove Hero", heroArray));
+		
 	}
 	
 	/**
@@ -572,6 +568,7 @@ public class TextUserInterface extends UserInterface {
 //		} catch (GameOverException e) {
 //			
 //			showMessageDialog("Sorry! You lost the game!");
+			
 		} catch (UserQuitException e) {
 			
 			throw e;

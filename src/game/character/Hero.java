@@ -202,4 +202,11 @@ public class Hero extends Character {
 		return this.item;
 		
 	}
+	
+	@Override
+	public String toString() {
+		
+		return String.format("%s (%s)", this.getName(), this.getType().getName());
+		
+	}
 }
