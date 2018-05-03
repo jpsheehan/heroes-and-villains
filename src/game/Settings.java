@@ -53,24 +53,44 @@ public class Settings {
 		
 	}
 	
+	/**
+	 * Gets the minimum number of characters the team name can have.
+	 * Denoted by "Game.Team.Name.Min" in strings.json.
+	 * @return
+	 */
 	public static int getTeamNameMin() {
 		
 		return getInt("Game.Team.Name.Min");
 		
 	}
-	
+
+	/**
+	 * Gets the maximum number of characters the team name can have.
+	 * Denoted by "Game.Team.Name.Max" in strings.json.
+	 * @return
+	 */
 	public static int getTeamNameMax() {
 		
 		return getInt("Game.Team.Name.Max");
 		
 	}
-	
+
+	/**
+	 * Gets the minimum number of characters the hero name can have.
+	 * Denoted by "Game.Hero.Name.Min" in strings.json.
+	 * @return
+	 */
 	public static int getHeroNameMin() {
 		
 		return getInt("Game.Hero.Name.Min");
 		
 	}
-	
+
+	/**
+	 * Gets the maximum number of characters the hero name can have.
+	 * Denoted by "Game.Hero.Name.Max" in strings.json.
+	 * @return
+	 */
 	public static int getHeroNameMax() {
 		
 		return getInt("Game.Hero.Name.Max");

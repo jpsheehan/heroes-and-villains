@@ -11,7 +11,6 @@ import game.Settings;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
-import game.character.HeroAbility;
 import game.character.HeroType;
 import game.city.Area;
 import game.city.City;

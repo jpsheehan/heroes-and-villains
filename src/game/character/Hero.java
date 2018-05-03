@@ -206,7 +206,7 @@ public class Hero extends Character {
 	@Override
 	public String toString() {
 		
-		return String.format("%s (%s)", this.getName(), this.getType().getName());
+		return String.format("%s (%s Student)", this.getName(), this.getType().getName());
 		
 	}
 }
