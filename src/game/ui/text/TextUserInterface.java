@@ -240,7 +240,7 @@ public class TextUserInterface extends UserInterface {
 					
 					if (heroes.size() > Settings.getHeroesMax()) {
 						
-						showMessageDialog(String.format("You can only have up to %d heroes in your team!", Settings.getCitiesMax()), "New Game > Error");
+						showMessageDialog(String.format("You can only have up to %d heroes in your team!", Settings.getHeroesMax()), "New Game > Error");
 						
 					} else {
 						
@@ -250,7 +250,7 @@ public class TextUserInterface extends UserInterface {
 							
 							heroes.add(newHero);
 							
-							showMessageDialog(String.format("You have added the hero \"%s\" (%s) to your team!", newHero.getName(), newHero.getType().toString()), "New Game > Hero Added"); 
+							showMessageDialog(String.format("You have added the hero \"%s\" (%s) to your team!", newHero.getName(), newHero.getType().getName()), "New Game > Hero Added"); 
 							
 						}
 					}
@@ -272,7 +272,7 @@ public class TextUserInterface extends UserInterface {
 							
 							heroes.remove(deletedHero);
 							
-							showMessageDialog(String.format("You have removed the hero \"%s\" (%s) from your team!", deletedHero.getName(), deletedHero.getType().toString()), "New Game > Hero Removed"); 
+							showMessageDialog(String.format("You have removed the hero \"%s\" (%s) from your team!", deletedHero.getName(), deletedHero.getType().getName()), "New Game > Hero Removed"); 
 							
 						}
 					}
@@ -385,9 +385,12 @@ public class TextUserInterface extends UserInterface {
 		int i = 0;
 		
 		for (HeroType heroType : HeroType.values()) {
-			//System.out.println("Hero Type: " + heroType); was only for testing
+
 			heroTypeArray[i++] = String.format("%s Major: %s\n\tAbility: %s - %s\n", heroType.getName(), heroType.getFlavourText(), heroType.getAbility().getName(), heroType.getAbility().getFlavourText());
+			
 		}
+		
+		printTitleBlock("New Game > Select Hero Type");
 				
 		int selectedHeroTypeIndex = TextUserInterfaceHelpers.showChoice("Select a the type of hero you want:", heroTypeArray);
 		HeroType selectedHeroType = HeroType.values()[selectedHeroTypeIndex];
@@ -395,7 +398,7 @@ public class TextUserInterface extends UserInterface {
 		String name = "";
 		while (true) {
 			
-			name = showInputDialog("Enter your hero's name:", "New Game > Add a Hero");
+			name = showInputDialog("Enter your hero's name:", "New Game > Add a Hero").trim();
 		
 			// Checks if the hero's name is unique.
 			for (Hero hero : heroes) {
@@ -408,10 +411,17 @@ public class TextUserInterface extends UserInterface {
 				
 			}
 			
-			// name is unique and not empty!
-			// TODO: verify name length
-			if (!name.trim().isEmpty())
+			// Checks if the name is the correct length
+			if (name.length() < Settings.getHeroNameMin() || name.length() > Settings.getHeroNameMax()) {
+				
+				showMessageDialog(String.format("The hero's name must be between %d and %d characters in length.", Settings.getHeroNameMin(), Settings.getHeroNameMax()), "New Game > Add a Hero > Name Error");
+				
+			} else {
+				
 				break;
+				
+			}
+			
 			
 		}
 		
@@ -428,7 +438,6 @@ public class TextUserInterface extends UserInterface {
 		
 		Hero[] heroArray = new Hero[heroes.size()];
 		
-		//get each hero from the ArrayList into an Array.
 		// loop through ArrayList (containing Hero) add each Hero into Array (containing hero) 
 		for (int i = 0; i < heroes.size(); i++) {
 			
@@ -514,7 +523,7 @@ public class TextUserInterface extends UserInterface {
 		
 		for (Hero hero : heroes) {
 			
-			heroStrings.add(String.format(" - %s (%s)", hero.getName(), hero.getType().toString()));
+			heroStrings.add(String.format(" - %s", hero.toString()));
 			
 		}
 		

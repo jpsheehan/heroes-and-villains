@@ -64,4 +64,16 @@ public class Settings {
 		return getInt("Game.Team.Name.Max");
 		
 	}
+	
+	public static int getHeroNameMin() {
+		
+		return getInt("Game.Hero.Name.Min");
+		
+	}
+	
+	public static int getHeroNameMax() {
+		
+		return getInt("Game.Hero.Name.Max");
+		
+	}
 }

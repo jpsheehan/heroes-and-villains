@@ -178,6 +178,8 @@
     "Game.Cities.Min": "3",
     "Game.Cities.Max": "6",
     "Game.Team.Name.Min": "2",
-    "Game.Team.Name.Max": "10"
+    "Game.Team.Name.Max": "10",
+    "Game.Hero.Name.Min": "2",
+    "Game.Hero.Name.Max": "10"
 	
 }
