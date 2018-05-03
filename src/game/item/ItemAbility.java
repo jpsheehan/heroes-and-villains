@@ -1,9 +1,12 @@
 package game.item;
 
 import game.Ability;
+import game.Describable;
+import game.Nameable;
+
 import static game.GeneralHelpers.getString;
 
-public enum ItemAbility implements Ability {
+public enum ItemAbility implements Ability, Nameable, Describable {
 	WIN_ON_DRAW, // for dice game and paper scissors rock
 	DAMAGE_PROTECTION, // (single use) stops a hero from taking damage once
 	INCREASE_GIFT_CHANCE,
@@ -11,29 +14,43 @@ public enum ItemAbility implements Ability {
 	FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER; // applies to the next guess the number game
 	
 	@Override
-	public String toString() {
+	public String getName() {
 		
+		return getString(this.getProperName() + ".Name");
+		
+	}
+	
+	public String getProperName() {
+
 		switch (this) {
 		
 			case DAMAGE_PROTECTION:
-				return getString("Ability.Item.DamageProtection.Name");
+				return getString("Ability.Item.DamageProtection");
 				
 			case DECREASE_ROBBERY_CHANCE:
-				return getString("Ability.Item.DecreaseRobberyChance.Name");
+				return ("Ability.Item.DecreaseRobberyChance");
 				
 			case FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER:
-				return getString("Ability.Item.FourAttemptsAtGuessTheNumber.Name");
+				return ("Ability.Item.FourAttemptsAtGuessTheNumber");
 				
 			case INCREASE_GIFT_CHANCE:
-				return getString("Ability.Item.IncreaseGiftChance.Name");
+				return ("Ability.Item.IncreaseGiftChance");
 				
 			case WIN_ON_DRAW:
-				return getString("Ability.Item.WinOnDraw.Name");
+				return ("Ability.Item.WinOnDraw");
 				
 			default:
-				return "null";
+				throw new AssertionError();
 		
 		}
+		
+		
+	}
+	
+	@Override
+	public String getFlavourText() {
+		
+		return getString(this.getProperName() + ".Flavour");
 		
 	}
 }
