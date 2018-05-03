@@ -21,6 +21,7 @@ public class PowerUpItem extends Item {
 	/**
 	 * Creates a new PowerUpItem.
 	 * @param name The name of the PowerUpItem.
+	 * @param flavourText The description of the item.
 	 * @param price The price of the PowerUpItem.
 	 * @param ability The ability the PowerUpItem has.
 	 * @param appliesTo The game(s) that the ability applies to.

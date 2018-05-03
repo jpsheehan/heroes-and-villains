@@ -1,15 +1,6 @@
 package game.item;
 
 import java.util.ArrayList;
-//import game.minigame.*;			//only needed for quick testing, to be removed later
-
-//20180411
-// initial build
-//20180422
-//convert back to 3 separate arraylists for powerups, healing, maps.
-//	parse into correct list on addition of an item.
-//		and return each separate list as a string on get
-//		override toString to get the entire inventory
 
 /**
  * The Inventory class holds lists of items for the teams and the shop as referenced in section 2.3.3 of the specification.
@@ -54,30 +45,36 @@ public class Inventory {
 		// check not null
 		if (item == null) {
 			
-			throw new IllegalArgumentException("item cannot be null");
+			throw new NullPointerException("item cannot be null");
+			
+		}
+		
+		if (this.exists(item)) {
+			
+			throw new IllegalArgumentException(String.format("item %s already exists in inventory", item.getName()));
 			
 		}
 		
 		if (item instanceof HealingItem) {
 			
 			listHealingItems.add(item);
+			return;
 			
 		}
 		
 		if (item instanceof Map) {
 			
 			listMaps.add(item);
-			
+			return;
 		}
 		
 		if (item instanceof PowerUpItem) {
 			
 			listPowerUpItems.add(item);
+			return;
 			
 		}
 		
-		// Item is not a Map, PowerUpItem or HealingItem.
-		throw new AssertionError();
 	}
 
 	/**
@@ -135,9 +132,6 @@ public class Inventory {
 			
 		}
 		
-		// the item is not a Map, PowerUpItem or HealingItem
-		throw new AssertionError();
-		
 	}
 	
 	/**
@@ -172,4 +166,49 @@ public class Inventory {
 		
 	}
 	
+	/**
+	 * Returns an array of maps in the inventory.
+	 * @return
+	 */
+	public Map[] getMaps() {
+
+		Map[] array = new Map[this.listMaps.size()];
+		array = this.listMaps.toArray(array);
+		return array;
+		
+	}
+	
+	/**
+	 * Returns an array of power up items in the inventory.
+	 * @return
+	 */
+	public PowerUpItem[] getPowerUpItems() {
+		
+		PowerUpItem[] array = new PowerUpItem[this.listPowerUpItems.size()];
+		array = this.listPowerUpItems.toArray(array);
+		return array;
+		
+	}
+	
+	/**
+	 * Returns an array of healing items in the inventory.
+	 * @return
+	 */
+	public HealingItem[] getHealingItems() {
+
+		HealingItem[] array = new HealingItem[this.listHealingItems.size()];
+		array = this.listHealingItems.toArray(array);
+		return array;
+		
+	}
+	
+	/**
+	 * Returns the number of items in the inventory.
+	 * @return
+	 */
+	public int size() {
+		
+		return this.listHealingItems.size() + this.listMaps.size() + this.listPowerUpItems.size();
+		
+	}
 }
