@@ -3,6 +3,7 @@ package game.city;
 import java.util.ArrayList;
 
 import game.character.InnKeeper;
+import game.item.Inventory;
 import game.item.Item;
 
 /**
@@ -14,7 +15,7 @@ public class Shop extends Area {
 	/**
 	 * The list of Items the shop sells.
 	 */
-	private ArrayList<Item> items;
+	private Inventory inventory;
 	
 	/**
 	 * The InnKeeper this shop has. Every shop must have an InnKeeper.
@@ -30,15 +31,22 @@ public class Shop extends Area {
 	public Shop(String name, String description, ArrayList<Item> items, InnKeeper innKeeper) {
 		super(name, description, AreaType.SHOP);
 		
-		this.items = items;
+		this.inventory = new Inventory();
+		
+		for (Item item : items) {
+			
+			this.inventory.add(item);
+			
+		}
+		
 		this.innKeeper = innKeeper;
 	}
 	
 	/**
 	 * Returns the list of Items to sell.
 	 */
-	public ArrayList<Item> getItems() {
-		return this.items;
+	public Inventory getInventory() {
+		return this.inventory;
 	}
 	
 	/**

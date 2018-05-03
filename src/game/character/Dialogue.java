@@ -1,11 +1,7 @@
 package game.character;
 
-//20180416 to do
-// dialogue is just for InnKeeper
-
-//20180417
-//A fixed and hardcoded list of phrases, will be concatenated with specific team lists, 
-//	perhaps in future a list of phrases for each category and randomly select per Inn / InnKeeper 
+import game.GeneralHelpers;
+import game.city.CityType;
  
 /**
  * Provides the dialogue for the InnKeeper 
@@ -13,11 +9,11 @@ package game.character;
  */
 public class Dialogue {
 	
-	/**
-	 * vPlate message
-	 */
-	private String vPlate;
-	
+//	/**
+//	 * vPlate message
+//	 */
+//	private String vPlate;
+//	
 	/**
 	 * Greeting message when team enters inn 
 	 */
@@ -29,110 +25,52 @@ public class Dialogue {
 	private String farewell;
 	
 	/**
-	 * Provides text list of options / things that can be done in the inn
+	 * Message when the team is presented with a list of items.
 	 */
 	private String options;
 	
 	/**
-	 * Provide text list of things that can be purchased
+	 * Message when the team purchases an item.
 	 */
-	private String purchase;
+	private String purchase;	 
 	
-	/**
-	 * Provide text for list of items the team has
-	 */
-	private String teamItems;
-	
-	/**
-	 * Provide text for list of abilities the team has
-	 */
-	private String teamAbilities;
-	
-	/**
-	 * Provide text for list attributes associated with an item
-	 */
-	private String itemAttributes;
-	
-	/**
-	 * text for Amount of money the team has
-	 */
-	 private String teamFunds;
-	 
-	
-	 public Dialogue() { 
-		 greeting = "Welcome to my humble Inn. Make yourself at home can I get you a drink? ";
-		 farewell = "Farewell my friends. May your studies go well ";
-		 options = "You can buy drinks, power ups, healing item and maps. You can relax too."+ "\n"+ 
-				"Would you like to ";
-		 purchase = "Itmes available for purcahse are: ";
-		 teamItems = "Your team items are: ";
-		 teamAbilities = "Your team abilites are: ";
-		 teamFunds = "Your team finances aren't looking too flash at: ";
-		 itemAttributes = "Items (if avilable) can do the following: ";
-		 vPlate = "Are you all students? Prove it, do you have a vPlate? ";
+	 public Dialogue(CityType type) {
+		 
+		 String specifier = type.getProperName() + ".InnKeeper.Dialogue";
+
+		 this.greeting = GeneralHelpers.getString(specifier + ".Greeting");
+		 this.farewell = GeneralHelpers.getString(specifier + ".Farewell");
+		 this.options = GeneralHelpers.getString(specifier + ".Options");
+		 this.purchase = GeneralHelpers.getString(specifier + ".Purchase");
+		 
 	 }
 	
 	/**
-	 * @return the greeting
+	 * @return The message to display when the team enters the shop
 	 */
 	public String getGreeting() {
 		return greeting;
 	}
 	
 	/**
-	 * @return the farewell
+	 * @return The message to display when the team exits the shop
 	 */
 	public String getFarewell() {
 		return farewell;
 	}
 
 	/**
-	 * @return the options
+	 * @return The message to display when the team is presented with a list of items to buy
 	 */
 	public String getOptions() {
 		return options;
 	}
 
 	/**
-	 * @return the purchase
+	 * @return The message to display when the team purchases an item
 	 */
 	public String getPurchase() {
 		return purchase;
-	}
-
-	/**
-	 * @return the teamItems
-	 */
-	public String getTeamItems() {
-		return teamItems;
-	}
-
-	/**
-	 * @return the teamAbilities
-	 */
-	public String getTeamAbilities() {
-		return teamAbilities;
-	}
-
-	/**
-	 * @return the teamFunds
-	 */
-	public String getTeamFunds() {
-		return teamFunds;
-	}
-	
-	/**
-	 * @return the item attributes
-	 */
-	public String getItemAttributes() {
-		return itemAttributes;
-	}
-	
-	/**
-	 * @return the vplate message
-	 */
-	public String getVPlate() {
-		return vPlate;
 	}
 	
 }

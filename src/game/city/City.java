@@ -47,11 +47,11 @@ public class City implements game.Nameable {
 	 */
 	private static ArrayList<Area> getAreaList(CityType type) {
 		
-		String buildingName = type.toString();
+		String buildingName = type.getProperName();
 		
 		ArrayList<Area> areaList = new ArrayList<Area>();
 
-		InnKeeper innKeeper = new InnKeeper(getString(String.format("%s.InnKeeper.Name", buildingName)), new Dialogue());
+		InnKeeper innKeeper = new InnKeeper(getString(String.format("%s.InnKeeper.Name", buildingName)), new Dialogue(type));
 		
 		ArrayList<Item> items = new ArrayList<Item>();
 		// TODO: Add items for shop?
@@ -74,7 +74,7 @@ public class City implements game.Nameable {
 	 */
 	private static String getCityName(CityType type) {
 		
-		return getString(type.toString() + ".Name");
+		return getString(type.getProperName() + ".Name");
 		
 	}
 	

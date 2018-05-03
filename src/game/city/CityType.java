@@ -1,5 +1,7 @@
 package game.city;
 
+import game.GeneralHelpers;
+
 public enum CityType {
 	
 	JAMES_HIGHT,
@@ -10,8 +12,7 @@ public enum CityType {
 	LAW,
 	MATARIKI;
 	
-	@Override
-	public String toString() {
+	public String getProperName() {
 		
 		switch (this) {
 		
@@ -40,6 +41,12 @@ public enum CityType {
 				throw new AssertionError();
 		
 		}
+		
+	}
+	
+	public String getName() {
+		
+		return GeneralHelpers.getString(this.getProperName() + ".Name");
 		
 	}
 

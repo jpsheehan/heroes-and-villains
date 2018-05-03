@@ -12,6 +12,7 @@ import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
+import game.character.InnKeeper;
 import game.city.Area;
 import game.city.City;
 import game.city.CityController;
@@ -584,7 +585,18 @@ public class TextUserInterface extends UserInterface {
 		} catch (Exception e) {
 			
 			// Handle all errors that shouldn't happen here:
-			showMessageDialog(e.toString(), "Critical Application Error");
+			printTitleBlock("Critical Application Error");
+			
+			printLineCentred("\n" + e.toString());
+			e.printStackTrace();
+			
+			printLineCentred("\nPress <Enter> to continue...");
+			
+			try {
+				
+				readLine();
+				
+			} catch (UserCancelException | UserContinueException e1) {}
 			
 		}
 		
@@ -848,14 +860,48 @@ public class TextUserInterface extends UserInterface {
 	 */
 	private void showShopArea(Shop shop) throws UserQuitException, TeamMovementException {
 		
-		printContextualTitleBlock();
+		InnKeeper innkeeper = shop.getInnKeeper();
 		
-		String input;
-		
-		// the next 5 lines are placeholders. delete and put things here.
-		try {
-			input = parseMovementInput();
-		} catch (UserCancelException | UserContinueException e) {
+		while (true) {
+			
+			printContextualTitleBlock();
+			
+			String input;
+			
+			printLineCentred(shop.getFlavourText());
+			printLineCentred(String.format("%s the shopkeeper says \"%s\"", innkeeper.getName(), innkeeper.getDialogue().getGreeting()));
+			
+			try {
+				
+				input = parseMovementInput();
+				
+			} catch (UserCancelException | UserContinueException e) {
+				
+				continue;
+				
+			}
+			
+			switch (input.toLowerCase()) {
+			
+				case "b":
+				case "buy":
+					
+					printContextualTitleBlock();
+					
+					printLineCentred(String.format("Your team has $%d.", this.getGameEnvironment().getTeam().getMoney()));
+					printLineCentred(String.format("%s says \"%s\"", innkeeper.getName(), innkeeper.getDialogue().getOptions()));
+					
+				try {
+					readLine();
+				} catch (UserCancelException | UserContinueException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
+					break;
+				
+			
+			}
 			
 		}
 		
@@ -928,20 +974,21 @@ public class TextUserInterface extends UserInterface {
 		
 	}
 
-	public static void main(String[] args) throws UserQuitException, UserCancelException {
+	public static void main(String[] args) throws UserQuitException, UserCancelException, TeamFullException {
 		
 		GeneralHelpers.setIsRunningInEclipse(true);
 		GameEnvironment ge = new GameEnvironment(TextUserInterface.class);
+		
+		Team team = new Team("Cool Team");
+		team.addHero(new Hero("Bob", HeroType.ENGINEERING_STUDENT));
+		
 		TextUserInterface ui = new TextUserInterface(ge);
 		ge.setCityController(new CityController(3));
+		ge.setTeam(team);
 		
-		ui.showHeroCreationMenu(new ArrayList<Hero>());
+		// ui.showHeroCreationMenu(new ArrayList<Hero>());
 		// ge.getCityController().useMap(new Map("Cool Map", "It's made of paper!", 10));
 		
-		try {
-			ui.drawMap();
-		} catch (UserQuitException e) {
-			
-		}
+		ui.gameLoop();
 	}
 }
