@@ -1,4 +1,4 @@
-package test.ui.text;
+package game;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

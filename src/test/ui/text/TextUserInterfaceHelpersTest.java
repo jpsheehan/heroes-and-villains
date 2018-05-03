@@ -1,7 +1,7 @@
 package test.ui.text;
 
+import static game.StreamHelpers.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static test.ui.text.StreamHelpers.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
