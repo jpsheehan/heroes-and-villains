@@ -21,4 +21,8 @@ public class RunnableTextUserInterface implements Runnable {
 			this.thread.start();
 		}
 	}
+	
+	public boolean isAlive() {
+		return this.thread.isAlive();
+	}
 }

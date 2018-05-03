@@ -18,12 +18,14 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 public class ConsoleWrapperWindow {
 
 	private JFrame frmHeroesAndVillains;
 	private JTextField textFieldInput;
 	private JTextArea textAreaOutput;
+	private RunnableTextUserInterface child;
 
 	/**
 	 * Launch the application.
@@ -50,12 +52,12 @@ public class ConsoleWrapperWindow {
 		
 		StreamHelpers.setupOutputStream();
 		
-		RunnableTextUserInterface textUi = new RunnableTextUserInterface();
-		textUi.start();
+		this.child = new RunnableTextUserInterface();
+		child.start();
 		
 		flushIO(false);
 		
-		textFieldInput.grabFocus();
+		textFieldInput.requestFocusInWindow();
 	}
 
 	/**
@@ -67,6 +69,7 @@ public class ConsoleWrapperWindow {
 		frmHeroesAndVillains.setBounds(100, 100, 640, 480);
 		frmHeroesAndVillains.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHeroesAndVillains.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmHeroesAndVillains.setResizable(false);
 		
 		JPanel panel = new JPanel();
 		frmHeroesAndVillains.getContentPane().add(panel, BorderLayout.SOUTH);
@@ -109,23 +112,29 @@ public class ConsoleWrapperWindow {
 	private void flushIO(boolean sendInput) {
 		
 		String input = textFieldInput.getText();
+		input += "\n";
 		textFieldInput.setText("");
 		
 		if (sendInput) {
-			input += "\n";
+			
 			StreamHelpers.setInputStream(input);
+			
 		}
+		
+		textAreaOutput.setText(textAreaOutput.getText() + input);
 		
 		int availableBytes;
 		
 		do {
+			
 			availableBytes = StreamHelpers.getAvailableOutput();
+			
 			try {
+				
 				Thread.sleep(50);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+				
+			} catch (InterruptedException e1) {}
+			
 		} while (availableBytes != StreamHelpers.getAvailableOutput());
 		
 		String output = StreamHelpers.getOutputStream();
@@ -145,9 +154,17 @@ public class ConsoleWrapperWindow {
 				textAreaOutput.setText(textAreaOutput.getText() + output);
 				
 			}
+			
 		}
 		
-		textFieldInput.grabFocus();
+		textFieldInput.requestFocusInWindow();
+		
+		// Close the window if the user has quit the textui
+		if (!this.child.isAlive()) {
+			
+			this.frmHeroesAndVillains.dispatchEvent(new WindowEvent(this.frmHeroesAndVillains, WindowEvent.WINDOW_CLOSING));
+			
+		}
 	}
 
 }
