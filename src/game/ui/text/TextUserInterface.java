@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import game.GameEnvironment;
 import game.GeneralHelpers;
+import game.Settings;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
@@ -134,7 +135,8 @@ public class TextUserInterface extends UserInterface {
 		
 		int cityCount = 0;
 		
-		String prompt = "How many villains do you want to fight? " + getInputOptions("3-6");
+		String prompt = "How many villains do you want to fight? " +
+				getInputOptions(String.format("%d-%d", Settings.getCitiesMin(), Settings.getCitiesMax()));
 		
 		printTitleBlock("New Game > Number of Villains");
 		
@@ -145,7 +147,7 @@ public class TextUserInterface extends UserInterface {
 			
 			try {
 				
-				cityCount = getNumberWithBounds(3, 6);
+				cityCount = getNumberWithBounds(Settings.getCitiesMin(), Settings.getCitiesMax());
 				return cityCount;
 			
 			} catch (UserContinueException e) {
@@ -236,9 +238,9 @@ public class TextUserInterface extends UserInterface {
 				case 1:
 					// add a hero
 					
-					if (heroes.size() >= 3) {
+					if (heroes.size() > Settings.getHeroesMax()) {
 						
-						showMessageDialog("You can only have three heroes in your team!", "New Game > Error");
+						showMessageDialog(String.format("You can only have up to %d heroes in your team!", Settings.getCitiesMax()), "New Game > Error");
 						
 					} else {
 						
@@ -285,15 +287,16 @@ public class TextUserInterface extends UserInterface {
 					if (!input.isEmpty()) {
 						
 						// Validate the input
-						if (input.length() < 2 || input.length() >= 10) {
+						if (input.length() < Settings.getTeamNameMin() || input.length() > Settings.getTeamNameMax()) {
 							
-							showMessageDialog("Sorry, the team name must be between 2 and 10 characters long.", "New Game > Change Team Name > Error");
+							showMessageDialog(String.format("Sorry, the team name must be between %d and %d characters long.", Settings.getTeamNameMin(), Settings.getTeamNameMax()), "New Game > Change Team Name > Error");
 							
 						} else {
 							
 							teamName = input;
 							
 							// change the menu string from "Name the Team" to "Rename the Team"
+							// TODO: come up with a better way of doing this. it will break if we try to add more menu options.
 							options[3] = "Rename the Team";
 							
 						}
@@ -305,13 +308,13 @@ public class TextUserInterface extends UserInterface {
 				case 4:
 					// ready!
 					
-					if (heroes.size() < 1) {
+					if (heroes.size() < Settings.getHeroesMin()) {
 						
 						showMessageDialog("You need at least one hero!", "New Game > Error");
 						
 					} else {
 						
-						if (heroes.size() > 3) {
+						if (heroes.size() > Settings.getHeroesMax()) {
 							
 							showMessageDialog("You cannot have more than three heroes!", "New Game > Error");
 							
