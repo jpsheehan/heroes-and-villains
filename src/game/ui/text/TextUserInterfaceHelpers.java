@@ -307,6 +307,63 @@ public class TextUserInterfaceHelpers {
 			
 		}
 		
+		// pull the input from the leftovers if possible
+		if (!TextUserInterfaceHelpers.leftoverInput.isEmpty()) {
+			
+			String[] lines = TextUserInterfaceHelpers.leftoverInput.split("\n", 2);
+			String input;
+			
+			switch (lines[0].toLowerCase()) {
+			
+				case "c":
+					// user wants to cancel
+					
+					throw new UserCancelException();
+				
+				case "q":
+					// user might want to quit
+					
+					// set any leftover input so that it can be grabbed by the showYesNo method
+					if (lines.length == 2) {
+						
+						TextUserInterfaceHelpers.leftoverInput = lines[1];
+						
+					}
+					
+					boolean shouldQuit = showYesNo("Are you sure you want to quit?", true);
+					
+					if (shouldQuit) {
+						
+						throw new UserQuitException();
+						
+					} else {
+					
+						throw new UserContinueException();
+						
+					}
+				
+				default:
+					
+					if (lines.length == 2) {
+						
+						// store the leftovers and set the input to the first line
+						TextUserInterfaceHelpers.leftoverInput = lines[1];
+						input = lines[0];
+						
+					} else {
+						
+						// clear the leftovers
+						TextUserInterfaceHelpers.leftoverInput = "";
+						input = lines[0];
+						
+					}
+					
+					return input;
+				
+			}
+			
+		}
+		
 		// Create a new buffer of a particular size. This size denotes how many characters of input can be accepted.
 		// 1024 is probably overkill and 32 would probably suffice.
 		int BUFFER_SIZE = 1024;

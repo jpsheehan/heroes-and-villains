@@ -149,13 +149,13 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		setInputStream("\n");
 		assertEquals("", readLine());
 		
-		setInputStream("1");
+		setInputStream("1\n");
 		assertEquals("1", readLine());
 		
-		setInputStream("");
+		setInputStream("\n");
 		assertEquals("", readLine());
 		
-		setInputStream("First Line\nSecond Line\nThird Line");
+		setInputStream("First Line\nSecond Line\nThird Line\n");
 		assertEquals("First Line", readLine());
 		assertEquals("Second Line", readLine());
 		assertEquals("Third Line", readLine());
@@ -163,15 +163,15 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		setInputStream("c\n");
 		assertThrows(UserCancelException.class, () -> readLine());
 		
-		setInputStream("q\ny");
+		setInputStream("q\ny\n");
 		assertThrows(UserQuitException.class, () -> readLine());
 		
-		setInputStream("q\nn");
+		setInputStream("q\nn\n");
 		assertThrows(UserContinueException.class, () -> readLine());
 		
-		setInputStream("First Line\nSecond Line");
+		setInputStream("First Line\nSecond Line\n");
 		assertEquals("First Line", readLine());
-		setInputStream("Cool Beans!");
+		setInputStream("Cool Beans!\n");
 		assertEquals("Cool Beans!", readLine());
 		
 	}
@@ -206,7 +206,7 @@ class TextUserInterfaceHelpersTest extends TextUserInterfaceHelpers {
 		setInputStream("no\n");
 		assertFalse(showYesNo("Test 4"));
 		
-		setInputStream("???\nyes");
+		setInputStream("???\nyes\n");
 		assertTrue(showYesNo("Test 5"));
 		
 		setInputStream("q\ny\n");
