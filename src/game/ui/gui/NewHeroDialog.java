@@ -23,8 +23,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.SwingConstants;
 
-public class NewHeroDialog extends JDialog {
+public class NewHeroDialog extends JDialog implements Returnable {
 
 	private HeroType heroType;
 	private String heroName;
@@ -59,6 +60,9 @@ public class NewHeroDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public NewHeroDialog() {
+		setResizable(false);
+		setModal(true);
+		setTitle("Create New Hero");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
@@ -87,6 +91,14 @@ public class NewHeroDialog extends JDialog {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -148,19 +160,20 @@ public class NewHeroDialog extends JDialog {
 		}
 		{
 			lblHeroTypeFlavourText = new JLabel("<lblHeroTypeFlavourText>");
-			contentPanel.add(lblHeroTypeFlavourText, "4, 6");
+			contentPanel.add(lblHeroTypeFlavourText, "4, 6, 1, 5, default, top");
 		}
 		{
 			JLabel lblAbility = new JLabel("Ability:");
-			contentPanel.add(lblAbility, "2, 8");
+			contentPanel.add(lblAbility, "2, 12");
 		}
 		{
 			lblHeroAbilityName = new JLabel("<lblHeroAbilityName>");
-			contentPanel.add(lblHeroAbilityName, "4, 8");
+			contentPanel.add(lblHeroAbilityName, "4, 12");
 		}
 		{
 			lblHeroAbilityFlavourText = new JLabel("<lblHeroAbilityFlavourText>");
-			contentPanel.add(lblHeroAbilityFlavourText, "4, 10");
+			lblHeroAbilityFlavourText.setVerticalAlignment(SwingConstants.TOP);
+			contentPanel.add(lblHeroAbilityFlavourText, "4, 14, 1, 5, default, fill");
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -197,6 +210,11 @@ public class NewHeroDialog extends JDialog {
 
 	}
 	
+	/**
+	 * Returns whether the hero name is valid.
+	 * @param heroName
+	 * @return
+	 */
 	private boolean isHeroNameValid(String heroName) {
 		
 		if (heroName == null || heroName.isEmpty())
@@ -211,6 +229,10 @@ public class NewHeroDialog extends JDialog {
 		
 	}
 	
+	/**
+	 * Returns the Hero object if all attributes are valid, otherwise null.
+	 * @return
+	 */
 	public Hero getHero() {
 		
 		if (isHeroNameValid(this.heroName) && this.heroType != null) {
@@ -225,18 +247,29 @@ public class NewHeroDialog extends JDialog {
 		
 	}
 	
+	/**
+	 * Gets the result of this dialog.
+	 * @return
+	 */
 	public DialogResult getDialogResult() {
 		
 		return this.dialogResult;
 		
 	}
 	
+	/**
+	 * Sets the result of this dialog.
+	 * @param dialogResult
+	 */
 	private void setDialogResult(DialogResult dialogResult) {
 		
 		this.dialogResult = dialogResult;
 		
 	}
 	
+	/**
+	 * Simply updates the labels relating to the chosen hero type.
+	 */
 	private void updateLabels() {
 		
 		if (this.heroType == null)

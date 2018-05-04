@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
 
 public class GameWindow {
 
@@ -52,7 +53,6 @@ public class GameWindow {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				NewHeroDialog dlg = new NewHeroDialog();
-				dlg.setModal(true);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -70,7 +70,8 @@ public class GameWindow {
 				}
 			}
 		});
-		frame.getContentPane().add(btnNewHero_1, BorderLayout.CENTER);
+		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		frame.getContentPane().add(btnNewHero_1);
 	}
 
 }
