@@ -21,14 +21,20 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	private String flavourText;
 	
 	/**
+	 * The type of item.
+	 */
+	private ItemType type;
+	
+	/**
 	 * Creates a new Item.
 	 * @param name The name of the Item.
 	 * @param price The price of the Item.
 	 */
-	public Item(String name, String flavourText, Integer price) {
+	public Item(String name, String flavourText, Integer price, ItemType type) {
 		this.name = name;
 		this.flavourText = flavourText;
 		this.price = price;
+		this.type = type;
 	}
 
 	/**
@@ -53,6 +59,14 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	@Override
 	public final String getFlavourText() {
 		return this.flavourText;
+	}
+	
+	/**
+	 * Gets the type of the item.
+	 * @return
+	 */
+	public final ItemType getType() {
+		return this.type;
 	}
 
 }
