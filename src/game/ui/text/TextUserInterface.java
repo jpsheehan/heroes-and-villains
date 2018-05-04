@@ -238,7 +238,7 @@ public class TextUserInterface extends UserInterface {
 				case 1:
 					// add a hero
 					
-					if (heroes.size() > Settings.getHeroesMax()) {
+					if (heroes.size() >= Settings.getHeroesMax()) {
 						
 						showMessageDialog(String.format("You can only have up to %d heroes in your team!", Settings.getHeroesMax()), "New Game > Error");
 						
@@ -390,6 +390,15 @@ public class TextUserInterface extends UserInterface {
 			
 		}
 		
+		// Put the hero names in an array list
+		ArrayList<String> currentHeroNames = new ArrayList<String>();
+		
+		for (Hero hero : heroes) {
+			
+			currentHeroNames.add(hero.getName());
+			
+		}
+		
 		printTitleBlock("New Game > Select Hero Type");
 				
 		int selectedHeroTypeIndex = TextUserInterfaceHelpers.showChoice("Select a the type of hero you want:", heroTypeArray);
@@ -401,13 +410,11 @@ public class TextUserInterface extends UserInterface {
 			name = showInputDialog("Enter your hero's name:", "New Game > Add a Hero").trim();
 		
 			// Checks if the hero's name is unique.
-			for (Hero hero : heroes) {
+			if (currentHeroNames.contains(name)) {
 				
-				if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
-					
-					continue;
-					
-				}
+				showMessageDialog(
+						String.format("The hero must have a unique name. There is already a \"%s\" in the team!", name));
+				continue;
 				
 			}
 			
