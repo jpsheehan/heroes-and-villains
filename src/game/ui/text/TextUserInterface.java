@@ -6,6 +6,8 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 import java.util.ArrayList;
 
 import game.GameEnvironment;
+import game.GameOverException;
+import game.GameWonException;
 import game.GeneralHelpers;
 import game.Settings;
 import game.Team;
@@ -238,7 +240,7 @@ public class TextUserInterface extends UserInterface {
 				case 1:
 					// add a hero
 					
-					if (heroes.size() > Settings.getHeroesMax()) {
+					if (heroes.size() >= Settings.getHeroesMax()) {
 						
 						showMessageDialog(String.format("You can only have up to %d heroes in your team!", Settings.getHeroesMax()), "New Game > Error");
 						
@@ -390,6 +392,15 @@ public class TextUserInterface extends UserInterface {
 			
 		}
 		
+		// Put the hero names in an array list
+		ArrayList<String> currentHeroNames = new ArrayList<String>();
+		
+		for (Hero hero : heroes) {
+			
+			currentHeroNames.add(hero.getName());
+			
+		}
+		
 		printTitleBlock("New Game > Select Hero Type");
 				
 		int selectedHeroTypeIndex = TextUserInterfaceHelpers.showChoice("Select a the type of hero you want:", heroTypeArray);
@@ -401,13 +412,11 @@ public class TextUserInterface extends UserInterface {
 			name = showInputDialog("Enter your hero's name:", "New Game > Add a Hero").trim();
 		
 			// Checks if the hero's name is unique.
-			for (Hero hero : heroes) {
+			if (currentHeroNames.contains(name)) {
 				
-				if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
-					
-					continue;
-					
-				}
+				showMessageDialog(
+						String.format("The hero must have a unique name. There is already a \"%s\" in the team!", name));
+				continue;
 				
 			}
 			
@@ -570,13 +579,13 @@ public class TextUserInterface extends UserInterface {
 				
 			}
 		
-//		} catch (GameWonException e) {
-//			
-//			showMessageDialog("Congratulations! You have won the game!");
-//			
-//		} catch (GameOverException e) {
-//			
-//			showMessageDialog("Sorry! You lost the game!");
+		} catch (GameWonException e) {
+			
+			showMessageDialog("Congratulations! You have won the game!");
+			
+		} catch (GameOverException e) {
+			
+			showMessageDialog("Sorry! You lost the game!");
 			
 		} catch (UserQuitException e) {
 			
@@ -606,7 +615,7 @@ public class TextUserInterface extends UserInterface {
 	 * Prints a title block, based on where your are in the city and which city you are in.
 	 * @throws UserQuitException
 	 */
-	private void printContextualTitleBlock() throws UserQuitException {
+	private void printContextualTitleBlock() {
 		
 		City city = this.getGameEnvironment().getCityController().getCurrentCity();
 		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
@@ -623,7 +632,7 @@ public class TextUserInterface extends UserInterface {
 	 * Displays an area on the screen, presenting the user with information and a list of options.
 	 * @throws UserQuitException
 	 */
-	private void displayAreaScreen() throws UserQuitException, TeamMovementException {
+	private void displayAreaScreen() throws UserQuitException, TeamMovementException, GameOverException, GameWonException {
 		
 		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
 		
