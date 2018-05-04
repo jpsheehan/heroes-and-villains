@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import game.character.Hero;
+import game.ui.gui.dialogs.NewHeroDialog;
 
 import javax.swing.JButton;
 import java.awt.BorderLayout;

@@ -1,4 +1,4 @@
-package game.ui.gui;
+package game.ui.gui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -14,6 +14,8 @@ import com.jgoodies.forms.layout.RowSpec;
 import game.Settings;
 import game.character.Hero;
 import game.character.HeroType;
+import game.ui.gui.DialogResult;
+import game.ui.gui.Returnable;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
