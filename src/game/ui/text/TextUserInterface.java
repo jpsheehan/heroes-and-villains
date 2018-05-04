@@ -6,6 +6,8 @@ import static game.ui.text.TextUserInterfaceHelpers.*;
 import java.util.ArrayList;
 
 import game.GameEnvironment;
+import game.GameOverException;
+import game.GameWonException;
 import game.GeneralHelpers;
 import game.Settings;
 import game.Team;
@@ -577,13 +579,13 @@ public class TextUserInterface extends UserInterface {
 				
 			}
 		
-//		} catch (GameWonException e) {
-//			
-//			showMessageDialog("Congratulations! You have won the game!");
-//			
-//		} catch (GameOverException e) {
-//			
-//			showMessageDialog("Sorry! You lost the game!");
+		} catch (GameWonException e) {
+			
+			showMessageDialog("Congratulations! You have won the game!");
+			
+		} catch (GameOverException e) {
+			
+			showMessageDialog("Sorry! You lost the game!");
 			
 		} catch (UserQuitException e) {
 			
@@ -613,7 +615,7 @@ public class TextUserInterface extends UserInterface {
 	 * Prints a title block, based on where your are in the city and which city you are in.
 	 * @throws UserQuitException
 	 */
-	private void printContextualTitleBlock() throws UserQuitException {
+	private void printContextualTitleBlock() {
 		
 		City city = this.getGameEnvironment().getCityController().getCurrentCity();
 		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
@@ -630,7 +632,7 @@ public class TextUserInterface extends UserInterface {
 	 * Displays an area on the screen, presenting the user with information and a list of options.
 	 * @throws UserQuitException
 	 */
-	private void displayAreaScreen() throws UserQuitException, TeamMovementException {
+	private void displayAreaScreen() throws UserQuitException, TeamMovementException, GameOverException, GameWonException {
 		
 		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
 		
