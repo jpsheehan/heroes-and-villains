@@ -3,6 +3,7 @@ package game.ui.gui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -24,18 +25,26 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class NewTeamDialog extends JDialog implements Returnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6907828618097444177L;
 	private DialogResult result;
 	private String teamName;
-	private ArrayList<Hero> heroes;
+	private DefaultListModel<Hero> heroes;
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldTeamName;
-	private JList listHeroes;
+	private JList<Hero> listHeroes;
+	private JButton btnAddHero, btnEditHero, btnRemoveHero;
 
 	/**
 	 * Launch the application.
@@ -54,6 +63,18 @@ public class NewTeamDialog extends JDialog implements Returnable {
 	 * Create the dialog.
 	 */
 	public NewTeamDialog() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				
+				updateButtons();
+				
+			}
+		});
+		heroes = new DefaultListModel<Hero>();
+		
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,7 +104,14 @@ public class NewTeamDialog extends JDialog implements Returnable {
 			contentPanel.add(lblHeroes, "2, 4, default, top");
 		}
 		{
-			listHeroes = new JList();
+			listHeroes = new JList<Hero>(heroes);
+			listHeroes.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent arg0) {
+					
+					updateButtons();
+					
+				}
+			});
 			contentPanel.add(listHeroes, "4, 4, fill, fill");
 		}
 		{
@@ -91,11 +119,11 @@ public class NewTeamDialog extends JDialog implements Returnable {
 			contentPanel.add(panel, "4, 5, center, center");
 			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
-				JButton btnAddHero = new JButton("Add...");
+				btnAddHero = new JButton("Add...");
 				btnAddHero.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
-						if (heroes.size() + 1 < Settings.getHeroesMax()) {
+						if (heroes.size() < Settings.getHeroesMax()) {
 							
 							NewHeroDialog dlg = new NewHeroDialog();
 							dlg.setVisible(true);
@@ -109,8 +137,9 @@ public class NewTeamDialog extends JDialog implements Returnable {
 									// check that the name doesn't exist
 									if (isHeroNameUnique(hero.getName())) {
 										
-										heroes.add(hero);
-										updateListAndButtons();
+										heroes.addElement(hero);
+										
+										updateButtons();
 										
 									} else {
 										
@@ -144,11 +173,55 @@ public class NewTeamDialog extends JDialog implements Returnable {
 				panel.add(btnAddHero);
 			}
 			{
-				JButton btnEditHero = new JButton("Edit...");
+				btnEditHero = new JButton("Edit...");
+				btnEditHero.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						Hero originalHero = listHeroes.getSelectedValue();
+						
+						EditHeroDialog dlg = new EditHeroDialog(originalHero);
+						dlg.setVisible(true);
+						
+						if (dlg.getDialogResult() == DialogResult.OK) {
+							
+							Hero newHero = dlg.getHero();
+							
+							if (!originalHero.getName().equals(newHero.getName()) || originalHero.getType() != newHero.getType()) {
+								
+								// update the hero
+								heroes.insertElementAt(newHero, listHeroes.getSelectedIndex());
+								heroes.removeElement(originalHero);
+								updateButtons();
+								
+							} else {
+								
+								JOptionPane.showMessageDialog(null, "No changes were made to the hero.");
+								
+							}
+							
+						}
+						
+					}
+				});
 				panel.add(btnEditHero);
 			}
 			{
-				JButton btnRemoveHero = new JButton("Remove");
+				btnRemoveHero = new JButton("Remove");
+				btnRemoveHero.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						Hero removedHero = listHeroes.getSelectedValue();
+						
+						int result = JOptionPane.showConfirmDialog(null, String.format("Are you sure you want to remove %s from the team?", removedHero));
+						
+						if (result == JOptionPane.YES_OPTION) {
+							
+							heroes.removeElement(removedHero);
+							
+						}
+						
+					}
+				});
 				panel.add(btnRemoveHero);
 			}
 		}
@@ -185,7 +258,6 @@ public class NewTeamDialog extends JDialog implements Returnable {
 			}
 		}
 		
-		this.heroes = new ArrayList<Hero>();
 		this.teamName = "";
 	}
 
@@ -228,9 +300,11 @@ public class NewTeamDialog extends JDialog implements Returnable {
 	
 	private boolean isHeroNameUnique(String name) {
 		
-		for (Hero hero: this.heroes) {
+		for (Object obj: this.heroes.toArray()) {
 			
-			if (hero.getName().equals(name)) {
+			Hero hero = (Hero)obj;
+			
+			if (hero.getName().toLowerCase().equals(name.toLowerCase())) {
 				
 				return false;
 				
@@ -242,9 +316,24 @@ public class NewTeamDialog extends JDialog implements Returnable {
 		
 	}
 	
-	private void updateListAndButtons() {
+	private void updateButtons() {
 		
+		btnAddHero.setEnabled(true);
+		btnEditHero.setEnabled(true);
+		btnRemoveHero.setEnabled(true);
 		
+		if (this.listHeroes.getSelectedValue() == null) {
+
+			btnEditHero.setEnabled(false);
+			btnRemoveHero.setEnabled(false);
+			
+		}
+		
+		if (this.heroes.size() >= Settings.getHeroesMax()) {
+			
+			btnAddHero.setEnabled(false);
+			
+		}
 		
 	}
 	
@@ -260,8 +349,9 @@ public class NewTeamDialog extends JDialog implements Returnable {
 			
 			try {
 				
-				for (Hero hero : this.heroes) {
+				for (Object obj : this.heroes.toArray()) {
 					
+					Hero hero = (Hero)obj;
 					team.addHero(hero);
 					
 				}

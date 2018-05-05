@@ -1,6 +1,7 @@
 package game.ui.gui.dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -26,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class NewHeroDialog extends JDialog implements Returnable {
 
@@ -42,7 +45,8 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	private JLabel lblHeroTypeFlavourText;
 	private JLabel lblHeroAbilityName;
 	private JLabel lblHeroAbilityFlavourText;
-	private JComboBox comboBoxHeroType;
+	private JComboBox<String> comboBoxHeroType;
+	private Color defaultTextFieldBackgroundColor;
 
 	/**
 	 * Launch the application.
@@ -77,6 +81,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				}
 				
 				comboBoxHeroType.setSelectedItem(HeroType.values()[0]);
+				defaultTextFieldBackgroundColor = textFieldHeroName.getBackground();
 				
 				heroType = HeroType.values()[0];
 				updateLabels();
@@ -117,18 +122,19 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		}
 		{
 			textFieldHeroName = new JTextField();
-			textFieldHeroName.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+			textFieldHeroName.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
 					
 					String name = textFieldHeroName.getText();
 					if (isHeroNameValid(name)) {
 						
 						heroName = name.trim();
-						// make it default color
+						textFieldHeroName.setBackground(defaultTextFieldBackgroundColor);
 						
 					} else {
 						
-						// make it red?
+						textFieldHeroName.setBackground(Color.RED);
 						
 					}
 					
@@ -142,7 +148,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 			contentPanel.add(lblHeroType, "2, 4, left, default");
 		}
 		{
-			comboBoxHeroType = new JComboBox();
+			comboBoxHeroType = new JComboBox<String>();
 			comboBoxHeroType.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				
@@ -186,6 +192,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
+						heroName = textFieldHeroName.getText().trim();
 						setDialogResult(DialogResult.OK);
 						dispose();
 						
@@ -280,6 +287,20 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		lblHeroTypeFlavourText.setText(this.heroType.getFlavourText());
 		lblHeroAbilityName.setText(this.heroType.getAbility().getName());
 		lblHeroAbilityFlavourText.setText(this.heroType.getAbility().getFlavourText());
+		
+	}
+	
+	protected void setHeroName(String name) {
+		
+		name = name.trim();
+		this.heroName = name;
+		textFieldHeroName.setText(name);
+		
+	}
+	
+	protected void setHeroType(HeroType type) {
+		
+		comboBoxHeroType.setSelectedItem(type.toString());
 		
 	}
 
