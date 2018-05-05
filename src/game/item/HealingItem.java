@@ -25,7 +25,7 @@ public class HealingItem extends Item {
 	 * @param applicationTime The time (in seconds) to restore the specified amount of health.
 	 */
 	public HealingItem(String name, String flavourText, int price, int restorationLevel, int applicationTime) {
-		super(name, flavourText, price);
+		super(name, flavourText, price, ItemType.HEALING_ITEM);
 		
 		if (restorationLevel < 1 || restorationLevel > 4) {
 			throw new IllegalArgumentException(

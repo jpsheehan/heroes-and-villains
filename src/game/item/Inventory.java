@@ -203,6 +203,36 @@ public class Inventory {
 	}
 	
 	/**
+	 * Returns an array of all items.
+	 * @return
+	 */
+	public Item[] getAllItems() {
+		
+		Item[] items = new Item[this.size()];
+		int i = 0;
+		
+		for (Item map : this.listMaps) {
+			
+			items[i] = map;
+			
+		}
+		
+		for (Item healingItem : this.listHealingItems) {
+			
+			items[i] = healingItem;
+			
+		}
+		
+		for (Item powerUpItems : this.listPowerUpItems) {
+			
+			items[i] = powerUpItems;
+			
+		}
+		
+		return items;
+	}
+	
+	/**
 	 * Returns the number of items in the inventory.
 	 * @return
 	 */

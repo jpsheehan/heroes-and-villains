@@ -26,6 +26,7 @@ import game.city.PowerUpDen;
 import game.city.Shop;
 import game.city.TeamMovementException;
 import game.city.VillainsLair;
+import game.item.Item;
 
 /**
  * Represents the user interface shown to the user in text format.
@@ -895,12 +896,69 @@ public class TextUserInterface extends UserInterface {
 				case "b":
 				case "buy":
 					
-					printContextualTitleBlock();
-					
-					printLineCentred(String.format("Your team has $%d.", this.getGameEnvironment().getTeam().getMoney()));
-					printLineCentred(String.format("%s says \"%s\"", innkeeper.getName(), innkeeper.getDialogue().getOptions()));
+					while (true) {
+						
+						printContextualTitleBlock();
+						
+						printLineCentred(String.format("Your team has $%d.", this.getGameEnvironment().getTeam().getMoney()));
+						// printLineCentred(String.format("%s says \"%s\"", innkeeper.getName(), innkeeper.getDialogue().getOptions()));
+						
+						if (shop.getInventory().size() == 0) {
+							
+							printLineCentred("The shop has no more items for sale!\nPress <Enter> to continue...");
+							
+							try {
+								
+								readLine();
+								
+							} catch (UserCancelException | UserContinueException e) {}
+							
+							break;
+							
+						}
+						
+						String[] itemNames = new String[shop.getInventory().size()];
+						
+						int i = 0;
+						for (Item item : shop.getInventory().getAllItems()) {
+							
+							itemNames[i++] = String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText());
+							
+						}
+						
+						try {
+							
+							int index = showChoice("What would you like to purchase?", itemNames);
+							
+							if (index >= 0) {
+								
+								Item item = shop.getInventory().getAllItems()[index];
+								
+								if (item.getPrice() <= this.getGameEnvironment().getTeam().getMoney()) {
+									
+									this.getGameEnvironment().getTeam().spendMoney(item.getPrice());
+									this.getGameEnvironment().getTeam().getInventory().add(item);
+									shop.getInventory().remove(item);
+									
+									showMessageDialog(String.format("You purchased a %s! You now have $%d.", item.getName(), this.getGameEnvironment().getTeam().getMoney()));
+									
+								} else {
+									
+									showMessageDialog("You cannot afford that. You only have $%d.", "Not Enough Money");
+									
+								}
+								
+							}
+							
+						} catch (UserCancelException e1) {
+							
+							break;
+							
+						}
+					}
 					
 				try {
+					System.out.println("...");
 					readLine();
 				} catch (UserCancelException | UserContinueException e) {
 					// TODO Auto-generated catch block

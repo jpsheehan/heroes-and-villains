@@ -2,6 +2,7 @@ package game;
 import java.util.ArrayList;
 
 import game.character.Hero;
+import game.item.Inventory;
 
 public class Team implements Nameable {
 
@@ -21,6 +22,11 @@ public class Team implements Nameable {
 	private int money;
 	
 	/**
+	 * The inventory of the team.
+	 */
+	private Inventory inventory;
+	
+	/**
 	 * Creates a new Team.
 	 * @param name The name of the team.
 	 */
@@ -36,6 +42,7 @@ public class Team implements Nameable {
 		
 		this.name = name;
 		this.heroes = new ArrayList<Hero>();
+		this.inventory = new Inventory();
 		
 	}
 	
@@ -169,6 +176,16 @@ public class Team implements Nameable {
 		}
 		
 		this.money -= amount;
+		
+	}
+	
+	/**
+	 * Gets the team's inventory.
+	 * @return
+	 */
+	public Inventory getInventory() {
+		
+		return this.inventory;
 		
 	}
 }
