@@ -388,7 +388,6 @@ public class TextUserInterface extends UserInterface {
 		int i = 0;
 		
 		for (HeroType heroType : HeroType.values()) {
-
 			heroTypeArray[i++] = String.format("%s Major: %s\n\tAbility: %s - %s\n", heroType.getName(), heroType.getFlavourText(), heroType.getAbility().getName(), heroType.getAbility().getFlavourText());
 			
 		}
@@ -397,7 +396,6 @@ public class TextUserInterface extends UserInterface {
 		ArrayList<String> currentHeroNames = new ArrayList<String>();
 		
 		for (Hero hero : heroes) {
-			
 			currentHeroNames.add(hero.getName());
 			
 		}
@@ -980,16 +978,73 @@ public class TextUserInterface extends UserInterface {
 	private void showPowerUpDenArea(PowerUpDen powerUpDen) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
-		String input;
+		String input = null;
 		
-		// the next 5 lines are placeholders. delete and put things here.
+		// the next 5 lines were placeholders. delete and put things in.
 		try {
 			input = parseMovementInput();
 		} catch (UserCancelException | UserContinueException e) {
 			
 		}
+			
+			switch (input.toLowerCase()) {
+			
+				case "a":
+				case "apply":
+					
+					while (true) {
+						
+						
+						if (this.getGameEnvironment().getTeam().getInventory().getPowerUpItems().length == 0) {
+							
+							printLineCentred("You do not have any healing items available !\nPress <Enter> to continue...");
+							
+							try {
+								
+								readLine();
+								
+							} catch (UserCancelException | UserContinueException f) {}
+							
+							break;
+						
+							/*
+							String[] healingItemNames = new String[this.getGameEnvironment().getTeam().getInventory().getPowerUpItems().length];
+							String[] heroNames = new String[this.getGameEnvironment().getTeam().getHeroes().size()];
+							String[] heroNamesHealth = new String[this.getGameEnvironment().getTeam().getHeroes() .size()];
+
+							
+							printLineCentred(String.format("Your team has these healing items %s.", this.getGameEnvironment().getTeam().getInventory().getPowerUpItems().toString()));
+							
+							try {
+								
+								int itemIndex = showChoice("Which item would you like to apply?", healingItemNames);
+								
+								int heroIndex = showChoice("Which hero will receive the item?", heroNames);
+							}
+						*/
+						}
+					}
+			}
+		}
 		
-	}
+		/*
+		 * powerUpDen process
+		 *  
+		 * Print the contextual title block
+		 * while ? check user input -
+		 * check the team actually has some healing items
+		 * check for c or q (cancel or quit)
+		 *  a or apply for apply healing items 
+		 *  	list the healing items in the team (from the team inventory) (get them into a local string)
+		 *  	print item selection list and get user selection (helper)
+		 *  	print heros in the team and their current health (team . hero . getHealth() )
+		 *  	print hero selection (who to apply item to) and get user selection (helper)
+		 *  	apply healing item
+		 *  		remove from team inventory
+		 *  		apply healing to hero
+		 *  		return
+		*/
+
 	
 	/**
 	 * Displays a Hospital to the user and handles related inputs.
