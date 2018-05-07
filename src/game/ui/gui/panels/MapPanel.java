@@ -9,12 +9,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class MapPanel extends JPanel {
 	
 	public Color unvisitedColor = Color.GRAY;
 	public Color visitedColor = Color.WHITE;
 	public Color errorColor = Color.RED;
+	public Color occupiedColor = Color.GREEN;
 	
 	private CityController cityController;
 
@@ -65,61 +67,68 @@ public class MapPanel extends JPanel {
 			g.fillRect(2 * width / 3, 2 * height / 3, width / 3, height / 3);
 			
 			// Fill the visited areas in
-			if (cityController.hasVisitedDirection(Direction.CENTRE)) {
-
-				g.setColor(visitedColor);
-				g.fillRect(width / 3, height / 3, width / 3, height / 3);
+			
+			for (Direction direction : Direction.values()) {
 				
-				g.setColor(getForeground());
-				String legend = cityController.getCurrentCity().getArea(Direction.CENTRE).getType().getMapLegend();
-				g.drawString(legend, (width - metrics.stringWidth(legend)) / 2, (height + metrics.getHeight() / 2) / 2);
+				if (cityController.hasVisitedDirection(direction)) {
+					
+					Point position = this.getAreaPosition(direction, width, height);
+	
+					// fill the area with a solid color.
+					g.setColor(visitedColor);
+					g.fillRect(position.x, position.y, width / 3, height / 3);
+					
+					// If this area is occupied by the team, draw a green circle
+					if (cityController.getDirection() == direction) {
+						
+						boolean wider = (width / 3 > height / 3);
+						
+						int diameter = (wider ? height / 3 : width / 3) - 16;
+						int x = (width / 3 - diameter) / 2 + position.x;
+						int y = (height / 3 - diameter) / 2 + position.y;
+						
+						g.setColor(occupiedColor);
+						g.fillOval(x, y, diameter, diameter);
+						
+					}
+					
+					// Draw the area legend
+					g.setColor(getForeground());
+					String legend = cityController.getCurrentCity().getArea(direction).getType().getMapLegend();
+					g.drawString(legend, position.x + (width / 3 - metrics.stringWidth(legend)) / 2, position.y + (height / 3 + metrics.getHeight() / 2) / 2);
+					
+				}
 				
 			}
 			
-//			if (cityController.hasVisitedDirection(Direction.NORTH)) {
-//
-//				g.setColor(visitedColor);
-//				g.fillRect(width / 3, 0, width / 3, height / 3);
-//				
-//				g.setColor(getForeground());
-//				String legend = cityController.getCurrentCity().getArea(Direction.CENTRE).getType().getMapLegend();
-//				g.drawString(legend, (width - g.getFontMetrics().stringWidth(legend)) / 2, height / 2);
-//				
-//			}
-//			
-//			if (cityController.hasVisitedDirection(Direction.WEST)) {
-//
-//				g.setColor(visitedColor);
-//				g.fillRect(0, height / 3, width / 3, height / 3);
-//				
-//				g.setColor(getForeground());
-//				String legend = cityController.getCurrentCity().getArea(Direction.CENTRE).getType().getMapLegend();
-//				g.drawString(legend, (width - g.getFontMetrics().stringWidth(legend)) / 2, (height - g.getFontMetrics().getHeight()) / 2);
-//				
-//			}
-//			
-//			if (cityController.hasVisitedDirection(Direction.EAST)) {
-//
-//				g.setColor(visitedColor);
-//				g.fillRect(2 * width / 3, height / 3, width / 3, height / 3);
-//				
-//				g.setColor(getForeground());
-//				String legend = cityController.getCurrentCity().getArea(Direction.CENTRE).getType().getMapLegend();
-//				g.drawString(legend, (width - g.getFontMetrics().stringWidth(legend)) / 2, (height - g.getFontMetrics().getHeight()) / 2);
-//				
-//			}
-//			
-//			if (cityController.hasVisitedDirection(Direction.SOUTH)) {
-//
-//				g.setColor(visitedColor);
-//				g.fillRect(width / 3, 2 * height / 3, width / 3, height / 3);
-//				
-//				g.setColor(getForeground());
-//				String legend = cityController.getCurrentCity().getArea(Direction.CENTRE).getType().getMapLegend();
-//				g.drawString(legend, (width - g.getFontMetrics().stringWidth(legend)) / 2, (height - g.getFontMetrics().getHeight()) / 2);
-//				
-//			}
 		}
+		
+	}
+	
+	private Point getAreaPosition(Direction direction, int width, int height) {
+		
+		switch (direction) {
+		
+			case CENTRE:
+				return new Point(width / 3, height / 3);
+				
+			case EAST:
+				return new Point(2 * width / 3, height / 3);
+				
+			case NORTH:
+				return new Point(width / 3, 0);
+				
+			case SOUTH:
+				return new Point(width / 3, 2 * height / 3);
+				
+			case WEST:
+				return new Point(0, height / 3);
+			
+			default:
+				throw new AssertionError();
+		
+		}
+		
 	}
 	
 }

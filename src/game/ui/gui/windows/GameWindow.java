@@ -5,7 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import game.ui.gui.panels.MapPanel;
 import game.city.CityController;
-import game.item.Map;
+import game.city.Direction;
+import game.city.IllegalMoveException;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -45,7 +46,15 @@ public class GameWindow {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		CityController cc = new CityController(3);
-		cc.useMap(new Map("","", 10));
+		// cc.useMap(new Map("","", 10));
+		try {
+			cc.move(Direction.SOUTH);
+			cc.move(Direction.NORTH);
+			cc.move(Direction.NORTH);
+		} catch (IllegalMoveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		MapPanel mapPanel =  new MapPanel(cc);
 		mapPanel.setBackground(Color.BLACK);
 		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
