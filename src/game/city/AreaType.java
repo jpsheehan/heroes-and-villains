@@ -46,4 +46,34 @@ public enum AreaType {
 		return this.toString().replaceAll(" ", "").replaceAll("'", "");
 		
 	}
+	
+	/**
+	 * Returns the letter to use as a legend on a map.
+	 * @return
+	 */
+	public String getMapLegend() {
+		
+		switch (this) {
+			
+			case HOME_BASE:
+				return "B";
+				
+			case HOSPITAL:
+				return "H";
+				
+			case POWER_UP_DEN:
+				return "P";
+				
+			case SHOP:
+				return "S";
+				
+			case VILLAINS_LAIR:
+				return "V";
+				
+			default:
+				throw new AssertionError();
+		
+		}
+		
+	}
 }
