@@ -54,7 +54,14 @@ public class City implements game.Nameable {
 		InnKeeper innKeeper = new InnKeeper(getString(String.format("%s.InnKeeper.Name", buildingName)), new Dialogue(type));
 		
 		ArrayList<Item> items = new ArrayList<Item>();
-		// TODO: Add items for shop?
+		
+		String[] properNames = getString(String.format("%s.Shop.Items")).split(",");
+		
+		for (String properName : properNames) {
+			
+			items.add(Item.fromStrings(properName.trim()));
+			
+		}
 		
 		Villain villain = new Villain(getString(String.format("%s.Villain.Name", buildingName)), VillainType.RORY_THE_BUILDER, MinigameType.ALL, 3);
 		
