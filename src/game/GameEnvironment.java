@@ -2,7 +2,9 @@ package game;
 
 import game.city.CityController;
 import game.ui.UserInterface;
+import game.ui.gui.GraphicalUserInterface;
 import game.ui.text.TextUserInterface;
+import game.ui.textgui.TextGraphicalUserInterface;
 
 //20180416 to do
 // call the ui
@@ -44,6 +46,14 @@ public class GameEnvironment {
 				this.ui = new TextUserInterface(this);
 				break;
 			
+			case "game.ui.gui.GraphicalUserInterface":
+				this.ui = new GraphicalUserInterface(this);
+				break;
+				
+			case "game.ui.textgui.TextGraphicalUserInterface":
+				this.ui = new TextGraphicalUserInterface(this);
+				break;
+				
 			default:
 				throw new IllegalArgumentException("No such ui class: " + uiClass.getName());
 		
