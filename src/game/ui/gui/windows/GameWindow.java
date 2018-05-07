@@ -4,12 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import game.ui.gui.panels.MapPanel;
-import game.city.CityController;
-import game.city.Direction;
-import game.city.IllegalMoveException;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.BoxLayout;
+import game.ui.gui.panels.TeamSummaryPanel;
+import game.Team;
+import game.TeamFullException;
+import game.character.Hero;
+import game.character.HeroType;
+
+import javax.swing.JLabel;
+import game.city.CityController;
 
 public class GameWindow {
 
@@ -45,19 +51,22 @@ public class GameWindow {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		CityController cc = new CityController(3);
-		// cc.useMap(new Map("","", 10));
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		Team team = new Team("Team Name");
 		try {
-			cc.move(Direction.SOUTH);
-			cc.move(Direction.NORTH);
-			cc.move(Direction.NORTH);
-		} catch (IllegalMoveException e) {
+			team.addHero(new Hero("Steve", HeroType.ARTS_STUDENT));
+			team.addHero(new Hero("Bob", HeroType.ENGINEERING_STUDENT));
+			team.addHero(new Hero("Amy", HeroType.LAW_STUDENT));
+		} catch (TeamFullException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		MapPanel mapPanel =  new MapPanel(cc);
-		mapPanel.setBackground(Color.BLACK);
-		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+		
+		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(team);
+		frame.getContentPane().add(teamSummaryPanel, BorderLayout.NORTH);
+		
+		MapPanel mapPanel = new MapPanel((CityController) null);
+		frame.getContentPane().add(mapPanel, BorderLayout.EAST);
 	}
-
 }
