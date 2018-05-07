@@ -44,13 +44,43 @@ public enum ItemAbility implements Ability, Nameable, Describable {
 		
 		}
 		
-		
 	}
 	
 	@Override
 	public String getFlavourText() {
 		
 		return getString(this.getProperName() + ".Flavour");
+		
+	}
+	
+	public static ItemAbility fromProperName(String name) {
+		
+		switch (name) {
+		
+			case "DamageProtection":
+			case "Ability.Item.DamageProtection":
+				return DAMAGE_PROTECTION;
+				
+			case "DecreaseRobberyChance":
+			case "Ability.Item.DecreaseRobberyChance":
+				return ItemAbility.DECREASE_ROBBERY_CHANCE;
+				
+			case "FourAttemptsAtGuessTheNumber":
+			case "Ability.Item.FourAttemptsAtGuessTheNumber":
+				return FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER;
+				
+			case "IncreaseGiftChance":
+			case "Ability.Item.IncreaseGiftChance":
+				return INCREASE_GIFT_CHANCE;
+				
+			case "WinOnDraw":
+			case "Ability.Item.WinOnDraw":
+				return WIN_ON_DRAW;
+			
+			default:
+				throw new AssertionError();
+				
+		}
 		
 	}
 }

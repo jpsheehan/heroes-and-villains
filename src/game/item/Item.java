@@ -2,6 +2,10 @@ package game.item;
 
 import game.Describable;
 import game.Nameable;
+import game.minigame.MinigameType;
+
+import static game.GeneralHelpers.getString;
+import static game.GeneralHelpers.getInt;
 
 public abstract class Item implements Buyable, Nameable, Describable {
 	
@@ -67,6 +71,62 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	 */
 	public final ItemType getType() {
 		return this.type;
+	}
+	
+	/**
+	 * Returns an item from the strings file.
+	 * All items must have Name, Flavour, Price and Type keys.
+	 * Valid type values are "Healing", "Map" and "PowerUp".
+	 * Healing items require ApplicationTime, RestorationLevel
+	 * PowerUp items require Ability, AppliesTo
+	 * Valid MinigameTypes for AppliesTo are "PaperScissorsRock", "DiceRolls", "GuessTheNumber" and "All".
+	 * @param specifier The item to return.
+	 * @return
+	 */
+	public static Item fromStrings(String specifier) {
+		
+		specifier = String.format("Item.%s.", specifier);
+		
+		try {
+			
+			String name = getString(specifier + "Name");
+			String flavour = getString(specifier + "Flavour");
+			String type = getString(specifier + "Type");
+			int price = getInt(specifier + "Price");
+			
+			switch (type) {
+			
+			case "Healing":
+				
+				int applicationTime = getInt(specifier + "ApplicationTime");
+				int restorationLevel = getInt(specifier + "RestorationLevel");
+				
+				return new HealingItem(name, flavour, price, restorationLevel, applicationTime);
+				
+			case "Map":
+				
+				return new Map(name, flavour, price);
+				
+			case "PowerUp":
+				
+				String abilityString = getString(specifier + "Ability");
+				ItemAbility ability = ItemAbility.fromProperName(abilityString);
+				
+				MinigameType appliesTo = MinigameType.fromProperName(getString(specifier + "AppliesTo"));
+				
+				return new PowerUpItem(name, flavour, price, ability, appliesTo);
+				
+				default:
+					throw new AssertionError(String.format("Invalid item type \"%s\"", type));
+			
+			}
+			
+		} catch (Exception e) {
+			
+			throw new IllegalArgumentException(String.format("Invalid specifier for item \"%s\"", specifier), e);
+			
+		}
+		
 	}
 
 }
