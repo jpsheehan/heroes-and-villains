@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 import game.city.*;
 import game.item.Inventory;
 import game.item.Item;
+import javax.swing.SwingConstants;
+import javax.swing.JList;
 
 public class ItemSelectionDialog extends JDialog implements Returnable {
 
@@ -30,16 +32,9 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5348976844662470541L;
-	//private ItemType itemType;
-	private String itemName;
 	private DialogResult dialogResult;
-
+	private JList listItems;
 	private final JPanel contentPanel = new JPanel();
-	private JLabel lblItemName;
-	private JLabel lblItemFlavourText;
-	private JLabel lblItemPrice;
-	private JComboBox<String> comboBoxItems;
-	private Color defaultTextFieldBackgroundColor;
 	private Inventory inventory;
 	
 	/**
@@ -66,7 +61,8 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	public ItemSelectionDialog(Inventory inventory) {
 		this.inventory = inventory;
-		// String[] itemNames = new String[inventory.size()];
+		
+
 		setResizable(false);
 		setModal(true);
 		setTitle("Select Items");
@@ -75,19 +71,13 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				
-				// Get the item details from the inventory into an
-				
+				// Get the item details from the inventory into a string array			
 				for (Item item : inventory.getAllItems()) {
 					
-					comboBoxItems.addItem(String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText()));		
+					
+					listItems.addItem(String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText()));		
 					
 				}
-				
-				//itemNames = this.itemNames;
-				//comboBoxItem.setSelectedItem(HeroType.values()[0]);
-				//defaultTextFieldBackgroundColor = textFieldHeroName.getBackground();
-				//heroType = HeroType.values()[0];
-				//updateLabels();
 			}
 		});
 		
@@ -96,11 +86,6 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		{
-			JLabel lblItemName = new JLabel("Item:");
-			contentPanel.add(lblItemName, "2, 2, right, default");
-		}
 		
 		{
 			JLabel lblItemFlavourText = new JLabel("Description:");
@@ -112,9 +97,25 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			contentPanel.add(lblItemPrice, "2, 4, default, top");
 		}
 		
-		comboBoxItems = new JComboBox<String>();
-		comboBoxItems.setBounds(6, 21, 438, 218);
-		contentPanel.add(comboBoxItems);
+		JLabel lblItem = new JLabel("Item");
+		lblItem.setBounds(0, 0, 31, 27);
+		contentPanel.add(lblItem);
+		
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setBounds(388, 0, 48, 27);
+		contentPanel.add(lblPrice);
+		
+		JLabel lblDescription = new JLabel("Description");
+		lblDescription.setBounds(86, 0, 88, 27);
+		contentPanel.add(lblDescription);
+		
+		JLabel lblType = new JLabel("Type");
+		lblType.setBounds(312, 0, 34, 27);
+		contentPanel.add(lblType);
+		
+		listItems = new JList();
+		listItems.setBounds(0, 238, 448, -213);
+		contentPanel.add(listItems);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -168,5 +169,4 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		
 		return this.dialogResult;
 	}
-
 }
