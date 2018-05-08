@@ -22,21 +22,20 @@ import javax.swing.JTextField;
 
 public class ItemSelectionDialog extends JDialog implements Returnable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5348976844662470541L;
 	//private ItemType itemType;
 	private String itemName;
 	private DialogResult dialogResult;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 79073142309546931L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblItemName;
 	private JLabel lblItemFlavourText;
 	private JLabel lblItemPrice;
 	private JComboBox<String> comboBoxItem;
 	private Color defaultTextFieldBackgroundColor;
-	
 	
 	/**
 	 * Launch the application.
