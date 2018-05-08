@@ -149,6 +149,22 @@ public class City implements game.Nameable {
 		
 	}
 	
+	public Area getArea(AreaType type) {
+		
+		for (Area area : areas.values()) {
+			
+			if (area.getType() == type) {
+				
+				return area;
+				
+			}
+			
+		}
+		
+		throw new AssertionError("Invalid area type.");
+		
+	}
+	
 	/**
 	 * Gets the type of City.
 	 * @return Returns the CityType.
