@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class MapPanel extends JPanel {
 	
@@ -29,6 +31,14 @@ public class MapPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MapPanel(CityController cityController) {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				
+				setSize(getHeight(), getHeight());
+				
+			}
+		});
 		setLayout(null);
 		
 		this.cityController = cityController;

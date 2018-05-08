@@ -14,6 +14,11 @@ import game.character.Hero;
 import game.character.HeroType;
 
 import game.city.CityController;
+import javax.swing.JPanel;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class GameWindow {
 
@@ -37,6 +42,37 @@ public class GameWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		createTestEnvironment();
+		
+		JPanel northPanel = new JPanel();
+		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
+		northPanel.setLayout(new GridLayout(1, 2, 0, 0));
+		
+		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
+		northPanel.add(teamSummaryPanel);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		northPanel.add(horizontalGlue);
+		
+		MapPanel mapPanel = new MapPanel(getGameEnvironment().getCityController());
+		northPanel.add(mapPanel);
+		mapPanel.setLayout(null);
+	}
+	
+	public void show() {
+		this.frame.setVisible(true);
+	}
+	
+	private GameEnvironment getGameEnvironment() {
+		return this.gameEnvironment;
+	}
+	
+	/**
+	 * REMOVE FROM PRODUCTION!
+	 * Creates a basic team and city controller for testing
+	 */
+	private void createTestEnvironment() {
+		
 		Team team = new Team("Team Name");
 		try {
 			team.addHero(new Hero("Steve", HeroType.ARTS_STUDENT));
@@ -51,19 +87,6 @@ public class GameWindow {
 		gameEnvironment.setTeam(team);
 		gameEnvironment.setCityController(new CityController(3));
 		
-		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
-		frame.getContentPane().add(teamSummaryPanel, BorderLayout.NORTH);
-		
-		MapPanel mapPanel = new MapPanel(getGameEnvironment().getCityController());
-		frame.getContentPane().add(mapPanel, BorderLayout.EAST);
-	}
-	
-	public void show() {
-		this.frame.setVisible(true);
-	}
-	
-	private GameEnvironment getGameEnvironment() {
-		return this.gameEnvironment;
 	}
 
 }
