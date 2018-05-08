@@ -26,9 +26,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 public class NewHeroDialog extends JDialog implements Returnable {
 
@@ -42,11 +43,11 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	private static final long serialVersionUID = 79073142309546932L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldHeroName;
-	private JLabel lblHeroTypeFlavourText;
 	private JLabel lblHeroAbilityName;
-	private JLabel lblHeroAbilityFlavourText;
 	private JComboBox<String> comboBoxHeroType;
 	private Color defaultTextFieldBackgroundColor;
+	private JTextArea textAreaHeroTypeFlavourText;
+	private JTextArea textAreaHeroAbilityFlavourText;
 
 	/**
 	 * Launch the application.
@@ -103,7 +104,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -111,7 +112,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -164,11 +165,15 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		}
 		{
 			JLabel lblDescription = new JLabel("Description:");
-			contentPanel.add(lblDescription, "2, 6");
+			contentPanel.add(lblDescription, "2, 6, default, top");
 		}
 		{
-			lblHeroTypeFlavourText = new JLabel("<lblHeroTypeFlavourText>");
-			contentPanel.add(lblHeroTypeFlavourText, "4, 6, 1, 5, default, top");
+			textAreaHeroTypeFlavourText = new JTextArea();
+			textAreaHeroTypeFlavourText.setBackground(UIManager.getColor("Label.background"));
+			textAreaHeroTypeFlavourText.setWrapStyleWord(true);
+			textAreaHeroTypeFlavourText.setLineWrap(true);
+			textAreaHeroTypeFlavourText.setEditable(false);
+			contentPanel.add(textAreaHeroTypeFlavourText, "4, 6, 1, 5, fill, fill");
 		}
 		{
 			JLabel lblAbility = new JLabel("Ability:");
@@ -177,11 +182,6 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		{
 			lblHeroAbilityName = new JLabel("<lblHeroAbilityName>");
 			contentPanel.add(lblHeroAbilityName, "4, 12");
-		}
-		{
-			lblHeroAbilityFlavourText = new JLabel("<lblHeroAbilityFlavourText>");
-			lblHeroAbilityFlavourText.setVerticalAlignment(SwingConstants.TOP);
-			contentPanel.add(lblHeroAbilityFlavourText, "4, 14, 1, 5, default, fill");
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -215,6 +215,14 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+		{
+			textAreaHeroAbilityFlavourText = new JTextArea();
+			textAreaHeroAbilityFlavourText.setBackground(UIManager.getColor("Label.background"));
+			textAreaHeroAbilityFlavourText.setWrapStyleWord(true);
+			textAreaHeroAbilityFlavourText.setLineWrap(true);
+			textAreaHeroAbilityFlavourText.setEditable(false);
+			contentPanel.add(textAreaHeroAbilityFlavourText, "4, 14, 1, 5, fill, fill");
 		}
 
 	}
@@ -284,9 +292,10 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		if (this.heroType == null)
 			return;
 		
-		lblHeroTypeFlavourText.setText(this.heroType.getFlavourText());
+		
+		textAreaHeroTypeFlavourText.setText(this.heroType.getFlavourText());
 		lblHeroAbilityName.setText(this.heroType.getAbility().getName());
-		lblHeroAbilityFlavourText.setText(this.heroType.getAbility().getFlavourText());
+		textAreaHeroAbilityFlavourText.setText(this.heroType.getAbility().getFlavourText());
 		
 	}
 	
@@ -303,5 +312,4 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		comboBoxHeroType.setSelectedItem(type.toString());
 		
 	}
-
 }
