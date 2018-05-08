@@ -1,46 +1,30 @@
 package game.ui.gui.windows;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import game.ui.gui.panels.MapPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import javax.swing.BoxLayout;
 import game.ui.gui.panels.TeamSummaryPanel;
+import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
 
-import javax.swing.JLabel;
 import game.city.CityController;
 
 public class GameWindow {
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameWindow window = new GameWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Create the application.
 	 */
-	public GameWindow() {
+	public GameWindow(GameEnvironment env) {
+		this.gameEnvironment = env;
 		initialize();
 	}
 
@@ -61,12 +45,25 @@ public class GameWindow {
 		} catch (TeamFullException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 		
-		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(team);
+		gameEnvironment.setTeam(team);
+		gameEnvironment.setCityController(new CityController(3));
+		
+		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
 		frame.getContentPane().add(teamSummaryPanel, BorderLayout.NORTH);
 		
-		MapPanel mapPanel = new MapPanel((CityController) null);
+		MapPanel mapPanel = new MapPanel(getGameEnvironment().getCityController());
 		frame.getContentPane().add(mapPanel, BorderLayout.EAST);
 	}
+	
+	public void show() {
+		this.frame.setVisible(true);
+	}
+	
+	private GameEnvironment getGameEnvironment() {
+		return this.gameEnvironment;
+	}
+
 }

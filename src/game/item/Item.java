@@ -84,7 +84,7 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	 * @return
 	 */
 	public static Item fromStrings(String specifier) {
-		
+		System.err.println(specifier);
 		specifier = String.format("Item.%s.", specifier);
 		
 		try {

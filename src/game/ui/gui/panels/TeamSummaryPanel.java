@@ -30,8 +30,8 @@ public class TeamSummaryPanel extends JPanel {
 			int i = 0;
 			for (Hero hero : team.getHeroes()) {
 				
-				this.summaries[i++] = new HeroSummaryPanel(hero);
-				add(this.summaries[i]);
+				this.summaries[i] = new HeroSummaryPanel(hero);
+				add(this.summaries[i++]);
 				
 			}
 			

@@ -55,7 +55,7 @@ public class City implements game.Nameable {
 		
 		ArrayList<Item> items = new ArrayList<Item>();
 		
-		String[] properNames = getString(String.format("%s.Shop.Items")).split(",");
+		String[] properNames = getString(String.format("%s.Shop.Items", type.getProperName())).split(",");
 		
 		for (String properName : properNames) {
 			
