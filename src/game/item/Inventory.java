@@ -213,19 +213,19 @@ public class Inventory {
 		
 		for (Item map : this.listMaps) {
 			
-			items[i] = map;
+			items[i++] = map;
 			
 		}
 		
 		for (Item healingItem : this.listHealingItems) {
 			
-			items[i] = healingItem;
+			items[i++] = healingItem;
 			
 		}
 		
 		for (Item powerUpItems : this.listPowerUpItems) {
 			
-			items[i] = powerUpItems;
+			items[i++] = powerUpItems;
 			
 		}
 		

@@ -66,7 +66,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	public ItemSelectionDialog(Inventory inventory) {
 		this.inventory = inventory;
-		//String[] itemNames = new String[inventory.size()];
+		// String[] itemNames = new String[inventory.size()];
 		setResizable(false);
 		setModal(true);
 		setTitle("Select Items");
@@ -76,15 +76,13 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			public void windowOpened(WindowEvent arg0) {
 				
 				// Get the item details from the inventory into an
-				/*
-				int i = 0;
+				
 				for (Item item : inventory.getAllItems()) {
 					
-					itemNames[i++] = String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText());
-		
+					comboBoxItems.addItem(String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText()));		
 					
 				}
-				*/
+				
 				//itemNames = this.itemNames;
 				//comboBoxItem.setSelectedItem(HeroType.values()[0]);
 				//defaultTextFieldBackgroundColor = textFieldHeroName.getBackground();
@@ -114,9 +112,9 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			contentPanel.add(lblItemPrice, "2, 4, default, top");
 		}
 		
-		JComboBox<Item> comboBox = new JComboBox<Item>(inventory.getAllItems());
-		comboBox.setBounds(6, 21, 438, 218);
-		contentPanel.add(comboBox);
+		comboBoxItems = new JComboBox<String>();
+		comboBoxItems.setBounds(6, 21, 438, 218);
+		contentPanel.add(comboBoxItems);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
