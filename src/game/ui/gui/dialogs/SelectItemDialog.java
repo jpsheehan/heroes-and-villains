@@ -13,8 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import game.character.HeroType;
-import game.city.CityController;
-import game.city.Shop;
+import game.city.*;
+//import game.city.CityController;
+//import game.city.City;
+//import game.city.Shop;
 import game.item.Item;
 import game.ui.gui.DialogResult;
 import game.ui.gui.Returnable;
@@ -34,6 +36,7 @@ public class SelectItemDialog extends JDialog implements Returnable {
 	//private String itemName;
 	//private String itemType;
 	//private int itemPrice;
+	//String[] itemNames = new String[CityController.getCurrentCity().Shop.getInventory().size()];
 		
 	/**
 	 * Launch the application.
@@ -60,10 +63,11 @@ public class SelectItemDialog extends JDialog implements Returnable {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				
-				//Create string to hold item info, will go on the combo box
-				String[] itemNames = new String[Shop.getInventory().size()];
+				//Create string array to hold item info, length = number of items in the shop inventory  ,will go onto the combo box,
+				String[] itemNames = new String[CityController.Area.Shop.getInventory().size()];
 				
-				// Populate the combo box with the Items, their flavour / description, type (healing, ability, map), and price
+			
+				// Populate the combo box list with the Items, their flavour / description, type (healing, ability, map), and price
 				int i = 0;
 				for (Item item : shop.getInventory().getAllItems()) {
 							
@@ -73,7 +77,7 @@ public class SelectItemDialog extends JDialog implements Returnable {
 				/*
 				for (Shop counter : Shop.getInventory().values()) {
 					
-					comboCoxListItems.addItem(counter.getName());
+					comboBoxListItems.addItem(counter.getName());
 					
 				}
 				
@@ -83,8 +87,6 @@ public class SelectItemDialog extends JDialog implements Returnable {
 				
 				itemType = ItemType.values()[0];
 				updateLabels();
-				
-				
 				
 			}
 		});
