@@ -13,7 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import game.character.HeroType;
+import game.city.CityController;
 import game.city.Shop;
+import game.item.Item;
 import game.ui.gui.DialogResult;
 import game.ui.gui.Returnable;
 import javax.swing.SwingConstants;
@@ -29,9 +31,9 @@ public class SelectItemDialog extends JDialog implements Returnable {
 	private static final long serialVersionUID = -111727830559469912L;
 	private DialogResult result;
 	//private jList<Item> listItems;
-	private String itemName;
-	private String itemType;
-	private int itemPrice;
+	//private String itemName;
+	//private String itemType;
+	//private int itemPrice;
 		
 	/**
 	 * Launch the application.
@@ -58,17 +60,31 @@ public class SelectItemDialog extends JDialog implements Returnable {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				
+				//Create string to hold item info, will go on the combo box
+				String[] itemNames = new String[Shop.getInventory().size()];
+				
 				// Populate the combo box with the Items, their flavour / description, type (healing, ability, map), and price
+				int i = 0;
+				for (Item item : shop.getInventory().getAllItems()) {
+							
+					itemNames[i++] = String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText());
+							
+					}
+				/*
 				for (Shop counter : Shop.getInventory().values()) {
 					
 					comboCoxListItems.addItem(counter.getName());
 					
 				}
 				
-				comboCoxListItems.setSelectedItem(Shop.getInventory().values()[0]);
+				*/
+						
+				comboBoxListItems.setSelectedItem(Shop.getInventory().values()[0]);
 				
 				itemType = ItemType.values()[0];
 				updateLabels();
+				
+				
 				
 			}
 		});
@@ -76,34 +92,26 @@ public class SelectItemDialog extends JDialog implements Returnable {
 		setBounds(100, 100, 450, 320);
 		getContentPane().setLayout(null);
 		
-		JLabel Item = new JLabel("New label");
-		Item.setBounds(0, 12, 70, 15);
-		getContentPane().add(Item);
+		JLabel itemLbl = new JLabel("Item");
+		itemLbl.setBounds(0, 12, 70, 15);
+		getContentPane().add(itemLbl);
 		
-		JLabel Price = new JLabel("New label");
-		Price.setBounds(378, 12, 70, 15);
-		getContentPane().add(Price);
+		JLabel priceLbl = new JLabel("Price");
+		priceLbl.setBounds(378, 12, 70, 15);
+		getContentPane().add(priceLbl);
 		
-		JLabel Description = new JLabel("New label");
-		Description.setBounds(108, 12, 70, 15);
-		getContentPane().add(Description);
+		JLabel descriptionLbl = new JLabel("Description");
+		descriptionLbl.setBounds(108, 12, 96, 15);
+		getContentPane().add(descriptionLbl);
 		
-		JLabel ItemType = new JLabel("New label");
-		ItemType.setBounds(287, 12, 70, 15);
-		getContentPane().add(ItemType);
+		JLabel itemTypeLbl = new JLabel("Item Type");
+		itemTypeLbl.setBounds(287, 12, 70, 15);
+		getContentPane().add(itemTypeLbl);
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setBounds(0, 259, 448, 35);
 		getContentPane().add(buttonPane);
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		
-		JButton button = new JButton("OK");
-		button.setActionCommand("OK");
-		buttonPane.add(button);
-		
-		JButton button_1 = new JButton("Cancel");
-		button_1.setActionCommand("Cancel");
-		buttonPane.add(button_1);
 		{
 			JButton okButton = new JButton("OK");
 			okButton.addActionListener(new ActionListener() {
@@ -114,10 +122,6 @@ public class SelectItemDialog extends JDialog implements Returnable {
 					
 				}
 			});
-			{
-				JButton btnNewButton = new JButton("New button");
-				buttonPane.add(btnNewButton);
-			}
 			okButton.setActionCommand("OK");
 			buttonPane.add(okButton);
 			getRootPane().setDefaultButton(okButton);
@@ -136,9 +140,9 @@ public class SelectItemDialog extends JDialog implements Returnable {
 			buttonPane.add(cancelButton);
 		}
 		
-		JComboBox comboCoxListItems = new JComboBox();
-		comboCoxListItems.setBounds(0, 26, 448, 234);
-		getContentPane().add(comboCoxListItems);
+		JComboBox<String> comboBoxListItems = new JComboBox<String>();
+		comboBoxListItems.setBounds(0, 26, 448, 234);
+		getContentPane().add(comboBoxListItems);
 	}
 	
 	@Override
