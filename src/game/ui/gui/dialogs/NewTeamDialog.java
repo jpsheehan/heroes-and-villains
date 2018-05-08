@@ -1,6 +1,7 @@
 package game.ui.gui.dialogs;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 
 import javax.swing.DefaultListModel;
@@ -30,6 +31,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+
 
 public class NewTeamDialog extends JDialog implements Returnable {
 
