@@ -31,6 +31,11 @@ import game.item.Item;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class ItemSelectionDialog extends JDialog implements Returnable {
 
@@ -42,8 +47,9 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	private String itemName;
 	private int index;
 	private JList<String> listItems;
-	private final JPanel contentPanel = new JPanel();
+	// private final JPanel contentPanel = new JPanel();
 	private Inventory inventory;
+	private Item selectedItem;
 	
 	
 	/**
@@ -92,41 +98,59 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
 		
-		JLabel lblItem = new JLabel("Item");
-		lblItem.setBounds(6, 0, 31, 27);
-		contentPanel.add(lblItem);
-		
-		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(388, 0, 48, 27);
-		contentPanel.add(lblPrice);
-		
-		JLabel lblDescription = new JLabel("Description");
-		lblDescription.setBounds(86, 0, 88, 27);
-		contentPanel.add(lblDescription);
-		
-		JLabel lblType = new JLabel("Type");
-		lblType.setBounds(312, 0, 34, 27);
-		contentPanel.add(lblType);
-		
-		listItems = new JList<>(listModel);
-		getContentPane().add(listItems, BorderLayout.CENTER);			//if enabled it overwrites the labels
-		//add(new JScrollPane(listItems));
-		listItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listItems.setBounds(0, 238, 448, -213);
-		//contentPanel.add(listItems);									//if enabled there are labels but no list
-		listItems.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				
-				//String nameOfItem = listItems.getSelectedValue();
-				index = listItems.getSelectedIndex();
-				itemName = listModel.get(index);
-			}
-		});
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {},
+			new RowSpec[] {}));
+//		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		getContentPane().add(contentPanel, BorderLayout.CENTER);
+//		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
+//				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+//				ColumnSpec.decode("31px"),
+//				ColumnSpec.decode("35px"),
+//				ColumnSpec.decode("81px"),
+//				ColumnSpec.decode("34px"),
+//				ColumnSpec.decode("1px"),},
+//			new RowSpec[] {
+//				RowSpec.decode("104px"),
+//				RowSpec.decode("15px"),
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,
+//				FormSpecs.RELATED_GAP_ROWSPEC,
+//				FormSpecs.DEFAULT_ROWSPEC,}));
+//		
+//		JLabel lblItem = new JLabel("Item");
+//		contentPanel.add(lblItem, "2, 1, left, center");
+//		
+//		JLabel lblPrice = new JLabel("Price");
+//		contentPanel.add(lblPrice, "2, 2, left, center");
+//		
+//		JLabel lblDescription = new JLabel("Description");
+//		contentPanel.add(lblDescription, "2, 4, left, center");
+//		
+//		JLabel lblType = new JLabel("Type");
+//		contentPanel.add(lblType, "2, 6, left, center");
+//		
+//		listItems = new JList<>(listModel);
+//		contentPanel.add(listItems, "2, 8, 4, 1");
+//		//add(new JScrollPane(listItems));
+//		listItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+//		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		//contentPanel.add(listItems);									//if enabled there are labels but no list
+//		listItems.addListSelectionListener(new ListSelectionListener() {
+//			public void valueChanged(ListSelectionEvent arg0) {
+//				
+//				//String nameOfItem = listItems.getSelectedValue();
+//				index = listItems.getSelectedIndex();
+//				// itemName = listModel.get(index);
+//				
+//				selectedItem = inventory.getAllItems()[index];
+//				
+//			}
+//		});
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -180,4 +204,6 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		
 		return this.dialogResult;
 	}
+	
+	
 }
