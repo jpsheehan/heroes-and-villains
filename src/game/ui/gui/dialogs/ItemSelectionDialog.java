@@ -8,11 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import game.ui.gui.DialogResult;
@@ -25,6 +27,7 @@ import game.item.Inventory;
 import game.item.Item;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 public class ItemSelectionDialog extends JDialog implements Returnable {
 
@@ -33,9 +36,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	private static final long serialVersionUID = 5348976844662470541L;
 	private DialogResult dialogResult;
-	private JList listItems;
+	private JList<String> listItems;
 	private final JPanel contentPanel = new JPanel();
 	private Inventory inventory;
+	
 	
 	/**
 	 * Launch the application.
@@ -61,11 +65,11 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	public ItemSelectionDialog(Inventory inventory) {
 		this.inventory = inventory;
-		
+		DefaultListModel<String> listModel = new DefaultListModel<>();
 
 		setResizable(false);
 		setModal(true);
-		setTitle("Select Items");
+		setTitle("Item Selection Menu");
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -74,10 +78,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				// Get the item details from the inventory into a string array			
 				for (Item item : inventory.getAllItems()) {
 					
-					
-					listItems.addItem(String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText()));		
+					listModel.addElement(String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText()));		
 					
 				}
+				
 			}
 		});
 		
@@ -87,18 +91,8 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		{
-			JLabel lblItemFlavourText = new JLabel("Description:");
-			contentPanel.add(lblItemFlavourText, "2, 4, default, top");
-		}
-		
-		{
-			JLabel lblItemPrice = new JLabel("Price:");
-			contentPanel.add(lblItemPrice, "2, 4, default, top");
-		}
-		
 		JLabel lblItem = new JLabel("Item");
-		lblItem.setBounds(0, 0, 31, 27);
+		lblItem.setBounds(6, 0, 31, 27);
 		contentPanel.add(lblItem);
 		
 		JLabel lblPrice = new JLabel("Price");
@@ -113,9 +107,13 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		lblType.setBounds(312, 0, 34, 27);
 		contentPanel.add(lblType);
 		
-		listItems = new JList();
+		listItems = new JList<>(listModel);
+		getContentPane().add(listItems, BorderLayout.CENTER);													//if I have this enabled it overwrites the labels
+		//add(new JScrollPane(listItems));
+		listItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listItems.setBounds(0, 238, 448, -213);
-		contentPanel.add(listItems);
+		//contentPanel.add(listItems);									//if I have this enabled there are labels but no list
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
