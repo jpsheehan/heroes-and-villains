@@ -16,12 +16,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import game.ui.gui.DialogResult;
 import game.ui.gui.Returnable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import game.character.HeroType;
 import game.city.*;
 import game.item.Inventory;
 import game.item.Item;
@@ -36,6 +39,8 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	private static final long serialVersionUID = 5348976844662470541L;
 	private DialogResult dialogResult;
+	private String itemName;
+	private int index;
 	private JList<String> listItems;
 	private final JPanel contentPanel = new JPanel();
 	private Inventory inventory;
@@ -78,7 +83,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				// Get the item details from the inventory into a string array			
 				for (Item item : inventory.getAllItems()) {
 					
-					listModel.addElement(String.format("$%d - %s (%s): %s", item.getPrice(), item.getName(), item.getType().toString(), item.getFlavourText()));		
+					listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
 					
 				}
 				
@@ -108,12 +113,20 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		contentPanel.add(lblType);
 		
 		listItems = new JList<>(listModel);
-		getContentPane().add(listItems, BorderLayout.CENTER);													//if I have this enabled it overwrites the labels
+		getContentPane().add(listItems, BorderLayout.CENTER);			//if enabled it overwrites the labels
 		//add(new JScrollPane(listItems));
 		listItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listItems.setBounds(0, 238, 448, -213);
-		//contentPanel.add(listItems);									//if I have this enabled there are labels but no list
+		//contentPanel.add(listItems);									//if enabled there are labels but no list
+		listItems.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				
+				//String nameOfItem = listItems.getSelectedValue();
+				index = listItems.getSelectedIndex();
+				itemName = listModel.get(index);
+			}
+		});
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
