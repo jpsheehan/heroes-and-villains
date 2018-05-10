@@ -73,13 +73,17 @@ public class TeamSummaryPanel extends JPanel {
 	
 	public void update() {
 		
-		for (HeroSummaryPanel summary : this.summaries) {
-			
-			summary.update();
-			
-		}
+		if (this.team != null) {
 		
-		lblMoney.setText(String.format("$%d", this.team.getMoney()));
+			for (HeroSummaryPanel summary : this.summaries) {
+				
+				summary.update();
+				
+			}
+			
+			lblMoney.setText(String.format("$%d", this.team.getMoney()));
+		
+		}
 		
 	}
 
