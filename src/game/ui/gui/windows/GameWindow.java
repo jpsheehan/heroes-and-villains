@@ -11,13 +11,15 @@ import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
+import game.character.HeroDeadException;
 import game.character.HeroType;
 
 import game.city.CityController;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import java.awt.Component;
+//import java.awt.Dimension;
+
 import javax.swing.Box;
 
 public class GameWindow {
@@ -37,10 +39,13 @@ public class GameWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+//		Dimension size = new Dimension(800, 600);
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+//		frame.setMaximumSize(size);
+//		frame.setSize(size);
 		
 		createTestEnvironment();
 		
@@ -78,10 +83,11 @@ public class GameWindow {
 			team.addHero(new Hero("Steve", HeroType.ARTS_STUDENT));
 			team.addHero(new Hero("Bob", HeroType.ENGINEERING_STUDENT));
 			team.addHero(new Hero("Amy", HeroType.LAW_STUDENT));
-		} catch (TeamFullException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return;
+			
+			team.getHeroes().get(0).takeDamage(30);
+			team.getHeroes().get(1).takeDamage(60);
+			team.getHeroes().get(2).takeDamage(200);
+		} catch (TeamFullException | HeroDeadException e) {
 		}
 		
 		gameEnvironment.setTeam(team);
