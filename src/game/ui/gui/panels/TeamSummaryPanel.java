@@ -6,11 +6,14 @@ import game.Team;
 import game.character.Hero;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class TeamSummaryPanel extends JPanel {
 	
 	private Team team;
 	private HeroSummaryPanel summaries[];
+	private JLabel lblMoney;
 
 	/**
 	 * 
@@ -35,6 +38,12 @@ public class TeamSummaryPanel extends JPanel {
 		JLabel lblTeamName = new JLabel("<lblTeamName>");
 		namePanel.add(lblTeamName);
 		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		namePanel.add(horizontalStrut);
+		
+		lblMoney = new JLabel("<lblMoney>");
+		namePanel.add(lblMoney);
+		
 		JPanel heroesPanel = new JPanel();
 		add(heroesPanel);
 		heroesPanel.setLayout(new BoxLayout(heroesPanel, BoxLayout.Y_AXIS));
@@ -55,6 +64,8 @@ public class TeamSummaryPanel extends JPanel {
 			
 		}
 		
+		update();
+		
 	}
 	
 	public void update() {
@@ -64,6 +75,8 @@ public class TeamSummaryPanel extends JPanel {
 			summary.update();
 			
 		}
+		
+		lblMoney.setText(String.format("$%d", this.team.getMoney()));
 		
 	}
 
