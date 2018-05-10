@@ -97,10 +97,7 @@ public class GameWindow {
 				try {
 					getGameEnvironment().getCityController().move(Direction.NORTH);
 					updateAreaPanel();
-				} catch (IllegalMoveException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (IllegalMoveException e1) {}
 			}
 		});
 		navigationPanel.add(btnNorth, BorderLayout.NORTH);
@@ -111,10 +108,7 @@ public class GameWindow {
 				try {
 					getGameEnvironment().getCityController().move(Direction.SOUTH);
 					updateAreaPanel();
-				} catch (IllegalMoveException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (IllegalMoveException e1) {}
 			}
 		});
 		navigationPanel.add(btnSouth, BorderLayout.SOUTH);
@@ -125,10 +119,7 @@ public class GameWindow {
 				try {
 					getGameEnvironment().getCityController().move(Direction.WEST);
 					updateAreaPanel();
-				} catch (IllegalMoveException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (IllegalMoveException e1) {}
 			}
 		});
 		navigationPanel.add(btnWest, BorderLayout.WEST);
@@ -139,10 +130,7 @@ public class GameWindow {
 				try {
 					getGameEnvironment().getCityController().move(Direction.EAST);
 					updateAreaPanel();
-				} catch (IllegalMoveException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} catch (IllegalMoveException e1) {}
 			}
 		});
 		navigationPanel.add(btnEast, BorderLayout.EAST);

@@ -3,6 +3,8 @@ package game.ui.gui.panels;
 import javax.swing.JPanel;
 
 import game.character.Hero;
+import game.ui.gui.dialogs.HeroInformationDialog;
+
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
@@ -12,6 +14,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HeroSummaryPanel extends JPanel {
 
@@ -48,6 +52,11 @@ public class HeroSummaryPanel extends JPanel {
 		add(healthBar);
 		
 		btnMoreInfo = new JButton("More Info...");
+		btnMoreInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				(new HeroInformationDialog(hero)).setVisible(true);
+			}
+		});
 		add(btnMoreInfo);
 		
 		update();
