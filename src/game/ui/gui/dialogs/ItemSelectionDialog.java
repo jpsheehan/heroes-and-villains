@@ -155,7 +155,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 					index = list.getSelectedIndex();					
 					selectedItem = inventory.getAllItems()[index];
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					//e1.printStackTrace();
 				}
 				}
 			});
