@@ -4,6 +4,8 @@ import static game.GeneralHelpers.getString;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import game.Describable;
+import game.Nameable;
 import game.character.Dialogue;
 import game.character.InnKeeper;
 import game.character.Villain;
@@ -11,7 +13,7 @@ import game.character.VillainType;
 import game.item.Item;
 import game.minigame.MinigameType;
 
-public class City implements game.Nameable {
+public class City implements Nameable, Describable {
 	
 	/**
 	 * The name of the City.
@@ -179,6 +181,13 @@ public class City implements game.Nameable {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public String getFlavourText() {
+
+		return getString(type.getProperName() + ".Flavour");
+		
 	}
 	
 }
