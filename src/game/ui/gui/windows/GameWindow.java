@@ -64,53 +64,12 @@ public class GameWindow {
 	private void initialize() {
 		Dimension size = new Dimension(800, 600);
 		frame = new JFrame();
-		frame.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				
-				// Handle keyboard input
-				
-				try {
-					
-					if (e.getKeyCode() == KeyEvent.VK_UP) {
-						
-						getGameEnvironment().getCityController().move(Direction.NORTH);
-						
-					} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-						
-						getGameEnvironment().getCityController().move(Direction.SOUTH);
-						
-					} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-						
-						getGameEnvironment().getCityController().move(Direction.WEST);
-						
-					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-						
-						getGameEnvironment().getCityController().move(Direction.EAST);
-						
-					} else {
-						
-						return;
-						
-					}
-					
-					updateAreaPanel();
-					
-				
-				} catch (IllegalMoveException e1) {
-					
-					// TODO: Cannot move there
-					
-				}
-			}
-		});
 		
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setMaximumSize(size);
 		frame.setSize(size);
-		frame.setFocusable(true);
 		
 		createTestEnvironment();
 		
@@ -192,8 +151,6 @@ public class GameWindow {
 		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
 		
 		updateAreaPanel();
-
-		frame.requestFocusInWindow();
 		
 	}
 	
