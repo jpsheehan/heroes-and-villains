@@ -41,6 +41,9 @@ public class TeamSummaryPanel extends JPanel {
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		namePanel.add(horizontalStrut);
 		
+		JLabel lblFunds = new JLabel("Funds:");
+		namePanel.add(lblFunds);
+		
 		lblMoney = new JLabel("<lblMoney>");
 		namePanel.add(lblMoney);
 		
