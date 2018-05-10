@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TeamSummaryPanel extends JPanel {
 	
@@ -38,18 +41,34 @@ public class TeamSummaryPanel extends JPanel {
 		JLabel lblTeamName = new JLabel("<lblTeamName>");
 		namePanel.add(lblTeamName);
 		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
-		namePanel.add(horizontalStrut);
-		
-		JLabel lblFunds = new JLabel("Funds:");
-		namePanel.add(lblFunds);
-		
-		lblMoney = new JLabel("<lblMoney>");
-		namePanel.add(lblMoney);
-		
 		JPanel heroesPanel = new JPanel();
 		add(heroesPanel);
 		heroesPanel.setLayout(new BoxLayout(heroesPanel, BoxLayout.Y_AXIS));
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		add(verticalStrut);
+		
+		JPanel inventoryPanel = new JPanel();
+		add(inventoryPanel);
+		inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.X_AXIS));
+		
+		JLabel lblFunds = new JLabel("Funds: ");
+		inventoryPanel.add(lblFunds);
+		
+		lblMoney = new JLabel("<lblMoney>");
+		inventoryPanel.add(lblMoney);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		inventoryPanel.add(horizontalStrut);
+		
+		JButton btnInventory = new JButton("Inventory...");
+		btnInventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Show inventory dialog
+				// (new InventoryDialog(this.team.getInventory())).setVisible(true);
+			}
+		});
+		inventoryPanel.add(btnInventory);
 		
 		if (this.team != null) {
 			
