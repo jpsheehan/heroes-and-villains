@@ -44,10 +44,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	private static final long serialVersionUID = 5348976844662470541L;
 	private DialogResult dialogResult;
-	private String itemName;
 	private int index;
-	private JList<String> listItems;
-	// private final JPanel contentPanel = new JPanel();
 	private Inventory inventory;
 	private Item selectedItem;
 	
@@ -59,13 +56,14 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		//for testing
 	    City city = new City(CityType.ERSKINE);
 	    Inventory inventory = ((Shop)city.getArea(AreaType.SHOP)).getInventory();
-	    //(new ItemSelectionDialog(inventory)).setVisible(true);
 	    
 	    //
 		try {
 			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			System.out.println(dialog.getSelectedItem().getName());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -96,49 +94,78 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			}
 		});
 		
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 639, 429);
 		getContentPane().setLayout(new BorderLayout());
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {},
-			new RowSpec[] {}));
-//		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		getContentPane().add(contentPanel, BorderLayout.CENTER);
-//		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
-//				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-//				ColumnSpec.decode("31px"),
-//				ColumnSpec.decode("35px"),
-//				ColumnSpec.decode("81px"),
-//				ColumnSpec.decode("34px"),
-//				ColumnSpec.decode("1px"),},
-//			new RowSpec[] {
-//				RowSpec.decode("104px"),
-//				RowSpec.decode("15px"),
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,
-//				FormSpecs.RELATED_GAP_ROWSPEC,
-//				FormSpecs.DEFAULT_ROWSPEC,}));
-//		
-//		JLabel lblItem = new JLabel("Item");
-//		contentPanel.add(lblItem, "2, 1, left, center");
-//		
-//		JLabel lblPrice = new JLabel("Price");
-//		contentPanel.add(lblPrice, "2, 2, left, center");
-//		
-//		JLabel lblDescription = new JLabel("Description");
-//		contentPanel.add(lblDescription, "2, 4, left, center");
-//		
-//		JLabel lblType = new JLabel("Type");
-//		contentPanel.add(lblType, "2, 6, left, center");
-//		
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("left:default"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				ColumnSpec.decode("right:default"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
+		{
+			JLabel lblNewLabel = new JLabel("Item");
+			panel.add(lblNewLabel, "3, 2");
+		}
+		{
+			JLabel lblNewLabel_2 = new JLabel("Description");
+			panel.add(lblNewLabel_2, "5, 2");
+		}
+		{
+			JLabel lblNewLabel_3 = new JLabel("Type");
+			panel.add(lblNewLabel_3, "16, 2");
+		}
+		{
+			JLabel lblNewLabel_1 = new JLabel("Price");
+			panel.add(lblNewLabel_1, "22, 2");
+		}
+		{
+			JList list = new JList<>(listModel);
+			list.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e) {
+					try {	
+					index = list.getSelectedIndex();					
+					selectedItem = inventory.getAllItems()[index];
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				}
+			});
+			panel.add(list, "2, 4, 22, 1, fill, fill");
+		}
+
 //		listItems = new JList<>(listModel);
 //		contentPanel.add(listItems, "2, 8, 4, 1");
 //		//add(new JScrollPane(listItems));
-//		listItems.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-//		listItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		
 //		//contentPanel.add(listItems);									//if enabled there are labels but no list
 //		listItems.addListSelectionListener(new ListSelectionListener() {
 //			public void valueChanged(ListSelectionEvent arg0) {
@@ -204,6 +231,12 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		
 		return this.dialogResult;
 	}
-	
-	
+	/**
+	 * Gets the result of this Item Selection.
+	 * @return
+	 */
+	public Item getSelectedItem() {
+		
+		return this.selectedItem;
+	}
 }
