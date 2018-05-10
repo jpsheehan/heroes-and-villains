@@ -4,9 +4,11 @@ package game.ui.gui.windows;
 import javax.swing.JFrame;
 
 import game.ui.gui.panels.MapPanel;
+import game.ui.gui.panels.PowerUpDenPanel;
 
 import java.awt.BorderLayout;
 import game.ui.gui.panels.TeamSummaryPanel;
+import game.ui.gui.panels.VillainsLairPanel;
 import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
@@ -25,12 +27,16 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 import game.ui.gui.panels.AreaSummaryPanel;
+import game.ui.gui.panels.HomeBasePanel;
+import game.ui.gui.panels.HospitalPanel;
 import game.ui.gui.panels.ShopAreaPanel;
 import game.city.Shop;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameWindow {
 
@@ -127,15 +133,59 @@ public class GameWindow {
 		mapPanel.setLayout(new BoxLayout(mapPanel, BoxLayout.X_AXIS));
 		
 		JButton btnNorth = new JButton("N");
+		btnNorth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					getGameEnvironment().getCityController().move(Direction.NORTH);
+					updateAreaPanel();
+				} catch (IllegalMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		navigationPanel.add(btnNorth, BorderLayout.NORTH);
 		
 		btnSouth = new JButton("S");
+		btnSouth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					getGameEnvironment().getCityController().move(Direction.SOUTH);
+					updateAreaPanel();
+				} catch (IllegalMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		navigationPanel.add(btnSouth, BorderLayout.SOUTH);
 		
 		btnWest = new JButton("W");
+		btnWest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					getGameEnvironment().getCityController().move(Direction.WEST);
+					updateAreaPanel();
+				} catch (IllegalMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		navigationPanel.add(btnWest, BorderLayout.WEST);
 		
 		btnEast = new JButton("E");
+		btnEast.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					getGameEnvironment().getCityController().move(Direction.EAST);
+					updateAreaPanel();
+				} catch (IllegalMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		navigationPanel.add(btnEast, BorderLayout.EAST);
 		
 		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
@@ -191,12 +241,15 @@ public class GameWindow {
 		switch (this.getGameEnvironment().getCityController().getCurrentArea().getType()) {
 		
 			case HOME_BASE:
+				currentAreaPanel = new HomeBasePanel();
 				break;
 				
 			case HOSPITAL:
+				currentAreaPanel = new HospitalPanel();
 				break;
 				
 			case POWER_UP_DEN:
+				currentAreaPanel = new PowerUpDenPanel();
 				break;
 				
 			case SHOP:
@@ -204,6 +257,7 @@ public class GameWindow {
 				break;
 				
 			case VILLAINS_LAIR:
+				currentAreaPanel = new VillainsLairPanel();
 				break;
 		
 		}
