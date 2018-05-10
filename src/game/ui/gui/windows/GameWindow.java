@@ -13,7 +13,7 @@ import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroDeadException;
 import game.character.HeroType;
-
+import game.city.AreaType;
 import game.city.CityController;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -22,6 +22,8 @@ import java.awt.Component;
 
 import javax.swing.Box;
 import game.ui.gui.panels.AreaSummaryPanel;
+import game.ui.gui.panels.ShopAreaPanel;
+import game.city.Shop;
 
 public class GameWindow {
 
@@ -66,6 +68,9 @@ public class GameWindow {
 		
 		AreaSummaryPanel areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
 		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
+		
+		ShopAreaPanel shopAreaPanel = new ShopAreaPanel((Shop)this.getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP), this.getGameEnvironment().getTeam());
+		frame.getContentPane().add(shopAreaPanel, BorderLayout.CENTER);
 	}
 	
 	public void show() {
