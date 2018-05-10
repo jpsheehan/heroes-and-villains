@@ -6,12 +6,15 @@ import game.city.CityController;
 import game.city.Direction;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class MapPanel extends JPanel {
 	
@@ -31,21 +34,26 @@ public class MapPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MapPanel(CityController cityController) {
+		setBackground(Color.BLACK);
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
 				
-				setSize(getHeight(), getHeight());
+				setSize(128, 128);
 				
 			}
 		});
-		setLayout(null);
 		
 		this.cityController = cityController;
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(128, 128));
+		add(rigidArea);
+		
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		
 		
 		int width = getWidth(), height = getHeight();
 		

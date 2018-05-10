@@ -15,20 +15,34 @@ import game.character.HeroDeadException;
 import game.character.HeroType;
 import game.city.AreaType;
 import game.city.CityController;
+import game.city.Direction;
+import game.city.IllegalMoveException;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.Component;
-//import java.awt.Dimension;
+import java.awt.Dimension;
 
 import javax.swing.Box;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.ui.gui.panels.ShopAreaPanel;
 import game.city.Shop;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
 
 public class GameWindow {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
+	private JPanel currentAreaPanel;
+	private AreaSummaryPanel areaSummaryPanel;
+	private MapPanel mapPanel;
+	private JPanel navigationPanel;
+	private JButton btnSouth;
+	private JButton btnWest;
+	private JButton btnEast;
 
 	/**
 	 * Create the application.
@@ -42,13 +56,55 @@ public class GameWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-//		Dimension size = new Dimension(800, 600);
+		Dimension size = new Dimension(800, 600);
 		frame = new JFrame();
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				// Handle keyboard input
+				
+				try {
+					
+					if (e.getKeyCode() == KeyEvent.VK_UP) {
+						
+						getGameEnvironment().getCityController().move(Direction.NORTH);
+						
+					} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+						
+						getGameEnvironment().getCityController().move(Direction.SOUTH);
+						
+					} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+						
+						getGameEnvironment().getCityController().move(Direction.WEST);
+						
+					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+						
+						getGameEnvironment().getCityController().move(Direction.EAST);
+						
+					} else {
+						
+						return;
+						
+					}
+					
+					updateAreaPanel();
+					
+				
+				} catch (IllegalMoveException e1) {
+					
+					// TODO: Cannot move there
+					
+				}
+			}
+		});
+		
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-//		frame.setMaximumSize(size);
-//		frame.setSize(size);
+		frame.setMaximumSize(size);
+		frame.setSize(size);
+		frame.setFocusable(true);
 		
 		createTestEnvironment();
 		
@@ -62,15 +118,33 @@ public class GameWindow {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		northPanel.add(horizontalGlue);
 		
-		MapPanel mapPanel = new MapPanel(getGameEnvironment().getCityController());
-		northPanel.add(mapPanel);
-		mapPanel.setLayout(null);
+		navigationPanel = new JPanel();
+		northPanel.add(navigationPanel);
+		navigationPanel.setLayout(new BorderLayout(0, 0));
 		
-		AreaSummaryPanel areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
+		mapPanel = new MapPanel(getGameEnvironment().getCityController());
+		navigationPanel.add(mapPanel, BorderLayout.CENTER);
+		mapPanel.setLayout(new BoxLayout(mapPanel, BoxLayout.X_AXIS));
+		
+		JButton btnNorth = new JButton("N");
+		navigationPanel.add(btnNorth, BorderLayout.NORTH);
+		
+		btnSouth = new JButton("S");
+		navigationPanel.add(btnSouth, BorderLayout.SOUTH);
+		
+		btnWest = new JButton("W");
+		navigationPanel.add(btnWest, BorderLayout.WEST);
+		
+		btnEast = new JButton("E");
+		navigationPanel.add(btnEast, BorderLayout.EAST);
+		
+		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
 		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
 		
-		ShopAreaPanel shopAreaPanel = new ShopAreaPanel((Shop)this.getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP), this.getGameEnvironment().getTeam());
-		frame.getContentPane().add(shopAreaPanel, BorderLayout.CENTER);
+		updateAreaPanel();
+
+		frame.requestFocusInWindow();
+		
 	}
 	
 	public void show() {
@@ -103,5 +177,45 @@ public class GameWindow {
 		gameEnvironment.setCityController(new CityController(3));
 		
 	}
-
+	
+	private void updateAreaPanel() {
+		
+		if (currentAreaPanel != null) {
+			
+			frame.getContentPane().remove(currentAreaPanel);
+			currentAreaPanel = null;
+			
+		}
+		
+		// Set the currentAreaPanel depending on the type of area the team is in
+		switch (this.getGameEnvironment().getCityController().getCurrentArea().getType()) {
+		
+			case HOME_BASE:
+				break;
+				
+			case HOSPITAL:
+				break;
+				
+			case POWER_UP_DEN:
+				break;
+				
+			case SHOP:
+				currentAreaPanel = new ShopAreaPanel((Shop)this.getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP), this.getGameEnvironment().getTeam());
+				break;
+				
+			case VILLAINS_LAIR:
+				break;
+		
+		}
+		
+		if (currentAreaPanel != null) {
+			
+			frame.getContentPane().add(currentAreaPanel, BorderLayout.CENTER);
+			areaSummaryPanel.update();
+			
+		}
+		
+		mapPanel.repaint();
+		
+	}
 }
