@@ -21,6 +21,7 @@ import java.awt.Component;
 //import java.awt.Dimension;
 
 import javax.swing.Box;
+import game.ui.gui.panels.AreaSummaryPanel;
 
 public class GameWindow {
 
@@ -62,6 +63,9 @@ public class GameWindow {
 		MapPanel mapPanel = new MapPanel(getGameEnvironment().getCityController());
 		northPanel.add(mapPanel);
 		mapPanel.setLayout(null);
+		
+		AreaSummaryPanel areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
+		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
 	}
 	
 	public void show() {
