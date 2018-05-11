@@ -251,7 +251,7 @@
 	"Item.Curry.Price": "17",
 	"Item.Curry.Type": "PowerUp",
 	"Item.Curry.Ability": "DamageReduction",
-	"Item.Curry.AppliesTo": "All"
+	"Item.Curry.AppliesTo": "All",
 	
 	"Item.GreenTea.Name": "Green Tea               ",
 	"Item.GreenTea.Flavour": "Better than coffee?",
@@ -321,7 +321,7 @@
 	"Item.VCurry.Price": "10",
 	"Item.VCurry.Type": "PowerUp",
 	"Item.VCurry.Ability": "DamageReduction",
-	"Item.VCurry.AppliesTo": "All"
+	"Item.VCurry.AppliesTo": "All",
 
 	"Item.Quiche.Name": "Roast Vege Quiche         ",
 	"Item.Quiche.Flavour": "Real men eat Quiche",
