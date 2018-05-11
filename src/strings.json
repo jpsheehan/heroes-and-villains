@@ -250,7 +250,7 @@
 	"Item.Curry.Flavour": "Do villains like garlic? ",
 	"Item.Curry.Price": "17",
 	"Item.Curry.Type": "PowerUp",
-	"Item.Curry.Ability": "DamageReduction",
+	"Item.Curry.Ability": "DamageProtection",
 	"Item.Curry.AppliesTo": "All",
 	
 	"Item.GreenTea.Name": "Green Tea               ",
@@ -316,13 +316,6 @@
 	"Item.MacCheese.RestorationLevel": "3",
 	"Item.MacCheese.ApplicationTime": "3",
 	
-	"Item.VCurry.Name": "Vegetarian Curry          ",
-	"Item.VCurry.Flavour": "Remember .. villains and garlic",
-	"Item.VCurry.Price": "10",
-	"Item.VCurry.Type": "PowerUp",
-	"Item.VCurry.Ability": "DamageReduction",
-	"Item.VCurry.AppliesTo": "All",
-
 	"Item.Quiche.Name": "Roast Vege Quiche         ",
 	"Item.Quiche.Flavour": "Real men eat Quiche",
 	"Item.Quiche.Price": "6",
@@ -396,6 +389,13 @@
 	"Item.WinOnDraw.Price": "15",
 	"Item.WinOnDraw.Type": "PowerUp",
 	"Item.WinOnDraw.Ability": "WinOnDraw",
-	"Item.WinOnDraw.AppliesTo": "DiceRolls"
+	"Item.WinOnDraw.AppliesTo": "DiceRolls",
+	
+	"Item.VCurry.Name": "Vegetarian Curry          ",
+	"Item.VCurry.Flavour": "Remember .. villains and garlic",
+	"Item.VCurry.Price": "10",
+	"Item.VCurry.Type": "PowerUp",
+	"Item.VCurry.Ability": "DamageProtection",
+	"Item.VCurry.AppliesTo": "All"
 	
 }
