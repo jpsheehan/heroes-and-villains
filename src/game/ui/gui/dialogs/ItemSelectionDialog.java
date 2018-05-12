@@ -1,7 +1,6 @@
 package game.ui.gui.dialogs;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,30 +9,21 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import game.ui.gui.DialogResult;
 import game.ui.gui.Returnable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import game.character.HeroType;
 import game.city.*;
 import game.item.Inventory;
 import game.item.Item;
 import game.item.ItemType;
 
-import javax.swing.SwingConstants;
 import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.BoxLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -65,7 +55,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			System.out.println(dialog.getSelectedItem().getName());
+			
+			if (dialog.getDialogResult() == DialogResult.OK) {
+				System.out.println(dialog.getSelectedItem().getName());
+			}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -76,7 +69,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.HEALING_ITEM);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			System.out.println(dialog.getSelectedItem().getName());
+			
+			if (dialog.getDialogResult() == DialogResult.OK) {
+				System.out.println(dialog.getSelectedItem().getName());
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,7 +83,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.MAP);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			System.out.println(dialog.getSelectedItem().getName());
+
+			if (dialog.getDialogResult() == DialogResult.OK) {
+				System.out.println(dialog.getSelectedItem().getName());
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +97,11 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.POWER_UP_ITEM);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			System.out.println(dialog.getSelectedItem().getName());
+			
+
+			if (dialog.getDialogResult() == DialogResult.OK) {
+				System.out.println(dialog.getSelectedItem().getName());
+			}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -114,143 +117,9 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	public ItemSelectionDialog(Inventory inventory, ItemType itemType) {
 		this.inventory = inventory;
 		this.itemType = itemType;
-		DefaultListModel<String> listModel = new DefaultListModel<>();
 		
-
-		setResizable(false);
-		setModal(true);
-		setTitle("Item Selection Menu");
+		initializeComponents();
 		
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				
-				switch (itemType) {
-				
-				case MAP:
-					// Get the item details from the inventory into a string array			
-					for (Item item : inventory.getMaps()) {
-						listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
-						}
-					break;
-				case HEALING_ITEM:
-					for (Item item : inventory.getHealingItems()) {
-						listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
-						}
-					break;
-				case POWER_UP_ITEM:
-						for (Item item : inventory.getPowerUpItems()) {
-						listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
-						}
-					break;
-				default:
-					throw new AssertionError();
-				}
-				
-			}
-		});
-		
-		setBounds(100, 100, 639, 429);
-		getContentPane().setLayout(new BorderLayout());
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("left:default"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				ColumnSpec.decode("right:default"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
-		{
-			JLabel lblNewLabel = new JLabel("Item");
-			panel.add(lblNewLabel, "3, 2");
-		}
-		{
-			JLabel lblNewLabel_2 = new JLabel("Description");
-			panel.add(lblNewLabel_2, "5, 2");
-		}
-		{
-			JLabel lblNewLabel_3 = new JLabel("Type");
-			panel.add(lblNewLabel_3, "16, 2");
-		}
-		{
-			JLabel lblNewLabel_1 = new JLabel("Price");
-			panel.add(lblNewLabel_1, "22, 2");
-		}
-		{
-			JList list = new JList<>(listModel);
-			list.addListSelectionListener(new ListSelectionListener() {
-				public void valueChanged(ListSelectionEvent e) {
-					try {	
-					index = list.getSelectedIndex();					
-					selectedItem = inventory.getAllItems()[index];
-				} catch (Exception e1) {
-					//e1.printStackTrace();
-				}
-				}
-			});
-			panel.add(list, "2, 4, 22, 1, fill, fill");
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						setDialogResult(DialogResult.OK);
-						dispose();
-						
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			
-			
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						setDialogResult(DialogResult.CANCEL);
-						dispose();
-						
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
 	}
 	
 	/**
@@ -260,7 +129,14 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	public ItemSelectionDialog(Inventory inventory) {
 		this.inventory = inventory;
-		DefaultListModel<String> listModel = new DefaultListModel<>();
+		this.itemType = null;
+		
+		initializeComponents();
+	}
+	
+	private void initializeComponents() {
+		
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
 
 		setResizable(false);
 		setModal(true);
@@ -270,14 +146,47 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				
-				// Get the item details from the inventory into a string array			
-				for (Item item : inventory.getAllItems()) {
+				if (itemType == null) {
 					
-					listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+					// show all the items
+					for (Item item : inventory.getAllItems()) {
+						
+						listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));
+						
+					}
+					
+				} else {
+					
+					switch (itemType) {
+						
+						case MAP:
+							// Get the item details from the inventory into a string array			
+							for (Item item : inventory.getMaps()) {
+								listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+								}
+							break;
+							
+						case HEALING_ITEM:
+							for (Item item : inventory.getHealingItems()) {
+								listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+								}
+							break;
+							
+						case POWER_UP_ITEM:
+								for (Item item : inventory.getPowerUpItems()) {
+								listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+								}
+							break;
+							
+						default:
+							throw new AssertionError();
+							
+					}
 					
 				}
 				
 			}
+			
 		});
 		
 		setBounds(100, 100, 639, 429);
@@ -334,14 +243,14 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			panel.add(lblNewLabel_1, "22, 2");
 		}
 		{
-			JList list = new JList<>(listModel);
+			JList<String> list = new JList<String>(listModel);
 			list.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e) {
 					try {	
 					index = list.getSelectedIndex();					
 					selectedItem = inventory.getAllItems()[index];
 				} catch (Exception e1) {
-					//e1.printStackTrace();
+					// SelectedItem is null
 				}
 				}
 			});
@@ -381,6 +290,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
 	}
 	
 	/**
