@@ -1,5 +1,6 @@
 package game.character;
 
+import game.item.HealingItem;
 import game.item.PowerUpItem;
 
 /**
@@ -22,6 +23,9 @@ public class Hero extends Character {
 	 * The power up item the Hero is using/holding.
 	 */
 	private PowerUpItem item = null;
+	
+	private int healingStartTime;
+	private HealingItem healingItem;
 	
 	/**
 	 * Creates a new Hero.
@@ -126,7 +130,15 @@ public class Hero extends Character {
 	 */
 	public Integer getHealth() {
 		
-		return this.health;
+		if (this.healingItem == null) {
+			
+			return this.health;
+			
+		} else {
+			
+			return this.health + (int)(this.healingItem.getRestorationLevel() * 0.25 * getMaxHealth() * (999 - this.healingStartTime) / this.healingItem.getApplicationTime());
+			
+		}
 		
 	}
 	
@@ -145,7 +157,7 @@ public class Hero extends Character {
 		
 		this.health -= damage;
 		
-		if (this.health <= 0) {
+		if (this.getHealth() <= 0) {
 			
 			this.health = 0;
 			throw new HeroDeadException(this);
@@ -160,7 +172,7 @@ public class Hero extends Character {
 	 */
 	public boolean isAlive() {
 		
-		return (this.health > 0);
+		return (this.getHealth() > 0);
 		
 	}
 	
@@ -207,6 +219,68 @@ public class Hero extends Character {
 	public String toString() {
 		
 		return String.format("%s (%s Student)", this.getName(), this.getType().getName());
+		
+	}
+	
+	/**
+	 * Uses a healing item on the hero.
+	 * @param item
+	 */
+	public void useHealingItem(HealingItem item) {
+		
+		if (isHealing()) {
+			
+			throw new IllegalArgumentException("Hero is already healing");
+			
+		}
+		
+		this.healingItem = item;
+		this.healingStartTime = 999;
+		
+	}
+	
+	/**
+	 * Returns true if the hero is currently healing.
+	 * @return
+	 */
+	public boolean isHealing() {
+		
+		if (this.healingItem != null) {
+			
+			if (
+					this.healingStartTime + this.healingItem.getApplicationTime() > 999 ||
+					this.getHealth() > getMaxHealth()
+				) {
+				
+				if (getHealth() > getMaxHealth()) {
+					
+					this.health = getMaxHealth();
+					
+				} else {
+					
+					this.health += (int)(this.getMaxHealth() * (this.healingItem.getRestorationLevel() * 0.25));
+					
+				}
+				
+				this.healingItem = null;
+				this.healingStartTime = 0;
+				return false;
+				
+			} else {
+				
+				return true;
+				
+			}
+			
+		}
+		
+		return false;
+		
+	}
+	
+	public int getMaxHealth() {
+		
+		return 100;
 		
 	}
 }
