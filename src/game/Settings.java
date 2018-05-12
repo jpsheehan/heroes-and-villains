@@ -96,4 +96,15 @@ public class Settings {
 		return getInt("Game.Hero.Name.Max");
 		
 	}
+	
+	/**
+	 * Gets the amount of money the team starts with.
+	 * Denoted by "Game.Team.StartMoney" in strings.json.
+	 * @return
+	 */
+	public static int getTeamStartMoney() {
+		
+		return getInt("Game.Team.StartMoney");
+		
+	}
 }

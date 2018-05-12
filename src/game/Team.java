@@ -43,6 +43,7 @@ public class Team implements Nameable {
 		this.name = name;
 		this.heroes = new ArrayList<Hero>();
 		this.inventory = new Inventory();
+		this.money = Settings.getTeamStartMoney();
 		
 	}
 	
