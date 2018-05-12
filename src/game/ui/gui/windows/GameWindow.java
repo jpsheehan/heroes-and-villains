@@ -4,6 +4,7 @@ package game.ui.gui.windows;
 import javax.swing.JFrame;
 
 import game.ui.gui.panels.MapPanel;
+import game.ui.gui.panels.NavigationPanel;
 import game.ui.gui.panels.PowerUpDenPanel;
 
 import java.awt.BorderLayout;
@@ -48,8 +49,7 @@ public class GameWindow implements Triggerable {
 	private GameEnvironment gameEnvironment;
 	private JPanel currentAreaPanel;
 	private AreaSummaryPanel areaSummaryPanel;
-	private MapPanel mapPanel;
-	private JPanel navigationPanel;
+	private NavigationPanel navigationPanel;
 	private JPanel navigationPanelHolder;
 	private JPanel areaPanelHolder;
 	private TeamSummaryPanel teamSummaryPanel;
@@ -90,57 +90,8 @@ public class GameWindow implements Triggerable {
 		navigationPanelHolder = new JPanel();
 		northPanel.add(navigationPanelHolder);
 		
-		navigationPanel = new JPanel();
+		navigationPanel = new NavigationPanel(this, this.getGameEnvironment().getCityController());
 		navigationPanelHolder.add(navigationPanel);
-		navigationPanel.setLayout(new BorderLayout(0, 0));
-		
-		mapPanel = new MapPanel(getGameEnvironment().getCityController());
-		navigationPanel.add(mapPanel, BorderLayout.CENTER);
-		mapPanel.setLayout(new BoxLayout(mapPanel, BoxLayout.X_AXIS));
-		
-		JButton btnNorth = new JButton("N");
-		btnNorth.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					getGameEnvironment().getCityController().move(Direction.NORTH);
-					updateAreaPanel();
-				} catch (IllegalMoveException e1) {}
-			}
-		});
-		navigationPanel.add(btnNorth, BorderLayout.NORTH);
-		
-		JButton btnSouth = new JButton("S");
-		btnSouth.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					getGameEnvironment().getCityController().move(Direction.SOUTH);
-					updateAreaPanel();
-				} catch (IllegalMoveException e1) {}
-			}
-		});
-		navigationPanel.add(btnSouth, BorderLayout.SOUTH);
-		
-		JButton btnWest = new JButton("W");
-		btnWest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					getGameEnvironment().getCityController().move(Direction.WEST);
-					updateAreaPanel();
-				} catch (IllegalMoveException e1) {}
-			}
-		});
-		navigationPanel.add(btnWest, BorderLayout.WEST);
-		
-		JButton btnEast = new JButton("E");
-		btnEast.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					getGameEnvironment().getCityController().move(Direction.EAST);
-					updateAreaPanel();
-				} catch (IllegalMoveException e1) {}
-			}
-		});
-		navigationPanel.add(btnEast, BorderLayout.EAST);
 		
 		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
 		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
@@ -225,7 +176,7 @@ public class GameWindow implements Triggerable {
 			
 		}
 		
-		mapPanel.repaint();
+		navigationPanel.update();
 		
 	}
 	
