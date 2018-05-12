@@ -21,7 +21,6 @@ import game.city.Direction;
 import game.city.IllegalMoveException;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import java.awt.GridLayout;
 import java.awt.Component;
@@ -33,14 +32,11 @@ import game.ui.gui.panels.HomeBasePanel;
 import game.ui.gui.panels.HospitalPanel;
 import game.ui.gui.panels.ShopAreaPanel;
 import game.city.Shop;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import javax.swing.border.BevelBorder;
 
 public class GameWindow {
 
@@ -50,10 +46,8 @@ public class GameWindow {
 	private AreaSummaryPanel areaSummaryPanel;
 	private MapPanel mapPanel;
 	private JPanel navigationPanel;
-	private JButton btnSouth;
-	private JButton btnWest;
-	private JButton btnEast;
-	private JPanel panel;
+	private JPanel navigationPanelHolder;
+	private JPanel areaPanelHolder;
 
 	/**
 	 * Create the application.
@@ -88,19 +82,11 @@ public class GameWindow {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		northPanel.add(horizontalGlue);
 		
-		panel = new JPanel();
-		northPanel.add(panel);
+		navigationPanelHolder = new JPanel();
+		northPanel.add(navigationPanelHolder);
 		
 		navigationPanel = new JPanel();
-		panel.add(navigationPanel);
-		navigationPanel.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent arg0) {
-				
-				// navigationPanel.setSize(128 + btnEast.getWidth(), navigationPanel.getHeight());
-				
-			}
-		});
+		navigationPanelHolder.add(navigationPanel);
 		navigationPanel.setLayout(new BorderLayout(0, 0));
 		
 		mapPanel = new MapPanel(getGameEnvironment().getCityController());
@@ -118,7 +104,7 @@ public class GameWindow {
 		});
 		navigationPanel.add(btnNorth, BorderLayout.NORTH);
 		
-		btnSouth = new JButton("S");
+		JButton btnSouth = new JButton("S");
 		btnSouth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -129,7 +115,7 @@ public class GameWindow {
 		});
 		navigationPanel.add(btnSouth, BorderLayout.SOUTH);
 		
-		btnWest = new JButton("W");
+		JButton btnWest = new JButton("W");
 		btnWest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -140,7 +126,7 @@ public class GameWindow {
 		});
 		navigationPanel.add(btnWest, BorderLayout.WEST);
 		
-		btnEast = new JButton("E");
+		JButton btnEast = new JButton("E");
 		btnEast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -153,6 +139,10 @@ public class GameWindow {
 		
 		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
 		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
+		
+		areaPanelHolder = new JPanel();
+		areaPanelHolder.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		frame.getContentPane().add(areaPanelHolder, BorderLayout.CENTER);
 		
 		updateAreaPanel();
 		
@@ -193,7 +183,7 @@ public class GameWindow {
 		
 		if (currentAreaPanel != null) {
 			
-			frame.getContentPane().remove(currentAreaPanel);
+			areaPanelHolder.remove(currentAreaPanel);
 			currentAreaPanel = null;
 			
 		}
@@ -225,7 +215,7 @@ public class GameWindow {
 		
 		if (currentAreaPanel != null) {
 			
-			frame.getContentPane().add(currentAreaPanel, BorderLayout.CENTER);
+			areaPanelHolder.add(currentAreaPanel, BorderLayout.CENTER);
 			areaSummaryPanel.update();
 			
 		}
