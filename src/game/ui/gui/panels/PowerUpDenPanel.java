@@ -2,8 +2,12 @@ package game.ui.gui.panels;
 
 import javax.swing.JPanel;
 
+import game.ui.gui.Triggerable;
+
 public class PowerUpDenPanel extends JPanel {
 
+	private Triggerable window;
+	
 	/**
 	 * 
 	 */
@@ -12,8 +16,10 @@ public class PowerUpDenPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PowerUpDenPanel() {
-
+	public PowerUpDenPanel(Triggerable window) {
+		
+		this.window = window;
+		
 	}
 
 }

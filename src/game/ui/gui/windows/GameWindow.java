@@ -27,6 +27,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.Box;
+
+import game.ui.gui.Triggerable;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.ui.gui.panels.HomeBasePanel;
 import game.ui.gui.panels.HospitalPanel;
@@ -40,7 +42,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 
-public class GameWindow {
+public class GameWindow implements Triggerable {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
@@ -50,6 +52,7 @@ public class GameWindow {
 	private JPanel navigationPanel;
 	private JPanel navigationPanelHolder;
 	private JPanel areaPanelHolder;
+	private TeamSummaryPanel teamSummaryPanel;
 
 	/**
 	 * Create the application.
@@ -78,7 +81,7 @@ public class GameWindow {
 		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
+		teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
 		northPanel.add(teamSummaryPanel);
 		
 		ImagePanel imagePanel = new ImagePanel();
@@ -194,23 +197,23 @@ public class GameWindow {
 		switch (this.getGameEnvironment().getCityController().getCurrentArea().getType()) {
 		
 			case HOME_BASE:
-				currentAreaPanel = new HomeBasePanel();
+				currentAreaPanel = new HomeBasePanel(this);
 				break;
 				
 			case HOSPITAL:
-				currentAreaPanel = new HospitalPanel();
+				currentAreaPanel = new HospitalPanel(this);
 				break;
 				
 			case POWER_UP_DEN:
-				currentAreaPanel = new PowerUpDenPanel();
+				currentAreaPanel = new PowerUpDenPanel(this);
 				break;
 				
 			case SHOP:
-				currentAreaPanel = new ShopAreaPanel((Shop)this.getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP), this.getGameEnvironment().getTeam());
+				currentAreaPanel = new ShopAreaPanel(this, (Shop)this.getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP), this.getGameEnvironment().getTeam());
 				break;
 				
 			case VILLAINS_LAIR:
-				currentAreaPanel = new VillainsLairPanel();
+				currentAreaPanel = new VillainsLairPanel(this);
 				break;
 		
 		}
@@ -225,4 +228,15 @@ public class GameWindow {
 		mapPanel.repaint();
 		
 	}
+	
+	@Override
+	public void triggerUpdateNavigation() {
+		updateAreaPanel();
+	}
+
+	@Override
+	public void triggerUpdateTeam() {
+		teamSummaryPanel.update();
+	}
+	
 }

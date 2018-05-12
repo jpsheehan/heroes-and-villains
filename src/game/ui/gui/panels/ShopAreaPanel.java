@@ -6,6 +6,7 @@ import game.Team;
 import game.city.Shop;
 import game.item.Item;
 import game.ui.gui.DialogResult;
+import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
 import javax.swing.BoxLayout;
@@ -24,6 +25,7 @@ public class ShopAreaPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 7862077770649661135L;
 
+	private Triggerable window;
 	private Shop shop;
 	private Team team;
 	private JTextArea textAreaDialogue;
@@ -32,8 +34,9 @@ public class ShopAreaPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ShopAreaPanel(Shop shop, Team team) {
+	public ShopAreaPanel(Triggerable window, Shop shop, Team team) {
 
+		this.window = window;
 		this.shop = shop;
 		this.team = team;
 		
