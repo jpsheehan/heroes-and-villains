@@ -21,6 +21,8 @@ import game.city.Direction;
 import game.city.IllegalMoveException;
 
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+
 import java.awt.GridLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -37,6 +39,8 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class GameWindow {
 
@@ -49,6 +53,7 @@ public class GameWindow {
 	private JButton btnSouth;
 	private JButton btnWest;
 	private JButton btnEast;
+	private JPanel panel;
 
 	/**
 	 * Create the application.
@@ -83,8 +88,19 @@ public class GameWindow {
 		Component horizontalGlue = Box.createHorizontalGlue();
 		northPanel.add(horizontalGlue);
 		
+		panel = new JPanel();
+		northPanel.add(panel);
+		
 		navigationPanel = new JPanel();
-		northPanel.add(navigationPanel);
+		panel.add(navigationPanel);
+		navigationPanel.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				
+				// navigationPanel.setSize(128 + btnEast.getWidth(), navigationPanel.getHeight());
+				
+			}
+		});
 		navigationPanel.setLayout(new BorderLayout(0, 0));
 		
 		mapPanel = new MapPanel(getGameEnvironment().getCityController());
