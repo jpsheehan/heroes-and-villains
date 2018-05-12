@@ -149,7 +149,7 @@ public class GameWindow implements Triggerable {
 		switch (this.getGameEnvironment().getCityController().getCurrentArea().getType()) {
 		
 			case HOME_BASE:
-				currentAreaPanel = new HomeBasePanel(this);
+				currentAreaPanel = new HomeBasePanel(this, this.getGameEnvironment().getTeam().getInventory(), this.getGameEnvironment().getCityController());
 				break;
 				
 			case HOSPITAL:
