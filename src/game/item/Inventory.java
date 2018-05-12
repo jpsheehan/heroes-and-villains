@@ -49,11 +49,12 @@ public class Inventory {
 			
 		}
 		
-		if (this.exists(item)) {
-			
-			throw new IllegalArgumentException(String.format("item %s already exists in inventory", item.getName()));
-			
-		}
+		// Uncomment to disallow purchase of identical items.
+//		if (this.exists(item)) {
+//			
+//			throw new IllegalArgumentException(String.format("item %s already exists in inventory", item.getName()));
+//			
+//		}
 		
 		if (item instanceof HealingItem) {
 			
