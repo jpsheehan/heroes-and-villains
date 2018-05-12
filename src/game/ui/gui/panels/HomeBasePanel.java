@@ -29,8 +29,17 @@ public class HomeBasePanel extends JPanel {
 	public HomeBasePanel(Triggerable window, Inventory inventory, CityController cityController) {
 		
 		JButton btnUseAMap = new JButton("Use a Map...");
+		
 		btnUseAMap.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if (inventory.getMaps().length == 0) {
+					
+					JOptionPane.showMessageDialog(null, "You don't have any maps to use.");
+					return;
+					
+				}
 				
 				ItemSelectionDialog dlg = new ItemSelectionDialog(inventory, ItemType.MAP);
 				dlg.setVisible(true);
@@ -56,6 +65,7 @@ public class HomeBasePanel extends JPanel {
 				
 			}
 		});
+		
 		add(btnUseAMap);
 		
 	}
