@@ -10,6 +10,7 @@ import game.ui.gui.dialogs.ItemSelectionDialog;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.JButton;
@@ -82,7 +83,8 @@ public class ShopAreaPanel extends JPanel {
 						
 					} catch (Exception e2) {
 						
-						// TODO: Show error message, you don not have enough money for that.
+						JOptionPane.showMessageDialog(null, "You don't have enough money for that.");
+						
 						return;
 					}
 					
@@ -98,16 +100,6 @@ public class ShopAreaPanel extends JPanel {
 			}
 		});
 		panel_2.add(btnBuyItems);
-		
-		JButton btnLeave = new JButton("Leave");
-		btnLeave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				// TODO: Somehow make the team return to the HomeBase
-				
-			}
-		});
-		panel_2.add(btnLeave);
 		
 		if (this.shop == null || this.team == null) {
 			
