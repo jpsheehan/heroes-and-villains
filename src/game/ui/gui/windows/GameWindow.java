@@ -100,7 +100,7 @@ public class GameWindow implements Triggerable {
 		areaPanelHolder.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		frame.getContentPane().add(areaPanelHolder, BorderLayout.CENTER);
 		
-		updateAreaPanel();
+		triggerUpdateNavigation();
 		
 	}
 	
@@ -135,7 +135,8 @@ public class GameWindow implements Triggerable {
 		
 	}
 	
-	private void updateAreaPanel() {
+	@Override
+	public void triggerUpdateNavigation() {
 		
 		if (currentAreaPanel != null) {
 			
@@ -178,11 +179,6 @@ public class GameWindow implements Triggerable {
 		
 		navigationPanel.update();
 		
-	}
-	
-	@Override
-	public void triggerUpdateNavigation() {
-		updateAreaPanel();
 	}
 
 	@Override
