@@ -193,7 +193,7 @@
     "Game.Cities.Max": "6",
     "Game.Team.Name.Min": "2",
     "Game.Team.Name.Max": "10",
-    "Game.Team.StartMoney": "10",
+    "Game.Team.StartMoney": "20",
     "Game.Hero.Name.Min": "2",
     "Game.Hero.Name.Max": "10",
     
@@ -256,9 +256,9 @@
 	"Item.GreenTea.Name": "Green Tea               ",
 	"Item.GreenTea.Flavour": "Better than coffee?",
 	"Item.GreenTea.Price": "4",
-	"Item.GreenTea.Type": "Healing",
-	"Item.GreenTea.RestorationLevel": "2",
-	"Item.GreenTea.ApplicationTime": "1",
+	"Item.GreenTea.Type": "PowerUp",
+	"Item.GreenTea.Ability": "WinOnDraw",
+	"Item.GreenTea.AppliesTo": "DiceRolls",
 	
 	"Item.CurlyFries.Name": "Curly Fries           ",
 	"Item.CurlyFries.Flavour": "More curl than Donald Trump",
