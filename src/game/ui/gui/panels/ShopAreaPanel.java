@@ -98,6 +98,9 @@ public class ShopAreaPanel extends JPanel {
 					
 					update();
 					
+					// Update the funds in the window
+					window.triggerUpdateTeam();
+					
 				}
 				
 			}
