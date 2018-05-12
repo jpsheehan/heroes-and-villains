@@ -30,6 +30,7 @@ import javax.swing.Box;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.ui.gui.panels.HomeBasePanel;
 import game.ui.gui.panels.HospitalPanel;
+import game.ui.gui.panels.ImagePanel;
 import game.ui.gui.panels.ShopAreaPanel;
 import game.city.Shop;
 import javax.swing.JButton;
@@ -37,6 +38,7 @@ import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
+import javax.swing.JLabel;
 
 public class GameWindow {
 
@@ -79,8 +81,8 @@ public class GameWindow {
 		TeamSummaryPanel teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
 		northPanel.add(teamSummaryPanel);
 		
-		Component horizontalGlue = Box.createHorizontalGlue();
-		northPanel.add(horizontalGlue);
+		ImagePanel imagePanel = new ImagePanel();
+		northPanel.add(imagePanel);
 		
 		navigationPanelHolder = new JPanel();
 		northPanel.add(navigationPanelHolder);
