@@ -1,5 +1,8 @@
 package game.character;
 
+import java.util.Date;
+
+import game.GeneralHelpers;
 import game.item.HealingItem;
 import game.item.PowerUpItem;
 
@@ -24,7 +27,7 @@ public class Hero extends Character {
 	 */
 	private PowerUpItem item = null;
 	
-	private int healingStartTime;
+	private long healingStartTime;
 	private HealingItem healingItem;
 	
 	/**
@@ -109,7 +112,15 @@ public class Hero extends Character {
 			
 		} else {
 			
-			return this.health + (int)(this.healingItem.getRestorationLevel() * 0.25 * getMaxHealth() * (999 - this.healingStartTime) / this.healingItem.getApplicationTime());
+			float percentHealed = (float) GeneralHelpers.min((float)((new Date()).getTime() - healingStartTime) / (1000 * healingItem.getApplicationTime()), 1f);
+			float amountToHeal = (float) (healingItem.getRestorationLevel() * 0.25 * getMaxHealth());
+			int calculatedHealth = (int) GeneralHelpers.min(this.health + (int)(percentHealed * amountToHeal), getMaxHealth());
+//			TODO: REMOVE THIS. TESTING
+//			if (this.getName().equals("Steve")) {
+//				System.out.println(String.format("PercentHealed: %f%%, AmountToHeal: %f%%, CalculatedHealth: %d", percentHealed * 100, amountToHeal, calculatedHealth));
+//			}
+			
+			return calculatedHealth;
 			
 		}
 		
@@ -208,7 +219,7 @@ public class Hero extends Character {
 		}
 		
 		this.healingItem = item;
-		this.healingStartTime = 999;
+		this.healingStartTime = (new Date()).getTime();
 		
 	}
 	
@@ -221,7 +232,7 @@ public class Hero extends Character {
 		if (this.healingItem != null) {
 			
 			if (
-					this.healingStartTime + this.healingItem.getApplicationTime() > 999 ||
+					this.healingStartTime + this.healingItem.getApplicationTime() > (new Date()).getTime() ||
 					this.getHealth() > getMaxHealth()
 				) {
 				

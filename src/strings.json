@@ -209,14 +209,14 @@
 	"Item.Coffee.Price": "3",
 	"Item.Coffee.Type": "Healing",
 	"Item.Coffee.RestorationLevel": "1",
-	"Item.Coffee.ApplicationTime": "1",
+	"Item.Coffee.ApplicationTime": "10",
 	
 	"Item.Pie.Name": "Steak and Cheese Pie         ",
 	"Item.Pie.Flavour": "Stodgey, boost health by 2",
 	"Item.Pie.Price": "5",
 	"Item.Pie.Type": "Healing",
 	"Item.Pie.RestorationLevel": "2",
-	"Item.Pie.ApplicationTime": "2",
+	"Item.Pie.ApplicationTime": "15",
 	
 	"Item.SBurger.Name": "Shilling Club Burger     ",
 	"Item.SBurger.Flavour": "The business, max health boost",
