@@ -1,4 +1,4 @@
-package game.ui.gui.panels;
+package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
 
@@ -15,8 +15,10 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 
-public class HomeBasePanel extends JPanel {
+public class HomeBasePanel extends GenericAreaPanel {
 
 	/**
 	 * 
@@ -27,8 +29,19 @@ public class HomeBasePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public HomeBasePanel(Triggerable window, Inventory inventory, CityController cityController) {
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		JPanel panel = new JPanel();
+		add(panel);
+		
+		JLabel lblYouCanUse = new JLabel("You can use a map here to view the whole building!");
+		panel.add(lblYouCanUse);
+		
+		JPanel panel_1 = new JPanel();
+		add(panel_1);
 		
 		JButton btnUseAMap = new JButton("Use a Map...");
+		panel_1.add(btnUseAMap);
 		
 		btnUseAMap.addActionListener(new ActionListener() {
 			
@@ -37,6 +50,13 @@ public class HomeBasePanel extends JPanel {
 				if (inventory.getMaps().length == 0) {
 					
 					JOptionPane.showMessageDialog(null, "You don't have any maps to use.");
+					return;
+					
+				}
+				
+				if (cityController.hasUsedMap()) {
+					
+					JOptionPane.showMessageDialog(null, "You have already used a map in this building!");
 					return;
 					
 				}
@@ -54,10 +74,10 @@ public class HomeBasePanel extends JPanel {
 					
 					Map map = (Map)dlg.getSelectedItem();
 					
-					JOptionPane.showMessageDialog(null, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()));
-					
 					cityController.useMap(map);
 					inventory.remove(map);
+					
+					JOptionPane.showMessageDialog(null, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()));
 					
 					window.triggerUpdateNavigation();
 					
@@ -66,8 +86,12 @@ public class HomeBasePanel extends JPanel {
 			}
 		});
 		
-		add(btnUseAMap);
-		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		repaint();
 	}
 
 }

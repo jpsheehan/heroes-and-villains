@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import game.character.Hero;
 import game.ui.gui.components.HealthBar;
 import game.ui.gui.dialogs.HeroInformationDialog;
+import game.ui.gui.panels.areas.GenericAreaPanel;
 
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -18,7 +19,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class HeroSummaryPanel extends JPanel {
+public class HeroSummaryPanel extends GenericAreaPanel {
 
 	private Hero hero;
 	

@@ -5,11 +5,15 @@ import javax.swing.JFrame;
 
 import game.ui.gui.panels.MapPanel;
 import game.ui.gui.panels.NavigationPanel;
-import game.ui.gui.panels.PowerUpDenPanel;
 
 import java.awt.BorderLayout;
 import game.ui.gui.panels.TeamSummaryPanel;
-import game.ui.gui.panels.VillainsLairPanel;
+import game.ui.gui.panels.areas.GenericAreaPanel;
+import game.ui.gui.panels.areas.HomeBasePanel;
+import game.ui.gui.panels.areas.HospitalPanel;
+import game.ui.gui.panels.areas.PowerUpDenPanel;
+import game.ui.gui.panels.areas.ShopAreaPanel;
+import game.ui.gui.panels.areas.VillainsLairPanel;
 import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
@@ -31,10 +35,7 @@ import javax.swing.Box;
 
 import game.ui.gui.Triggerable;
 import game.ui.gui.panels.AreaSummaryPanel;
-import game.ui.gui.panels.HomeBasePanel;
-import game.ui.gui.panels.HospitalPanel;
 import game.ui.gui.panels.ImagePanel;
-import game.ui.gui.panels.ShopAreaPanel;
 import game.city.Shop;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -49,7 +50,7 @@ public class GameWindow implements Triggerable {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
-	private JPanel currentAreaPanel;
+	private GenericAreaPanel currentAreaPanel;
 	private AreaSummaryPanel areaSummaryPanel;
 	private NavigationPanel navigationPanel;
 	private JPanel navigationPanelHolder;
@@ -203,12 +204,13 @@ public class GameWindow implements Triggerable {
 			areaSummaryPanel.update();
 			lblAreaTitle.setText(String.format("%s > %s", getGameEnvironment().getCityController().getCurrentCity().getName(), getGameEnvironment().getCityController().getCurrentArea().getName()));
 			lblAreaSubtitle.setText(getGameEnvironment().getCityController().getCurrentArea().getType().toString());
+			currentAreaPanel.update();
 			
 		}
 		
 		navigationPanel.update();
 		
-		areaPanelHolder.repaint();
+		areaPanelHolderHolder.repaint();
 		
 	}
 

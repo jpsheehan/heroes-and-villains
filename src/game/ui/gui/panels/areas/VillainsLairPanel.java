@@ -1,10 +1,10 @@
-package game.ui.gui.panels;
+package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
 
 import game.ui.gui.Triggerable;
 
-public class VillainsLairPanel extends JPanel {
+public class VillainsLairPanel extends GenericAreaPanel {
 
 	/**
 	 * 
@@ -20,6 +20,12 @@ public class VillainsLairPanel extends JPanel {
 
 		this.window = window;
 		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		repaint();
 	}
 
 }

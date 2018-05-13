@@ -1,4 +1,4 @@
-package game.ui.gui.panels;
+package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
 
@@ -18,7 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ShopAreaPanel extends JPanel {
+public class ShopAreaPanel extends GenericAreaPanel {
 
 	/**
 	 * 
@@ -126,6 +126,8 @@ public class ShopAreaPanel extends JPanel {
 	}
 	
 	public void update() {
+		
+		repaint();
 		
 		if (this.shop != null && this.team != null) {
 			

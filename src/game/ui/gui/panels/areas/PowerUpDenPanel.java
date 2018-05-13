@@ -1,10 +1,10 @@
-package game.ui.gui.panels;
+package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
 
 import game.ui.gui.Triggerable;
 
-public class PowerUpDenPanel extends JPanel {
+public class PowerUpDenPanel extends GenericAreaPanel {
 
 	private Triggerable window;
 	
@@ -20,6 +20,12 @@ public class PowerUpDenPanel extends JPanel {
 		
 		this.window = window;
 		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		repaint();
 	}
 
 }

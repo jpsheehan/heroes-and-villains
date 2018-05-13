@@ -1,4 +1,4 @@
-package game.ui.gui.panels;
+package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
 
@@ -23,7 +23,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.FlowLayout;
 
-public class HospitalPanel extends JPanel {
+public class HospitalPanel extends GenericAreaPanel {
 
 	private Triggerable window;
 	
@@ -137,6 +137,8 @@ public class HospitalPanel extends JPanel {
 	}
 	
 	public void update() {
+		
+		repaint();
 		
 		if (selectedItem == null) {
 			
