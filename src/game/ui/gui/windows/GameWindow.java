@@ -43,6 +43,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Font;
 
 public class GameWindow implements Triggerable {
 
@@ -54,6 +55,11 @@ public class GameWindow implements Triggerable {
 	private JPanel navigationPanelHolder;
 	private JPanel areaPanelHolder;
 	private TeamSummaryPanel teamSummaryPanel;
+	private JPanel areaPanelHolderHolder;
+	private JPanel areaTitle;
+	private JLabel lblAreaTitle;
+	private JPanel areaSubtitle;
+	private JLabel lblAreaSubtitle;
 
 	/**
 	 * Create the application.
@@ -97,9 +103,29 @@ public class GameWindow implements Triggerable {
 		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
 		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
 		
+		areaPanelHolderHolder = new JPanel();
+		areaPanelHolderHolder.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		frame.getContentPane().add(areaPanelHolderHolder, BorderLayout.CENTER);
+		areaPanelHolderHolder.setLayout(new BoxLayout(areaPanelHolderHolder, BoxLayout.Y_AXIS));
+		
+		areaTitle = new JPanel();
+		areaPanelHolderHolder.add(areaTitle);
+		areaTitle.setLayout(new BoxLayout(areaTitle, BoxLayout.X_AXIS));
+		
+		lblAreaTitle = new JLabel("NULL");
+		lblAreaTitle.setFont(new Font("Dialog", Font.BOLD, 20));
+		areaTitle.add(lblAreaTitle);
+		
+		areaSubtitle = new JPanel();
+		areaPanelHolderHolder.add(areaSubtitle);
+		areaSubtitle.setLayout(new BoxLayout(areaSubtitle, BoxLayout.X_AXIS));
+		
+		lblAreaSubtitle = new JLabel("NULL");
+		lblAreaSubtitle.setFont(new Font("Dialog", Font.BOLD, 14));
+		areaSubtitle.add(lblAreaSubtitle);
+		
 		areaPanelHolder = new JPanel();
-		areaPanelHolder.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		frame.getContentPane().add(areaPanelHolder, BorderLayout.CENTER);
+		areaPanelHolderHolder.add(areaPanelHolder);
 		
 		triggerUpdateNavigation();
 		
@@ -175,6 +201,8 @@ public class GameWindow implements Triggerable {
 			
 			areaPanelHolder.add(currentAreaPanel, BorderLayout.CENTER);
 			areaSummaryPanel.update();
+			lblAreaTitle.setText(String.format("%s > %s", getGameEnvironment().getCityController().getCurrentCity().getName(), getGameEnvironment().getCityController().getCurrentArea().getName()));
+			lblAreaSubtitle.setText(getGameEnvironment().getCityController().getCurrentArea().getType().toString());
 			
 		}
 		
