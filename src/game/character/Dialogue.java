@@ -32,7 +32,7 @@ public class Dialogue {
 	/**
 	 * Message when the team purchases an item.
 	 */
-	private String purchase;	 
+	private String purchase;
 	
 	 public Dialogue(CityType type) {
 		 
