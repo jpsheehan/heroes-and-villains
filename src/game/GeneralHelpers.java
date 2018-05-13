@@ -189,4 +189,40 @@ public final class GeneralHelpers {
 		
 	}
 	
+	public static double max(double ...args) {
+		
+		double value = Double.MIN_VALUE;
+		
+		for (double v : args) {
+			
+			if (v > value) {
+				
+				value = v;
+				
+			}
+			
+		}
+		
+		return value;
+		
+	}
+	
+	public static double min(double ...args) {
+		
+		double value = Double.MAX_VALUE;
+		
+		for (double v : args) {
+			
+			if (v < value) {
+				
+				value = v;
+				
+			}
+			
+		}
+		
+		return value;
+		
+	}
+	
 }
