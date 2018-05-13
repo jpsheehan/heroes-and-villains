@@ -283,4 +283,10 @@ public class Hero extends Character {
 		return 100;
 		
 	}
+	
+	public HealingItem getHealingItem() {
+		
+		return this.healingItem;
+		
+	}
 }
