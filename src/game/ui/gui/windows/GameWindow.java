@@ -125,9 +125,9 @@ public class GameWindow implements Triggerable {
 			team.addHero(new Hero("Bob", HeroType.ENGINEERING_STUDENT));
 			team.addHero(new Hero("Amy", HeroType.LAW_STUDENT));
 			
-			team.getHeroes().get(0).takeDamage(30);
-			team.getHeroes().get(1).takeDamage(60);
-			team.getHeroes().get(2).takeDamage(200);
+			team.getHeroes()[0].takeDamage(30);
+			team.getHeroes()[1].takeDamage(60);
+			team.getHeroes()[2].takeDamage(200);
 		} catch (TeamFullException | HeroDeadException e) {
 		}
 		
@@ -154,7 +154,7 @@ public class GameWindow implements Triggerable {
 				break;
 				
 			case HOSPITAL:
-				currentAreaPanel = new HospitalPanel(this);
+				currentAreaPanel = new HospitalPanel(this, this.getGameEnvironment().getTeam());
 				break;
 				
 			case POWER_UP_DEN:

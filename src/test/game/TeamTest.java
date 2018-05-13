@@ -29,20 +29,20 @@ class TeamTest {
 		team_1.addHero(new Hero("Charlie", HeroType.LAW_STUDENT));
 		assertThrows(TeamFullException.class, () -> team_1.addHero(new Hero("Eve", HeroType.MATHS_STUDENT)));
 		
-		assertEquals(3, team_1.getHeroes().size());
-		assertEquals(0, team_2.getHeroes().size());
+		assertEquals(3, team_1.getHeroes().length);
+		assertEquals(0, team_2.getHeroes().length);
 		
 		assertThrows(IllegalArgumentException.class, () -> team_2.removeHero(bob));
 		assertThrows(IllegalArgumentException.class, () -> team_1.removeHero("Eve"));
 		
-		assertEquals(3, team_1.getHeroes().size());
-		assertEquals(0, team_2.getHeroes().size());
+		assertEquals(3, team_1.getHeroes().length);
+		assertEquals(0, team_2.getHeroes().length);
 		
 		team_1.removeHero("Alice");
 		team_1.removeHero(bob);
 		
-		assertEquals(1, team_1.getHeroes().size());
-		assertEquals("Charlie", team_1.getHeroes().get(0).getName());
+		assertEquals(1, team_1.getHeroes().length);
+		assertEquals("Charlie", team_1.getHeroes()[0].getName());
 	}
 
 	@Test

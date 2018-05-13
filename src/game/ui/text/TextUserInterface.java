@@ -211,7 +211,7 @@ public class TextUserInterface extends UserInterface {
 			// Print a list of heroes in your team.
 			if (heroes.size() > 0) {
 				
-				System.out.println(getPrettyHeroesString(heroes));
+				System.out.println(getPrettyHeroesString((Hero[])heroes.toArray()));
 				
 			}
 			
@@ -469,8 +469,8 @@ public class TextUserInterface extends UserInterface {
 		return showYesNoDialog(
 				String.format(
 						"You will be fighting %d villains. Your team name is \"%s\". You have %d hero%s:\n%s\n\nIs this ok?",
-						params.getCityCount(), params.getTeam().getName(), params.getTeam().getHeroes().size(),
-						params.getTeam().getHeroes().size() == 1 ? "" : "es", String.join("\n", heroString)), // pluralise the word "hero" if there is more than one hero in the team
+						params.getCityCount(), params.getTeam().getName(), params.getTeam().getHeroes().length,
+						params.getTeam().getHeroes().length == 1 ? "" : "es", String.join("\n", heroString)), // pluralise the word "hero" if there is more than one hero in the team
 				"New Game > Confirm");
 		
 	}
@@ -525,7 +525,7 @@ public class TextUserInterface extends UserInterface {
 	 * @param heroes The list or array of heroes to display.
 	 * @return
 	 */
-	private static String getPrettyHeroesString(Iterable<Hero> heroes) {
+	private static String getPrettyHeroesString(Hero[] heroes) {
 		
 		ArrayList<String> heroStrings = new ArrayList<String>();
 		

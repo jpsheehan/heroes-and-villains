@@ -51,9 +51,9 @@ public class Team implements Nameable {
 	 * Returns the list of heroes.
 	 * @return
 	 */
-	public ArrayList<Hero> getHeroes() {
+	public Hero[] getHeroes() {
 		
-		return this.heroes;
+		return (Hero[])this.heroes.toArray();
 		
 	}
 	

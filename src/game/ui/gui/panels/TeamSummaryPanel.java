@@ -75,7 +75,7 @@ public class TeamSummaryPanel extends JPanel {
 			
 			lblTeamName.setText(team.getName());
 			
-			this.summaries = new HeroSummaryPanel[team.getHeroes().size()];
+			this.summaries = new HeroSummaryPanel[team.getHeroes().length];
 			
 			int i = 0;
 			for (Hero hero : team.getHeroes()) {
