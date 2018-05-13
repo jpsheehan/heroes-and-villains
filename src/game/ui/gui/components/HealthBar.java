@@ -1,14 +1,18 @@
 package game.ui.gui.components;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JProgressBar;
+import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 import game.character.Hero;
 
-public class HealthBar extends JProgressBar {
+public class HealthBar extends JProgressBar implements ActionListener {
 
+	private static int UPDATE_DELAY = 200;
 	private Hero hero;
 	
 	/**
@@ -28,6 +32,9 @@ public class HealthBar extends JProgressBar {
 			protected Color getSelectionBackground() { return Color.white; }
 		    protected Color getSelectionForeground() { return Color.black; }
 		});
+		
+		// Start a timer to update the healthbar automatically
+		(new Timer(UPDATE_DELAY, this)).start();
 		
 		update();
 	}
@@ -80,6 +87,13 @@ public class HealthBar extends JProgressBar {
 	public void setHero(Hero hero) {
 		
 		this.hero = hero;
+		
+		update();
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		
 		update();
 		
