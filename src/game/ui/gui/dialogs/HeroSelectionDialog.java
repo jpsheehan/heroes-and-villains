@@ -19,6 +19,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,7 @@ import game.ui.gui.components.HealthBar;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
-public class HeroSelectionDialog extends JDialog implements Returnable {
+public class HeroSelectionDialog extends JDialog implements Returnable, ActionListener {
 
 	/**
 	 * 
@@ -290,6 +292,8 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 			
 		}
 		
+		(new Timer(500, this)).start();
+		
 	}
 	
 	private void setDialogResult(DialogResult dialogResult) {
@@ -326,6 +330,21 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 		
 		okButton.setEnabled(false);
 		okButton.setVisible(false);
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent args) {
+		
+		if (selectedHero == null || !selectedHero.isHealing()) {
+			
+			lblHealingItem.setText("None");
+			
+		} else {
+			
+			lblHealingItem.setText(selectedHero.getHealingItem().getName());
+			
+		}
 		
 	}
 
