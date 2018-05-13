@@ -342,7 +342,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 			
 		} else {
 			
-			lblHealingItem.setText(selectedHero.getHealingItem().getName());
+			lblHealingItem.setText(String.format("%s (%ds remaining)", selectedHero.getHealingItem().getName(), selectedHero.getRemainingHealingTime()));
 			
 		}
 		

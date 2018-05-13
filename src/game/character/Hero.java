@@ -142,6 +142,24 @@ public class Hero extends Character {
 	}
 	
 	/**
+	 * Gets the remaining time (in seconds) that the healing item will take to be used.
+	 * @return
+	 */
+	public int getRemainingHealingTime() {
+		
+		if (!isHealing()) {
+			
+			return 0;
+			
+		} else {
+			
+			return healingItem.getApplicationTime() - (int)(((float)((new Date()).getTime() - healingStartTime)) / 1000f);
+			
+		}
+		
+	}
+	
+	/**
 	 * Deals some amount of damage to the Hero.
 	 * @param damage The amount of damage to deal.
 	 * @throws HeroDeadException if the hero is dead.
