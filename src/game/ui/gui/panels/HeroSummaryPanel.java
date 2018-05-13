@@ -3,6 +3,7 @@ package game.ui.gui.panels;
 import javax.swing.JPanel;
 
 import game.character.Hero;
+import game.ui.gui.components.HealthBar;
 import game.ui.gui.dialogs.HeroInformationDialog;
 
 import javax.swing.JLabel;
@@ -22,7 +23,7 @@ public class HeroSummaryPanel extends JPanel {
 	private Hero hero;
 	
 	private JLabel lblHeroName;
-	private JProgressBar healthBar;
+	private HealthBar healthBar;
 	private JButton btnMoreInfo;
 	
 	/**
@@ -42,13 +43,7 @@ public class HeroSummaryPanel extends JPanel {
 		lblHeroName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHeroName);
 		
-		healthBar = new JProgressBar();
-		healthBar.setBackground(Color.BLACK);
-		healthBar.setStringPainted(true);
-		healthBar.setUI(new BasicProgressBarUI() {
-			protected Color getSelectionBackground() { return Color.white; }
-		    protected Color getSelectionForeground() { return Color.black; }
-		});
+		healthBar = new HealthBar(this.hero);
 		add(healthBar);
 		
 		btnMoreInfo = new JButton("More Info...");
@@ -70,44 +65,22 @@ public class HeroSummaryPanel extends JPanel {
 			
 			lblHeroName.setText("NULL");
 			btnMoreInfo.setEnabled(false);
-			// healthBar.setString("?/?");
-			healthBar.setIndeterminate(true);
 			
 		} else {
 			
 			lblHeroName.setText(hero.getName());
-			// healthBar.setString(String.format("%d/%d", hero.getHealth(), 100));
-			healthBar.setValue(hero.getHealth());
-			healthBar.setIndeterminate(false);
 			btnMoreInfo.setEnabled(true);
 			
+			if (!hero.isAlive() ) {
+				
+				lblHeroName.setForeground(Color.GRAY);
+				btnMoreInfo.setEnabled(false);
+				
+			}
 		}
 		
-		// update the color of the healthBar
-		if (hero.getHealth() > 70) {
-			
-			healthBar.setForeground(Color.GREEN);
-			
-		} else if (hero.getHealth() > 40) {
-			
-			healthBar.setForeground(Color.YELLOW);
-			
-		} else if (hero.getHealth() > 10) {
-			
-			healthBar.setForeground(Color.ORANGE);
-			
-		} else if (hero.getHealth() > 0) {
-			
-			healthBar.setForeground(Color.RED);
-			
-		} else {
-			
-			healthBar.setBackground(Color.GRAY);
-			healthBar.setString("Dead");
-			lblHeroName.setForeground(Color.GRAY);
-			btnMoreInfo.setEnabled(false);
-			
-		}
+		healthBar.update();
 		
 	}
+	
 }
