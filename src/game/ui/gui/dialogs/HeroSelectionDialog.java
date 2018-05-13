@@ -84,6 +84,15 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 					
 					comboBox.setSelectedIndex(0);
 					
+					if (heroes.length == 1) {
+						
+						// replace the comboBox with a label
+						contentPanel.remove(comboBox);
+						JLabel lblHeroName = new JLabel(selectedHero.getName());
+						contentPanel.add(lblHeroName, "4, 2, fill, default");
+						
+					}
+					
 				} else {
 					
 					comboBox.setEnabled(false);
@@ -197,6 +206,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 		}
 		{
 			lblHeroTypeFlavour = new JTextArea("lblHeroTypeFlavour");
+			lblHeroTypeFlavour.setEditable(false);
 			lblHeroTypeFlavour.setWrapStyleWord(true);
 			lblHeroTypeFlavour.setLineWrap(true);
 			lblHeroTypeFlavour.setBackground(UIManager.getColor("Label.background"));
@@ -213,6 +223,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 		}
 		{
 			lblHeroAbilityFlavour = new JTextArea("lblHeroAbilityFlavour");
+			lblHeroAbilityFlavour.setEditable(false);
 			lblHeroAbilityFlavour.setWrapStyleWord(true);
 			lblHeroAbilityFlavour.setLineWrap(true);
 			lblHeroAbilityFlavour.setBackground(UIManager.getColor("Label.background"));
@@ -308,6 +319,13 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 	public boolean getCanSelectDeadHeroes() {
 		
 		return this.canSelectDeadHeroes;
+		
+	}
+	
+	protected void makeReadOnly() {
+		
+		okButton.setEnabled(false);
+		okButton.setVisible(false);
 		
 	}
 
