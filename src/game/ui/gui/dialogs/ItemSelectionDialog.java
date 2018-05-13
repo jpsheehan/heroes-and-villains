@@ -37,8 +37,6 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	private static final long serialVersionUID = 5348976844662470541L;
 	private DialogResult dialogResult;
 	private int index;
-	private Inventory inventory;
-	private ItemType itemType;
 	private Item selectedItem;
 	
 	
@@ -52,7 +50,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	    
 	  //Testing default get all items in inventory
 		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory);
+			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
@@ -115,27 +113,6 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 * @override
 	 */
 	public ItemSelectionDialog(Inventory inventory, ItemType itemType) {
-		this.inventory = inventory;
-		this.itemType = itemType;
-		
-		initializeComponents();
-		
-	}
-	
-	/**
-	 * Create the dialog.
-	 * Default dialog displays all Items in Inventory
-	 * @param Inventory
-	 */
-	public ItemSelectionDialog(Inventory inventory) {
-		this.inventory = inventory;
-		this.itemType = null;
-		
-		initializeComponents();
-	}
-	
-	private void initializeComponents() {
-		
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 
 		setResizable(false);
@@ -290,6 +267,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
 		
 	}
 	

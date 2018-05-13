@@ -66,7 +66,7 @@ public class TeamSummaryPanel extends JPanel {
 		JButton btnInventory = new JButton("Inventory...");
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				(new ItemSelectionDialog(team.getInventory())).setVisible(true);
+				(new ItemSelectionDialog(team.getInventory(), null)).setVisible(true);
 			}
 		});
 		inventoryPanel.add(btnInventory);
