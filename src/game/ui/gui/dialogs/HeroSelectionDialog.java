@@ -43,6 +43,8 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 	
 	private DialogResult dialogResult;
 	
+	private boolean canSelectDeadHeroes;
+	
 	private Hero selectedHero;
 
 	/**
@@ -62,6 +64,9 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 	 * Create the dialog.
 	 */
 	public HeroSelectionDialog(Hero[] heroes) {
+		
+		canSelectDeadHeroes = false;
+		
 		setTitle("Select a Hero");
 		setModal(true);
 		
@@ -158,6 +163,16 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 						} else {
 							
 							lblHealingItem.setText(selectedHero.getHealingItem().getName());
+							
+						}
+						
+						if (!getCanSelectDeadHeroes() && !selectedHero.isAlive()) {
+							
+							okButton.setEnabled(false);
+							
+						} else {
+							
+							okButton.setEnabled(true);
 							
 						}
 						
@@ -281,6 +296,18 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 	public Hero getSelectedHero() {
 		
 		return this.selectedHero;
+		
+	}
+	
+	public void setCanSelectDeadHeroes(boolean enabled) {
+		
+		this.canSelectDeadHeroes = enabled;
+		
+	}
+	
+	public boolean getCanSelectDeadHeroes() {
+		
+		return this.canSelectDeadHeroes;
 		
 	}
 
