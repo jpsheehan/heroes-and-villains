@@ -38,6 +38,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	private DialogResult dialogResult;
 	private int index;
 	private Item selectedItem;
+	private boolean showPrice;
 	
 	
 	/**
@@ -48,9 +49,9 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	    City city = new City(CityType.ERSKINE);
 	    Inventory inventory = ((Shop)city.getArea(AreaType.SHOP)).getInventory();
 	    
-	  //Testing default get all items in inventory
+	  //Testing: ItemType = null, should get all items in inventory and showPrice = true, should display prices
 		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null);
+			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null, true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
@@ -62,9 +63,23 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				e.printStackTrace();
 			}
 	    
+		//Testing: ItemType = null, should get all items in inventory and showPrice = false, should not display prices
+				try {
+					ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null, false);
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+					
+					if (dialog.getDialogResult() == DialogResult.OK) {
+						System.out.println(dialog.getSelectedItem().getName());
+					}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+		
 	    //Testing Type HealingItem
 		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.HEALING_ITEM);
+			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.HEALING_ITEM, true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
@@ -78,7 +93,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		
 		//Testing Type MapItem
 		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.MAP);
+			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.MAP, true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 
@@ -92,7 +107,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				
 		//Testing Type PowerUpItem
 		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.POWER_UP_ITEM);
+			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.POWER_UP_ITEM, true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
@@ -109,10 +124,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	/**
 	 * Create the dialog
 	 * Dialog only displays Items of the specified ItemType from the inventory
-	 * @param Inventory, ItemType
-	 * @override
+	 * If Boolean is set to false, price is not shown
+	 * @param Inventory, ItemType, Boolean
 	 */
-	public ItemSelectionDialog(Inventory inventory, ItemType itemType) {
+	public ItemSelectionDialog(Inventory inventory, ItemType itemType, Boolean showPrice) {
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 
 		setResizable(false);
@@ -124,34 +139,44 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			public void windowOpened(WindowEvent arg0) {
 				
 				if (itemType == null) {
+					if (showPrice == false) {
 					
-					// show all the items
-					for (Item item : inventory.getAllItems()) {
+						// show all the items without price
+						for (Item item : inventory.getAllItems()) {
 						
-						listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));
+							listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));
 						
+						}
 					}
-					
-				} else {
+					else {
+						// show all the items without price
+						for (Item item : inventory.getAllItems()) {
+						
+							listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));
+						
+						}
+					}	
+				} 
+				else {
 					
 					switch (itemType) {
 						
 						case MAP:
 							// Get the item details from the inventory into a string array			
 							for (Item item : inventory.getMaps()) {
-								listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
 								}
 							break;
 							
 						case HEALING_ITEM:
 							for (Item item : inventory.getHealingItems()) {
-								listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
 								}
 							break;
 							
 						case POWER_UP_ITEM:
 								for (Item item : inventory.getPowerUpItems()) {
-								listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));		
+								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
 								}
 							break;
 							
@@ -216,8 +241,10 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			panel.add(lblNewLabel_3, "16, 2");
 		}
 		{
-			JLabel lblNewLabel_1 = new JLabel("Price");
-			panel.add(lblNewLabel_1, "22, 2");
+			if (showPrice == true) {
+				JLabel lblNewLabel_1 = new JLabel("Price");
+				panel.add(lblNewLabel_1, "22, 2");
+			}
 		}
 		{
 			JList<String> list = new JList<String>(listModel);
