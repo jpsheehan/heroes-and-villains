@@ -1,6 +1,7 @@
 package game.character;
 
 import static game.GeneralHelpers.getString;
+import static game.GeneralHelpers.getFloat;
 
 import game.Describable;
 
@@ -98,6 +99,16 @@ public enum HeroType implements Nameable, Describable {
 				throw new AssertionError();
 				
 		}
+		
+	}
+	
+	/**
+	 * Returns the recovery rate of the HeroType.
+	 * @return
+	 */
+	public float getRecoveryRate() {
+		
+		return getFloat(this.getProperName() + ".RecoveryRate");
 		
 	}
 	

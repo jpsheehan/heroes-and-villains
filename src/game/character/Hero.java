@@ -88,39 +88,12 @@ public class Hero extends Character {
 	
 	/**
 	 * Returns the recovery rate of the Hero (depends on its type). The recovery rate is the amount of health regained every 10 seconds.
+	 * TODO: Update this doc
 	 * @throws Exception 
 	 */
-	public Integer getRecoveryRate() {
+	public float getRecoveryRate() {
 		
-		// TODO: Change these:
-		
-		switch (this.type) {
-		
-			case ARTS_STUDENT:
-				return 2;
-			
-			case COMMERCE_STUDENT:
-				return 2;
-				
-			case COMPUTER_SCIENCE_STUDENT:
-				return 2;
-				
-			case ENGINEERING_STUDENT:
-				return 2;
-				
-			case LAW_STUDENT:
-				return 2;
-				
-			case MATHS_STUDENT:
-				return 2;
-				
-			case SCIENCE_STUDENT:
-				return 2;
-				
-			default:
-				throw new AssertionError("You shouldn't get this. Is there another HeroType that we don't know about?");
-			
-		}
+		return this.getType().getRecoveryRate();
 		
 	}
 	

@@ -62,6 +62,25 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Gets the associated floating point number from the strings.json file.
+	 * @param specifier The float to get.
+	 * @return
+	 */
+	public static float getFloat(String specifier) {
+		
+		try {
+			
+			return (float)Float.parseFloat(getString(specifier));
+			
+		} catch (NumberFormatException e) {
+			
+			throw new IllegalArgumentException(String.format("Invalid float for specifier \"%s\".", specifier));
+			
+		}
+		
+	}
+	
 	private static boolean runningInEclipse;
 	
 	/**
