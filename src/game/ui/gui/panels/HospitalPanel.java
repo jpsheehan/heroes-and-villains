@@ -66,6 +66,8 @@ public class HospitalPanel extends JPanel {
 					
 					selectedHero = dlg.getSelectedHero();
 					
+					update();
+					
 				}
 				
 			}
