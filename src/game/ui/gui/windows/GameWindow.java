@@ -32,6 +32,8 @@ import game.ui.gui.Triggerable;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.ui.gui.panels.ImagePanel;
 import game.city.Shop;
+import game.item.HealingItem;
+
 import javax.swing.BoxLayout;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
@@ -150,6 +152,8 @@ public class GameWindow implements Triggerable {
 			team.getHeroes()[2].takeDamage(200);
 		} catch (TeamFullException | HeroDeadException e) {
 		}
+		
+		team.getInventory().add(HealingItem.fromStrings("Coffee"));
 		
 		gameEnvironment.setTeam(team);
 		gameEnvironment.setCityController(new CityController(3));
