@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import game.Settings;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
@@ -65,22 +66,24 @@ class TeamTest {
 	@Test
 	void testMoney() {
 		
+		int startMoney = Settings.getTeamStartMoney();
+		
 		team_1.giveMoney(20);
 		assertThrows(IllegalArgumentException.class, () -> team_1.giveMoney(-10));
-		assertEquals(20, team_1.getMoney());
+		assertEquals(startMoney + 20, team_1.getMoney());
 		
-		assertEquals(0, team_2.getMoney());
+		assertEquals(startMoney, team_2.getMoney());
 		
 		team_1.spendMoney(5);
-		assertEquals(15, team_1.getMoney());
+		assertEquals(startMoney + 15, team_1.getMoney());
 		
 		team_2.giveMoney(49);
-		assertThrows(IllegalArgumentException.class, () -> team_2.spendMoney(50));
-		assertEquals(49, team_2.getMoney());
+		assertThrows(IllegalArgumentException.class, () -> team_2.spendMoney(100));
+		assertEquals(startMoney + 49, team_2.getMoney());
 		
 		team_2.giveMoney(1);
 		team_2.spendMoney(50);
-		assertEquals(0, team_2.getMoney());
+		assertEquals(startMoney, team_2.getMoney());
 		
 	}
 
