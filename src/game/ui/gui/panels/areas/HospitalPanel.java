@@ -118,6 +118,15 @@ public class HospitalPanel extends GenericAreaPanel {
 		btnApplyHealingItem = new JButton("Apply Healing Item");
 		btnApplyHealingItem.setEnabled(false);
 		panel_5.add(btnApplyHealingItem);
+		
+		JPanel panel_7 = new JPanel();
+		panel_6.add(panel_7);
+		
+		JLabel lblNewLabel = new JLabel("The following heroes are currently being healed:");
+		panel_7.add(lblNewLabel);
+		
+		JPanel panelHeroHealingParent = new JPanel();
+		panel_6.add(panelHeroHealingParent);
 		btnApplyHealingItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
