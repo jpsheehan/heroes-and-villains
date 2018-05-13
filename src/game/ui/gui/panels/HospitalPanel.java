@@ -7,6 +7,7 @@ import game.character.Hero;
 import game.ui.gui.DialogResult;
 import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.HeroSelectionDialog;
+import game.ui.gui.dialogs.ItemSelectionDialog;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,6 +15,8 @@ import java.awt.event.ActionEvent;
 
 import game.item.HealingItem;
 import game.item.Inventory;
+import game.item.ItemType;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -50,7 +53,7 @@ public class HospitalPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel_6.add(panel);
 		
-		JLabel lblThisIsA = new JLabel("This is a hospital. You can apply healing items here.");
+		JLabel lblThisIsA = new JLabel("You can apply healing items here.");
 		panel.add(lblThisIsA);
 		
 		JPanel panel_1 = new JPanel();
@@ -100,7 +103,16 @@ public class HospitalPanel extends JPanel {
 		btnSelectAnItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.HEALING_ITEM);
+				dlg.setVisible(true);
 				
+				if (dlg.getDialogResult() == DialogResult.OK) {
+					
+					selectedItem = (HealingItem)dlg.getSelectedItem();
+					
+					update();
+					
+				}
 				
 			}
 		});
@@ -110,6 +122,7 @@ public class HospitalPanel extends JPanel {
 		panel_6.add(panel_5);
 		
 		btnApplyHealingItem = new JButton("Apply Healing Item");
+		btnApplyHealingItem.setEnabled(false);
 		panel_5.add(btnApplyHealingItem);
 		btnApplyHealingItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -118,6 +131,8 @@ public class HospitalPanel extends JPanel {
 				
 			}
 		});
+		
+		update();
 		
 	}
 	
