@@ -18,12 +18,14 @@ import game.ui.gui.Returnable;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import game.ui.gui.components.HealthBar;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 public class HeroSelectionDialog extends JDialog implements Returnable {
 
@@ -34,9 +36,10 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 	private final JPanel contentPanel = new JPanel();
 	
 	private JComboBox<Hero> comboBox;
-	private Hero[] heroes;
-	private JLabel lblHeroType, lblHeroTypeFlavour, lblHeroAbility, lblHeroAbilityFlavour, lblHealingItem, lblPowerUpItem;
-	private JProgressBar healthBar;
+	private JLabel lblHeroType, lblHeroAbility, lblHealingItem, lblPowerUpItem;
+	private JTextArea lblHeroTypeFlavour, lblHeroAbilityFlavour;
+	private HealthBar healthBar;
+	private JButton okButton;
 	
 	private DialogResult dialogResult;
 	
@@ -62,13 +65,11 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 		setTitle("Select a Hero");
 		setModal(true);
 		
-		this.heroes = heroes;
-		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				
-				if (heroes.length > 0) {
+				if (heroes != null && heroes.length > 0) {
 					
 					for (Hero hero : heroes) {
 						
@@ -81,6 +82,14 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 				} else {
 					
 					comboBox.setEnabled(false);
+					okButton.setEnabled(false);
+					
+					lblHealingItem.setText("None");
+					lblHeroAbility.setText("None");
+					lblHeroAbilityFlavour.setText("None");
+					lblHeroType.setText("None");
+					lblHeroTypeFlavour.setText("None");
+					lblPowerUpItem.setText("None");
 					
 				}
 				
@@ -130,8 +139,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 						lblHeroType.setText(selectedHero.getType().getName());
 						lblHeroTypeFlavour.setText(selectedHero.getType().getFlavourText());
 						
-						healthBar.setMaximum(selectedHero.getMaxHealth());
-						healthBar.setValue(selectedHero.getHealth());
+						healthBar.setHero(selectedHero);
 						
 						if (selectedHero.getPowerUpItem() == null) {
 							
@@ -155,7 +163,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 						
 					} catch (NullPointerException e) {
 						
-						// JOptionPane.showMessageDialog(null, "An error occurred :(");
+						okButton.setEnabled(false);
 						
 					}
 					
@@ -173,7 +181,10 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 			contentPanel.add(lblHeroType, "4, 4");
 		}
 		{
-			lblHeroTypeFlavour = new JLabel("lblHeroTypeFlavour");
+			lblHeroTypeFlavour = new JTextArea("lblHeroTypeFlavour");
+			lblHeroTypeFlavour.setWrapStyleWord(true);
+			lblHeroTypeFlavour.setLineWrap(true);
+			lblHeroTypeFlavour.setBackground(UIManager.getColor("Label.background"));
 			contentPanel.add(lblHeroTypeFlavour, "4, 6");
 		}
 		{
@@ -186,7 +197,10 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 			contentPanel.add(lblHeroAbility, "4, 8");
 		}
 		{
-			lblHeroAbilityFlavour = new JLabel("lblHeroAbilityFlavour");
+			lblHeroAbilityFlavour = new JTextArea("lblHeroAbilityFlavour");
+			lblHeroAbilityFlavour.setWrapStyleWord(true);
+			lblHeroAbilityFlavour.setLineWrap(true);
+			lblHeroAbilityFlavour.setBackground(UIManager.getColor("Label.background"));
 			contentPanel.add(lblHeroAbilityFlavour, "4, 10");
 		}
 		{
@@ -195,7 +209,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 			contentPanel.add(lblHealth, "2, 12");
 		}
 		{
-			healthBar = new JProgressBar();
+			healthBar = new HealthBar((Hero) null);
 			contentPanel.add(healthBar, "4, 12");
 		}
 		{
@@ -221,7 +235,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
