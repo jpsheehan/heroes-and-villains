@@ -25,7 +25,6 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	 */
 	private static final long serialVersionUID = 7862077770649661135L;
 
-	private Triggerable window;
 	private Shop shop;
 	private Team team;
 	private JTextArea textAreaDialogue;
@@ -36,7 +35,6 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	 */
 	public ShopAreaPanel(Triggerable window, Shop shop, Team team) {
 
-		this.window = window;
 		this.shop = shop;
 		this.team = team;
 		
