@@ -182,13 +182,7 @@ public class CityController {
 			
 		}
 		
-		this.direction = absoluteDirection;
-		
-		if (!hasVisitedDirection(this.direction)) {
-			
-			this.visitedDirections.add(this.direction);
-			
-		}
+		this.goTo(absoluteDirection);
 		
 	}
 	
@@ -253,6 +247,18 @@ public class CityController {
 	public boolean hasUsedMap() {
 		
 		return this._hasUsedMap;
+		
+	}
+	
+	public void goTo(Direction direction) {
+		
+		this.direction = direction;
+		
+		if (!hasVisitedDirection(this.direction)) {
+			
+			this.visitedDirections.add(this.direction);
+			
+		}
 		
 	}
 }
