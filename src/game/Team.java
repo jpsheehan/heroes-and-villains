@@ -53,7 +53,15 @@ public class Team implements Nameable {
 	 */
 	public Hero[] getHeroes() {
 		
-		return (Hero[])this.heroes.toArray();
+		Hero[] heroArray = new Hero[this.heroes.size()];
+		
+		for (int i = 0; i < this.heroes.size(); i++) {
+			
+			heroArray[i] = heroes.get(i);
+			
+		}
+		
+		return heroArray;
 		
 	}
 	
