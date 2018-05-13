@@ -43,6 +43,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -165,6 +167,19 @@ public class GameWindow implements Triggerable {
 	
 	@Override
 	public void triggerUpdateNavigation() {
+		
+		// Prompt for confirmation before entering a Villain's Lair
+		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR) {
+			
+			int res = JOptionPane.showConfirmDialog(null, "You are about to enter a Villain's Lair. Are you sure you want to enter?", null, JOptionPane.YES_NO_OPTION);
+			
+			if (res != JOptionPane.YES_OPTION) {
+				
+				getGameEnvironment().getCityController().goTo(Direction.CENTRE);
+				
+			}
+			
+		}
 		
 		if (currentAreaPanel != null) {
 			
