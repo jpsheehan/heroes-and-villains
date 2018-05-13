@@ -115,10 +115,25 @@ public class Hero extends Character {
 			float percentHealed = (float) GeneralHelpers.min((float)((new Date()).getTime() - healingStartTime) / (1000 * healingItem.getApplicationTime()), 1f);
 			float amountToHeal = (float) (healingItem.getRestorationLevel() * 0.25 * getMaxHealth());
 			int calculatedHealth = (int) GeneralHelpers.min(this.health + (int)(percentHealed * amountToHeal), getMaxHealth());
-//			TODO: REMOVE THIS. TESTING
-//			if (this.getName().equals("Steve")) {
-//				System.out.println(String.format("PercentHealed: %f%%, AmountToHeal: %f%%, CalculatedHealth: %d", percentHealed * 100, amountToHeal, calculatedHealth));
-//			}
+			
+			if (percentHealed == 1f || calculatedHealth == getMaxHealth()) {
+				
+				System.out.println("Finished healing");
+				
+				if (calculatedHealth > getMaxHealth()) {
+					
+					this.health = getMaxHealth();
+					
+				} else {
+					
+					this.health = calculatedHealth;
+					
+				}
+				
+				this.healingItem = null;
+				this.healingStartTime = 0;
+				
+			}
 			
 			return calculatedHealth;
 			
@@ -229,36 +244,7 @@ public class Hero extends Character {
 	 */
 	public boolean isHealing() {
 		
-		if (this.healingItem != null) {
-			
-			if (
-					this.healingStartTime + this.healingItem.getApplicationTime() > (new Date()).getTime() ||
-					this.getHealth() > getMaxHealth()
-				) {
-				
-				if (getHealth() > getMaxHealth()) {
-					
-					this.health = getMaxHealth();
-					
-				} else {
-					
-					this.health += (int)(this.getMaxHealth() * (this.healingItem.getRestorationLevel() * 0.25));
-					
-				}
-				
-				this.healingItem = null;
-				this.healingStartTime = 0;
-				return false;
-				
-			} else {
-				
-				return true;
-				
-			}
-			
-		}
-		
-		return false;
+		return this.healingItem != null;
 		
 	}
 	
