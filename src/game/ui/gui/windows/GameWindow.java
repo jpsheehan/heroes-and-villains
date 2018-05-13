@@ -185,7 +185,7 @@ public class GameWindow implements Triggerable {
 				break;
 				
 			case POWER_UP_DEN:
-				currentAreaPanel = new PowerUpDenPanel(this);
+				currentAreaPanel = new PowerUpDenPanel(this, this.getGameEnvironment().getTeam());
 				break;
 				
 			case SHOP:
