@@ -54,13 +54,13 @@ class HeroTest {
 	@Test
 	void testGetRecoveryRate() {
 		
-		assertEquals(new Integer(2), hero_1.getRecoveryRate());
-		assertEquals(new Integer(2), hero_2.getRecoveryRate());
-		assertEquals(new Integer(2), hero_3.getRecoveryRate());
-		assertEquals(new Integer(2), hero_4.getRecoveryRate());
-		assertEquals(new Integer(2), hero_5.getRecoveryRate());
-		assertEquals(new Integer(2), hero_6.getRecoveryRate());
-		assertEquals(new Integer(2), hero_7.getRecoveryRate());
+		assertEquals(1f, hero_1.getRecoveryRate());
+		assertEquals(1f, hero_2.getRecoveryRate());
+		assertEquals(1f, hero_3.getRecoveryRate());
+		assertEquals(1f, hero_4.getRecoveryRate());
+		assertEquals(1f, hero_5.getRecoveryRate());
+		assertEquals(1f, hero_6.getRecoveryRate());
+		assertEquals(1f, hero_7.getRecoveryRate());
 		
 	}
 
