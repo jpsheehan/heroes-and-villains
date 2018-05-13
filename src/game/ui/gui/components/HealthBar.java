@@ -21,17 +21,22 @@ public class HealthBar extends JProgressBar {
 		super();
 		
 		this.hero = hero;
-
-		setBackground(Color.BLACK);
+		
 		setStringPainted(true);
+		
 		setUI(new BasicProgressBarUI() {
 			protected Color getSelectionBackground() { return Color.white; }
 		    protected Color getSelectionForeground() { return Color.black; }
 		});
 		
+		update();
 	}
 	
 	public void update() {
+
+		setBackground(Color.BLACK);
+		
+		this.setString(null);
 		
 		if (hero == null) {
 			
@@ -70,6 +75,13 @@ public class HealthBar extends JProgressBar {
 			
 		}
 		
+	}
+	
+	public void setHero(Hero hero) {
+		
+		this.hero = hero;
+		
+		update();
 		
 	}
 
