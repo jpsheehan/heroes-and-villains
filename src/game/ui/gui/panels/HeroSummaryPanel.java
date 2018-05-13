@@ -1,15 +1,11 @@
 package game.ui.gui.panels;
 
-import javax.swing.JPanel;
-
 import game.character.Hero;
 import game.ui.gui.components.HealthBar;
 import game.ui.gui.dialogs.HeroInformationDialog;
 import game.ui.gui.panels.areas.GenericAreaPanel;
 
 import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import javax.swing.plaf.basic.BasicProgressBarUI;
 
 import java.awt.Color;
 

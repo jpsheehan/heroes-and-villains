@@ -1052,14 +1052,14 @@ public class TextUserInterface extends UserInterface {
 	private void showHospitalArea(Hospital hospital) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
-		String input;
-		
-		// the next 5 lines are placeholders. delete and put things here.
-		try {
-			input = parseMovementInput();
-		} catch (UserCancelException | UserContinueException e) {
-			
-		}
+//		String input;
+//		
+//		// the next 5 lines are placeholders. delete and put things here.
+//		try {
+//			input = parseMovementInput();
+//		} catch (UserCancelException | UserContinueException e) {
+//			
+//		}
 	} // JESSE TO DO HOMEBASE AND SHOP!!
 	
 	/**
@@ -1068,14 +1068,14 @@ public class TextUserInterface extends UserInterface {
 	private void showHomeBaseArea(HomeBase homeBase) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
-		String input;
-		
-		// the next 5 lines are placeholders. delete and put things here.
-		try {
-			input = parseMovementInput();
-		} catch (UserCancelException | UserContinueException e) {
-			
-		}
+//		String input;
+//		
+//		// the next 5 lines are placeholders. delete and put things here.
+//		try {
+//			input = parseMovementInput();
+//		} catch (UserCancelException | UserContinueException e) {
+//			
+//		}
 		
 	}
 	
@@ -1085,14 +1085,14 @@ public class TextUserInterface extends UserInterface {
 	private void showVillainsLairArea(VillainsLair villainsLair) throws UserQuitException, TeamMovementException {
 		
 		printContextualTitleBlock();
-		String input;
-		
-		// the next 5 lines are placeholders. delete and put things here.
-		try {
-			input = parseMovementInput();
-		} catch (UserCancelException | UserContinueException e) {
-			
-		}
+//		String input;
+//		
+//		// the next 5 lines are placeholders. delete and put things here.
+//		try {
+//			input = parseMovementInput();
+//		} catch (UserCancelException | UserContinueException e) {
+//			
+//		}
 		
 	}
 

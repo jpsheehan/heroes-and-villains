@@ -22,7 +22,6 @@ public class NavigationPanel extends JPanel {
 	
 	private MapPanel mapPanel;
 	private CityController cityController;
-	private Triggerable window;
 	private JButton btnNorth, btnSouth, btnEast, btnWest;
 
 	/**
@@ -30,7 +29,6 @@ public class NavigationPanel extends JPanel {
 	 */
 	public NavigationPanel(Triggerable window, CityController cityController) {
 		
-		this.window = window;
 		this.cityController = cityController;
 		
 		setLayout(new BorderLayout(0, 0));

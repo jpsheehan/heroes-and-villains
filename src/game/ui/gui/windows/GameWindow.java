@@ -3,7 +3,6 @@ package game.ui.gui.windows;
 
 import javax.swing.JFrame;
 
-import game.ui.gui.panels.MapPanel;
 import game.ui.gui.panels.NavigationPanel;
 
 import java.awt.BorderLayout;
@@ -23,29 +22,21 @@ import game.character.HeroType;
 import game.city.AreaType;
 import game.city.CityController;
 import game.city.Direction;
-import game.city.IllegalMoveException;
 
 import javax.swing.JPanel;
 
 import java.awt.GridLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-
-import javax.swing.Box;
 
 import game.ui.gui.Triggerable;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.ui.gui.panels.ImagePanel;
 import game.city.Shop;
-import javax.swing.JButton;
 import javax.swing.BoxLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Color;
 import java.awt.Font;
 
 public class GameWindow implements Triggerable {
