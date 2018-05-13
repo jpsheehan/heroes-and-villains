@@ -14,19 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import game.item.HealingItem;
-import game.item.Inventory;
 import game.item.ItemType;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.FlowLayout;
+import javax.swing.JOptionPane;
 
 public class HospitalPanel extends GenericAreaPanel {
 
-	private Triggerable window;
-	
 	/**
 	 * 
 	 */
@@ -43,7 +38,6 @@ public class HospitalPanel extends GenericAreaPanel {
 	 */
 	public HospitalPanel(Triggerable window, Team team) {
 
-		this.window = window;
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel panel_6 = new JPanel();
@@ -127,7 +121,21 @@ public class HospitalPanel extends GenericAreaPanel {
 		btnApplyHealingItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				if (selectedHero.isHealing()) {
+					
+					JOptionPane.showMessageDialog(null, String.format("%s is already healing!", selectedHero.getName()));
+					return;
+					
+				}
 				
+				selectedHero.useHealingItem(selectedItem);
+				team.getInventory().remove(selectedItem);
+				
+				JOptionPane.showMessageDialog(null, String.format("%s is being healed with %s!", selectedHero.getName(), selectedItem.getName()));
+				
+				selectedHero = null;
+				selectedItem = null;
+				update();
 				
 			}
 		});
