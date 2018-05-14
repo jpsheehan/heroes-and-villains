@@ -15,7 +15,7 @@ public enum HeroAbility implements Ability, Nameable, Describable {
 	CHEAPER_ITEMS, // for commerce students
 	DAMAGE_REDUCTION, // (20%) engineering students (body odour)
 	INCREASED_RECOVERY_RATE, // (for team) science students
-	THROW_MONEY, // (useless) arts students
+	WITTY_PHRASES, // (team entertainment) arts students
 	IMPROVED_ODDS, // (for dice game and guess the number) mathematics students
 	PREVENTS_ROBBERY, // law students
 	HACK_MAINFRAME; // (allows the team to teleport to the next city (one time use)) compsoc. students
@@ -42,8 +42,8 @@ public enum HeroAbility implements Ability, Nameable, Describable {
 			case DAMAGE_REDUCTION:
 				return ("Ability.Hero.DamageReduction");
 				
-			case THROW_MONEY:
-				return ("Ability.Hero.ThrowMoney");
+			case WITTY_PHRASES:
+				return ("Ability.Hero.WittyPhrases");
 				
 			default:
 				throw new AssertionError();
