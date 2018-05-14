@@ -11,7 +11,7 @@ public class Map extends Item {
 	 * @param name The name of the Map.
 	 * @param price The price of the Map.
 	 */
-	public Map(String name, String flavourText, Integer price) {
+	public Map(String name, String flavourText, int price) {
 		super(name, flavourText, price, ItemType.MAP);
 	}
 	

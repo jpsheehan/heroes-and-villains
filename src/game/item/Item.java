@@ -17,7 +17,7 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	/**
 	 * The price of the Item.
 	 */
-	private Integer price;
+	private int price;
 	
 	/**
 	 * The description of the item.
@@ -34,7 +34,7 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	 * @param name The name of the Item.
 	 * @param price The price of the Item.
 	 */
-	public Item(String name, String flavourText, Integer price, ItemType type) {
+	public Item(String name, String flavourText, int price, ItemType type) {
 		this.name = name;
 		this.flavourText = flavourText;
 		this.price = price;
@@ -53,7 +53,7 @@ public abstract class Item implements Buyable, Nameable, Describable {
 	 * Returns the price of the Item.
 	 */
 	@Override
-	public final Integer getPrice() {
+	public final int getPrice() {
 		return this.price;
 	}
 	

@@ -43,7 +43,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	 * Returns a random integer between 1 and 10 (inclusive).
 	 * @return
 	 */
-	private Integer generateRandomNumber() {
+	private int generateRandomNumber() {
 		
 		int number = GeneralHelpers.getRandom().nextInt(maxNumber) + 1;
 		return number;
@@ -140,7 +140,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	 * Returns the maximum number that can be guessed.
 	 * @return
 	 */
-	public Integer getMaxNumber() {
+	public int getMaxNumber() {
 		return maxNumber;
 	}
 	
@@ -148,7 +148,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	 * Returns the minimum number that can be guessed (always 1).
 	 * @return
 	 */
-	public Integer getMinNumber() {
+	public int getMinNumber() {
 		return 1;
 	}
 	
@@ -156,7 +156,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	 * Returns the secret number if the game is over.
 	 * @return
 	 */
-	public Integer getSecretNumber() {
+	public int getSecretNumber() {
 		
 		if (state != MinigameState.PLAYING) {
 			

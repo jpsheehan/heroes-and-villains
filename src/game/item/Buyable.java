@@ -9,6 +9,6 @@ public interface Buyable {
 	/**
 	 * Returns the price of the item.
 	 */
-	public Integer getPrice();
+	public int getPrice();
 	
 }

@@ -20,7 +20,7 @@ public class Hero extends Character {
 	/**
 	 * The current health of the Hero.
 	 */
-	private Integer health;
+	private int health;
 	
 	/**
 	 * The power up item the Hero is using/holding.
@@ -104,7 +104,7 @@ public class Hero extends Character {
 	 * Returns the current health of the Hero.
 	 * @return
 	 */
-	public Integer getHealth() {
+	public int getHealth() {
 		
 		if (this.healingItem == null) {
 			

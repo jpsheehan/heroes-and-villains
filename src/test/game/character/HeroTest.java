@@ -69,10 +69,10 @@ class HeroTest {
 	
 		try {
 			hero_1.takeDamage(10);
-			assertEquals(new Integer(90), hero_1.getHealth());
+			assertEquals(90, hero_1.getHealth());
 			
 			hero_1.takeDamage(80);
-			assertEquals(new Integer(10), hero_1.getHealth());
+			assertEquals(10, hero_1.getHealth());
 			
 		} catch (HeroDeadException e) {
 			fail("Shouldn't have thrown an exception here.");
@@ -82,7 +82,7 @@ class HeroTest {
 		assertTrue(hero_2.isAlive());
 		
 		assertThrows(HeroDeadException.class, () -> hero_3.takeDamage(300));
-		assertEquals(new Integer(0), hero_3.getHealth());
+		assertEquals(0, hero_3.getHealth());
 		assertFalse(hero_3.isAlive());
 		
 	}

@@ -20,10 +20,4 @@ public abstract class UserInterface {
 	
 	public abstract void start();
 	
-//	public abstract void showTitleScreen();
-//	
-//	public abstract Integer showGameCreationScreen() throws Exception;
-//	
-//	public abstract Team showTeamCreationScreen() throws Exception;
-	
 }

@@ -51,18 +51,18 @@ public class Villain extends Character {
 	/**
  	* The numbers of wins required to defeat the Villain.
  	*/
-	private Integer winsToDefeat;
+	private int winsToDefeat;
 
 	/**
  	* The numbers of wins required to beat the Villain.
  	*/
-	private Integer timesBeaten;
+	private int timesBeaten;
 	
 	/**
  	* The strength level of the Villain.
  	* Scale of 1-10: 10 doing greatest damage, 1 doing least damage.
  	*/
-	private Integer strength;
+	private int strength;
 	
 	/**
 	 * Favourite game (if only one entry) or (multiple) games the Villain plays.
