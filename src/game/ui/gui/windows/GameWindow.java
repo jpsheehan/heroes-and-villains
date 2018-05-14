@@ -29,8 +29,8 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 
 import game.ui.gui.Triggerable;
+import game.ui.gui.components.ImagePanel;
 import game.ui.gui.panels.AreaSummaryPanel;
-import game.ui.gui.panels.ImagePanel;
 import game.city.Shop;
 import game.item.HealingItem;
 
@@ -43,7 +43,7 @@ import java.awt.Font;
 
 public class GameWindow implements Triggerable {
 
-	private JFrame frame;
+	private JFrame frmHeroesAndVillains;
 	private GameEnvironment gameEnvironment;
 	private GenericAreaPanel currentAreaPanel;
 	private AreaSummaryPanel areaSummaryPanel;
@@ -56,6 +56,7 @@ public class GameWindow implements Triggerable {
 	private JLabel lblAreaTitle;
 	private JPanel areaSubtitle;
 	private JLabel lblAreaSubtitle;
+	private ImagePanel imagePanel;
 
 	/**
 	 * Create the application.
@@ -70,25 +71,27 @@ public class GameWindow implements Triggerable {
 	 */
 	private void initialize() {
 		Dimension size = new Dimension(800, 600);
-		frame = new JFrame();
+		frmHeroesAndVillains = new JFrame();
+		frmHeroesAndVillains.setTitle("Heroes and Villains - Campus Edition");
 		
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		frame.setMaximumSize(size);
-		frame.setSize(size);
+		frmHeroesAndVillains.setBounds(100, 100, 450, 300);
+		frmHeroesAndVillains.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHeroesAndVillains.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmHeroesAndVillains.setMaximumSize(size);
+		frmHeroesAndVillains.setSize(size);
 		
 		createTestEnvironment();
 		
 		JPanel northPanel = new JPanel();
-		frame.getContentPane().add(northPanel, BorderLayout.NORTH);
+		frmHeroesAndVillains.getContentPane().add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new GridLayout(1, 2, 0, 0));
 		
 		teamSummaryPanel = new TeamSummaryPanel(getGameEnvironment().getTeam());
 		northPanel.add(teamSummaryPanel);
 		
-		ImagePanel imagePanel = new ImagePanel();
+		imagePanel = new ImagePanel();
 		northPanel.add(imagePanel);
+		// imagePanel.setImagePath("test.jpg");
 		
 		navigationPanelHolder = new JPanel();
 		northPanel.add(navigationPanelHolder);
@@ -97,11 +100,11 @@ public class GameWindow implements Triggerable {
 		navigationPanelHolder.add(navigationPanel);
 		
 		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
-		frame.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
+		frmHeroesAndVillains.getContentPane().add(areaSummaryPanel, BorderLayout.SOUTH);
 		
 		areaPanelHolderHolder = new JPanel();
 		areaPanelHolderHolder.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		frame.getContentPane().add(areaPanelHolderHolder, BorderLayout.CENTER);
+		frmHeroesAndVillains.getContentPane().add(areaPanelHolderHolder, BorderLayout.CENTER);
 		areaPanelHolderHolder.setLayout(new BoxLayout(areaPanelHolderHolder, BoxLayout.Y_AXIS));
 		
 		areaTitle = new JPanel();
@@ -128,7 +131,7 @@ public class GameWindow implements Triggerable {
 	}
 	
 	public void show() {
-		this.frame.setVisible(true);
+		this.frmHeroesAndVillains.setVisible(true);
 	}
 	
 	private GameEnvironment getGameEnvironment() {

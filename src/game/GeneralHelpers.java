@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 
 import com.google.gson.*;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 public final class GeneralHelpers {
 	
@@ -57,6 +61,20 @@ public final class GeneralHelpers {
 		} catch (NumberFormatException e) {
 			
 			throw new IllegalArgumentException(String.format("Invalid integer for specifier \"%s\".", specifier));
+			
+		}
+		
+	}
+	
+	public static BufferedImage getImage(String filename) {
+		
+		try {
+			
+			return ImageIO.read(GeneralHelpers.class.getClassLoader().getResourceAsStream("images/" + filename));
+			
+		} catch (IOException e) {
+			
+			return null;
 			
 		}
 		
