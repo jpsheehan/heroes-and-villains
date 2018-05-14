@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		GeneralHelpers.seedRandom(0L);
+		GeneralHelpers.seedRandom(4L);
 		new GameEnvironment(GraphicalUserInterface.class).run();
 
 	}
