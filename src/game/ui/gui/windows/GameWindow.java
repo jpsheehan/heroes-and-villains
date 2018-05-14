@@ -155,8 +155,9 @@ public class GameWindow implements Triggerable {
 			team.getHeroes()[2].takeDamage(200);
 		} catch (TeamFullException | HeroDeadException e) {
 		}
-		
+
 		team.getInventory().add(HealingItem.fromStrings("Coffee"));
+		team.getInventory().add(HealingItem.fromStrings("Curry"));
 		
 		gameEnvironment.setTeam(team);
 		gameEnvironment.setCityController(new CityController(3));

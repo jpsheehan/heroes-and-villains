@@ -38,8 +38,6 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	private DialogResult dialogResult;
 	private int index;
 	private Item selectedItem;
-	private boolean showPrice;
-	
 	/**
 	 * Launch the application.
 	 */
@@ -251,7 +249,32 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 				public void valueChanged(ListSelectionEvent e) {
 					try {	
 					index = list.getSelectedIndex();					
-					selectedItem = inventory.getAllItems()[index];
+					
+					if (itemType == null) {
+						
+						selectedItem = inventory.getAllItems()[index];
+						
+					} else {
+						
+						switch (itemType) {
+						
+						case HEALING_ITEM:
+							selectedItem = inventory.getHealingItems()[index];
+							break;
+							
+						case MAP:
+							selectedItem = inventory.getMaps()[index];
+							break;
+							
+						case POWER_UP_ITEM:
+							selectedItem = inventory.getPowerUpItems()[index];
+							break;
+						
+						}
+						
+					}
+					
+					
 				} catch (Exception e1) {
 					// SelectedItem is null
 				}
