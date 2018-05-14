@@ -19,6 +19,7 @@ import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroDeadException;
 import game.character.HeroType;
+import game.city.Area;
 import game.city.AreaType;
 import game.city.CityController;
 import game.city.Direction;
@@ -32,6 +33,7 @@ import game.ui.gui.Triggerable;
 import game.ui.gui.components.ImagePanel;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.city.Shop;
+import game.city.VillainsLair;
 import game.item.HealingItem;
 
 import javax.swing.BoxLayout;
@@ -188,7 +190,10 @@ public class GameWindow implements Triggerable {
 		}
 		
 		// Set the currentAreaPanel depending on the type of area the team is in
-		switch (this.getGameEnvironment().getCityController().getCurrentArea().getType()) {
+		
+		Area area = this.getGameEnvironment().getCityController().getCurrentArea();
+		
+		switch (area.getType()) {
 		
 			case HOME_BASE:
 				currentAreaPanel = new HomeBasePanel(this, this.getGameEnvironment().getTeam().getInventory(), this.getGameEnvironment().getCityController());
@@ -203,11 +208,11 @@ public class GameWindow implements Triggerable {
 				break;
 				
 			case SHOP:
-				currentAreaPanel = new ShopAreaPanel(this, (Shop)this.getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP), this.getGameEnvironment().getTeam());
+				currentAreaPanel = new ShopAreaPanel(this, (Shop)area, this.getGameEnvironment().getTeam());
 				break;
 				
 			case VILLAINS_LAIR:
-				currentAreaPanel = new VillainsLairPanel(this);
+				currentAreaPanel = new VillainsLairPanel(this, (VillainsLair)area, this.getGameEnvironment().getTeam());
 				break;
 		
 		}

@@ -117,11 +117,23 @@ public class BattleScreen {
 	/**
 	 * Randomly sets the minigame from a list of the Villains favourite games.
 	 */
-	private void setMinigame() {
+	public void setMinigame() {
 		
 		MinigameType type = this.villain.getFavouriteGames()[
 				GeneralHelpers.getRandom().nextInt(this.villain.getFavouriteGames().length)
 		];
+		
+		if (type == MinigameType.ALL) {
+			
+			MinigameType[] possibleTypes = new MinigameType[] {
+				MinigameType.DICE_ROLLS,
+				MinigameType.GUESS_THE_NUMBER,
+				MinigameType.PAPER_SCISSORS_ROCK
+			};
+			
+			type = possibleTypes[GeneralHelpers.getRandom().nextInt(possibleTypes.length)];
+			
+		}
 		
 		this.setMinigame(type);
 		
@@ -133,7 +145,7 @@ public class BattleScreen {
 	 */
 	private void setMinigame(MinigameType type) {
 		
-		if (GeneralHelpers.doesArrayContain(this.villain.getFavouriteGames(), type)) {
+//		if (GeneralHelpers.doesArrayContain(this.villain.getFavouriteGames(), type) || this.villain.getFavouriteGames() ) {
 			
 			Ability[] abilities = this.calculateAbilities(type);
 			
@@ -155,12 +167,12 @@ public class BattleScreen {
 					throw new AssertionError("MinigameType is invalid.");
 					
 			}
-			
-		} else {
 		
-			throw new IllegalArgumentException("Villain does not have this minigame as one of their favourites.");
-			
-		}
+//		} else {
+//		
+//			throw new IllegalArgumentException("Villain does not have this minigame as one of their favourites.");
+//			
+//		}
 		
 	}
 	
@@ -184,7 +196,14 @@ public class BattleScreen {
 		
 		abilities.add((Ability)this.hero.getAbility());
 		
-		return (Ability[]) abilities.toArray();
+		Ability[] abilitiesArray = new Ability[abilities.size()];
+		for (int i = 0; i < abilities.size(); i++) {
+			
+			abilitiesArray[i] = abilities.get(i);
+			
+		}
+				
+		return abilitiesArray;
 		
 	}
 	
