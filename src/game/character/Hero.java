@@ -62,7 +62,7 @@ public class Hero extends Character {
 		switch (this.type) {
 		
 			case ARTS_STUDENT:
-				return HeroAbility.THROW_MONEY;
+				return HeroAbility.WITTY_PHRASES;
 				
 			case COMMERCE_STUDENT:
 				return HeroAbility.CHEAPER_ITEMS;
