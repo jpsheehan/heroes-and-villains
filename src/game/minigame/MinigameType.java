@@ -33,4 +33,28 @@ public enum MinigameType {
 		}
 		
 	}
+	
+	@Override
+	public String toString() {
+		
+		switch (this) {
+		
+			case ALL:
+				return "All";
+				
+			case DICE_ROLLS:
+				return "Dice Rolls";
+				
+			case GUESS_THE_NUMBER:
+				return "Guess the Number";
+				
+			case PAPER_SCISSORS_ROCK:
+				return "Paper Scissors Rock";
+			
+			default:
+				throw new AssertionError();
+		
+		}
+		
+	}
 }
