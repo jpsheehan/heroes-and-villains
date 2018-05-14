@@ -40,7 +40,6 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	private Item selectedItem;
 	private boolean showPrice;
 	
-	
 	/**
 	 * Launch the application.
 	 */
