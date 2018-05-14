@@ -118,8 +118,6 @@ public class Hero extends Character {
 			
 			if (percentHealed == 1f || calculatedHealth == getMaxHealth()) {
 				
-				System.out.println("Finished healing");
-				
 				if (calculatedHealth > getMaxHealth()) {
 					
 					this.health = getMaxHealth();
