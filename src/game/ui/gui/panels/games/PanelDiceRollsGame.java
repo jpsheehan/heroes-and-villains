@@ -3,6 +3,7 @@ package game.ui.gui.panels.games;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import game.BattleScreen;
 import game.Team;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
@@ -19,6 +20,8 @@ import java.awt.event.ActionEvent;
 
 import game.item.HealingItem;
 import game.item.ItemType;
+import game.minigame.DiceRolls;
+import game.minigame.Minigame;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -32,16 +35,26 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = -562504025376734580L;
+	private int diceRollingLoop = 10;
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
+	private DiceRolls diceRolls;
+	
 	private boolean rollDice = false;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelDiceRollsGame(Triggerable window) {
+	public PanelDiceRollsGame(Triggerable window, BattleScreen battleScreen) {
+		
+		diceRolls = (DiceRolls)battleScreen.getMinigame();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		JLabel lblHeroDice;
+		JLabel lblVillainDice;
+		String lblHeroDiceValue = "0";
+		String lblVillainDiceValue = "0";
+		JButton button;
 		
 		JPanel panel_6 = new JPanel();
 		add(panel_6);
@@ -61,28 +74,29 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//get the value of the ok button.
-				
 				//If the Roll button is clicked populate the Hero and Villain Dice value labels with some 
-				// random dice values that change say every .5 seconds for say 5 seconds
-				// once the timer(s) run through fix the Hero and Dice Values
+				// random dice values that change say every .5 seconds for say 10 loops
 				// set Hero or Villain won
 				// Enable the OK (to continue button)
-				//TODO
 				
-				if (dlg.getDialogResult() == DialogResult.OK) {
-						
-					update();
+				for (int i = 0; i < diceRollingLoop ; i++) {
+					//get dice values and display on labels
+					diceRolls.doTurn(null);
+					lblHeroRoll.setText(diceRolls.getHeroLastTurn().toString());
+					lblVillainRoll.setText(diceRolls.getHeroLastTurn().toString());
 					
+					//pause 0.5 seconds
+					(new Timer(500, null)).start();
 				}
-				
+				setGameWinner();
+				button.setEnabled(false);
 			}
 		});
 		
 		JPanel panel_2 = new JPanel();
 		panel_6.add(panel_2);
 		
-		JLabel lblClickStartToRoll = new JLabel("Click Roll button to roll the dice");
+		JLabel lblClickStartToRoll = new JLabel("Click \"Roll\" to start");
 		panel_2.add(lblClickStartToRoll);
 		panel_1.add(btnStart);
 		panel_6.add(panel_1);
@@ -94,19 +108,19 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		lblHeroRoll.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_3.add(lblHeroRoll);
 		
-		lblVillainRoll = new JLabel("      Villain Roll");
+		JLabel lblVillainRoll = new JLabel("      Villain Roll");
 		lblVillainRoll.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(lblVillainRoll);
 		
 		JPanel panel_4 = new JPanel();
 		panel_6.add(panel_4);
 		
-		JLabel lblHeroDice = new JLabel("lblHeroDiceValue");
+		lblHeroDice = new JLabel("lblHeroDiceValue");
 		lblHeroDice.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblHeroDice.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_4.add(lblHeroDice);
 		
-		JLabel lblVillainDice = new JLabel("lblVillainDiceValue");
+		lblVillainDice = new JLabel("lblVillainDiceValue");
 		lblVillainDice.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblVillainDice.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_4.add(lblVillainDice);
@@ -120,7 +134,12 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		JPanel panel_7 = new JPanel();
 		panel_6.add(panel_7);
 		
-		JButton button = new JButton("OK");
+		button = new JButton("OK");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		button.setEnabled(false);
 		panel_7.add(button);
 		button.setActionCommand("OK");
@@ -131,20 +150,26 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		repaint();
 	}
 		
-	//Is this needed?
 	/**
 	 * Sets the winner text label to show that the Hero Won
 	 */
-	public void setHeroWinner() {
-		//TODO
-	}
-	
-	//Is this needed?
-	/**
-	 * Sets the winner text label to show that the Villain Won
-	 */
-	public void setVillainWinner() {
-		//TODO
-	}
+	public void setGameWinner() {
 		
+		switch (battleScreen.Dicerolls.getState()) {
+			
+		case WON:
+			lblWinner.setText("The Hero Won!");
+			break;
+		case LOST:	
+			blWinner.setText("The Villain Won!");
+			break;
+		case DRAW;
+			blWinner.setText("The Villain Won!");
+			break;
+		default:
+			blWinner.setText("Unknown");
+		}
+		
+	}
+			
 }
