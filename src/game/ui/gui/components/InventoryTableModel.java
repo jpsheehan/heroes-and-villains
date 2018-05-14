@@ -190,5 +190,19 @@ public class InventoryTableModel extends AbstractTableModel {
 	public boolean isCellEditable(int x, int y) {
 		return false;
 	}
+	
+	public Item getSelectedItem(int row) {
+		
+		try {
+			
+			return this.items[row];
+			
+		} catch (Exception e) {
+			
+			return null;
+			
+		}
+		
+	}
 
 }

@@ -61,7 +61,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 					
 				}
 				
-				ItemSelectionDialog dlg = new ItemSelectionDialog(inventory, ItemType.MAP, false);
+				ItemSelectionDialog dlg = new ItemSelectionDialog(inventory, ItemType.MAP, false, true);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {

@@ -93,7 +93,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 		btnSelectAnItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.POWER_UP_ITEM, false);
+				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.POWER_UP_ITEM, false, true);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {

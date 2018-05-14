@@ -7,27 +7,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import game.ui.gui.DialogResult;
 import game.ui.gui.Returnable;
 
-import game.city.*;
 import game.item.Inventory;
 import game.item.Item;
 import game.item.ItemType;
 
-import javax.swing.JList;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+import game.ui.gui.components.InventoryPanel;
 
 public class ItemSelectionDialog extends JDialog implements Returnable {
 
@@ -36,87 +27,87 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	private static final long serialVersionUID = 5348976844662470541L;
 	private DialogResult dialogResult;
-	private int index;
-	private Item selectedItem;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		//for testing
-	    City city = new City(CityType.ERSKINE);
-	    Inventory inventory = ((Shop)city.getArea(AreaType.SHOP)).getInventory();
-	    
-	  //Testing: ItemType = null, should get all items in inventory and showPrice = true, should display prices
-		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null, true);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			
-			if (dialog.getDialogResult() == DialogResult.OK) {
-				System.out.println(dialog.getSelectedItem().getName());
-			}
+	private InventoryPanel inventoryPanel;
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	    
-		//Testing: ItemType = null, should get all items in inventory and showPrice = false, should not display prices
-				try {
-					ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null, false);
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-					
-					if (dialog.getDialogResult() == DialogResult.OK) {
-						System.out.println(dialog.getSelectedItem().getName());
-					}
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-		
-	    //Testing Type HealingItem
-		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.HEALING_ITEM, true);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			
-			if (dialog.getDialogResult() == DialogResult.OK) {
-				System.out.println(dialog.getSelectedItem().getName());
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		//Testing Type MapItem
-		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.MAP, true);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-
-			if (dialog.getDialogResult() == DialogResult.OK) {
-				System.out.println(dialog.getSelectedItem().getName());
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
-				
-		//Testing Type PowerUpItem
-		try {
-			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.POWER_UP_ITEM, true);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			
-
-			if (dialog.getDialogResult() == DialogResult.OK) {
-				System.out.println(dialog.getSelectedItem().getName());
-			}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		//for testing
+//	    City city = new City(CityType.ERSKINE);
+//	    Inventory inventory = ((Shop)city.getArea(AreaType.SHOP)).getInventory();
+//	    
+//	  //Testing: ItemType = null, should get all items in inventory and showPrice = true, should display prices
+//		try {
+//			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null, true);
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//			
+//			if (dialog.getDialogResult() == DialogResult.OK) {
+//				System.out.println(dialog.getSelectedItem().getName());
+//			}
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//	    
+//		//Testing: ItemType = null, should get all items in inventory and showPrice = false, should not display prices
+//				try {
+//					ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, null, false);
+//					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//					dialog.setVisible(true);
+//					
+//					if (dialog.getDialogResult() == DialogResult.OK) {
+//						System.out.println(dialog.getSelectedItem().getName());
+//					}
+//
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//		
+//	    //Testing Type HealingItem
+//		try {
+//			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.HEALING_ITEM, true);
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//			
+//			if (dialog.getDialogResult() == DialogResult.OK) {
+//				System.out.println(dialog.getSelectedItem().getName());
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		//Testing Type MapItem
+//		try {
+//			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.MAP, true);
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//
+//			if (dialog.getDialogResult() == DialogResult.OK) {
+//				System.out.println(dialog.getSelectedItem().getName());
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}		
+//				
+//		//Testing Type PowerUpItem
+//		try {
+//			ItemSelectionDialog dialog = new ItemSelectionDialog(inventory, ItemType.POWER_UP_ITEM, true);
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//			
+//
+//			if (dialog.getDialogResult() == DialogResult.OK) {
+//				System.out.println(dialog.getSelectedItem().getName());
+//			}
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//	}
 
 	/**
 	 * Create the dialog
@@ -124,8 +115,8 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 * If Boolean is set to false, price is not shown
 	 * @param Inventory, ItemType, Boolean
 	 */
-	public ItemSelectionDialog(Inventory inventory, ItemType itemType, Boolean showPrice) {
-		DefaultListModel<String> listModel = new DefaultListModel<String>();
+	public ItemSelectionDialog(Inventory inventory, ItemType itemType, boolean showPrice, boolean showOkButton) {
+		// DefaultListModel<String> listModel = new DefaultListModel<String>();
 
 		setResizable(false);
 		setModal(true);
@@ -135,54 +126,54 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
 				
-				if (itemType == null) {
-					if (showPrice == false) {
-					
-						// show all the items without price
-						for (Item item : inventory.getAllItems()) {
-						
-							listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));
-						
-						}
-					}
-					else {
-						// show all the items without price
-						for (Item item : inventory.getAllItems()) {
-						
-							listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));
-						
-						}
-					}	
-				} 
-				else {
-					
-					switch (itemType) {
-						
-						case MAP:
-							// Get the item details from the inventory into a string array			
-							for (Item item : inventory.getMaps()) {
-								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
-								}
-							break;
-							
-						case HEALING_ITEM:
-							for (Item item : inventory.getHealingItems()) {
-								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
-								}
-							break;
-							
-						case POWER_UP_ITEM:
-								for (Item item : inventory.getPowerUpItems()) {
-								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
-								}
-							break;
-							
-						default:
-							throw new AssertionError();
-							
-					}
-					
-				}
+//				if (itemType == null) {
+//					if (showPrice == false) {
+//					
+//						// show all the items without price
+//						for (Item item : inventory.getAllItems()) {
+//						
+//							listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));
+//						
+//						}
+//					}
+//					else {
+//						// show all the items without price
+//						for (Item item : inventory.getAllItems()) {
+//						
+//							listModel.addElement(String.format("%s: (%s) %s $%d", item.getName(), item.getFlavourText(), item.getType().toString(), item.getPrice()));
+//						
+//						}
+//					}	
+//				} 
+//				else {
+//					
+//					switch (itemType) {
+//						
+//						case MAP:
+//							// Get the item details from the inventory into a string array			
+//							for (Item item : inventory.getMaps()) {
+//								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
+//								}
+//							break;
+//							
+//						case HEALING_ITEM:
+//							for (Item item : inventory.getHealingItems()) {
+//								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
+//								}
+//							break;
+//							
+//						case POWER_UP_ITEM:
+//								for (Item item : inventory.getPowerUpItems()) {
+//								listModel.addElement(String.format("%s: (%s) %s", item.getName(), item.getFlavourText(), item.getType().toString()));		
+//								}
+//							break;
+//							
+//						default:
+//							throw new AssertionError();
+//							
+//					}
+//					
+//				}
 				
 			}
 			
@@ -193,100 +184,17 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("left:default"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				ColumnSpec.decode("right:default"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+		panel.setLayout(new BorderLayout(0, 0));
 		{
-			JLabel lblNewLabel = new JLabel("Item");
-			panel.add(lblNewLabel, "3, 2");
-		}
-		{
-			JLabel lblNewLabel_2 = new JLabel("Description");
-			panel.add(lblNewLabel_2, "5, 2");
-		}
-		{
-			JLabel lblNewLabel_3 = new JLabel("Type");
-			panel.add(lblNewLabel_3, "16, 2");
-		}
-		{
-			if (showPrice == true) {
-				JLabel lblNewLabel_1 = new JLabel("Price");
-				panel.add(lblNewLabel_1, "22, 2");
-			}
-		}
-		{
-			JList<String> list = new JList<String>(listModel);
-			list.addListSelectionListener(new ListSelectionListener() {
-				public void valueChanged(ListSelectionEvent e) {
-					try {	
-					index = list.getSelectedIndex();					
-					
-					if (itemType == null) {
-						
-						selectedItem = inventory.getAllItems()[index];
-						
-					} else {
-						
-						switch (itemType) {
-						
-						case HEALING_ITEM:
-							selectedItem = inventory.getHealingItems()[index];
-							break;
-							
-						case MAP:
-							selectedItem = inventory.getMaps()[index];
-							break;
-							
-						case POWER_UP_ITEM:
-							selectedItem = inventory.getPowerUpItems()[index];
-							break;
-						
-						}
-						
-					}
-					
-					
-				} catch (Exception e1) {
-					// SelectedItem is null
-				}
-				}
-			});
-			panel.add(list, "2, 4, 22, 1, fill, fill");
+			inventoryPanel = new InventoryPanel(inventory, itemType, showPrice);
+			panel.add(inventoryPanel, BorderLayout.CENTER);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
+			
+			if (showOkButton) {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -343,6 +251,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 */
 	public Item getSelectedItem() {
 		
-		return this.selectedItem;
+		return inventoryPanel.getSelectedItem();
 	}
+	
 }
