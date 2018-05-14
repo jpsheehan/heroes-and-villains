@@ -23,6 +23,7 @@ import game.item.ItemType;
 import game.minigame.DiceRolls;
 import game.minigame.Minigame;
 
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -39,6 +40,9 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
 	private DiceRolls diceRolls;
+	//private BattleScreen battleScreen;
+	JLabel lblWinner;
+	JButton button;
 	
 	private boolean rollDice = false;
 
@@ -54,7 +58,6 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		JLabel lblVillainDice;
 		String lblHeroDiceValue = "0";
 		String lblVillainDiceValue = "0";
-		JButton button;
 		
 		JPanel panel_6 = new JPanel();
 		add(panel_6);
@@ -89,7 +92,7 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 					(new Timer(500, null)).start();
 				}
 				setGameWinner();
-				button.setEnabled(false);
+				button.setEnabled(true);
 			}
 		});
 		
@@ -137,7 +140,8 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		button = new JButton("OK");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				//TODO
+				System.out.println("Exit this panel.");
 			}
 		});
 		button.setEnabled(false);
@@ -155,21 +159,22 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 	 */
 	public void setGameWinner() {
 		
-		switch (battleScreen.Dicerolls.getState()) {
+		switch (diceRolls.getState()) {
 			
 		case WON:
 			lblWinner.setText("The Hero Won!");
 			break;
 		case LOST:	
-			blWinner.setText("The Villain Won!");
+			lblWinner.setText("The Villain Won!");
 			break;
-		case DRAW;
-			blWinner.setText("The Villain Won!");
+		case DRAWN:
+			lblWinner.setText("The game was drawn");
 			break;
 		default:
-			blWinner.setText("Unknown");
+			lblWinner.setText("Unknown");
 		}
 		
 	}
+	
 			
 }
