@@ -12,8 +12,6 @@ import game.ui.gui.dialogs.ItemSelectionDialog;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,7 +25,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 
 	private Shop shop;
 	private Team team;
-	private JTextArea textAreaDialogue;
+	private JLabel textAreaDialogue;
 	private JButton btnBuyItems;
 	
 	/**
@@ -51,11 +49,9 @@ public class ShopAreaPanel extends GenericAreaPanel {
 		
 		JPanel panel = new JPanel();
 		add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
-		textAreaDialogue = new JTextArea();
-		textAreaDialogue.setLineWrap(true);
-		textAreaDialogue.setWrapStyleWord(true);
-		textAreaDialogue.setBackground(UIManager.getColor("Label.background"));
+		textAreaDialogue = new JLabel();
 		panel.add(textAreaDialogue);
 		
 		JPanel panel_2 = new JPanel();
@@ -148,5 +144,4 @@ public class ShopAreaPanel extends GenericAreaPanel {
 		this.textAreaDialogue.setText(str);
 		
 	}
-
 }
