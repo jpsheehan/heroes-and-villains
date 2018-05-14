@@ -25,19 +25,19 @@ public enum ItemAbility implements Ability, Nameable, Describable {
 		switch (this) {
 		
 			case DAMAGE_PROTECTION:
-				return getString("Ability.Item.DamageProtection");
+				return "Ability.Item.DamageProtection";
 				
 			case DECREASE_ROBBERY_CHANCE:
-				return ("Ability.Item.DecreaseRobberyChance");
+				return "Ability.Item.DecreaseRobberyChance";
 				
 			case FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER:
-				return ("Ability.Item.FourAttemptsAtGuessTheNumber");
+				return "Ability.Item.FourAttemptsAtGuessTheNumber";
 				
 			case INCREASE_GIFT_CHANCE:
-				return ("Ability.Item.IncreaseGiftChance");
+				return "Ability.Item.IncreaseGiftChance";
 				
 			case WIN_ON_DRAW:
-				return ("Ability.Item.WinOnDraw");
+				return "Ability.Item.WinOnDraw";
 				
 			default:
 				throw new AssertionError();
