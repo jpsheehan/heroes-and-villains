@@ -91,7 +91,7 @@ public class GameWindow implements Triggerable {
 		
 		imagePanel = new ImagePanel();
 		northPanel.add(imagePanel);
-		// imagePanel.setImagePath("test.jpg");
+		imagePanel.setImagePath("duck.jpg");
 		
 		navigationPanelHolder = new JPanel();
 		northPanel.add(navigationPanelHolder);

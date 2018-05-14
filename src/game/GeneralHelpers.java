@@ -72,12 +72,12 @@ public final class GeneralHelpers {
 			
 			return ImageIO.read(GeneralHelpers.class.getClassLoader().getResourceAsStream("images/" + filename));
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			
 			return null;
 			
 		}
-		
+	    
 	}
 	
 	/**
