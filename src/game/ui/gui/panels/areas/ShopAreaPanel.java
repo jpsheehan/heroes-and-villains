@@ -65,7 +65,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 		btnBuyItems.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				ItemSelectionDialog dlg = new ItemSelectionDialog(shop.getInventory(), null);
+				ItemSelectionDialog dlg = new ItemSelectionDialog(shop.getInventory(), null, true);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {

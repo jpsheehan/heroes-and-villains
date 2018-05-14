@@ -107,7 +107,7 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 		btnSelectAnItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.HEALING_ITEM);
+				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.HEALING_ITEM, false);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
