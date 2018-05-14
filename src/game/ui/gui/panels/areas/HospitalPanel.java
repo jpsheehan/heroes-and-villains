@@ -1,6 +1,7 @@
 package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import game.Team;
 import game.character.Hero;
@@ -11,6 +12,8 @@ import game.ui.gui.dialogs.ItemSelectionDialog;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
 import game.item.HealingItem;
@@ -20,7 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class HospitalPanel extends GenericAreaPanel {
+public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 
 	/**
 	 * 
@@ -31,12 +34,19 @@ public class HospitalPanel extends GenericAreaPanel {
 	private HealingItem selectedItem;
 	
 	private JButton btnApplyHealingItem;
-	private JLabel lblSelectedItem, lblSelectedHero;
+	private JLabel lblSelectedItem, lblSelectedHero, lblAreHeroesBeingHealed;
+	private JPanel panelHeroHealingParent;
+	private Team team;
+	
+	private Map<Hero, JLabel> healingLabels;
 
 	/**
 	 * Create the panel.
 	 */
 	public HospitalPanel(Triggerable window, Team team) {
+		
+		this.healingLabels = new HashMap<Hero, JLabel>();
+		this.team = team;
 
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -122,11 +132,13 @@ public class HospitalPanel extends GenericAreaPanel {
 		JPanel panel_7 = new JPanel();
 		panel_6.add(panel_7);
 		
-		JLabel lblNewLabel = new JLabel("The following heroes are currently being healed:");
-		panel_7.add(lblNewLabel);
+		lblAreHeroesBeingHealed = new JLabel("The following heroes are currently being healed:");
+		lblAreHeroesBeingHealed.setVisible(false);
+		panel_7.add(lblAreHeroesBeingHealed);
 		
-		JPanel panelHeroHealingParent = new JPanel();
+		panelHeroHealingParent = new JPanel();
 		panel_6.add(panelHeroHealingParent);
+		panelHeroHealingParent.setLayout(new BoxLayout(panelHeroHealingParent, BoxLayout.Y_AXIS));
 		btnApplyHealingItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -150,6 +162,8 @@ public class HospitalPanel extends GenericAreaPanel {
 		});
 		
 		update();
+		
+		(new Timer(500, this)).start();
 		
 	}
 	
@@ -180,4 +194,49 @@ public class HospitalPanel extends GenericAreaPanel {
 		btnApplyHealingItem.setEnabled(selectedHero != null && selectedItem != null);
 		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		boolean areHeroesBeingHealed = false;
+		
+		for (Hero hero : team.getHeroes()) {
+			
+			String healingString = String.format("%s (%ds remaining)", hero.getName(), hero.getRemainingHealingTime());
+			
+			if (hero.isHealing() && !healingLabels.containsKey(hero)) {
+				
+				JPanel newPanel = new JPanel();
+				JLabel newLabel = new JLabel();
+				newLabel.setText(healingString);
+				
+				newPanel.add(newLabel);
+				panelHeroHealingParent.add(newPanel);
+				
+				healingLabels.put(hero,  newLabel);
+				
+			}
+			
+			if (healingLabels.containsKey(hero)) {
+				
+				if (hero.isHealing()) {
+					
+					healingLabels.get(hero).setText(healingString);
+					areHeroesBeingHealed = true;
+					
+				} else {
+					
+					panelHeroHealingParent.remove(healingLabels.get(hero).getParent());
+					healingLabels.remove(hero);
+					
+				}
+				
+			}
+			
+		}
+		
+		lblAreHeroesBeingHealed.setVisible(areHeroesBeingHealed);
+		
+	}
+	
 }
