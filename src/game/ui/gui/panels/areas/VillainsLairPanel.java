@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSplitPane;
 
 public class VillainsLairPanel extends GenericAreaPanel {
 	
@@ -22,7 +23,8 @@ public class VillainsLairPanel extends GenericAreaPanel {
 	private JLabel lblSelectedHero;
 	private JButton btnReadyToBattle, btnSelectAHero;
 	private boolean isBattleActive = false;
-	private JPanel gamePanel, gamePanelHolder;
+	private JPanel gamePanel;
+	private JSplitPane splitPane;
 
 	/**
 	 * 
@@ -36,7 +38,7 @@ public class VillainsLairPanel extends GenericAreaPanel {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		JPanel villainPanel = new JPanel();
-		add(villainPanel);
+		// add(villainPanel);
 		villainPanel.setLayout(new BoxLayout(villainPanel, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -92,13 +94,6 @@ public class VillainsLairPanel extends GenericAreaPanel {
 				villainsLair.getBattleScreen().setHero(selectedHero);
 				villainsLair.getBattleScreen().setMinigame();
 				
-				// Remove the current game panel (if any)
-				if (gamePanel != null) {
-					
-					gamePanelHolder.remove(gamePanel);
-					
-				}
-				
 				// set the new game panel
 				switch (villainsLair.getBattleScreen().getMinigameType()) {
 				
@@ -122,8 +117,8 @@ public class VillainsLairPanel extends GenericAreaPanel {
 				}
 				
 				// add the new game panel
-				gamePanelHolder.add(gamePanel);
-				
+				splitPane.setRightComponent(gamePanel);
+
 				update();
 				
 			}
@@ -133,9 +128,13 @@ public class VillainsLairPanel extends GenericAreaPanel {
 		btnReadyToBattle.setEnabled(false);
 		panel_4.add(btnReadyToBattle);
 		
-		gamePanelHolder = new JPanel();
-		add(gamePanelHolder);
-		gamePanelHolder.setLayout(new BoxLayout(gamePanelHolder, BoxLayout.Y_AXIS));
+		splitPane = new JSplitPane();
+		add(splitPane);
+		
+		gamePanel = new JPanel();
+		
+		splitPane.setLeftComponent(villainPanel);
+		splitPane.setRightComponent(gamePanel);
 		
 		
 	}
