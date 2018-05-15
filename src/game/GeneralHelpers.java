@@ -15,6 +15,8 @@ import javax.imageio.ImageIO;
 
 public final class GeneralHelpers {
 	
+	private static long randomSeed;
+	
 	/**
 	 * Gets the associated string from the strings.json file.
 	 * @param specifier The string to get.
@@ -147,6 +149,7 @@ public final class GeneralHelpers {
 	 */
 	public static void seedRandom(long seed) {
 		
+		GeneralHelpers.randomSeed = seed;
 		GeneralHelpers.randomState = new Random();
 		randomState.setSeed(seed);
 		
@@ -239,6 +242,16 @@ public final class GeneralHelpers {
 		}
 		
 		return value;
+		
+	}
+	
+	/**
+	 * Gets the random number seed value.
+	 * @return
+	 */
+	public static long getSeed() {
+		
+		return GeneralHelpers.randomSeed;
 		
 	}
 	
