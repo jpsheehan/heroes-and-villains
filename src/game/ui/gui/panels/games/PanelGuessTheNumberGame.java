@@ -129,6 +129,20 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		btnGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblHeroDice.setText((String.format("%d", slider.getValue())));
+				for (int i = 0; i < diceRollingLoop ; i++) {
+					
+					//get dice values and display on labels
+					lblVillainDice.setText(String.format("%d", GeneralHelpers.getRandom().nextInt(6) + 1));
+					
+					//pause 0.1 seconds
+					//(new Timer(100, null)).start();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
+					}
+				}
 				lblVillainDice.setText(guessTheNumber.getHeroLastTurn().toString());
 			}
 		});
