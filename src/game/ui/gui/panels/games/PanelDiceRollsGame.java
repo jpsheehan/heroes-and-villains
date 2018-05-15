@@ -91,7 +91,9 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 					//pause 0.5 seconds
 					(new Timer(500, null)).start();
 				}
+				//Update the winner (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
 				setGameWinner();
+				//Set the OK button visible (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
 				button.setEnabled(true);
 			}
 		});
