@@ -6,9 +6,8 @@ import game.city.VillainsLair;
 import game.ui.gui.DialogResult;
 import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.HeroSelectionDialog;
-import game.ui.gui.panels.games.GuessTheNumberGamePanel;
 import game.ui.gui.panels.games.PanelDiceRollsGame;
-import game.ui.gui.panels.games.PaperScissorsRockGamePanel;
+import game.ui.gui.panels.games.PanelGuessTheNumberGame;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
@@ -108,11 +107,12 @@ public class VillainsLairPanel extends GenericAreaPanel {
 						break;
 						
 					case GUESS_THE_NUMBER:
-						gamePanel = new GuessTheNumberGamePanel();
+						gamePanel = new PanelGuessTheNumberGame(window, villainsLair.getBattleScreen());
 						break;
 						
 					case PAPER_SCISSORS_ROCK:
-						gamePanel = new PaperScissorsRockGamePanel();
+						// gamePanel = new PaperScissorsRockGamePanel();
+						gamePanel = new JPanel();
 						break;
 						
 					default:
