@@ -4,6 +4,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import game.city.AreaType;
 import game.city.CityController;
 import game.city.Direction;
 import game.city.IllegalMoveException;
@@ -91,6 +92,10 @@ public class NavigationPanel extends JPanel {
 		btnSouth.setEnabled(false);
 		btnWest.setEnabled(false);
 		btnEast.setEnabled(false);
+		
+		if (cityController.getCurrentArea().getType() == AreaType.VILLAINS_LAIR) {
+			return;
+		}
 		
 		switch (cityController.getDirection()) {
 		
