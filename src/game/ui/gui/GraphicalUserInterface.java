@@ -21,7 +21,7 @@ public class GraphicalUserInterface extends UserInterface {
 					GameWindow window = new GameWindow(getGameEnvironment());
 					window.show();
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 		});
