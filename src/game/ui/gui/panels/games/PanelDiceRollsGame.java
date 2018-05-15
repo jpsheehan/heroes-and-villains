@@ -190,6 +190,5 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		}
 		lblWinner.setEnabled(true);
 	}
-	
-			
+		
 }
