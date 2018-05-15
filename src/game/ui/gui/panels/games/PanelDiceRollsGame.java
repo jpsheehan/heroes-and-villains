@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.BattleScreen;
+import game.GeneralHelpers;
 import game.Team;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
@@ -39,12 +40,14 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 	private int diceRollingLoop = 10;
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
+	private JLabel lblHeroDice;
+	private JLabel lblVillainDice;
 	private DiceRolls diceRolls;
 	//private BattleScreen battleScreen;
 	JLabel lblWinner;
 	JButton button;
 	
-	private boolean rollDice = false;
+	//private boolean rollDice = false;
 
 	/**
 	 * Create the panel.
@@ -54,8 +57,8 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		diceRolls = (DiceRolls)battleScreen.getMinigame();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		JLabel lblHeroDice;
-		JLabel lblVillainDice;
+		//JLabel lblHeroDice;
+		//JLabel lblVillainDice;
 		String lblHeroDiceValue = "0";
 		String lblVillainDiceValue = "0";
 		
@@ -83,16 +86,25 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 				// Enable the OK (to continue button)
 				
 				for (int i = 0; i < diceRollingLoop ; i++) {
-					//get dice values and display on labels
-					diceRolls.doTurn(null);
-					lblHeroRoll.setText(diceRolls.getHeroLastTurn().toString());
-					lblVillainRoll.setText(diceRolls.getHeroLastTurn().toString());
 					
-					//pause 0.5 seconds
-					(new Timer(500, null)).start();
+					//get dice values and display on labels
+					lblHeroDice.setText(String.format("%d", GeneralHelpers.getRandom().nextInt(6) + 1));
+					lblVillainDice.setText(String.format("%d", GeneralHelpers.getRandom().nextInt(6) + 1));
+					
+					//pause 0.1 seconds
+					//(new Timer(100, null)).start();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						//e.printStackTrace();
+					}
 				}
+				diceRolls.doTurn(null);
+				lblHeroDice.setText(diceRolls.getHeroLastTurn().toString());
+				lblVillainDice.setText(diceRolls.getHeroLastTurn().toString());
 				//Update the winner (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
-				setGameWinner();
+				//setGameWinner();
 				//Set the OK button visible (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
 				button.setEnabled(true);
 			}
@@ -109,11 +121,11 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
-		JLabel lblHeroRoll = new JLabel("Hero Roll           ");
+		lblHeroRoll = new JLabel("Hero Roll         ");
 		lblHeroRoll.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_3.add(lblHeroRoll);
 		
-		JLabel lblVillainRoll = new JLabel("      Villain Roll");
+		lblVillainRoll = new JLabel("    Villain Roll");
 		lblVillainRoll.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(lblVillainRoll);
 		
@@ -134,6 +146,7 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		panel_6.add(panel_5);
 		
 		JLabel lblWinner = new JLabel("lblWinnerText");
+		lblWinner.setEnabled(false);
 		panel_5.add(lblWinner);
 		
 		JPanel panel_7 = new JPanel();
@@ -175,7 +188,7 @@ public class PanelDiceRollsGame extends GenericAreaPanel {
 		default:
 			lblWinner.setText("Unknown");
 		}
-		
+		lblWinner.setEnabled(true);
 	}
 	
 			
