@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.BattleScreen;
+import game.GeneralHelpers;
 import game.Team;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
@@ -32,13 +33,17 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class PanelGuessTheNumberGame extends GenericAreaPanel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -562504025376734580L;
+
+	private static final long serialVersionUID = -5763958068575027679L;
 	private int diceRollingLoop = 10;
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
@@ -46,6 +51,7 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 	//private BattleScreen battleScreen;
 	JLabel lblWinner;
 	JButton button;
+	private final JSlider slider = new JSlider();
 	
 	/**
 	 * Create the panel.
@@ -75,27 +81,17 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		JPanel panel_2 = new JPanel();
 		panel_6.add(panel_2);
 		
-		JLabel lblClickStartToRoll = new JLabel("Game starts when die is clicked to guess.");
+		JLabel lblClickStartToRoll = new JLabel("Move slider, then click \"Guess\" to start game");
 		panel_2.add(lblClickStartToRoll);
 		panel_6.add(panel_1);
-		
-		JButton btnOne = new JButton("One");
-		panel_1.add(btnOne);
-		
-		JButton btnTwo = new JButton("Two");
-		panel_1.add(btnTwo);
-		
-		JButton btnThree = new JButton("Three");
-		panel_1.add(btnThree);
-		
-		JButton btnFour = new JButton("Four");
-		panel_1.add(btnFour);
-		
-		JButton btnFive = new JButton("Five");
-		panel_1.add(btnFive);
-		
-		JButton btnSix = new JButton("Six");
-		panel_1.add(btnSix);
+		slider.setValue(3);
+		slider.setMajorTickSpacing(1);
+		slider.setPaintLabels(true);
+		slider.setPaintTicks(true);
+		slider.setSnapToTicks(true);
+		slider.setMinimum(1);
+		slider.setMaximum(6);
+		panel_1.add(slider);
 		
 		//TODO
 		/*\
@@ -113,32 +109,40 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
-		JLabel lblHeroRoll = new JLabel("Hero Guess          ");
-		lblHeroRoll.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_3.add(lblHeroRoll);
-		
-		JLabel lblVillainRoll = new JLabel("      Villain Roll");
-		lblVillainRoll.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_3.add(lblVillainRoll);
+		JPanel panel_5 = new JPanel();
+		panel_6.add(panel_5);
 		
 		JPanel panel_4 = new JPanel();
 		panel_6.add(panel_4);
 		
 		lblHeroDice = new JLabel("lblHeroDiceValue");
+		panel_4.add(lblHeroDice);
 		lblHeroDice.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblHeroDice.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_4.add(lblHeroDice);
 		
 		lblVillainDice = new JLabel("lblVillainDiceValue");
+		panel_4.add(lblVillainDice);
 		lblVillainDice.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblVillainDice.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_4.add(lblVillainDice);
 		
-		JPanel panel_5 = new JPanel();
-		panel_6.add(panel_5);
+		JButton btnGuess = new JButton("Guess");
+		btnGuess.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblHeroDice.setText((String.format("%d", slider.getValue())));
+				lblVillainDice.setText(guessTheNumber.getHeroLastTurn().toString());
+			}
+		});
+		btnGuess.setActionCommand("OK");
+		panel_3.add(btnGuess);
 		
-		JLabel lblWinner = new JLabel("lblWinnerText");
-		panel_5.add(lblWinner);
+		
+		JLabel lblHeroRoll_1 = new JLabel("Hero Guess          ");
+		panel_5.add(lblHeroRoll_1);
+		lblHeroRoll_1.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		JLabel lblVillainRoll_1 = new JLabel("      Villain Roll");
+		panel_5.add(lblVillainRoll_1);
+		lblVillainRoll_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.addMouseListener(new MouseAdapter() {
@@ -170,7 +174,7 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 	 */
 	public void setGameWinner() {
 		
-		switch (diceRolls.getState()) {
+		switch (guessTheNumber.getState()) {
 			
 		case WON:
 			lblWinner.setText("The Hero Won!");
@@ -186,5 +190,4 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		}
 		
 	}
-			
 }
