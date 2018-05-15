@@ -10,7 +10,7 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 
 import game.character.Hero;
 
-public class HealthBar extends JProgressBar implements ActionListener {
+public class HeroHealthBar extends JProgressBar implements ActionListener {
 
 	private static int UPDATE_DELAY = 200;
 	private Hero hero;
@@ -20,7 +20,7 @@ public class HealthBar extends JProgressBar implements ActionListener {
 	 */
 	private static final long serialVersionUID = -7004751552534381921L;
 	
-	public HealthBar(Hero hero) {
+	public HeroHealthBar(Hero hero) {
 		
 		super();
 		
