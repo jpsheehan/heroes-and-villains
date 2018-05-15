@@ -104,7 +104,7 @@ public class VillainsLairPanel extends GenericAreaPanel {
 				switch (villainsLair.getBattleScreen().getMinigameType()) {
 				
 					case DICE_ROLLS:
-						gamePanel = new PanelDiceRollsGame(window);
+						gamePanel = new PanelDiceRollsGame(window, villainsLair.getBattleScreen());
 						break;
 						
 					case GUESS_THE_NUMBER:
