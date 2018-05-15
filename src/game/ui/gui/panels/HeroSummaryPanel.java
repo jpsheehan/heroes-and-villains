@@ -1,7 +1,7 @@
 package game.ui.gui.panels;
 
 import game.character.Hero;
-import game.ui.gui.components.HealthBar;
+import game.ui.gui.components.HeroHealthBar;
 import game.ui.gui.dialogs.HeroInformationDialog;
 import game.ui.gui.panels.areas.GenericAreaPanel;
 
@@ -20,7 +20,7 @@ public class HeroSummaryPanel extends GenericAreaPanel {
 	private Hero hero;
 	
 	private JLabel lblHeroName;
-	private HealthBar healthBar;
+	private HeroHealthBar healthBar;
 	private JButton btnMoreInfo;
 	
 	/**
@@ -40,7 +40,7 @@ public class HeroSummaryPanel extends GenericAreaPanel {
 		lblHeroName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHeroName);
 		
-		healthBar = new HealthBar(this.hero);
+		healthBar = new HeroHealthBar(this.hero);
 		add(healthBar);
 		
 		btnMoreInfo = new JButton("More Info...");

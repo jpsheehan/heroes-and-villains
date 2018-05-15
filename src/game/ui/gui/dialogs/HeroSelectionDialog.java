@@ -25,7 +25,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import game.ui.gui.components.HealthBar;
+import game.ui.gui.components.HeroHealthBar;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
@@ -40,7 +40,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 	private JComboBox<Hero> comboBox;
 	private JLabel lblHeroType, lblHeroAbility, lblHealingItem, lblPowerUpItem;
 	private JTextArea lblHeroTypeFlavour, lblHeroAbilityFlavour;
-	private HealthBar healthBar;
+	private HeroHealthBar healthBar;
 	private JButton okButton;
 	
 	private DialogResult dialogResult;
@@ -237,7 +237,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 			contentPanel.add(lblHealth, "2, 12");
 		}
 		{
-			healthBar = new HealthBar((Hero) null);
+			healthBar = new HeroHealthBar((Hero) null);
 			contentPanel.add(healthBar, "4, 12");
 		}
 		{
