@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import game.item.HealingItem;
 import game.item.ItemType;
 import game.minigame.DiceRolls;
+import game.minigame.GuessTheNumber;
 import game.minigame.Minigame;
 
 import javax.swing.AbstractButton;
@@ -29,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelGuessTheNumberGame extends GenericAreaPanel {
 
@@ -39,24 +42,21 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 	private int diceRollingLoop = 10;
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
-	private DiceRolls diceRolls;
+	private GuessTheNumber guessTheNumber;
 	//private BattleScreen battleScreen;
 	JLabel lblWinner;
 	JButton button;
 	
-	private boolean rollDice = false;
-
 	/**
 	 * Create the panel.
 	 */
 	public PanelGuessTheNumberGame(Triggerable window, BattleScreen battleScreen) {
 		
-		diceRolls = (DiceRolls)battleScreen.getMinigame();
+		guessTheNumber = (GuessTheNumber)battleScreen.getMinigame();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		JLabel lblHeroDice;
 		JLabel lblVillainDice;
-		String lblHeroDiceValue = "0";
 		String lblVillainDiceValue = "0";
 		
 		JPanel panel_6 = new JPanel();
@@ -66,50 +66,54 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		JPanel panel = new JPanel();
 		panel_6.add(panel);
 		
-		JLabel lblDiceRollsGame = new JLabel("Dice Rolls Game");
-		lblDiceRollsGame.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		panel.add(lblDiceRollsGame);
+		JLabel lblGuessTheNumberGame = new JLabel("Guess The Number Game");
+		lblGuessTheNumberGame.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		panel.add(lblGuessTheNumberGame);
 		
 		JPanel panel_1 = new JPanel();
-		
-		JButton btnStart = new JButton("Roll (the dice) ..");
-		btnStart.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				//If the Roll button is clicked populate the Hero and Villain Dice value labels with some 
-				// random dice values that change say every .5 seconds for say 10 loops
-				// set Hero or Villain won
-				// Enable the OK (to continue button)
-				
-				for (int i = 0; i < diceRollingLoop ; i++) {
-					//get dice values and display on labels
-					diceRolls.doTurn(null);
-					lblHeroRoll.setText(diceRolls.getHeroLastTurn().toString());
-					lblVillainRoll.setText(diceRolls.getHeroLastTurn().toString());
-					
-					//pause 0.5 seconds
-					(new Timer(500, null)).start();
-				}
-				//Update the winner (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
-				setGameWinner();
-				//Set the OK button visible (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
-				button.setEnabled(true);
-			}
-		});
 		
 		JPanel panel_2 = new JPanel();
 		panel_6.add(panel_2);
 		
-		JLabel lblClickStartToRoll = new JLabel("Click \"Roll\" to start");
+		JLabel lblClickStartToRoll = new JLabel("Game starts when die is clicked to guess.");
 		panel_2.add(lblClickStartToRoll);
-		panel_1.add(btnStart);
 		panel_6.add(panel_1);
+		
+		JButton btnOne = new JButton("One");
+		panel_1.add(btnOne);
+		
+		JButton btnTwo = new JButton("Two");
+		panel_1.add(btnTwo);
+		
+		JButton btnThree = new JButton("Three");
+		panel_1.add(btnThree);
+		
+		JButton btnFour = new JButton("Four");
+		panel_1.add(btnFour);
+		
+		JButton btnFive = new JButton("Five");
+		panel_1.add(btnFive);
+		
+		JButton btnSix = new JButton("Six");
+		panel_1.add(btnSix);
+		
+		//TODO
+		/*\
+		 Event handler to to detect button press
+		 set the heroGuess to the number clicked
+		 update the HeroGuess label value
+		 for loop with timer to get and display dice values 
+		 then update the VillainRoll to the final dice value
+		 set the winner
+		 set the ok button viable 
+		 */
+		
+		//do we need a turns left label?
 		
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
-		JLabel lblHeroRoll = new JLabel("Hero Roll           ");
+		JLabel lblHeroRoll = new JLabel("Hero Guess          ");
 		lblHeroRoll.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_3.add(lblHeroRoll);
 		
@@ -137,6 +141,11 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		panel_5.add(lblWinner);
 		
 		JPanel panel_7 = new JPanel();
+		panel_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		panel_6.add(panel_7);
 		
 		button = new JButton("OK");
@@ -177,6 +186,5 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel {
 		}
 		
 	}
-	
 			
 }
