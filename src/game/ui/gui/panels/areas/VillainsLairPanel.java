@@ -157,6 +157,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		btnGoToNextBuilding = new JButton("Go To Next Building!");
 		btnGoToNextBuilding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				window.trigger(GameEvent.GO_TO_NEXT_CITY);
+				
 			}
 		});
 		btnGoToNextBuilding.setEnabled(false);
@@ -260,6 +263,8 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 					lblInformation.setText(String.format("%s has died! Please select another hero.", e.getHero().getName()));
 					selectedHero = null;
 					update();
+					
+					this.window.trigger(GameEvent.TEAM_CHANGED);
 					
 					return;
 					
