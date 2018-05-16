@@ -54,11 +54,17 @@ public class BattleScreen {
 	 * @param villain The villain the hero is to battle.
 	 * @param cityIndex The index of the city the team is in.
 	 */
-	public BattleScreen(Villain villain, int cityIndex) {
+	public BattleScreen(Villain villain) {
 		
 		this.villain = villain;
-		this.cityIndex = cityIndex;
+		this.cityIndex = 0;
 		this.villainHealth = DEFAULT_VILLAIN_HEALTH;
+		
+	}
+	
+	public void setCityIndex(int cityIndex) {
+		
+		this.cityIndex = cityIndex;
 		
 	}
 	

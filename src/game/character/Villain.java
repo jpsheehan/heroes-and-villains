@@ -2,7 +2,6 @@ package game.character;
 
 import game.minigame.*;
 
-import game.character.VillainType;
 
 /**
  * Represents a Villain as described in section 3.3 of the specification.
@@ -13,14 +12,14 @@ public class Villain extends Character {
 	// get favourite games
 	// test 
 	
-	public Villain(String name, VillainType type, MinigameType game, int winsToDefeat) {
+	public Villain(String name, String taunt, MinigameType game, int winsToDefeat) {
 		
 		super(name);
 		
-		this.type = type;
 		this.winsToDefeat = winsToDefeat;
 		this.timesBeaten = 0;
 		this.favouriteGame = new MinigameType[] { game };
+		this.taunt = taunt;
 	}
 	
 	/**
@@ -30,23 +29,18 @@ public class Villain extends Character {
 	 * @param int The number of (minigame) wins required to defeat the Villain 
 	 * @param MiniGame one of more minigames the villain plays 
 	 */
-	public Villain(String name, VillainType type, MinigameType[] games, int winsToDefeat) {
+	public Villain(String name, String taunt, MinigameType[] games, int winsToDefeat) {
 		
 		super(name);
 		
-		this.type = type;
 		this.winsToDefeat = winsToDefeat;
 		this.timesBeaten = 0;
 		this.favouriteGame = games;
+		this.taunt = taunt;
 		
 	}
 	
 	//return favourite game, or if a list of games randomly choose a game and return it
-
-	/**
-	 * The type of Villain this is.
-	 */
-	private VillainType type;
 
 	/**
  	* The numbers of wins required to defeat the Villain.
@@ -57,6 +51,8 @@ public class Villain extends Character {
  	* The numbers of wins required to beat the Villain.
  	*/
 	private int timesBeaten;
+	
+	private String taunt;
 	
 	/**
  	* The strength level of the Villain.
@@ -73,16 +69,6 @@ public class Villain extends Character {
 	 * The Villans's taunt phrase
 	 */
 	//private String taunt;
-	
-	/**
-	 * Returns the type of Villain.
-	 * @return
-	 */
-	public VillainType getType() {
-		
-		return this.type;
-		
-	}
 
 	/**
 	 * Returns the number of wins required to defeat the Villain.
@@ -122,30 +108,7 @@ public class Villain extends Character {
 	 */
 	public String getTaunt() {
 		
-		switch (this.type) {
-		
-			case OVERPRICED_TEXTBOOK:
-				return "That'll be $476.97 please. Paying by eftpos? There is %4 surcharge for credit cards";
-				
-			case LIBRARIAN:
-				return "Don't you know the Dewey Decimal System? What, you've never heard of the Library of Congress either?";
-				
-			case ADMINISTRATION:
-				return "All courses are full. No you cannot change modules. You'll need to apply in writing within five workign days.";
-				
-			case RICHARD_LOBB:
-				return "Richard strikes again!";
-				
-			case SIMON_BROWN:
-				return "Physics is fun!";
-				
-			case RORY_THE_BUILDER:
-				return "Building schmilding. Bet you don't have tools like mine!";
-				
-			default :
-				throw new AssertionError("Invalid VillainType to find the taunt for.");
-				
-		}
+		return taunt;
 		
 	}
 	

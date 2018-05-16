@@ -94,6 +94,7 @@ public class CityController {
 		for (int i = 0; i < this.numberOfCities - 1; i++) {
 			
 			this.cities[i] = new City(shuffledCityTypes.get(i));
+			((VillainsLair)this.cities[i].getArea(AreaType.VILLAINS_LAIR)).getBattleScreen().setCityIndex(i);
 			
 		}
 		

@@ -25,12 +25,12 @@ public class VillainsLair extends Area {
 	 * Creates a new Villains Lair.
 	 * @param name The name of the Villains Lair.
 	 */
-	public VillainsLair(String name, String description, Villain villain, int cityIndex) {
+	public VillainsLair(String name, String description, Villain villain) {
 		
 		super(name, description, AreaType.VILLAINS_LAIR);
 		
 		this.villain = villain;
-		this.battleScreen = new BattleScreen(villain, cityIndex);
+		this.battleScreen = new BattleScreen(villain);
 		
 	}
 
