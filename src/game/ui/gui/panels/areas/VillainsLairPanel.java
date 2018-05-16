@@ -11,6 +11,7 @@ import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.panels.games.PanelDiceRollsGame;
 import game.ui.gui.panels.games.PanelGuessTheNumberGame;
+import game.ui.gui.panels.games.PanelPaperScissorsRock;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
@@ -132,8 +133,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 						break;
 						
 					case PAPER_SCISSORS_ROCK:
-						// gamePanel = new PaperScissorsRockGamePanel();
-						gamePanel = new JPanel();
+						gamePanel = new PanelPaperScissorsRock(self, villainsLair.getBattleScreen());
 						break;
 						
 					default:
