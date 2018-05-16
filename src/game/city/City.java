@@ -9,7 +9,6 @@ import game.Nameable;
 import game.character.Dialogue;
 import game.character.InnKeeper;
 import game.character.Villain;
-import game.character.VillainType;
 import game.item.Item;
 import game.minigame.MinigameType;
 
