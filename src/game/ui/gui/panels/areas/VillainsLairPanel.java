@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
+import game.ui.gui.components.VillainHealthBar;
 
 public class VillainsLairPanel extends GenericAreaPanel {
 	
@@ -25,6 +26,7 @@ public class VillainsLairPanel extends GenericAreaPanel {
 	private boolean isBattleActive = false;
 	private JPanel gamePanel;
 	private JSplitPane splitPane;
+	private VillainHealthBar villainHealthBar;
 
 	/**
 	 * 
@@ -46,6 +48,12 @@ public class VillainsLairPanel extends GenericAreaPanel {
 		
 		JLabel lblVillainName = new JLabel(villainsLair.getVillain().getName());
 		panel.add(lblVillainName);
+		
+		JPanel panel_5 = new JPanel();
+		villainPanel.add(panel_5);
+		
+		villainHealthBar = new VillainHealthBar(villainsLair.getVillain());
+		panel_5.add(villainHealthBar);
 		
 		JPanel panel_3 = new JPanel();
 		villainPanel.add(panel_3);
