@@ -4,6 +4,7 @@ import game.Team;
 import game.character.Hero;
 import game.city.VillainsLair;
 import game.ui.gui.DialogResult;
+import game.ui.gui.GameEvent;
 import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.panels.games.PanelDiceRollsGame;
@@ -18,7 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import game.ui.gui.components.VillainHealthBar;
 
-public class VillainsLairPanel extends GenericAreaPanel {
+public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	
 	private Hero selectedHero;
 	private JLabel lblSelectedHero;
@@ -27,7 +28,9 @@ public class VillainsLairPanel extends GenericAreaPanel {
 	private JPanel gamePanel;
 	private JSplitPane splitPane;
 	private VillainHealthBar villainHealthBar;
-
+	private Triggerable window;
+	private Triggerable self;
+	
 	/**
 	 * 
 	 */
@@ -38,9 +41,12 @@ public class VillainsLairPanel extends GenericAreaPanel {
 	 */
 	public VillainsLairPanel(Triggerable window, VillainsLair villainsLair, Team team) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.window = window;
+		
+		// An alias of this
+		this.self = this;
 		
 		JPanel villainPanel = new JPanel();
-		// add(villainPanel);
 		villainPanel.setLayout(new BoxLayout(villainPanel, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -106,11 +112,11 @@ public class VillainsLairPanel extends GenericAreaPanel {
 				switch (villainsLair.getBattleScreen().getMinigameType()) {
 				
 					case DICE_ROLLS:
-						gamePanel = new PanelDiceRollsGame(window, villainsLair.getBattleScreen());
+						gamePanel = new PanelDiceRollsGame(self, villainsLair.getBattleScreen());
 						break;
 						
 					case GUESS_THE_NUMBER:
-						gamePanel = new PanelGuessTheNumberGame(window, villainsLair.getBattleScreen());
+						gamePanel = new PanelGuessTheNumberGame(self, villainsLair.getBattleScreen());
 						break;
 						
 					case PAPER_SCISSORS_ROCK:
@@ -162,6 +168,37 @@ public class VillainsLairPanel extends GenericAreaPanel {
 		
 		btnSelectAHero.setEnabled(isBattleActive == false);
 		btnReadyToBattle.setEnabled(selectedHero != null && isBattleActive == false);
+		
+	}
+
+	@Override
+	public void trigger(GameEvent event) {
+		
+		switch (event) {
+		
+			case MINIGAME_WON:
+				// disable the minigame panel
+				// display a message saying the team won
+				// deal damage to the villain
+				// enable the battle button
+				break;
+				
+			case MINIGAME_LOST:
+				// disable the minigame panel
+				// display a message saying the team won
+				// deal damage to the hero
+				// enable the battle button
+				break;
+				
+			case MINIGAME_DRAWN:
+				// display a message saying that the game was drawn
+				// don't do anything else!
+				break;
+			
+			default:
+				window.trigger(event);
+		
+		}
 		
 	}
 

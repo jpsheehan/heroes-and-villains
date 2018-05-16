@@ -246,7 +246,7 @@ public class GameWindow implements Triggerable {
 				break;
 				
 			default:
-				throw new AssertionError("Could not handle event.");
+				throw new AssertionError(String.format("Could not handle event \"%s\".", event));
 			
 		}
 	}

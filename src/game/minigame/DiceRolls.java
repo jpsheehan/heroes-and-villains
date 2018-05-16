@@ -48,6 +48,13 @@ public class DiceRolls extends Minigame<Object, Integer, Integer> {
 			
 		}
 		
+		// if the state is drawn, set it to playing instead
+		if (state == MinigameState.DRAWN) {
+			
+			state = MinigameState.PLAYING;
+			
+		}
+		
 		if (state == MinigameState.PLAYING) {
 			
 			heroRoll = rollDice();
@@ -133,7 +140,7 @@ public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	@Override
 	public int getRemainingTurns() {
 		
-		if (state == MinigameState.PLAYING) {
+		if (state == MinigameState.PLAYING || state == MinigameState.DRAWN) {
 			
 			return 1;
 			

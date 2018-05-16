@@ -163,12 +163,29 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 			// Handle the event
 			if (++completedAnimations == 2) {
 				
-				// The next three lines are just for debugging purposes
-				System.out.println("Both animations complete!");
-				System.out.println(String.format("Hero: %d", diceRolls.getHeroLastTurn()));
-				System.out.println(String.format("Vill: %d", diceRolls.getVillainLastTurn()));
+				// Check the status of the game here and update components/trigger events in the villainsLairPanel
+				switch (diceRolls.getState()) {
+					
+					case WON:
+						villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
+						break;
+						
+					case LOST:
+						villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
+						break;
+					
+					case DRAWN:
+						villainsLairPanel.trigger(GameEvent.MINIGAME_DRAWN);
+						break;
+						
+					case PLAYING:
+						System.out.println(diceRolls.getState());
+						break;
+						
+					default:
+						throw new AssertionError();
 				
-				// TODO: Check the status of the game here and update components/trigger events in the villainsLairPanel
+				}
 			}
 			
 		} else {
