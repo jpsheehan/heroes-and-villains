@@ -66,7 +66,7 @@ public class BattleScreen {
 	 * Returns the money reward for winning this battle.
 	 * @return
 	 */
-	public int calculateMoneyReward() {
+	private int calculateMoneyReward() {
 		
 		float rewardMultiplier = 1.0f;
 		
@@ -80,7 +80,7 @@ public class BattleScreen {
 	 * Returns the damage dealt to the hero.
 	 * @return
 	 */
-	public int calculateDamage() {
+	private int calculateDamage() {
 		
 		float damageMultiplier = 1.0f;
 		
