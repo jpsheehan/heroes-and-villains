@@ -7,6 +7,7 @@ import game.item.Inventory;
 import game.item.ItemType;
 import game.item.Map;
 import game.ui.gui.DialogResult;
+import game.ui.gui.GameEvent;
 import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
@@ -78,8 +79,8 @@ public class HomeBasePanel extends GenericAreaPanel {
 					inventory.remove(map);
 					
 					JOptionPane.showMessageDialog(null, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()));
-					
-					window.triggerUpdateNavigation();
+
+					window.trigger(GameEvent.NAVIGATION_CHANGED);
 					
 				}
 				

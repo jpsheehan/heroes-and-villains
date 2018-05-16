@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 
+import game.ui.gui.GameEvent;
 import game.ui.gui.Triggerable;
 import game.ui.gui.components.ImagePanel;
 import game.ui.gui.panels.AreaSummaryPanel;
@@ -126,7 +127,7 @@ public class GameWindow implements Triggerable {
 		areaPanelHolderHolder.add(areaPanelHolder);
 		areaPanelHolder.setLayout(new BorderLayout(0, 0));
 		
-		triggerUpdateNavigation();
+		updateNavigation();
 		
 	}
 	
@@ -164,8 +165,7 @@ public class GameWindow implements Triggerable {
 		
 	}
 	
-	@Override
-	public void triggerUpdateNavigation() {
+	private void updateNavigation() {
 		
 		// Prompt for confirmation before entering a Villain's Lair
 		// TURNED OFF FOR TESTING!
@@ -233,8 +233,22 @@ public class GameWindow implements Triggerable {
 	}
 
 	@Override
-	public void triggerUpdateTeam() {
-		teamSummaryPanel.update();
+	public void trigger(GameEvent event) {
+		
+		switch (event) {
+		
+			case TEAM_CHANGED:
+				teamSummaryPanel.update();
+				break;
+				
+			case NAVIGATION_CHANGED:
+				updateNavigation();
+				break;
+				
+			default:
+				throw new AssertionError("Could not handle event.");
+			
+		}
 	}
 	
 }

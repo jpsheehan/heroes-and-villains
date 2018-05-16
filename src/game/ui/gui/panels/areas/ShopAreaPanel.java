@@ -6,6 +6,7 @@ import game.Team;
 import game.city.Shop;
 import game.item.Item;
 import game.ui.gui.DialogResult;
+import game.ui.gui.GameEvent;
 import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
@@ -93,7 +94,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 					update();
 					
 					// Update the funds in the window
-					window.triggerUpdateTeam();
+					window.trigger(GameEvent.TEAM_CHANGED);
 					
 				}
 				
