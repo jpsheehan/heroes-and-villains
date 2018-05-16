@@ -133,6 +133,8 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel implements Trigger
 				lblTurnsLeft.setEnabled(true);
 				lblHeroGuess.setEnabled(true);
 				
+				villainsLairPanel.trigger(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
+				
 				switch (guessTheNumber.getVillainLastTurn()) {
 						case TOO_HIGH:
 							lblGuessResult.setText("Hero guess too high!");
