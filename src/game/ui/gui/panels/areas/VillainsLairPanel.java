@@ -229,7 +229,8 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 					villainsLair.getBattleScreen().minigameStateChecker();
 					
 				} catch (VillainDeadException e) {
-					
+					//TODO
+					//Exception in thread "AWT-EventQueue-0" java.util.MissingFormatArgumentException: Format specifier '%d'
 					lblInformation.setText(String.format("%s has been defeated! You won $%d!", e.getVillain().getName()));
 					
 					btnGoToNextBuilding.setEnabled(true);
