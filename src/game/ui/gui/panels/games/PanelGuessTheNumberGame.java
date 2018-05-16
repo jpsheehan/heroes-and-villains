@@ -38,7 +38,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-public class PanelGuessTheNumberGame extends GenericAreaPanel implements Triggerable {
+public class PanelGuessTheNumberGame extends JPanel {
 
 	/**
 	 * 
@@ -46,7 +46,6 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel implements Trigger
 
 	private static final long serialVersionUID = -5763958068575027679L;
 	private Triggerable villainsLairPanel;
-	//private int completedAnimations;
 	private GuessTheNumber guessTheNumber;
 	JLabel lblWinner;
 	JButton btnGuess;
@@ -61,8 +60,7 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel implements Trigger
 		guessTheNumber = (GuessTheNumber)battleScreen.getMinigame();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		//String lblVillainDiceValue = "0";
-		
+
 		JPanel panel_6 = new JPanel();
 		add(panel_6);
 		panel_6.setLayout(new BoxLayout(panel_6, BoxLayout.Y_AXIS));
@@ -145,16 +143,35 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel implements Trigger
 						case CORRECT:
 							lblGuessResult.setText("Hero guess correct!");
 							break;
-						default:
-							//
+							
 				}
 				lblGuessResult.setEnabled(true);
 				
 				//disable the guess button if run out of turns
 				if (guessTheNumber.getRemainingTurns() == 0) {
-					disableAll();
+
+					// Check the status of the game here and update components/trigger events in the villainsLairPanel
+					switch (guessTheNumber.getState()) {
+						
+						case WON:
+							disableAll();
+							villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
+							break;
+							
+						case LOST:
+							disableAll();
+							villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
+							break;
+							
+						default:
+							throw new AssertionError();
+					
+					}
+				
 				}
+			
 			}
+			
 		});
 		
 		btnGuess.setActionCommand("OK");
@@ -162,75 +179,11 @@ public class PanelGuessTheNumberGame extends GenericAreaPanel implements Trigger
 		
 	}
 	
-	public void update() {
-		
-		repaint();
-	}
-		
-	/**
-	 * Sets the winner text label to show that the Hero Won
-	 */
-	public void setGameWinner() {
-		
-		switch (guessTheNumber.getState()) {
-			
-		case WON:
-			lblWinner.setText("The Hero Won!");
-			break;
-		case LOST:	
-			lblWinner.setText("The Villain Won!");
-			break;
-		case DRAWN:
-			lblWinner.setText("The game was drawn");
-			break;
-		default:
-			lblWinner.setText("Unknown");
-		}
-		
-	}
-	
 	private void disableAll() {
 		
 		btnGuess.setEnabled(false);
+		slider.setEnabled(false);
 		
 	}
 	
-	@Override
-	public void trigger(GameEvent event) {
-		
-		if (event == GameEvent.ANIMATION_COMPLETE) {
-			
-				// Check the status of the game here and update components/trigger events in the villainsLairPanel
-				switch (guessTheNumber.getState()) {
-					
-					case WON:
-						disableAll();
-						villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
-						break;
-						
-					case LOST:
-						disableAll();
-						villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
-						break;
-					
-					case DRAWN:
-						//should never be a draw
-						villainsLairPanel.trigger(GameEvent.MINIGAME_DRAWN);
-						break;
-						
-					case PLAYING:
-						System.out.println(guessTheNumber.getState());
-						break;
-						
-					default:
-						throw new AssertionError();
-				
-			}
-			
-			// The parent must handle the event
-			villainsLairPanel.trigger(event);
-			
-		}
-		
-	}
 }
