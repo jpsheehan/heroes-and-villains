@@ -32,8 +32,8 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 	private Triggerable villainsLairPanel;
 	private int completedAnimations;
 	JLabel lblWinner;
-	JButton button;
-
+	JButton btnStart; 
+	
 	/**
 	 * Create the panel.
 	 */
@@ -61,11 +61,13 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		
 		JPanel panel_1 = new JPanel();
 		
-		JButton btnStart = new JButton("Roll (the dice) ..");
+		btnStart = new JButton("Roll (the dice) ..");
 		btnStart.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
+				villainsLairPanel.trigger(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
+				
 				diceRolls.doTurn(null);
 				completedAnimations = 0;
 				herosDie.roll(diceRolls.getHeroLastTurn());
@@ -105,54 +107,17 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		panel_4.add(horizontalStrut);
 		
 		panel_4.add(villainsDie);
-		
-		JPanel panel_5 = new JPanel();
-		panel_6.add(panel_5);
-		
-		JLabel lblWinner = new JLabel("lblWinnerText");
-		lblWinner.setEnabled(false);
-		panel_5.add(lblWinner);
-		
-		JPanel panel_7 = new JPanel();
-		panel_6.add(panel_7);
-		
-		button = new JButton("OK");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO
-				System.out.println("Exit this panel.");
-			}
-		});
-		button.setEnabled(false);
-		panel_7.add(button);
-		button.setActionCommand("OK");
 	}
 	
 	public void update() {
 		
 		repaint();
 	}
+	
+	private void disableAll() {
 		
-	/**
-	 * Sets the winner text label to show that the Hero Won
-	 */
-	public void setGameWinner() {
+		btnStart.setEnabled(false);
 		
-		switch (diceRolls.getState()) {
-			
-		case WON:
-			lblWinner.setText("The Hero Won!");
-			break;
-		case LOST:	
-			lblWinner.setText("The Villain Won!");
-			break;
-		case DRAWN:
-			lblWinner.setText("The game was drawn");
-			break;
-		default:
-			lblWinner.setText("Unknown");
-		}
-		lblWinner.setEnabled(true);
 	}
 
 	@Override
@@ -167,10 +132,12 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 				switch (diceRolls.getState()) {
 					
 					case WON:
+						disableAll();
 						villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
 						break;
 						
 					case LOST:
+						disableAll();
 						villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
 						break;
 					

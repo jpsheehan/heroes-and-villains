@@ -2,6 +2,8 @@ package game.ui.gui.panels.areas;
 
 import game.Team;
 import game.character.Hero;
+import game.character.HeroDeadException;
+import game.character.VillainDeadException;
 import game.city.VillainsLair;
 import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
@@ -19,6 +21,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
 import game.ui.gui.components.VillainHealthBar;
 
+import java.awt.Color;
+import java.awt.Font;
+
 public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	
 	private Hero selectedHero;
@@ -30,6 +35,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	private VillainHealthBar villainHealthBar;
 	private Triggerable window;
 	private Triggerable self;
+	private JLabel lblMessage, lblInformation;
+	private VillainsLair villainsLair;
+	private JButton btnGoToNextBuilding;
 	
 	/**
 	 * 
@@ -42,6 +50,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	public VillainsLairPanel(Triggerable window, VillainsLair villainsLair, Team team) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.window = window;
+		this.villainsLair = villainsLair;
 		
 		// An alias of this
 		this.self = this;
@@ -108,6 +117,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 				villainsLair.getBattleScreen().setHero(selectedHero);
 				villainsLair.getBattleScreen().setMinigame();
 				
+				lblMessage.setText("");
+				lblInformation.setText("");
+				
 				// set the new game panel
 				switch (villainsLair.getBattleScreen().getMinigameType()) {
 				
@@ -142,12 +154,34 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		btnReadyToBattle.setEnabled(false);
 		panel_4.add(btnReadyToBattle);
 		
+		btnGoToNextBuilding = new JButton("Go To Next Building!");
+		btnGoToNextBuilding.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnGoToNextBuilding.setEnabled(false);
+		btnGoToNextBuilding.setVisible(false);
+		panel_4.add(btnGoToNextBuilding);
+		
 		splitPane = new JSplitPane();
 		add(splitPane);
 		
 		gamePanel = new JPanel();
 		
 		splitPane.setLeftComponent(villainPanel);
+		
+		JPanel panel_6 = new JPanel();
+		villainPanel.add(panel_6);
+		
+		lblMessage = new JLabel("");
+		lblMessage.setFont(new Font("Dialog", Font.BOLD, 14));
+		panel_6.add(lblMessage);
+		
+		JPanel panel_7 = new JPanel();
+		villainPanel.add(panel_7);
+		
+		lblInformation = new JLabel("");
+		panel_7.add(lblInformation);
 		splitPane.setRightComponent(gamePanel);
 		
 		
@@ -169,6 +203,8 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		btnSelectAHero.setEnabled(isBattleActive == false);
 		btnReadyToBattle.setEnabled(selectedHero != null && isBattleActive == false);
 		
+		villainHealthBar.update();
+		
 	}
 
 	@Override
@@ -177,22 +213,80 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		switch (event) {
 		
 			case MINIGAME_WON:
-				// disable the minigame panel
-				// display a message saying the team won
-				// deal damage to the villain
-				// enable the battle button
+
+				isBattleActive = false;
+
+				lblMessage.setText("YOU WON!");
+				lblMessage.setForeground(Color.GREEN);
+
+				update();
+				
+				try {
+					
+					villainsLair.getBattleScreen().minigameStateChecker();
+					
+				} catch (VillainDeadException e) {
+					
+					lblInformation.setText(String.format("%s has been defeated! You won $%d!", e.getVillain().getName()));
+					
+					btnGoToNextBuilding.setEnabled(true);
+					btnGoToNextBuilding.setVisible(true);
+
+					return;
+					
+				} catch (HeroDeadException e) {
+					
+					throw new AssertionError(e);
+					
+				}
+				
+				lblInformation.setText(String.format("You dealt some damage to %s!", villainsLair.getVillain().getName()));
+				
 				break;
 				
 			case MINIGAME_LOST:
-				// disable the minigame panel
-				// display a message saying the team won
-				// deal damage to the hero
-				// enable the battle button
+				
+				isBattleActive = false;
+
+				lblMessage.setText("YOU LOST!");
+				lblMessage.setForeground(Color.RED);
+				
+				try {
+					
+					villainsLair.getBattleScreen().minigameStateChecker();
+					
+				} catch (HeroDeadException e) {
+					
+					lblInformation.setText(String.format("%s has died! Please select another hero.", e.getHero().getName()));
+					selectedHero = null;
+					update();
+					
+					return;
+					
+				} catch (VillainDeadException e) {
+					
+					throw new AssertionError(e);
+					
+				}
+
+				update();
+				lblInformation.setText(String.format("%s dealt some damage to %s!", villainsLair.getVillain().getName(), selectedHero.getName()));
+				
 				break;
 				
 			case MINIGAME_DRAWN:
+				
 				// display a message saying that the game was drawn
-				// don't do anything else!
+				lblMessage.setText("YOU DREW!");
+				lblMessage.setForeground(Color.ORANGE);
+				lblInformation.setText("Have another go!");
+				
+				break;
+				
+			case VILLAINS_LAIR_CLEAR_MESSAGE:
+				
+				lblMessage.setText("");
+				lblInformation.setText("");
 				break;
 			
 			default:
@@ -201,5 +295,4 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		}
 		
 	}
-
 }

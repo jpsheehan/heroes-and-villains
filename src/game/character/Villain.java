@@ -162,11 +162,17 @@ public class Villain extends Character {
 	/**
 	 * Updates the number of times the Villain has been beaten.
 	 * @return
+	 * @throws VillainDeadException 
 	 */
-	public void decreaseTimesBeaten() {
+	public void beat() throws VillainDeadException {
 		
-		this.timesBeaten--;
+		this.timesBeaten++;
 		
+		if (this.timesBeaten >= this.winsToDefeat) {
+			
+			this.timesBeaten = this.winsToDefeat;
+			
+		}
 	}
 	/*
 	public static void main(String[] args) {

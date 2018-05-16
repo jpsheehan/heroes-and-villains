@@ -66,7 +66,7 @@ public class BattleScreen {
 	 * Returns the money reward for winning this battle.
 	 * @return
 	 */
-	private int calculateMoneyReward() {
+	public int calculateMoneyReward() {
 		
 		float rewardMultiplier = 1.0f;
 		
@@ -80,7 +80,7 @@ public class BattleScreen {
 	 * Returns the damage dealt to the hero.
 	 * @return
 	 */
-	private int calculateDamage() {
+	public int calculateDamage() {
 		
 		float damageMultiplier = 1.0f;
 		
@@ -249,11 +249,10 @@ public class BattleScreen {
 		
 			case WON:
 				// Deal "damage" to the villain and check if they are dead.
-				this.villainHealth--;
+				this.villain.beat();
 				
-				if (this.villainHealth <= 0) {
+				if (this.villain.getTimesBeaten() == this.villain.getWinsToDefeat()) {
 					
-					this.villainHealth = 0;
 					throw new VillainDeadException(this.villain, calculateMoneyReward());
 				}
 
