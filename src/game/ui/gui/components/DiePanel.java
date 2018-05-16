@@ -80,34 +80,37 @@ public class DiePanel extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		
-		int radius = getWidth() / 5;
+		int radius = getWidth() / 10;
 		
+		// draw the background
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
+		// draw a border
 		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		
 		switch (this.currentNumber) {
 		
 			case 5:
-				drawPip(g, getWidth() / 3, getHeight() / 3, radius); // top-left pip
-				drawPip(g, 2 * getWidth() / 3, 2 * getHeight() / 3, radius); // bottom-right pip
+				drawPip(g, getWidth() / 4, getHeight() / 4, radius); // top-left pip
+				drawPip(g, 3 * getWidth() / 4, 3 * getHeight() / 4, radius); // bottom-right pip
 			case 3:
-				drawPip(g, getWidth() / 3, 2 * getHeight() / 3, radius); // bottom-left pip
-				drawPip(g, 2 * getWidth() / 3, getHeight() / 3, radius); // top-right pip
+				drawPip(g, getWidth() / 4, 3 * getHeight() / 4, radius); // bottom-left pip
+				drawPip(g, 3 * getWidth() / 4, getHeight() / 4, radius); // top-right pip
 			case 1:
 				drawPip(g, getWidth() / 2, getHeight() / 2, radius); // centre pip
 				break;
 				
 			case 6:
-				drawPip(g, getWidth() / 3, getHeight() / 2, radius); // middle-left pip
-				drawPip(g, 2 * getWidth() / 3, getHeight() / 2, radius); // middle-right pip
+				drawPip(g, getWidth() / 4, getHeight() / 2, radius); // middle-left pip
+				drawPip(g, 3 * getWidth() / 4, getHeight() / 2, radius); // middle-right pip
 			case 4:
-				drawPip(g, getWidth() / 3, getHeight() / 3, radius); // top-left pip
-				drawPip(g, 2 * getWidth() / 3, 2 * getHeight() / 3, radius); // bottom-right pip
+				drawPip(g, getWidth() / 4, getHeight() / 4, radius); // top-left pip
+				drawPip(g, 3 * getWidth() / 4, 3 * getHeight() / 4, radius); // bottom-right pip
 			case 2:
-				drawPip(g, getWidth() / 3, 2 * getHeight() / 3, radius); // bottom-left pip
-				drawPip(g, 2 * getWidth() / 3, getHeight() / 3, radius); // top-right pip
+				drawPip(g, getWidth() / 4, 3 * getHeight() / 4, radius); // bottom-left pip
+				drawPip(g, 3 * getWidth() / 4, getHeight() / 4, radius); // top-right pip
 				break;
 			
 			default:
@@ -123,7 +126,7 @@ public class DiePanel extends JPanel implements ActionListener {
 	 */
 	private void drawPip(Graphics g, int x, int y, int radius) {
 		
-		g.drawOval(x - radius, y - radius, radius * 2, radius * 2);
+		g.fillOval(x - radius, y - radius, radius * 2, radius * 2);
 		
 	}
 

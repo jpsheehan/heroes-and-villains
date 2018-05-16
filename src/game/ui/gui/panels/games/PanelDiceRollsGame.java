@@ -1,34 +1,19 @@
 package game.ui.gui.panels.games;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import game.BattleScreen;
-import game.GeneralHelpers;
-import game.Team;
-import game.character.Hero;
-import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
 import game.ui.gui.Triggerable;
-import game.ui.gui.dialogs.HeroSelectionDialog;
-import game.ui.gui.dialogs.ItemSelectionDialog;
-import game.ui.gui.panels.areas.GenericAreaPanel;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 
-import game.item.HealingItem;
-import game.item.ItemType;
 import game.minigame.DiceRolls;
-import game.minigame.Minigame;
 
-import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import game.ui.gui.components.DiePanel;
@@ -41,17 +26,13 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 	 * 
 	 */
 	private static final long serialVersionUID = -562504025376734580L;
-//	private int diceRollingLoop = 10;
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
 	private DiceRolls diceRolls;
 	private Triggerable villainsLairPanel;
-	//private BattleScreen battleScreen;
 	private int completedAnimations;
 	JLabel lblWinner;
 	JButton button;
-	
-	//private boolean rollDice = false;
 
 	/**
 	 * Create the panel.
@@ -66,10 +47,6 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 				villainsDie = new DiePanel(this);
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		//JLabel lblHeroDice;
-		//JLabel lblVillainDice;
-//		String lblHeroDiceValue = "0";
-//		String lblVillainDiceValue = "0";
 		
 		JPanel panel_6 = new JPanel();
 		add(panel_6);
@@ -88,38 +65,12 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		btnStart.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//If the Roll button is clicked populate the Hero and Villain Dice value labels with some 
-				// random dice values that change say every .5 seconds for say 10 loops
-				// set Hero or Villain won
-				// Enable the OK (to continue button)
-				
-//				for (int i = 0; i < diceRollingLoop ; i++) {
-//					
-//					//get dice values and display on labels
-//					lblHeroDice.setText(String.format("%d", GeneralHelpers.getRandom().nextInt(6) + 1));
-//					lblVillainDice.setText(String.format("%d", GeneralHelpers.getRandom().nextInt(6) + 1));
-//					
-//					//pause 0.1 seconds
-//					//(new Timer(100, null)).start();
-//					try {
-//						Thread.sleep(100);
-//					} catch (InterruptedException e) {
-//						// TODO Auto-generated catch block
-//						//e.printStackTrace();
-//					}
-//				}
+
 				diceRolls.doTurn(null);
 				completedAnimations = 0;
 				herosDie.roll(diceRolls.getHeroLastTurn());
 				villainsDie.roll(diceRolls.getVillainLastTurn());
-				
-//				lblHeroDice.setText(diceRolls.getHeroLastTurn().toString());
-//				lblVillainDice.setText(diceRolls.getHeroLastTurn().toString());
-				//Update the winner (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
-				//setGameWinner();
-				//Set the OK button visible (may remove this, if implemented in BattleScreen Panel / Villains Lair Panel)
-//				button.setEnabled(true);
+
 			}
 		});
 		
@@ -134,11 +85,14 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
-		lblHeroRoll = new JLabel("Hero Roll         ");
-		lblHeroRoll.setHorizontalAlignment(SwingConstants.LEFT);
+		lblHeroRoll = new JLabel("Hero's Roll");
+		lblHeroRoll.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(lblHeroRoll);
 		
-		lblVillainRoll = new JLabel("    Villain Roll");
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		panel_3.add(horizontalStrut_1);
+		
+		lblVillainRoll = new JLabel("Villain's Roll");
 		lblVillainRoll.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(lblVillainRoll);
 		
@@ -209,11 +163,12 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 			// Handle the event
 			if (++completedAnimations == 2) {
 				
-				// Do things here!
+				// The next three lines are just for debugging purposes
 				System.out.println("Both animations complete!");
 				System.out.println(String.format("Hero: %d", diceRolls.getHeroLastTurn()));
 				System.out.println(String.format("Vill: %d", diceRolls.getVillainLastTurn()));
 				
+				// TODO: Check the status of the game here and update components/trigger events in the villainsLairPanel
 			}
 			
 		} else {
@@ -224,5 +179,4 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		}
 		
 	}
-		
 }
