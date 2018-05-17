@@ -28,7 +28,6 @@ import game.city.VillainsLair;
 import javax.swing.BoxLayout;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 
@@ -52,12 +51,14 @@ public class MainGamePanel extends JPanel implements Triggerable {
 	private JPanel areaSubtitle;
 	private JLabel lblAreaSubtitle;
 	private ImagePanel imagePanel;
+	private Triggerable window;
 
 	/**
 	 * Create the application.
 	 */
-	public MainGamePanel(GameEnvironment env) {
+	public MainGamePanel(GameEnvironment env, Triggerable window) {
 		this.gameEnvironment = env;
+		this.window = window;
 		initialize();
 	}
 
@@ -210,15 +211,15 @@ public class MainGamePanel extends JPanel implements Triggerable {
 					
 				} catch (GameWonException e) {
 					
-					// TODO: Make more better
-					JOptionPane.showMessageDialog(null, "Entire game has been won!");
+					window.trigger(GameEvent.MINIGAME_WON);
 					
 				}
 				
 				break;
 				
 			default:
-				throw new AssertionError(String.format("Could not handle event \"%s\".", event));
+				
+				window.trigger(event);
 			
 		}
 	}

@@ -278,7 +278,15 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 					selectedHero = null;
 					update();
 					
-					this.window.trigger(GameEvent.TEAM_CHANGED);
+					if (team.getNumberOfAliveHeroes() == 0) {
+						
+						this.window.trigger(GameEvent.GAME_LOST);
+						
+					} else {
+					
+						this.window.trigger(GameEvent.TEAM_CHANGED);
+						
+					}
 					
 					return;
 					

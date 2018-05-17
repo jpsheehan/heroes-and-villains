@@ -197,4 +197,22 @@ public class Team implements Nameable {
 		return this.inventory;
 		
 	}
+	
+	public int getNumberOfAliveHeroes() {
+		
+		int alive = 0;
+		
+		for (Hero hero : heroes) {
+			
+			if (hero.isAlive()) {
+				
+				alive++;
+				
+			}
+			
+		}
+		
+		return alive;
+		
+	}
 }

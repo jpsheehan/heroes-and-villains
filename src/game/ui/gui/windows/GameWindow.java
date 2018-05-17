@@ -2,6 +2,7 @@ package game.ui.gui.windows;
 
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import game.GameEnvironment;
 import game.Team;
@@ -13,6 +14,8 @@ import game.city.CityController;
 
 import java.awt.Dimension;
 
+import game.ui.gui.GameEvent;
+import game.ui.gui.Triggerable;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.item.HealingItem;
 
@@ -23,7 +26,7 @@ import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
-public class GameWindow {
+public class GameWindow implements Triggerable {
 
 	private JFrame frmHeroesAndVillains;
 	private GameEnvironment gameEnvironment;
@@ -43,6 +46,7 @@ public class GameWindow {
 	 */
 	private void initialize() {
 		
+		Triggerable self = this;
 		
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
@@ -53,7 +57,7 @@ public class GameWindow {
 				// Load the resources
 				(new LoadingResourcesDialog()).setVisible(true);
 				
-				mainGamePanel = new MainGamePanel(gameEnvironment);
+				mainGamePanel = new MainGamePanel(gameEnvironment, self);
 				cardPanel.add(mainGamePanel);
 				CardLayout cardLayout = (CardLayout)cardPanel.getLayout();
 				cardLayout.last(cardPanel);
@@ -103,6 +107,32 @@ public class GameWindow {
 		
 		gameEnvironment.setTeam(team);
 		gameEnvironment.setCityController(new CityController(3));
+		
+	}
+
+	@Override
+	public void trigger(GameEvent event) {
+		
+		switch (event) {
+		
+			case GAME_WON:
+				
+				JOptionPane.showMessageDialog(null, "Game won!");
+				frmHeroesAndVillains.dispose();
+				
+				break;
+				
+			case GAME_LOST:
+				
+				JOptionPane.showMessageDialog(null, "Game lost!");
+				frmHeroesAndVillains.dispose();
+				
+				break;
+			
+			default:
+				throw new AssertionError();
+		
+		}
 		
 	}
 }
