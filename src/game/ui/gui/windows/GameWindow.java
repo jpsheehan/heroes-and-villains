@@ -14,6 +14,7 @@ import game.ui.gui.panels.areas.PowerUpDenPanel;
 import game.ui.gui.panels.areas.ShopAreaPanel;
 import game.ui.gui.panels.areas.VillainsLairPanel;
 import game.GameEnvironment;
+import game.GameWonException;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
@@ -39,6 +40,7 @@ import game.item.HealingItem;
 import javax.swing.BoxLayout;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
@@ -255,6 +257,22 @@ public class GameWindow implements Triggerable {
 				
 			case NAVIGATION_CHANGED:
 				updateNavigation();
+				break;
+				
+			case GO_TO_NEXT_CITY:
+				
+				try {
+					
+					this.getGameEnvironment().getCityController().goToNextCity();
+					updateNavigation();
+					
+				} catch (GameWonException e) {
+					
+					// TODO: Make more better
+					JOptionPane.showMessageDialog(null, "Entire game has been won!");
+					
+				}
+				
 				break;
 				
 			default:
