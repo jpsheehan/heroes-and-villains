@@ -76,6 +76,7 @@ public class MainGamePanel extends JPanel implements Triggerable {
 		northPanel.add(teamSummaryPanel);
 		
 		imagePanel = new ImagePanel();
+		imagePanel.setImagePath("duck.jpg");
 		northPanel.add(imagePanel);
 		
 		navigationPanelHolder = new JPanel();

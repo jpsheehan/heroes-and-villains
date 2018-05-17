@@ -20,11 +20,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.CardLayout;
 import game.ui.gui.panels.MainGamePanel;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 public class GameWindow {
 
 	private JFrame frmHeroesAndVillains;
 	private GameEnvironment gameEnvironment;
+	private MainGamePanel mainGamePanel;
+	private JPanel cardPanel;
 
 	/**
 	 * Create the application.
@@ -38,6 +42,8 @@ public class GameWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
 		frmHeroesAndVillains.addWindowListener(new WindowAdapter() {
@@ -46,6 +52,11 @@ public class GameWindow {
 				
 				// Load the resources
 				(new LoadingResourcesDialog()).setVisible(true);
+				
+				mainGamePanel = new MainGamePanel(gameEnvironment);
+				cardPanel.add(mainGamePanel);
+				CardLayout cardLayout = (CardLayout)cardPanel.getLayout();
+				cardLayout.last(cardPanel);
 				
 			}
 		});
@@ -57,10 +68,11 @@ public class GameWindow {
 		frmHeroesAndVillains.setSize(size);
 		
 		createTestEnvironment();
-		frmHeroesAndVillains.getContentPane().setLayout(new CardLayout(0, 0));
+		frmHeroesAndVillains.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		MainGamePanel mainGamePanel = new MainGamePanel(this.gameEnvironment);
-		frmHeroesAndVillains.getContentPane().add(mainGamePanel, "name_81395174717469");
+		cardPanel = new JPanel();
+		frmHeroesAndVillains.getContentPane().add(cardPanel);
+		cardPanel.setLayout(new CardLayout(0, 0));
 		
 	}
 	
