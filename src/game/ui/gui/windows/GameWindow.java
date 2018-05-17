@@ -54,7 +54,9 @@ public class GameWindow implements GameEventListener {
 			public void windowOpened(WindowEvent e) {
 				
 				// Load the resources
-				(new LoadingResourcesDialog()).setVisible(true);
+				LoadingResourcesDialog dlg = new LoadingResourcesDialog();
+				dlg.setLocationRelativeTo(frmHeroesAndVillains);
+				dlg.setVisible(true);
 				
 			}
 		});
