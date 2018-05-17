@@ -19,8 +19,6 @@ import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.item.HealingItem;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.CardLayout;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
@@ -47,19 +45,13 @@ public class GameWindow implements GameEventListener {
 	 */
 	private void initialize() {
 		
+		// Load the resources
+		LoadingResourcesDialog dlg = new LoadingResourcesDialog();
+		dlg.setLocationRelativeTo(frmHeroesAndVillains);
+		dlg.setVisible(true);
+		
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
-		frmHeroesAndVillains.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-				
-				// Load the resources
-				LoadingResourcesDialog dlg = new LoadingResourcesDialog();
-				dlg.setLocationRelativeTo(frmHeroesAndVillains);
-				dlg.setVisible(true);
-				
-			}
-		});
 		frmHeroesAndVillains.setTitle("Heroes and Villains - Campus Edition");
 		
 		frmHeroesAndVillains.setBounds(100, 100, 450, 300);

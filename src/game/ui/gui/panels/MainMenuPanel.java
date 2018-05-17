@@ -15,6 +15,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class MainMenuPanel extends JPanel {
 
@@ -33,8 +34,11 @@ public class MainMenuPanel extends JPanel {
 		add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		ImagePanel logo = new ImagePanel();
+		ImagePanel logo = new ImagePanel("goose.jpg");
 		panel.add(logo);
+		
+		Component rigidArea = Box.createRigidArea(new Dimension(128, 128));
+		logo.add(rigidArea);
 		
 		JPanel panel_1 = new JPanel();
 		add(panel_1);
