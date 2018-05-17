@@ -25,6 +25,7 @@ import java.awt.CardLayout;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import game.ui.gui.panels.MainMenuPanel;
 
 public class GameWindow implements GameEventListener {
 
@@ -46,8 +47,6 @@ public class GameWindow implements GameEventListener {
 	 */
 	private void initialize() {
 		
-		GameEventListener self = this;
-		
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
 		frmHeroesAndVillains.addWindowListener(new WindowAdapter() {
@@ -56,11 +55,6 @@ public class GameWindow implements GameEventListener {
 				
 				// Load the resources
 				(new LoadingResourcesDialog()).setVisible(true);
-				
-				mainGamePanel = new MainGamePanel(gameEnvironment, self);
-				cardPanel.add(mainGamePanel);
-				CardLayout cardLayout = (CardLayout)cardPanel.getLayout();
-				cardLayout.last(cardPanel);
 				
 			}
 		});
@@ -71,12 +65,14 @@ public class GameWindow implements GameEventListener {
 		frmHeroesAndVillains.setMaximumSize(size);
 		frmHeroesAndVillains.setSize(size);
 		
-		createTestEnvironment();
 		frmHeroesAndVillains.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		cardPanel = new JPanel();
 		frmHeroesAndVillains.getContentPane().add(cardPanel);
 		cardPanel.setLayout(new CardLayout(0, 0));
+		
+		MainMenuPanel mainMenuPanel = new MainMenuPanel(this);
+		cardPanel.add(mainMenuPanel, "name_85970895571794");
 		
 	}
 	
@@ -127,6 +123,34 @@ public class GameWindow implements GameEventListener {
 				JOptionPane.showMessageDialog(null, "Game lost!");
 				frmHeroesAndVillains.dispose();
 				
+				break;
+				
+			case NEW_GAME:
+
+				createTestEnvironment();
+				
+				mainGamePanel = new MainGamePanel(gameEnvironment, this);
+				cardPanel.add(mainGamePanel);
+				CardLayout cardLayout = (CardLayout)cardPanel.getLayout();
+				cardLayout.last(cardPanel);
+				
+				break;
+				
+			case LOAD_GAME:
+				JOptionPane.showMessageDialog(null, "Not yet implemented.");
+				break;
+				
+			case QUIT_GAME:
+				
+				// TODO: Fix for production
+				// int result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Are you sure you want to quit?");
+				int result = JOptionPane.YES_OPTION;
+				
+				if (result == JOptionPane.YES_OPTION) {
+					
+					frmHeroesAndVillains.dispose();
+					
+				}
 				break;
 			
 			default:
