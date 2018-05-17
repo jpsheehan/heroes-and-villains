@@ -48,6 +48,8 @@ public final class GeneralHelpers {
 		
 	}
 	
+	public static ImageManager imageManager = new ImageManager();
+	
 	/**
 	 * Gets the associated integer from the strings.json file.
 	 * @param specifier The integer to get.
