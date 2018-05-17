@@ -8,6 +8,7 @@ import game.GeneralHelpers;
 import game.Team;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
+import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
@@ -161,7 +162,7 @@ public class PanelPaperScissorsRock extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				btnStartTimer.setEnabled(false);
-				villainsLairPanel.gameEventPerformed(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE);
+				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
 				
 				for (int i = 0 ; i < counterLoops ; i++) {
 					try {
@@ -212,19 +213,19 @@ public class PanelPaperScissorsRock extends JPanel {
 						case WON:
 							disableAll();
 							lblGameResult.setText("Hero won!");
-							villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_WON);
+							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_WON));
 							break;
 							
 						case LOST:
 							disableAll();
 							lblGameResult.setText("Villain won!");
-							villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_LOST);
+							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_LOST));
 							break;
 							
 						case DRAWN:
 							disableAll();
 							lblGameResult.setText("Game drawn!");
-							villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_DRAWN);
+							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_DRAWN));
 							break;
 							
 						default:

@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import game.BattleScreen;
 import game.ui.gui.GameEventType;
+import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
 import javax.swing.JButton;
@@ -66,7 +67,7 @@ public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				villainsLairPanel.gameEventPerformed(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE);
+				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
 				
 				diceRolls.doTurn(null);
 				completedAnimations = 0;
@@ -121,9 +122,9 @@ public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 	}
 
 	@Override
-	public void gameEventPerformed(GameEventType event) {
+	public void gameEventPerformed(GameEvent event) {
 		
-		if (event == GameEventType.ANIMATION_COMPLETE) {
+		if (event.getType() == GameEventType.ANIMATION_COMPLETE) {
 			
 			// Handle the event
 			if (++completedAnimations == 2) {
@@ -133,16 +134,16 @@ public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 					
 					case WON:
 						disableAll();
-						villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_WON);
+						villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_WON));
 						break;
 						
 					case LOST:
 						disableAll();
-						villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_LOST);
+						villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_LOST));
 						break;
 					
 					case DRAWN:
-						villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_DRAWN);
+						villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_DRAWN));
 						break;
 						
 					case PLAYING:

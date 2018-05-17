@@ -9,6 +9,7 @@ import game.city.CityController;
 import game.city.Direction;
 import game.city.IllegalMoveException;
 import game.ui.gui.GameEventType;
+import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
 import java.awt.BorderLayout;
@@ -44,7 +45,7 @@ public class NavigationPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					cityController.move(Direction.NORTH);
-					window.gameEventPerformed(GameEventType.NAVIGATION_CHANGED);
+					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
 				} catch (IllegalMoveException e1) {}
 			}
 		});
@@ -55,7 +56,7 @@ public class NavigationPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					cityController.move(Direction.SOUTH);
-					window.gameEventPerformed(GameEventType.NAVIGATION_CHANGED);
+					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
 				} catch (IllegalMoveException e1) {}
 			}
 		});
@@ -66,7 +67,7 @@ public class NavigationPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					cityController.move(Direction.WEST);
-					window.gameEventPerformed(GameEventType.NAVIGATION_CHANGED);
+					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
 				} catch (IllegalMoveException e1) {}
 			}
 		});
@@ -77,7 +78,7 @@ public class NavigationPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					cityController.move(Direction.EAST);
-					window.gameEventPerformed(GameEventType.NAVIGATION_CHANGED);
+					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
 				} catch (IllegalMoveException e1) {}
 			}
 		});

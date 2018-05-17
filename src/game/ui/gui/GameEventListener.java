@@ -2,6 +2,6 @@ package game.ui.gui;
 
 public interface GameEventListener {
 	
-	public void gameEventPerformed(GameEventType event);
+	public void gameEventPerformed(GameEvent event);
 
 }

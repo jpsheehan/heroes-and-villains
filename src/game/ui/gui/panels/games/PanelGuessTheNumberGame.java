@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import game.BattleScreen;
 import game.ui.gui.GameEventType;
+import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
 import javax.swing.JButton;
@@ -109,7 +110,7 @@ public class PanelGuessTheNumberGame extends JPanel {
 				lblTurnsLeft.setEnabled(true);
 				lblHeroGuess.setEnabled(true);
 				
-				villainsLairPanel.gameEventPerformed(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE);
+				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
 				
 				switch (guessTheNumber.getVillainLastTurn()) {
 						case TOO_HIGH:
@@ -133,12 +134,12 @@ public class PanelGuessTheNumberGame extends JPanel {
 						
 						case WON:
 							disableAll();
-							villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_WON);
+							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_WON));
 							break;
 							
 						case LOST:
 							disableAll();
-							villainsLairPanel.gameEventPerformed(GameEventType.MINIGAME_LOST);
+							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_LOST));
 							break;
 							
 						default:
