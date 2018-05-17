@@ -30,6 +30,7 @@ import java.awt.Dimension;
 import game.ui.gui.GameEvent;
 import game.ui.gui.Triggerable;
 import game.ui.gui.components.ImagePanel;
+import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.city.Shop;
 import game.city.VillainsLair;
@@ -40,6 +41,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameWindow implements Triggerable {
 
@@ -72,6 +75,16 @@ public class GameWindow implements Triggerable {
 	private void initialize() {
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
+		frmHeroesAndVillains.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				
+				// Load the resources
+				(new LoadingResourcesDialog()).setVisible(true);
+				imagePanel.setImagePath("duck.jpg");
+				
+			}
+		});
 		frmHeroesAndVillains.setTitle("Heroes and Villains - Campus Edition");
 		
 		frmHeroesAndVillains.setBounds(100, 100, 450, 300);
@@ -91,7 +104,6 @@ public class GameWindow implements Triggerable {
 		
 		imagePanel = new ImagePanel();
 		northPanel.add(imagePanel);
-		imagePanel.setImagePath("duck.jpg");
 		
 		navigationPanelHolder = new JPanel();
 		northPanel.add(navigationPanelHolder);

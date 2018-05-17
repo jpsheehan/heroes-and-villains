@@ -117,8 +117,6 @@ public class LoadingResourcesDialog extends JDialog implements ActionListener {
 			
 		} else {
 			
-			System.out.println("update");
-			
 			String name = im.getLastLoaded();
 			
 			if (name == null) {

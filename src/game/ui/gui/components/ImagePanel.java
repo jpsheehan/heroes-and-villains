@@ -2,7 +2,6 @@ package game.ui.gui.components;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import game.GeneralHelpers;
@@ -16,7 +15,7 @@ public class ImagePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2127501600065258904L;
-	private BufferedImage image;
+	private Image image;
 	private Image scaledImage;
 	public String path;
 	
@@ -40,9 +39,9 @@ public class ImagePanel extends JPanel {
 	}
 	
 	public ImagePanel(String path) {
-		
-		this.loadImage();
+
 		this.setImagePath(path);
+		this.loadImage();
 		
 	}
 	
@@ -55,8 +54,9 @@ public class ImagePanel extends JPanel {
 	
 	private void loadImage() {
 		
-		this.image = GeneralHelpers.getImage(this.path);
+		this.image = GeneralHelpers.imageManager.get(this.path);
 		this.scaledImage = null;
+		repaint();
 		
 	}
 	
@@ -70,9 +70,9 @@ public class ImagePanel extends JPanel {
 			// this.scaledImage = this.image.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
 			
 			// SMART SCALING			
-			float ratio = (float)getHeight() / (float)image.getHeight();
-			int newWidth = (int)(ratio * (float)image.getWidth());
-			int newHeight = (int)(ratio * (float)image.getHeight());
+			float ratio = (float)getHeight() / (float)image.getHeight(null);
+			int newWidth = (int)(ratio * (float)image.getWidth(null));
+			int newHeight = (int)(ratio * (float)image.getHeight(null));
 			
 			this.scaledImage = this.image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 
