@@ -39,6 +39,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	private JLabel lblMessage, lblInformation;
 	private VillainsLair villainsLair;
 	private JButton btnGoToNextBuilding;
+	private Team team;
 	
 	/**
 	 * 
@@ -52,6 +53,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.window = window;
 		this.villainsLair = villainsLair;
+		this.team = team;
 		
 		// An alias of this
 		this.self = this;
@@ -144,6 +146,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 				
 				// add the new game panel
 				splitPane.setRightComponent(gamePanel);
+				splitPane.setDividerLocation(0.5);
 
 				update();
 				
@@ -167,6 +170,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		panel_4.add(btnGoToNextBuilding);
 		
 		splitPane = new JSplitPane();
+		splitPane.setContinuousLayout(true);
 		add(splitPane);
 		
 		gamePanel = new JPanel();
@@ -186,6 +190,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		lblInformation = new JLabel("");
 		panel_7.add(lblInformation);
 		splitPane.setRightComponent(gamePanel);
+		splitPane.setDividerLocation(0.5);
 		
 		
 	}
@@ -231,10 +236,19 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 				} catch (VillainDeadException e) {
 					//TODO
 					//Exception in thread "AWT-EventQueue-0" java.util.MissingFormatArgumentException: Format specifier '%d'
-					lblInformation.setText(String.format("%s has been defeated! You won $%d!", e.getVillain().getName()));
+					lblInformation.setText(String.format("%s has been defeated! You won $%d!", e.getVillain().getName(), e.getReward()));
 					
 					btnGoToNextBuilding.setEnabled(true);
 					btnGoToNextBuilding.setVisible(true);
+					
+					btnReadyToBattle.setEnabled(false);
+					btnReadyToBattle.setVisible(false);
+					
+					btnSelectAHero.setEnabled(false);
+					
+					team.giveMoney(e.getReward());
+					
+					window.trigger(GameEvent.TEAM_CHANGED);
 
 					return;
 					
