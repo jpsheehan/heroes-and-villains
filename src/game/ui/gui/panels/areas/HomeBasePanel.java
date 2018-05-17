@@ -8,7 +8,7 @@ import game.item.ItemType;
 import game.item.Map;
 import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
 import javax.swing.JButton;
@@ -29,7 +29,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HomeBasePanel(Triggerable window, Inventory inventory, CityController cityController) {
+	public HomeBasePanel(GameEventListener window, Inventory inventory, CityController cityController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -80,7 +80,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 					
 					JOptionPane.showMessageDialog(null, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()));
 
-					window.trigger(GameEvent.NAVIGATION_CHANGED);
+					window.gameEventPerformed(GameEvent.NAVIGATION_CHANGED);
 					
 				}
 				

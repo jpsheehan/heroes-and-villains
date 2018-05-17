@@ -7,7 +7,7 @@ import game.character.VillainDeadException;
 import game.city.VillainsLair;
 import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.panels.games.PanelDiceRollsGame;
 import game.ui.gui.panels.games.PanelGuessTheNumberGame;
@@ -25,7 +25,7 @@ import game.ui.gui.components.VillainHealthBar;
 import java.awt.Color;
 import java.awt.Font;
 
-public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
+public class VillainsLairPanel extends GenericAreaPanel implements GameEventListener {
 	
 	private Hero selectedHero;
 	private JLabel lblSelectedHero;
@@ -34,8 +34,8 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	private JPanel gamePanel;
 	private JSplitPane splitPane;
 	private VillainHealthBar villainHealthBar;
-	private Triggerable window;
-	private Triggerable self;
+	private GameEventListener window;
+	private GameEventListener self;
 	private JLabel lblMessage, lblInformation;
 	private VillainsLair villainsLair;
 	private JButton btnGoToNextBuilding;
@@ -49,7 +49,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	/**
 	 * Create the panel.
 	 */
-	public VillainsLairPanel(Triggerable window, VillainsLair villainsLair, Team team) {
+	public VillainsLairPanel(GameEventListener window, VillainsLair villainsLair, Team team) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.window = window;
 		this.villainsLair = villainsLair;
@@ -161,7 +161,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 		btnGoToNextBuilding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				window.trigger(GameEvent.GO_TO_NEXT_CITY);
+				window.gameEventPerformed(GameEvent.GO_TO_NEXT_CITY);
 				
 			}
 		});
@@ -216,7 +216,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 	}
 
 	@Override
-	public void trigger(GameEvent event) {
+	public void gameEventPerformed(GameEvent event) {
 		
 		switch (event) {
 		
@@ -247,7 +247,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 					
 					team.giveMoney(e.getReward());
 					
-					window.trigger(GameEvent.TEAM_CHANGED);
+					window.gameEventPerformed(GameEvent.TEAM_CHANGED);
 
 					return;
 					
@@ -280,11 +280,11 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 					
 					if (team.getNumberOfAliveHeroes() == 0) {
 						
-						this.window.trigger(GameEvent.GAME_LOST);
+						this.window.gameEventPerformed(GameEvent.GAME_LOST);
 						
 					} else {
 					
-						this.window.trigger(GameEvent.TEAM_CHANGED);
+						this.window.gameEventPerformed(GameEvent.TEAM_CHANGED);
 						
 					}
 					
@@ -317,7 +317,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements Triggerable {
 				break;
 			
 			default:
-				window.trigger(event);
+				window.gameEventPerformed(event);
 		
 		}
 		

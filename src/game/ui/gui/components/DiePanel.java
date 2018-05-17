@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -27,7 +27,7 @@ public class DiePanel extends JPanel implements ActionListener {
 	private boolean isRolling;
 	private Random rng;
 	private Timer timer;
-	private Triggerable parent;
+	private GameEventListener parent;
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class DiePanel extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public DiePanel(Triggerable parent) {
+	public DiePanel(GameEventListener parent) {
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(64, 64));
 		add(rigidArea);
@@ -147,7 +147,7 @@ public class DiePanel extends JPanel implements ActionListener {
 			
 			timer.stop();
 			currentNumber = finalNumber;
-			parent.trigger(GameEvent.ANIMATION_COMPLETE);
+			parent.gameEventPerformed(GameEvent.ANIMATION_COMPLETE);
 			
 		}
 		

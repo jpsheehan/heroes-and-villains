@@ -15,7 +15,7 @@ import game.city.CityController;
 import java.awt.Dimension;
 
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.item.HealingItem;
 
@@ -26,7 +26,7 @@ import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
-public class GameWindow implements Triggerable {
+public class GameWindow implements GameEventListener {
 
 	private JFrame frmHeroesAndVillains;
 	private GameEnvironment gameEnvironment;
@@ -46,7 +46,7 @@ public class GameWindow implements Triggerable {
 	 */
 	private void initialize() {
 		
-		Triggerable self = this;
+		GameEventListener self = this;
 		
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
@@ -111,7 +111,7 @@ public class GameWindow implements Triggerable {
 	}
 
 	@Override
-	public void trigger(GameEvent event) {
+	public void gameEventPerformed(GameEvent event) {
 		
 		switch (event) {
 		

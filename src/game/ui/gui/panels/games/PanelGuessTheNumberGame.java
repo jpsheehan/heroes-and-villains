@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import game.BattleScreen;
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -33,7 +33,7 @@ public class PanelGuessTheNumberGame extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelGuessTheNumberGame(Triggerable villainsLairPanel, BattleScreen battleScreen) {
+	public PanelGuessTheNumberGame(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
 		guessTheNumber = (GuessTheNumber)battleScreen.getMinigame();
 		
@@ -109,7 +109,7 @@ public class PanelGuessTheNumberGame extends JPanel {
 				lblTurnsLeft.setEnabled(true);
 				lblHeroGuess.setEnabled(true);
 				
-				villainsLairPanel.trigger(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
+				villainsLairPanel.gameEventPerformed(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
 				
 				switch (guessTheNumber.getVillainLastTurn()) {
 						case TOO_HIGH:
@@ -133,12 +133,12 @@ public class PanelGuessTheNumberGame extends JPanel {
 						
 						case WON:
 							disableAll();
-							villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
+							villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_WON);
 							break;
 							
 						case LOST:
 							disableAll();
-							villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
+							villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_LOST);
 							break;
 							
 						default:

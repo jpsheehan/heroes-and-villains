@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import game.BattleScreen;
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,7 +20,7 @@ import game.ui.gui.components.DiePanel;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class PanelDiceRollsGame extends JPanel implements Triggerable {
+public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 	private JLabel lblVillainRoll;
 	private JLabel lblHeroRoll;
 	private DiceRolls diceRolls;
-	private Triggerable villainsLairPanel;
+	private GameEventListener villainsLairPanel;
 	private int completedAnimations;
 	JLabel lblWinner;
 	JButton btnStart; 
@@ -37,7 +37,7 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 	/**
 	 * Create the panel.
 	 */
-	public PanelDiceRollsGame(Triggerable villainsLairPanel, BattleScreen battleScreen) {
+	public PanelDiceRollsGame(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
 		diceRolls = (DiceRolls)battleScreen.getMinigame();
 		
@@ -66,7 +66,7 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				villainsLairPanel.trigger(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
+				villainsLairPanel.gameEventPerformed(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
 				
 				diceRolls.doTurn(null);
 				completedAnimations = 0;
@@ -121,7 +121,7 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 	}
 
 	@Override
-	public void trigger(GameEvent event) {
+	public void gameEventPerformed(GameEvent event) {
 		
 		if (event == GameEvent.ANIMATION_COMPLETE) {
 			
@@ -133,16 +133,16 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 					
 					case WON:
 						disableAll();
-						villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
+						villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_WON);
 						break;
 						
 					case LOST:
 						disableAll();
-						villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
+						villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_LOST);
 						break;
 					
 					case DRAWN:
-						villainsLairPanel.trigger(GameEvent.MINIGAME_DRAWN);
+						villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_DRAWN);
 						break;
 						
 					case PLAYING:
@@ -158,7 +158,7 @@ public class PanelDiceRollsGame extends JPanel implements Triggerable {
 		} else {
 			
 			// The parent must handle the event
-			villainsLairPanel.trigger(event);
+			villainsLairPanel.gameEventPerformed(event);
 			
 		}
 		

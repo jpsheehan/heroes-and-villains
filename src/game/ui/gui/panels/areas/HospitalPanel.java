@@ -6,7 +6,7 @@ import javax.swing.Timer;
 import game.Team;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
@@ -43,7 +43,7 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public HospitalPanel(Triggerable window, Team team) {
+	public HospitalPanel(GameEventListener window, Team team) {
 		
 		this.healingLabels = new HashMap<Hero, JLabel>();
 		this.team = team;

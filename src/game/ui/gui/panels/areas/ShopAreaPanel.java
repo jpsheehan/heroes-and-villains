@@ -7,7 +7,7 @@ import game.city.Shop;
 import game.item.Item;
 import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
 import javax.swing.BoxLayout;
@@ -32,7 +32,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ShopAreaPanel(Triggerable window, Shop shop, Team team) {
+	public ShopAreaPanel(GameEventListener window, Shop shop, Team team) {
 
 		this.shop = shop;
 		this.team = team;
@@ -94,7 +94,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 					update();
 					
 					// Update the funds in the window
-					window.trigger(GameEvent.TEAM_CHANGED);
+					window.gameEventPerformed(GameEvent.TEAM_CHANGED);
 					
 				}
 				

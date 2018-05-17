@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.components.ImagePanel;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.city.Shop;
@@ -31,7 +31,7 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 
-public class MainGamePanel extends JPanel implements Triggerable {
+public class MainGamePanel extends JPanel implements GameEventListener {
 
 	/**
 	 * 
@@ -51,12 +51,12 @@ public class MainGamePanel extends JPanel implements Triggerable {
 	private JPanel areaSubtitle;
 	private JLabel lblAreaSubtitle;
 	private ImagePanel imagePanel;
-	private Triggerable window;
+	private GameEventListener window;
 
 	/**
 	 * Create the application.
 	 */
-	public MainGamePanel(GameEnvironment env, Triggerable window) {
+	public MainGamePanel(GameEnvironment env, GameEventListener window) {
 		this.gameEnvironment = env;
 		this.window = window;
 		initialize();
@@ -190,7 +190,7 @@ public class MainGamePanel extends JPanel implements Triggerable {
 	}
 
 	@Override
-	public void trigger(GameEvent event) {
+	public void gameEventPerformed(GameEvent event) {
 		
 		switch (event) {
 		
@@ -211,7 +211,7 @@ public class MainGamePanel extends JPanel implements Triggerable {
 					
 				} catch (GameWonException e) {
 					
-					window.trigger(GameEvent.MINIGAME_WON);
+					window.gameEventPerformed(GameEvent.MINIGAME_WON);
 					
 				}
 				
@@ -219,7 +219,7 @@ public class MainGamePanel extends JPanel implements Triggerable {
 				
 			default:
 				
-				window.trigger(event);
+				window.gameEventPerformed(event);
 			
 		}
 	}

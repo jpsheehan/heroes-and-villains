@@ -5,7 +5,7 @@ import game.character.Hero;
 import game.item.ItemType;
 import game.item.PowerUpItem;
 import game.ui.gui.DialogResult;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 
@@ -35,7 +35,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PowerUpDenPanel(Triggerable window, Team team) {
+	public PowerUpDenPanel(GameEventListener window, Team team) {
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

@@ -9,7 +9,7 @@ import game.Team;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
-import game.ui.gui.Triggerable;
+import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.dialogs.ItemSelectionDialog;
 import game.ui.gui.panels.areas.GenericAreaPanel;
@@ -48,7 +48,7 @@ public class PanelPaperScissorsRock extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 6569531617355279249L;
-	private Triggerable villainsLairPanel;
+	private GameEventListener villainsLairPanel;
 	private PaperScissorsRock paperScissorsRock;
 	JLabel lblWinner;
 	JButton btnStartTimer;
@@ -59,7 +59,7 @@ public class PanelPaperScissorsRock extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelPaperScissorsRock(Triggerable villainsLairPanel, BattleScreen battleScreen) {
+	public PanelPaperScissorsRock(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
 		this.villainsLairPanel = villainsLairPanel;
 		paperScissorsRock = (PaperScissorsRock)battleScreen.getMinigame();
@@ -161,7 +161,7 @@ public class PanelPaperScissorsRock extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				btnStartTimer.setEnabled(false);
-				villainsLairPanel.trigger(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
+				villainsLairPanel.gameEventPerformed(GameEvent.VILLAINS_LAIR_CLEAR_MESSAGE);
 				
 				for (int i = 0 ; i < counterLoops ; i++) {
 					try {
@@ -212,19 +212,19 @@ public class PanelPaperScissorsRock extends JPanel {
 						case WON:
 							disableAll();
 							lblGameResult.setText("Hero won!");
-							villainsLairPanel.trigger(GameEvent.MINIGAME_WON);
+							villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_WON);
 							break;
 							
 						case LOST:
 							disableAll();
 							lblGameResult.setText("Villain won!");
-							villainsLairPanel.trigger(GameEvent.MINIGAME_LOST);
+							villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_LOST);
 							break;
 							
 						case DRAWN:
 							disableAll();
 							lblGameResult.setText("Game drawn!");
-							villainsLairPanel.trigger(GameEvent.MINIGAME_DRAWN);
+							villainsLairPanel.gameEventPerformed(GameEvent.MINIGAME_DRAWN);
 							break;
 							
 						default:
