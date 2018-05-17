@@ -6,7 +6,7 @@ import game.character.HeroDeadException;
 import game.character.VillainDeadException;
 import game.city.VillainsLair;
 import game.ui.gui.DialogResult;
-import game.ui.gui.GameEvent;
+import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.panels.games.PanelDiceRollsGame;
@@ -161,7 +161,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		btnGoToNextBuilding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				window.gameEventPerformed(GameEvent.GO_TO_NEXT_CITY);
+				window.gameEventPerformed(GameEventType.GO_TO_NEXT_CITY);
 				
 			}
 		});
@@ -216,7 +216,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	}
 
 	@Override
-	public void gameEventPerformed(GameEvent event) {
+	public void gameEventPerformed(GameEventType event) {
 		
 		switch (event) {
 		
@@ -247,7 +247,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					
 					team.giveMoney(e.getReward());
 					
-					window.gameEventPerformed(GameEvent.TEAM_CHANGED);
+					window.gameEventPerformed(GameEventType.TEAM_CHANGED);
 
 					return;
 					
@@ -280,11 +280,11 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					
 					if (team.getNumberOfAliveHeroes() == 0) {
 						
-						this.window.gameEventPerformed(GameEvent.GAME_LOST);
+						this.window.gameEventPerformed(GameEventType.GAME_LOST);
 						
 					} else {
 					
-						this.window.gameEventPerformed(GameEvent.TEAM_CHANGED);
+						this.window.gameEventPerformed(GameEventType.TEAM_CHANGED);
 						
 					}
 					

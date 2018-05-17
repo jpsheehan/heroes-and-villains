@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 import java.awt.GridLayout;
 
-import game.ui.gui.GameEvent;
+import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.components.ImagePanel;
 import game.ui.gui.panels.AreaSummaryPanel;
@@ -190,7 +190,7 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 	}
 
 	@Override
-	public void gameEventPerformed(GameEvent event) {
+	public void gameEventPerformed(GameEventType event) {
 		
 		switch (event) {
 		
@@ -211,7 +211,7 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 					
 				} catch (GameWonException e) {
 					
-					window.gameEventPerformed(GameEvent.MINIGAME_WON);
+					window.gameEventPerformed(GameEventType.MINIGAME_WON);
 					
 				}
 				

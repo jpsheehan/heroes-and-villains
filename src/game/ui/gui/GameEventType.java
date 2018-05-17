@@ -1,6 +1,6 @@
 package game.ui.gui;
 
-public enum GameEvent {
+public enum GameEventType {
 	
 	ANIMATION_COMPLETE,
 	NAVIGATION_CHANGED,

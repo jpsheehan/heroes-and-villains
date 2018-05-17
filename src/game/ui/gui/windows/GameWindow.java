@@ -14,7 +14,7 @@ import game.city.CityController;
 
 import java.awt.Dimension;
 
-import game.ui.gui.GameEvent;
+import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.item.HealingItem;
@@ -111,7 +111,7 @@ public class GameWindow implements GameEventListener {
 	}
 
 	@Override
-	public void gameEventPerformed(GameEvent event) {
+	public void gameEventPerformed(GameEventType event) {
 		
 		switch (event) {
 		

@@ -3,7 +3,7 @@ package game.ui.gui.components;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import game.ui.gui.GameEvent;
+import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 
 import java.awt.Color;
@@ -147,7 +147,7 @@ public class DiePanel extends JPanel implements ActionListener {
 			
 			timer.stop();
 			currentNumber = finalNumber;
-			parent.gameEventPerformed(GameEvent.ANIMATION_COMPLETE);
+			parent.gameEventPerformed(GameEventType.ANIMATION_COMPLETE);
 			
 		}
 		
