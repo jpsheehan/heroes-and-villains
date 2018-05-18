@@ -14,6 +14,7 @@ public enum GameEventType {
 	GAME_LOST,
 	QUIT_GAME,
 	NEW_GAME,
-	LOAD_GAME;
+	LOAD_GAME,
+	START_GAME;
 
 }

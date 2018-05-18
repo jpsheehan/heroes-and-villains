@@ -3,12 +3,19 @@ package game.ui.gui;
 public class GameEvent {
 
 	private GameEventType type;
-	private Object[] params;
+	private Object param;
 	
-	public GameEvent(GameEventType type, Object[] ...params) {
+	public GameEvent(GameEventType type) {
 		
 		this.type = type;
-		this.params = params;
+		this.param = null;
+		
+	}
+	
+	public GameEvent(GameEventType type, Object param) {
+		
+		this.type = type;
+		this.param = param;
 		
 	}
 	
@@ -18,9 +25,9 @@ public class GameEvent {
 		
 	}
 	
-	public Object[] getParameters() {
+	public Object getParameters() {
 		
-		return this.params;
+		return this.param;
 		
 	}
 	

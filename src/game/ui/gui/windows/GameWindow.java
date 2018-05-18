@@ -20,6 +20,8 @@ import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.item.HealingItem;
 
 import java.awt.CardLayout;
+
+import game.ui.gui.panels.GameSetUpPanel;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -121,12 +123,19 @@ public class GameWindow implements GameEventListener {
 				
 			case NEW_GAME:
 
-				createTestEnvironment();
-				
-				mainGamePanel = new MainGamePanel(gameEnvironment, this);
-				cardPanel.add(mainGamePanel);
+				GameSetUpPanel panel = new GameSetUpPanel(this);
+				cardPanel.add(panel);
 				CardLayout cardLayout = (CardLayout)cardPanel.getLayout();
 				cardLayout.last(cardPanel);
+				break;
+				
+			case START_GAME:
+				GameEnvironment env = (GameEnvironment)event.getParameters();
+				
+				mainGamePanel = new MainGamePanel(env, this);
+				cardPanel.add(mainGamePanel);
+				CardLayout cardLayout2 = (CardLayout)cardPanel.getLayout();
+				cardLayout2.last(cardPanel);
 				
 				break;
 				
