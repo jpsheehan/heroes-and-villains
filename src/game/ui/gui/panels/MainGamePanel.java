@@ -212,7 +212,7 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 					
 				} catch (GameWonException e) {
 					
-					window.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_WON));
+					window.gameEventPerformed(new GameEvent(GameEventType.GAME_WON));
 					
 				}
 				
