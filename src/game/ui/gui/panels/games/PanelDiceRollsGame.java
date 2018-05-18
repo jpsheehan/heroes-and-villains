@@ -69,6 +69,8 @@ public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 				
 				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
 				
+				btnStart.setEnabled(false);
+				
 				diceRolls.doTurn(null);
 				completedAnimations = 0;
 				herosDie.roll(diceRolls.getHeroLastTurn());
@@ -128,6 +130,8 @@ public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 			
 			// Handle the event
 			if (++completedAnimations == 2) {
+				
+				btnStart.setEnabled(true);
 				
 				// Check the status of the game here and update components/trigger events in the villainsLairPanel
 				switch (diceRolls.getState()) {
