@@ -97,6 +97,8 @@ public class PanelPaperScissorsRock extends JPanel {
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
+		paperScissorsRockCode = 2; // scissors
+		
 		JRadioButton rdbtnPaper = new JRadioButton("Paper");
 		buttonGroup_1.add(rdbtnPaper);
 		rdbtnPaper.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -184,9 +186,9 @@ public class PanelPaperScissorsRock extends JPanel {
 					case 3:
 						paperScissorsRock.doTurn(PaperScissorsRockMove.ROCK);
 						break;
-					default: {
+					default:
 						//do nothing - possibly generate exception
-					}
+						throw new AssertionError();
 				}
 				lblHeroChoice.setText(paperScissorsRock.getHeroLastTurn().toString());				
 				lblHeroChoice.setEnabled(true);
