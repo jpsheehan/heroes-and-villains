@@ -111,6 +111,7 @@ public class PanelPaperScissorsRock extends JPanel {
 		buttonGroup_1.add(rdbtnScissors);
 		rdbtnScissors.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		panel_3.add(rdbtnScissors);
+		rdbtnScissors.setSelected(true);
 		rdbtnScissors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				paperScissorsRockCode = 2;
@@ -232,6 +233,9 @@ public class PanelPaperScissorsRock extends JPanel {
 							throw new AssertionError();
 					
 						}
+					}
+				if (paperScissorsRock.getRemainingTurns() == 1 ) {
+					//play again
 					}
 				}
 			}
