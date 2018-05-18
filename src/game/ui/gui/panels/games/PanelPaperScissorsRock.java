@@ -166,16 +166,7 @@ public class PanelPaperScissorsRock extends JPanel {
 				
 				btnStartTimer.setEnabled(false);
 				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
-				
-				for (int i = 0 ; i < counterLoops ; i++) {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						//e1.printStackTrace();
-						//do nothing?
-						
-					}
+					
 				switch (paperScissorsRockCode) {
 					case 1:
 						paperScissorsRock.doTurn(PaperScissorsRockMove.PAPER);
@@ -225,21 +216,19 @@ public class PanelPaperScissorsRock extends JPanel {
 							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_LOST));
 							break;
 							
-						case DRAWN:
-							disableAll();
-							lblGameResult.setText("Game drawn!");
-							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_DRAWN));
-							break;
-							
 						default:
 							throw new AssertionError();
 					
-						}
 					}
-				if (paperScissorsRock.getRemainingTurns() == 1 ) {
-					//play again
-					}
+					
+				} else {
+					
+					btnStartTimer.setEnabled(true);
+					lblGameResult.setText("Game drawn!");
+					villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_DRAWN));
+						
 				}
+
 			}
 		});	
 	}

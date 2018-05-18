@@ -60,6 +60,11 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 			throw new IllegalArgumentException("choice should not be null for PaperScissorsRock game.");
 		}
 		
+		if (state == MinigameState.DRAWN) {
+			
+			state = MinigameState.PLAYING;
+			
+		}
 		
 		if (this.state == MinigameState.PLAYING) {
 			
