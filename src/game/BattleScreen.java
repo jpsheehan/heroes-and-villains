@@ -196,7 +196,7 @@ public class BattleScreen {
 				this.hero.getPowerUpItem().getAppliesTo() == type)
 			) {
 			
-			abilities.add((Ability)this.hero.getPowerUpItem());
+			abilities.add((Ability)this.hero.getPowerUpItem().getAbility());
 			
 		}
 		
