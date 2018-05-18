@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
+import game.ui.gui.KonamiQueue;
 import game.ui.gui.components.ImagePanel;
 import java.awt.Font;
 import java.awt.Component;
@@ -16,6 +17,10 @@ import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainMenuPanel extends JPanel {
 
@@ -23,11 +28,14 @@ public class MainMenuPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 4137926196390658257L;
+	private KonamiQueue konami;
 
 	/**
 	 * Create the panel.
 	 */
 	public MainMenuPanel(GameEventListener parent) {
+		konami = new KonamiQueue();
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -36,8 +44,32 @@ public class MainMenuPanel extends JPanel {
 		
 		ImagePanel logo = new ImagePanel("goose.jpg");
 		panel.add(logo);
+		logo.setFocusable(true);
 		
 		Component rigidArea = Box.createRigidArea(new Dimension(128, 128));
+		rigidArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				
+				konami.enqueue(arg0.getKeyCode());
+				
+				if (konami.getActivated()) {
+					
+					System.out.println("Easter egg");
+					
+				}
+				
+			}
+		});
+		rigidArea.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				logo.requestFocusInWindow();
+				konami.clear();
+				
+			}
+		});
 		logo.add(rigidArea);
 		
 		JPanel panel_1 = new JPanel();
@@ -105,6 +137,6 @@ public class MainMenuPanel extends JPanel {
 			}
 		});
 		panel_4.add(btnQuitGame);
-
+		
 	}
 }
