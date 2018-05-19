@@ -125,9 +125,7 @@ public class BattleScreen {
 	 */
 	public void setMinigame() {
 		
-		MinigameType type = this.villain.getFavouriteGames()[
-				GeneralHelpers.getRandom().nextInt(this.villain.getFavouriteGames().length)
-		];
+		MinigameType type = this.villain.getFavouriteGame();
 		
 		if (type == MinigameType.ALL) {
 			
@@ -257,7 +255,7 @@ public class BattleScreen {
 				// Deal "damage" to the villain and check if they are dead.
 				this.villain.beat();
 				
-				if (this.villain.getTimesBeaten() == this.villain.getWinsToDefeat()) {
+				if (this.villain.getNumberOfWinsToDefeat() == 0) {
 					
 					throw new VillainDeadException(this.villain, calculateMoneyReward());
 				}

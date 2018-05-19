@@ -64,8 +64,7 @@ public class City implements Nameable, Describable {
 			
 		}
 		
-		// TODO: Populate from strings
-		Villain villain = new Villain(getString(String.format("%s.Villain.Name", buildingName)), getString(String.format("%s.Villain.Taunt", buildingName)), MinigameType.ALL, 3);
+		Villain villain = Villain.fromStringsFile(type);
 		
 		areaList.add(new Shop(getString(String.format("%s.Shop.Name", buildingName)), getString(String.format("%s.Shop.Flavour", buildingName)), items, innKeeper));
 		areaList.add(new Hospital(getString(String.format("%s.Hospital.Name", buildingName)), getString(String.format("%s.Hospital.Flavour", buildingName))));

@@ -1,5 +1,8 @@
 package game.character;
 
+import static game.GeneralHelpers.getString;
+
+import game.city.CityType;
 import game.minigame.*;
 
 
@@ -8,96 +11,48 @@ import game.minigame.*;
  */
 public class Villain extends Character {
 
-	// 20180416 To Do
-	// get favourite games
-	// test 
-	
-	public Villain(String name, String taunt, MinigameType game, int winsToDefeat) {
-		
-		super(name);
-		
-		this.winsToDefeat = winsToDefeat;
-		this.timesBeaten = 0;
-		this.favouriteGame = new MinigameType[] { game };
-		this.taunt = taunt;
-	}
-	
-	/**
-	 * Creates a new Villain.
-	 * @param name The name of the Villain.
-	 * @param type The type of Villain.
-	 * @param int The number of (minigame) wins required to defeat the Villain 
-	 * @param MiniGame one of more minigames the villain plays 
-	 */
-	public Villain(String name, String taunt, MinigameType[] games, int winsToDefeat) {
-		
-		super(name);
-		
-		this.winsToDefeat = winsToDefeat;
-		this.timesBeaten = 0;
-		this.favouriteGame = games;
-		this.taunt = taunt;
-		
-	}
-	
-	//return favourite game, or if a list of games randomly choose a game and return it
-
 	/**
  	* The numbers of wins required to defeat the Villain.
  	*/
-	private int winsToDefeat;
+	private static int numberOfRequiredWins = 3;
 
 	/**
  	* The numbers of wins required to beat the Villain.
  	*/
 	private int timesBeaten;
 	
-	private String taunt;
-	
 	/**
- 	* The strength level of the Villain.
- 	* Scale of 1-10: 10 doing greatest damage, 1 doing least damage.
- 	*/
-	private int strength;
+	 * The villain's taunt phrase.
+	 */
+	private String taunt;
 	
 	/**
 	 * Favourite game (if only one entry) or (multiple) games the Villain plays.
 	 */
-	private MinigameType[] favouriteGame;
+	private MinigameType favouriteGame;
 	
-	/*/**
-	 * The Villans's taunt phrase
+	/**
+	 * Creates an instance of Villain.
+	 * @param name The Villain's name.
+	 * @param taunt The Villain's taunt phrase.
+	 * @param game The Villain's favourite game to play.
 	 */
-	//private String taunt;
+	public Villain(String name, String taunt, MinigameType game) {
+		
+		super(name);
+		
+		this.timesBeaten = 0;
+		this.favouriteGame = game;
+		this.taunt = taunt;
+	}
 
 	/**
 	 * Returns the number of wins required to defeat the Villain.
 	 * @return
 	 */
-	public int getWinsToDefeat() {
+	public int getNumberOfWinsToDefeat() {
 		
-		return this.winsToDefeat;
-		
-	}
-	
-	//Not sure if need this
-	/**
-	 * Returns the number of times the Villain has been beaten.
-	 * @return
-	 */
-	public int getTimesBeaten() {
-		
-		return this.timesBeaten;
-		
-	}
-	
-	/**
-	 * Returns the strength of the Villain.
-	 * @return
-	 */
-	public int getStrength() {
-		
-		return this.strength;
+		return Villain.numberOfRequiredWins - this.timesBeaten;
 		
 	}
 	
@@ -116,7 +71,7 @@ public class Villain extends Character {
 	 * Returns (single) favourite game or (multiple) games the Villain plays.
 	 * @return
 	 */
-	public MinigameType[] getFavouriteGames() {
+	public MinigameType getFavouriteGame() {
 		
 		return favouriteGame;
 		
@@ -131,49 +86,27 @@ public class Villain extends Character {
 		
 		this.timesBeaten++;
 		
-		if (this.timesBeaten >= this.winsToDefeat) {
+		if (this.timesBeaten >= Villain.numberOfRequiredWins) {
 			
-			this.timesBeaten = this.winsToDefeat;
+			this.timesBeaten = Villain.numberOfRequiredWins;
 			
 		}
 	}
-	/*
-	public static void main(String[] args) {
-		
-		//create some Minigames, create some Arraylists of minigames
-		// add the Minigames into the ArrayLists 
-		
-	    	//create some Villains
-		Villain v1 = new Villain("Front Desk", VillainType.LIBRARIAN, MinigameType.ALL, 1);
-		Villain v2 = new Villain("Level 5 ECE Support", VillainType.ADMINISTRATION, MinigameType.ALL, 2);
-		Villain v3 = new Villain("I'll Lobb you", VillainType.RICHARD_LOBB, MinigameType.ALL, 6);
-		Villain v4 = new Villain("Ker-ching", VillainType.OVERPRICED_TEXTBOOK, MinigameType.DICE_ROLLS, 5);
-		Villain v5 = new Villain("Sssss-simon", VillainType.SIMON_BROWN, MinigameType.PAPER_SCISSORS_ROCK, 8);
-		Villain v6 = new Villain("Level 5 ECE Support", VillainType.RORY_THE_BUILDER, MinigameType.GUESS_THE_NUMBER, 4);
-		
-		//print names
-		System.out.println(v1.getName());
-		System.out.println(v2.getName());
-		System.out.println(v3.getName());
-		System.out.println(v4.getName());
-		System.out.println(v5.getName());
-		System.out.println(v6.getName());
 	
-		//print strength and wins to defeat
-		System.out.println(v1.getStrength()+v1.getWinsToDefeat());
-		System.out.println(v2.getStrength()+v2.getWinsToDefeat());
-		System.out.println(v3.getStrength()+v3.getWinsToDefeat());
-		System.out.println(v4.getStrength()+v4.getWinsToDefeat());
-		System.out.println(v5.getStrength()+v5.getWinsToDefeat());
-		System.out.println(v6.getStrength()+v6.getWinsToDefeat());
+	/**
+	 * Creates a new instance from the strings.json file.
+	 * @param type The city that the Villain belongs to.
+	 * @return A new instance of Villain.
+	 */
+	public static Villain fromStringsFile(CityType type) {
 		
-		//print taunts
-		System.out.println(v1.getTaunt());
-		System.out.println(v2.getTaunt());
-		System.out.println(v3.getTaunt());
-		System.out.println(v4.getTaunt());
-		System.out.println(v5.getTaunt());
-		System.out.println(v6.getTaunt());
+		String buildingName = type.getProperName();
+		String name = getString(String.format("%s.Villain.Name", buildingName));
+		String taunt = getString(String.format("%s.Villain.Taunt", buildingName));
+		MinigameType game = MinigameType.fromProperName(getString(String.format("%s.Villain.Game", buildingName)));
+		
+		return new Villain(name, taunt, game);
+		
 	}
-	*/
+	
 }
