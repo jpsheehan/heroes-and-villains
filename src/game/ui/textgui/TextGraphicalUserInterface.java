@@ -1,13 +1,12 @@
 package game.ui.textgui;
 
-import game.GameEnvironment;
 import game.ui.UserInterface;
 import game.ui.textgui.ConsoleWrapperWindow;
 
 public class TextGraphicalUserInterface extends UserInterface {
 
-	public TextGraphicalUserInterface(GameEnvironment env) {
-		super(env);
+	public TextGraphicalUserInterface() {
+		super();
 	}
 
 	@Override

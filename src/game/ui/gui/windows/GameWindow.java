@@ -29,16 +29,21 @@ import game.ui.gui.panels.MainMenuPanel;
 
 public class GameWindow implements GameEventListener {
 
+	/**
+	 * The frame in which all the components reside.
+	 */
 	private JFrame frmHeroesAndVillains;
-	private GameEnvironment gameEnvironment;
+	
+	/**
+	 * The GameEnvin
+	 */
 	private MainGamePanel mainGamePanel;
 	private JPanel cardPanel;
 
 	/**
 	 * Create the application.
 	 */
-	public GameWindow(GameEnvironment env) {
-		this.gameEnvironment = env;
+	public GameWindow() {
 		initialize();
 	}
 
@@ -72,6 +77,9 @@ public class GameWindow implements GameEventListener {
 		
 	}
 	
+	/**
+	 * Shows the window.
+	 */
 	public void show() {
 		this.frmHeroesAndVillains.setVisible(true);
 	}
@@ -80,7 +88,7 @@ public class GameWindow implements GameEventListener {
 	 * REMOVE FROM PRODUCTION!
 	 * Creates a basic team and city controller for testing
 	 */
-	private void createTestEnvironment() {
+	private GameEnvironment getTestGameEnvironment() {
 		
 		Team team = new Team("Team Name");
 		try {
@@ -96,12 +104,25 @@ public class GameWindow implements GameEventListener {
 
 		team.getInventory().add(HealingItem.fromStrings("Coffee"));
 		team.getInventory().add(HealingItem.fromStrings("Curry"));
+
+		GameEnvironment gameEnvironment = new GameEnvironment();
 		
 		gameEnvironment.setTeam(team);
 		gameEnvironment.setCityController(new CityController(3));
 		
+		return gameEnvironment;
 	}
 
+	/**
+	 * Triggers a GameEvent, valid GameEventTypes are:
+	 * 	- GAME_WON: When the last villain has been defeated.
+	 *  - GAME_LOST: When the last hero has died.
+	 *  - START_GAME: When the Team and CityController have been created. Pass in a GameEnvironment instance as a parameter.
+	 *  - NEW_GAME: When the "New Game" button has been clicked in the main menu.
+	 *  - LOAD_GAME: When the "Load Game" button has been clicked in the main menu.
+	 *  - QUIT_GAME: When the "Quit Game" button has been clicked in the main menu.
+	 * @param event The event to trigger.
+	 */
 	@Override
 	public void gameEventPerformed(GameEvent event) {
 		

@@ -36,14 +36,22 @@ import game.item.Item;
  */
 public class TextUserInterface extends UserInterface {
 
+	private GameEnvironment gameEnvironment;
+	
 	/**
 	 * Create a new TextUserInterface object.
 	 * @param env A reference to the parent GameEnvironment.
 	 */
-	public TextUserInterface(GameEnvironment env) {
+	public TextUserInterface() {
 		
-		super(env);
+		super();
 		
+		this.gameEnvironment = new GameEnvironment();
+		
+	}
+	
+	private GameEnvironment getGameEnvironment() {
+		return this.gameEnvironment;
 	}
 	
 	/**
@@ -1099,12 +1107,12 @@ public class TextUserInterface extends UserInterface {
 	public static void main(String[] args) throws UserQuitException, UserCancelException, TeamFullException {
 		
 		GeneralHelpers.setIsRunningInEclipse(true);
-		GameEnvironment ge = new GameEnvironment(TextUserInterface.class);
+		GameEnvironment ge = new GameEnvironment();
 		
 		Team team = new Team("Cool Team");
 		team.addHero(new Hero("Bob", HeroType.ENGINEERING_STUDENT));
 		
-		TextUserInterface ui = new TextUserInterface(ge);
+		TextUserInterface ui = new TextUserInterface();
 		ge.setCityController(new CityController(3));
 		ge.setTeam(team);
 		

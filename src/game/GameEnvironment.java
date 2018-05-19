@@ -7,10 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import game.city.CityController;
-import game.ui.UserInterface;
-import game.ui.gui.GraphicalUserInterface;
-import game.ui.text.TextUserInterface;
-import game.ui.textgui.TextGraphicalUserInterface;
 
 //20180416 to do
 // call the ui
@@ -39,58 +35,10 @@ public class GameEnvironment {
 	private CityController cityController;
 	
 	/**
-	 * The user interface to use.
-	 */
-	private UserInterface ui;
-	
-	/**
 	 * Used to temporarily store the random seed when saving state.
 	 * Do not rely on this as the actual seed value, instead use game.GeneralHelpers.getSeed()
 	 */
 	private long randomSeedTemp;
-	
-	@SuppressWarnings("rawtypes")
-	public GameEnvironment(Class uiClass) {
-		
-		switch (uiClass.getName()) {
-		
-			case "game.ui.text.TextUserInterface":
-				this.ui = new TextUserInterface(this);
-				break;
-			
-			case "game.ui.gui.GraphicalUserInterface":
-				this.ui = new GraphicalUserInterface(this);
-				break;
-				
-			case "game.ui.textgui.TextGraphicalUserInterface":
-				this.ui = new TextGraphicalUserInterface(this);
-				break;
-				
-			default:
-				throw new IllegalArgumentException("No such ui class: " + uiClass.getName());
-		
-		}
-
-	}
-	
-	/**
-	 * Starts the game.
-	 */
-	public void run() {
-
-		this.ui.start();
-		
-	}
-	
-	/**
-	 * Gets the user interface.
-	 * @return
-	 */
-	public UserInterface getUserInterface() {
-		
-		return this.ui;
-		
-	}
 	
 	/**
 	 * Gets the city controller.

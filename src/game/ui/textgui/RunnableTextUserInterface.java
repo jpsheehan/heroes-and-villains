@@ -1,8 +1,6 @@
 package game.ui.textgui;
 
-import game.GameEnvironment;
 import game.GeneralHelpers;
-import game.ui.text.TextUserInterface;
 
 public class RunnableTextUserInterface implements Runnable {
 
@@ -12,7 +10,7 @@ public class RunnableTextUserInterface implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		GeneralHelpers.setIsRunningInEclipse(false);
-		new GameEnvironment(TextUserInterface.class).run();
+		start();
 	}
 	
 	public void start() {

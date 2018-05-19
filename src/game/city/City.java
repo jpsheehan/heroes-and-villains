@@ -10,7 +10,6 @@ import game.character.Dialogue;
 import game.character.InnKeeper;
 import game.character.Villain;
 import game.item.Item;
-import game.minigame.MinigameType;
 
 public class City implements Nameable, Describable {
 	

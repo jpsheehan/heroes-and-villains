@@ -12,7 +12,8 @@ public class Main {
 		final long seed = 3L;
 		
 		GeneralHelpers.seedRandom(seed);
-		new GameEnvironment(GraphicalUserInterface.class).run();
+		GraphicalUserInterface gui = new GraphicalUserInterface();
+		gui.start();
 
 	}
 
