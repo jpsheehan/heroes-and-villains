@@ -130,16 +130,18 @@ public class GameWindow implements GameEventListener {
 		
 			case GAME_WON:
 				
-				JOptionPane.showMessageDialog(null, "Game won!");
+				// TODO: Make more better.
+				// Show a message saying that the game was won!
+				JOptionPane.showMessageDialog(frmHeroesAndVillains, "Game won!");
 				frmHeroesAndVillains.dispose();
-				
 				break;
 				
 			case GAME_LOST:
 				
-				JOptionPane.showMessageDialog(null, "Game lost!");
+				// TODO: Make more better.
+				// Show a message saying that the game was lost!
+				JOptionPane.showMessageDialog(frmHeroesAndVillains, "Game lost!");
 				frmHeroesAndVillains.dispose();
-				
 				break;
 				
 			case NEW_GAME:
