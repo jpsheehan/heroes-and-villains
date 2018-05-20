@@ -6,12 +6,14 @@ import game.Nameable;
 
 import static game.GeneralHelpers.getString;
 
+import java.io.Serializable;
+
 /**
  * Represents the different kinds of abilities that Heroes can have.
  * TODO: The exact abilities will need to be discussed.
  *
  */
-public enum HeroAbility implements Ability, Nameable, Describable {
+public enum HeroAbility implements Ability, Nameable, Describable, Serializable {
 	CHEAPER_ITEMS, // for commerce students
 	DAMAGE_REDUCTION, // (20%) engineering students (body odour)
 	INCREASED_RECOVERY_RATE, // (for team) science students

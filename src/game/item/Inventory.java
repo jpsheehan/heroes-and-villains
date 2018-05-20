@@ -1,13 +1,19 @@
 package game.item;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The Inventory class holds lists of items for the teams and the shop as referenced in section 2.3.3 of the specification.
  *
  */
-public class Inventory {
+public class Inventory implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -177342150420127789L;
+
 	/**
 	 * ArrayList to hold objects of type PowerUpItem  
 	 */

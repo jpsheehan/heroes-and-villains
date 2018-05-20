@@ -7,6 +7,11 @@ package game.city;
 public class Hospital extends Area {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6474105888220400469L;
+
+	/**
 	 * Creates a new Hospital.
 	 * @param name The name of the Hospital.
 	 */

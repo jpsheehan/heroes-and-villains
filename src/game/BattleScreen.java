@@ -11,11 +11,18 @@ import game.minigame.Minigame;
 import game.minigame.MinigameType;
 import game.minigame.PaperScissorsRock;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import game.GeneralHelpers;
 
-public class BattleScreen {
+public class BattleScreen implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8383399144385457589L;
+
 
 	/**
 	 * The Villain being battled.

@@ -1,10 +1,16 @@
 package game;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import game.character.Hero;
 import game.item.Inventory;
 
-public class Team implements Nameable {
+public class Team implements Nameable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6707222599623695683L;
 
 	/**
 	 * The name of the team.

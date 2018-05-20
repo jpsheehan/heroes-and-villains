@@ -1,6 +1,9 @@
 package game.character;
 
 import static game.GeneralHelpers.getString;
+
+import java.io.Serializable;
+
 import static game.GeneralHelpers.getFloat;
 
 import game.Describable;
@@ -11,7 +14,7 @@ import game.Nameable;
  * The types of Heroes that exist in the game.
  *
  */
-public enum HeroType implements Nameable, Describable {
+public enum HeroType implements Nameable, Describable, Serializable {
 	ENGINEERING_STUDENT,
 	COMPUTER_SCIENCE_STUDENT,
 	ARTS_STUDENT,

@@ -1,5 +1,7 @@
 package game.minigame;
 
+import java.io.Serializable;
+
 import game.Ability;
 
 /**
@@ -10,8 +12,12 @@ import game.Ability;
  * @param <H> The return type of the getHeroLastTurn method.
  * @param <V> The return type of the getVillainLastTurn method.
  */
-public abstract class Minigame<C, H, V> {
+public abstract class Minigame<C, H, V> implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -98943080066864109L;
 	private Ability[] abilities;
 	protected MinigameState state;
 

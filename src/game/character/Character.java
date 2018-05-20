@@ -1,13 +1,19 @@
 package game.character;
 
+import java.io.Serializable;
+
 import game.Nameable;
 
 /**
  * Represents any character in the game.
  *
  */
-public abstract class Character implements Nameable {
+public abstract class Character implements Nameable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8369375027658819446L;
 	/**
 	 * The name of the Character.
 	 */

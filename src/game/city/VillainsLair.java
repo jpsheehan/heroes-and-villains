@@ -9,6 +9,11 @@ public class VillainsLair extends Area {
 	//Needs a Villain and a battlescreen in it
 	// getters and setters
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2893708442508659573L;
+
 	//20180417
 	// added Villain, battlescreen, getters
 	/**

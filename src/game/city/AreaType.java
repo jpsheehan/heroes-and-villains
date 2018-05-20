@@ -1,10 +1,12 @@
 package game.city;
 
+import java.io.Serializable;
+
 /**
  * Denotes the type of area an Area object is.
  *
  */
-public enum AreaType {
+public enum AreaType implements Serializable {
 	HOME_BASE,
 	SHOP,
 	VILLAINS_LAIR,

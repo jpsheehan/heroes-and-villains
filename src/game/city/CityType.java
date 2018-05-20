@@ -1,8 +1,10 @@
 package game.city;
 
+import java.io.Serializable;
+
 import game.GeneralHelpers;
 
-public enum CityType {
+public enum CityType implements Serializable {
 	
 	JAMES_HIGHT,
 	RUTHERFORD,

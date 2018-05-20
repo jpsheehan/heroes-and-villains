@@ -19,6 +19,11 @@ import game.ui.text.UserQuitException;
 
 public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScissorsRockMove, PaperScissorsRockMove> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5401974394486244423L;
+
 	private static PaperScissorsRockMove[] availableMoves = new PaperScissorsRockMove[] {
 		PaperScissorsRockMove.ROCK,
 		PaperScissorsRockMove.PAPER,

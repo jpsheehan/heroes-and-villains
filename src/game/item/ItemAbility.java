@@ -6,7 +6,9 @@ import game.Nameable;
 
 import static game.GeneralHelpers.getString;
 
-public enum ItemAbility implements Ability, Nameable, Describable {
+import java.io.Serializable;
+
+public enum ItemAbility implements Ability, Nameable, Describable, Serializable {
 	WIN_ON_DRAW, // for dice game and paper scissors rock
 	DAMAGE_PROTECTION, // (single use) stops a hero from taking damage once
 	INCREASE_GIFT_CHANCE,

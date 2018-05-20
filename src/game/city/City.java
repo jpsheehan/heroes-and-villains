@@ -1,6 +1,8 @@
 package game.city;
 
 import static game.GeneralHelpers.getString;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,8 +13,13 @@ import game.character.InnKeeper;
 import game.character.Villain;
 import game.item.Item;
 
-public class City implements Nameable, Describable {
+public class City implements Nameable, Describable, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5115206042729739277L;
+
 	/**
 	 * The name of the City.
 	 */

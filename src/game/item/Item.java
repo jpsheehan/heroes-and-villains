@@ -5,10 +5,18 @@ import game.Nameable;
 import game.minigame.MinigameType;
 
 import static game.GeneralHelpers.getString;
+
+import java.io.Serializable;
+
 import static game.GeneralHelpers.getInt;
 
-public abstract class Item implements Buyable, Nameable, Describable {
+public abstract class Item implements Buyable, Nameable, Describable, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -760574577254027710L;
+
 	/**
 	 * The name of the Item.
 	 */

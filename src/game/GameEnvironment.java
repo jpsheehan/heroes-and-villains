@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import game.city.CityController;
 
@@ -22,8 +23,13 @@ import game.city.CityController;
  * @author Manu
  *
  */
-public class GameEnvironment {
+public class GameEnvironment implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3013740228796469981L;
+
 	/**
 	 * The team of heroes.
 	 */

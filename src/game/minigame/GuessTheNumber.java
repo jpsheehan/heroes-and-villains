@@ -11,6 +11,10 @@ import game.ui.text.UserQuitException;
 
 public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAnswer> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3480301625315389239L;
 	private int guessesRemaining = 2;
 	private int maxNumber = 10;
 	private int secretNumber;

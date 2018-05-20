@@ -1,5 +1,6 @@
 package game.city;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import game.GameWonException;
@@ -11,8 +12,13 @@ import game.item.Map;
  * @author jesse
  *
  */
-public class CityController {
+public class CityController implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7347846701627560656L;
+
 	/**
 	 * A list of cities in the game.
 	 */

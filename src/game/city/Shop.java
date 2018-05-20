@@ -13,6 +13,11 @@ import game.item.Item;
 public class Shop extends Area {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1022651346182238023L;
+
+	/**
 	 * The list of Items the shop sells.
 	 */
 	private Inventory inventory;

@@ -1,11 +1,18 @@
 package game.item;
 
+import java.io.Serializable;
+
 /**
  * The HealingItem class as described in section 3.6 of the specification.
  *
  */
-public class HealingItem extends Item {
+public class HealingItem extends Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1452187370893053993L;
+
 	/**
 	 * The amount of health restored by the HealingItem. Health is restored in 25% increments.
 	 * For example, a restorationLevel of 2 would restore 50% of the Hero's health.

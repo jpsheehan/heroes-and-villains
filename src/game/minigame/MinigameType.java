@@ -1,11 +1,13 @@
 package game.minigame;
 
+import java.io.Serializable;
+
 /**
  * Denotes the type of minigame a Minigame instance is.
  * @author Jesse
  *
  */
-public enum MinigameType {
+public enum MinigameType implements Serializable {
 	GUESS_THE_NUMBER,
 	DICE_ROLLS,
 	PAPER_SCISSORS_ROCK,

@@ -3,6 +3,11 @@ package game.city;
 public class PowerUpDen extends Area {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2322987305678031051L;
+
+	/**
 	 * Creates a new Power Up Den.
 	 * @param name The name of the area.
 	 */

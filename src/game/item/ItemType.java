@@ -1,6 +1,8 @@
 package game.item;
 
-public enum ItemType {
+import java.io.Serializable;
+
+public enum ItemType implements Serializable {
 	MAP,
 	HEALING_ITEM,
 	POWER_UP_ITEM;

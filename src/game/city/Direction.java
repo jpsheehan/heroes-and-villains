@@ -1,9 +1,12 @@
 package game.city;
+
+import java.io.Serializable;
+
 /**
  * The direction an area resides in. The home base always resides in the centre.
  *
  */
-public enum Direction {
+public enum Direction implements Serializable {
 	NORTH,
 	SOUTH,
 	EAST,

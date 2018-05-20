@@ -1,11 +1,18 @@
 package game.item;
 
+import java.io.Serializable;
+
 /**
  * Represents a Map as described in section 2.3 of the specification.
  *
  */
-public class Map extends Item {
+public class Map extends Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1682836575817898404L;
+
 	/**
 	 * Creates a new Map.
 	 * @param name The name of the Map.

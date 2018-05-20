@@ -1,5 +1,7 @@
 package game.city;
 
+import java.io.Serializable;
+
 import game.Describable;
 import game.Nameable;
 
@@ -7,7 +9,12 @@ import game.Nameable;
  * Represents an Area within a City. A City has five Areas.
  *
  */
-public abstract class Area implements Nameable, Describable {
+public abstract class Area implements Nameable, Describable, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8493046604045045279L;
 
 	/**
 	 * The name of the Area.

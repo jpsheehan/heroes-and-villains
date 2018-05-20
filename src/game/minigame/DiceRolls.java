@@ -8,6 +8,11 @@ import game.item.ItemAbility;
 public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5190016761538901187L;
+
+	/**
 	 * The number the hero rolls.
 	 */
 	private int heroRoll;

@@ -3,6 +3,10 @@ package game.character;
 public class InnKeeper extends Character {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7255001793893507756L;
+	/**
 	 * The dialogue the InnKeeper will use.
 	 */
 	private Dialogue dialogue;

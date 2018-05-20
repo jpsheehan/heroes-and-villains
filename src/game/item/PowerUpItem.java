@@ -1,13 +1,20 @@
 package game.item;
 
+import java.io.Serializable;
+
 import game.minigame.MinigameType;
 
 /**
  * Represents a PowerUpItem as described in section 3.5 of the specification.
  *
  */
-public class PowerUpItem extends Item {
+public class PowerUpItem extends Item implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2511622060584756841L;
+
 	/**
 	 * The kind of ability this PowerUpItem has.
 	 */

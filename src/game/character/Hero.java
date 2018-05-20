@@ -1,5 +1,6 @@
 package game.character;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import game.GeneralHelpers;
@@ -10,8 +11,13 @@ import game.item.PowerUpItem;
  * Represents a Hero as described in section 3.2 of the specification.
  *
  */
-public class Hero extends Character {
+public class Hero extends Character implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4935741977219828138L;
+
 	/**
 	 * The type of Hero this is.
 	 */

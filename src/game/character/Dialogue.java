@@ -1,5 +1,7 @@
 package game.character;
 
+import java.io.Serializable;
+
 import game.GeneralHelpers;
 import game.city.CityType;
  
@@ -7,9 +9,14 @@ import game.city.CityType;
  * Provides the dialogue for the InnKeeper 
  *  
  */
-public class Dialogue {
+public class Dialogue implements Serializable {
 	
-//	/**
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4548151420650313683L;
+
+	//	/**
 //	 * vPlate message
 //	 */
 //	private String vPlate;

@@ -2,6 +2,8 @@ package game.character;
 
 import static game.GeneralHelpers.getString;
 
+import java.io.Serializable;
+
 import game.city.CityType;
 import game.minigame.*;
 
@@ -9,7 +11,12 @@ import game.minigame.*;
 /**
  * Represents a Villain as described in section 3.3 of the specification.
  */
-public class Villain extends Character {
+public class Villain extends Character implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8995085959168801055L;
 
 	/**
  	* The numbers of wins required to defeat the Villain.
