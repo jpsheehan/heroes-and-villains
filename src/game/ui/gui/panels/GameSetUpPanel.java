@@ -40,6 +40,7 @@ public class GameSetUpPanel extends JPanel {
 
 	private GameEventListener parent;
 	private GameEnvironment gameEnvironment;
+	private int cities;
 	
 	/**
 	 * Create the panel.
@@ -70,15 +71,15 @@ public class GameSetUpPanel extends JPanel {
 		JLabel lblClickStartToRoll = new JLabel("Select number of cities to explore:");
 		panel_2.add(lblClickStartToRoll);
 		
-		JSlider slider = new JSlider();
+		JSlider sliderNumberOfCities = new JSlider();
 		// Min and Max currently hardcoded, better to get from Strings file
-		slider.setMinimum(1);
-		slider.setMaximum(3);
-		slider.setMajorTickSpacing(1);
-		slider.setSnapToTicks(true);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		panel_2.add(slider);
+		sliderNumberOfCities.setMinimum(1);
+		sliderNumberOfCities.setMaximum(3);
+		sliderNumberOfCities.setMajorTickSpacing(1);
+		sliderNumberOfCities.setSnapToTicks(true);
+		sliderNumberOfCities.setPaintTicks(true);
+		sliderNumberOfCities.setPaintLabels(true);
+		panel_2.add(sliderNumberOfCities);
 		panel_6.add(panel_1);
 		
 		JLabel lblCreateHero = new JLabel("Create (and name) a Hero :");
@@ -107,7 +108,9 @@ public class GameSetUpPanel extends JPanel {
 		btnCreateTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//when we team created set the number of cities 
+				//when team created set the number of cities
+				
+				//(sliderNumberOfCities.getValue());
 				
 				NewTeamDialog dlg = new NewTeamDialog();
 				dlg.setVisible(true);
@@ -120,11 +123,19 @@ public class GameSetUpPanel extends JPanel {
 		panel_6.add(panel_5);
 		panel_5.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		
+		//OK takes user to the main game panel. 
+		// Could pop up a validation check window first: cancel would reEnable the New Game Menu and OK would continue to main game panel 
 		JButton button_1 = new JButton("OK");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				beginGame(gameEnvironment);
+			}
+		});
 		button_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		button_1.setActionCommand("OK");
 		panel_5.add(button_1);
 		
+		//cancel returns user back to Initial Startup Window 
 		JButton button_2 = new JButton("Cancel");
 		button_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		button_2.setActionCommand("Cancel");
