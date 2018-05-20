@@ -1,6 +1,8 @@
 package game.ui.gui.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +30,8 @@ import game.character.Hero;
 import game.ui.gui.DialogResult;
 import game.ui.gui.dialogs.EditHeroDialog;
 import game.ui.gui.dialogs.NewHeroDialog;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TeamCreationPanel extends JPanel {
 
@@ -48,6 +52,9 @@ public class TeamCreationPanel extends JPanel {
 	 * Create the dialog.
 	 */
 	public TeamCreationPanel() {
+		Color defaultTextFieldBackgroundColor;
+		Component self = this;
+		
 		heroes = new DefaultListModel<Hero>();
 		
 		setBounds(100, 100, 450, 300);
@@ -71,6 +78,25 @@ public class TeamCreationPanel extends JPanel {
 		}
 		{
 			textFieldTeamName = new JTextField();
+			defaultTextFieldBackgroundColor = textFieldTeamName.getBackground();
+			textFieldTeamName.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					
+					teamName = textFieldTeamName.getText();
+					if (isTeamNameValid()) {
+						
+						teamName = teamName.trim();
+						textFieldTeamName.setBackground(defaultTextFieldBackgroundColor);
+						
+					} else {
+						
+						textFieldTeamName.setBackground(Color.RED);
+						
+					}
+					
+				}
+			});
 			contentPanel.add(textFieldTeamName, "4, 2, fill, default");
 			textFieldTeamName.setColumns(10);
 		}
@@ -119,14 +145,14 @@ public class TeamCreationPanel extends JPanel {
 									} else {
 										
 										// a hero with that name exists
-										JOptionPane.showMessageDialog(null, "A hero already exists with that name.");
+										JOptionPane.showMessageDialog(self, "A hero already exists with that name.");
 										
 									}
 								
 								} else {
 									
 									// the hero name is not valid
-									JOptionPane.showMessageDialog(null, String.format(
+									JOptionPane.showMessageDialog(self, String.format(
 											"The hero's name is not valid. It must contain between %d and %d characters.",
 											Settings.getHeroNameMin(), Settings.getHeroNameMax()));
 									
@@ -137,7 +163,7 @@ public class TeamCreationPanel extends JPanel {
 						} else {
 							
 							// you have too many heroes in your team
-							JOptionPane.showMessageDialog(null,
+							JOptionPane.showMessageDialog(self,
 									String.format("You have too many heroes in your team. You can have, at most, %d.",
 											Settings.getHeroesMax()));
 							
@@ -170,7 +196,7 @@ public class TeamCreationPanel extends JPanel {
 								
 							} else {
 								
-								JOptionPane.showMessageDialog(null, "No changes were made to the hero.");
+								JOptionPane.showMessageDialog(self, "No changes were made to the hero.");
 								
 							}
 							
@@ -187,7 +213,7 @@ public class TeamCreationPanel extends JPanel {
 						
 						Hero removedHero = listHeroes.getSelectedValue();
 						
-						int result = JOptionPane.showConfirmDialog(null, String.format("Are you sure you want to remove %s from the team?", removedHero));
+						int result = JOptionPane.showConfirmDialog(self, String.format("Are you sure you want to remove %s from the team?", removedHero));
 						
 						if (result == JOptionPane.YES_OPTION) {
 							
@@ -301,6 +327,37 @@ public class TeamCreationPanel extends JPanel {
 			return null;
 			
 		}
+		
+	}
+	
+	/**
+	 * Returns a reason for why getTeam returns null.
+	 * @return
+	 */
+	public String getTeamFailureReason() {
+		
+		if (getTeam() == null) {
+			
+			if (!isTeamNameValid()) {
+				
+				return String.format("The team name is invalid. You must have between %d and %d characters in the name.", Settings.getTeamNameMin(), Settings.getTeamNameMax());
+				
+			} else {
+				
+				if (!areHeroesValid()) {
+					
+					return String.format("The number of heroes is invalid. You must have between %d and %d heroes in the team.", Settings.getHeroesMin(), Settings.getHeroesMax());
+					
+				}
+				
+			}
+			
+			throw new AssertionError();
+			
+		}
+		
+		return null;
+		
 		
 	}
 

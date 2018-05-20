@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 
 import game.BattleScreen;
 import game.GameEnvironment;
+import game.Settings;
+import game.Team;
+import game.city.CityController;
 import game.ui.gui.GameEventType;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
@@ -18,6 +21,7 @@ import game.minigame.DiceRolls;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import game.ui.gui.components.DiePanel;
@@ -28,6 +32,7 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JSlider;
 import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 
 public class GameSetUpPanel extends JPanel {
@@ -38,8 +43,6 @@ public class GameSetUpPanel extends JPanel {
 	private static final long serialVersionUID = 6625880562455508713L;
 
 	private GameEventListener parent;
-	private GameEnvironment gameEnvironment;
-	private int cities;
 	
 	/**
 	 * Create the panel.
@@ -47,7 +50,7 @@ public class GameSetUpPanel extends JPanel {
 	public GameSetUpPanel(GameEventListener parent) {
 
 		this.parent = parent;
-		GameEnvironment gameEnvironment = new GameEnvironment();
+		Component self = this;
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -71,52 +74,18 @@ public class GameSetUpPanel extends JPanel {
 		panel_2.add(lblClickStartToRoll);
 		
 		JSlider sliderNumberOfCities = new JSlider();
-		// Min and Max currently hardcoded, better to get from Strings file
-		sliderNumberOfCities.setMinimum(1);
-		sliderNumberOfCities.setMaximum(3);
+		sliderNumberOfCities.setMinimum(Settings.getCitiesMin());
+		sliderNumberOfCities.setMaximum(Settings.getCitiesMax());
 		sliderNumberOfCities.setMajorTickSpacing(1);
 		sliderNumberOfCities.setSnapToTicks(true);
 		sliderNumberOfCities.setPaintTicks(true);
 		sliderNumberOfCities.setPaintLabels(true);
 		panel_2.add(sliderNumberOfCities);
 		panel_6.add(panel_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblCreateHero = new JLabel("Create (and name) a Hero :");
-		panel_1.add(lblCreateHero);
-		lblCreateHero.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		JButton btnCreateHero = new JButton("Create Hero");
-		btnCreateHero.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				NewHeroDialog dlg = new NewHeroDialog();
-				dlg.setVisible(true);
-			}
-		});
-		panel_1.add(btnCreateHero);
-		btnCreateHero.setFont(new Font("Dialog", Font.BOLD, 12));
-		
-		JPanel panel_3 = new JPanel();
-		panel_6.add(panel_3);
-		
-		JLabel lblCreateTeam = new JLabel("Create (and name) Team:");
-		lblCreateTeam.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_3.add(lblCreateTeam);
-		
-		JButton btnCreateTeam = new JButton("Create Team");
-		btnCreateTeam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//when team created set the number of cities
-				
-				//(sliderNumberOfCities.getValue());
-				
-//				NewTeamDialog dlg = new NewTeamDialog();
-//				dlg.setVisible(true);
-			}
-		});
-		btnCreateTeam.setFont(new Font("Dialog", Font.BOLD, 12));
-		panel_3.add(btnCreateTeam);
+		TeamCreationPanel teamCreationPanel = new TeamCreationPanel();
+		panel_1.add(teamCreationPanel);
 		
 		JPanel panel_5 = new JPanel();
 		panel_6.add(panel_5);
@@ -127,7 +96,20 @@ public class GameSetUpPanel extends JPanel {
 		JButton button_1 = new JButton("OK");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				beginGame(gameEnvironment);
+				Team team = teamCreationPanel.getTeam();
+				
+				if (team == null) {
+					
+					JOptionPane.showMessageDialog(self, teamCreationPanel.getTeamFailureReason());
+					
+				} else {
+				
+					GameEnvironment env = new GameEnvironment();
+					env.setTeam(team);
+					env.setCityController(new CityController(sliderNumberOfCities.getValue()));
+					beginGame(env);
+					
+				}
 			}
 		});
 		button_1.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -144,7 +126,7 @@ public class GameSetUpPanel extends JPanel {
 	
 	private void beginGame(GameEnvironment env) {
 		
-	parent.gameEventPerformed(new GameEvent(GameEventType.START_GAME, env));
+		parent.gameEventPerformed(new GameEvent(GameEventType.START_GAME, env));
 		
 	}
 	

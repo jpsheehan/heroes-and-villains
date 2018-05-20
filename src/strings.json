@@ -19,7 +19,7 @@
 	"Rutherford.InnKeeper.Dialogue.Purchase": "Excellent choice:",
 	"Rutherford.Villain.Name": "Simon Brown",
 	"Rutherford.Villain.Taunt": "Physics is fun",
-    "Rutherford.Villain.Game": "",
+    "Rutherford.Villain.Game": "All",
 	
 	"Erskine.Name": "Jack Erskine",
 	"Erskine.Flavour": "Home to CompSci Maths & Stats and S/W Engineering.",
@@ -41,7 +41,7 @@
 	"Erskine.InnKeeper.Dialogue.Purchase": "Nice",
 	"Erskine.Villain.Name": "Matthias Galster",
 	"Erskine.Villain.Taunt": "I hope you had a nice weekend",
-    "Erskine.Villain.Game": "",
+    "Erskine.Villain.Game": "All",
 	
 	"EngCore.Name": "Engineering Core",
 	"EngCore.Flavour": "",
@@ -63,7 +63,7 @@
 	"EngCore.InnKeeper.Dialogue.Purchase": "",
 	"EngCore.Villain.Name": "Administration",
 	"EngCore.Villain.Taunt": "\"All courses are full. No you cannot change modules. You'll need to apply in writing within five working days.\"",
-    "EngCore.Villain.Game": "",
+    "EngCore.Villain.Game": "All",
 	
 	"JamesHight.Name": "James Hight",
 	"JamesHight.Flavour": "UC campus central!",
@@ -85,7 +85,7 @@
 	"JamesHight.InnKeeper.Dialogue.Purchase": "",
 	"JamesHight.Villain.Name": "Librarian",
 	"JamesHight.Villain.Taunt": "Don't you know the Dewey Decimal System? What, you've never heard of the Library of Congress either?",
-    "JamesHight.Villain.Game": "",
+    "JamesHight.Villain.Game": "All",
 	
 	"Psych.Name": "Psychology and Sociology",
 	"Psych.Flavour": "",
@@ -107,7 +107,7 @@
 	"Psych.InnKeeper.Dialogue.Purchase": "You have chosen to buy ",
 	"Psych.Villain.Name": "",
 	"Psych.Villain.Taunt": "",
-    "Psych.Villain.Game": "",
+    "Psych.Villain.Game": "All",
 	
 	"Law.Name": "Business & Law",
 	"Law.Flavour": "Commerce, not coerce",
@@ -129,7 +129,7 @@
 	"Law.InnKeeper.Dialogue.Purchase": "You are purchasing ",
 	"Law.Villain.Name": "Sir William",
 	"Law.Villain.Taunt": "I'll see you in court!",
-    "Law.Villain.Game": "",
+    "Law.Villain.Game": "All",
 	
 	"Matariki.Name": "Matariki",
 	"Matariki.Flavour": "Where it all starts?",
@@ -151,7 +151,7 @@
 	"Matariki.InnKeeper.Dialogue.Purchase": "Your choice",
 	"Matariki.Villain.Name": "Over-priced textbooks",
 	"Matariki.Villain.Taunt": "That'll be $476.97 please. Paying by eftpos? There is %4 surcharge for credit cards.",
-    "Matariki.Villain.Game": "",
+    "Matariki.Villain.Game": "All",
 	
 	"Ability.Hero.CheaperItems.Name": "Cheaper Items",
 	"Ability.Hero.CheaperItems.Flavour": "Team discount on purchases in shop, if Commerce student in team.",
