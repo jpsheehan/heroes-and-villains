@@ -2,7 +2,6 @@ package game.ui.gui.panels;
 
 import javax.swing.JPanel;
 
-import game.BattleScreen;
 import game.GameEnvironment;
 import game.Settings;
 import game.Team;
@@ -12,24 +11,17 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import game.minigame.DiceRolls;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import game.ui.gui.components.DiePanel;
-import game.ui.gui.dialogs.HeroSelectionDialog;
-import game.ui.gui.dialogs.NewHeroDialog;
 
 import java.awt.Component;
-import javax.swing.Box;
 import javax.swing.JSlider;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
