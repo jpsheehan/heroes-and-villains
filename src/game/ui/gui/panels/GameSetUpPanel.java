@@ -9,6 +9,8 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -37,6 +39,7 @@ public class GameSetUpPanel extends JPanel {
 	private static final long serialVersionUID = 6625880562455508713L;
 
 	private GameEventListener parent;
+	private GameEnvironment gameEnvironment;
 	
 	/**
 	 * Create the panel.
@@ -44,7 +47,7 @@ public class GameSetUpPanel extends JPanel {
 	public GameSetUpPanel(GameEventListener parent) {
 
 		this.parent = parent;
-		
+		GameEnvironment gameEnvironment = new GameEnvironment();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -55,8 +58,8 @@ public class GameSetUpPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel_6.add(panel);
 		
-		JLabel lblGameSetUpPanel = new JLabel("New Game Setup");
-		lblGameSetUpPanel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		JLabel lblGameSetUpPanel = new JLabel("New Game Menu");
+		lblGameSetUpPanel.setFont(new Font("Dialog", Font.BOLD, 16));
 		panel.add(lblGameSetUpPanel);
 		
 		JPanel panel_1 = new JPanel();
@@ -64,10 +67,17 @@ public class GameSetUpPanel extends JPanel {
 		JPanel panel_2 = new JPanel();
 		panel_6.add(panel_2);
 		
-		JLabel lblClickStartToRoll = new JLabel("Select number of cities to Explore:");
+		JLabel lblClickStartToRoll = new JLabel("Select number of cities to explore:");
 		panel_2.add(lblClickStartToRoll);
 		
 		JSlider slider = new JSlider();
+		// Min and Max currently hardcoded, better to get from Strings file
+		slider.setMinimum(1);
+		slider.setMaximum(3);
+		slider.setMajorTickSpacing(1);
+		slider.setSnapToTicks(true);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
 		panel_2.add(slider);
 		panel_6.add(panel_1);
 		
@@ -96,6 +106,9 @@ public class GameSetUpPanel extends JPanel {
 		JButton btnCreateTeam = new JButton("Create Team");
 		btnCreateTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//when we team created set the number of cities 
+				
 				NewTeamDialog dlg = new NewTeamDialog();
 				dlg.setVisible(true);
 			}
@@ -124,4 +137,20 @@ public class GameSetUpPanel extends JPanel {
 	parent.gameEventPerformed(new GameEvent(GameEventType.START_GAME, env));
 		
 	}
+	
+	/**
+	 * Launch the application.
+	 */
+	/*
+	public static void main(String[] args) {
+		try {
+			GameSetUpPanel panel = new GameSetUpPanel(parent);
+			panel.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			panel.setVisible(true);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	*/
 }
