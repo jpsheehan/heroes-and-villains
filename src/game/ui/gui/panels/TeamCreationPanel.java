@@ -1,45 +1,41 @@
-package game.ui.gui.dialogs;
+package game.ui.gui.panels;
 
 import java.awt.BorderLayout;
-
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 import game.Settings;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
 import game.ui.gui.DialogResult;
-import game.ui.gui.Returnable;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
+import game.ui.gui.dialogs.EditHeroDialog;
+import game.ui.gui.dialogs.NewHeroDialog;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-
-
-public class NewTeamDialog extends JDialog implements Returnable {
+public class TeamCreationPanel extends JPanel {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6907828618097444177L;
-	private DialogResult result;
+	private static final long serialVersionUID = -3165688514695170791L;
+	
 	private String teamName;
 	private DefaultListModel<Hero> heroes;
 	
@@ -49,38 +45,15 @@ public class NewTeamDialog extends JDialog implements Returnable {
 	private JButton btnAddHero, btnEditHero, btnRemoveHero;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			NewTeamDialog dialog = new NewTeamDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
-	public NewTeamDialog() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				
-				updateButtons();
-				
-			}
-		});
+	public TeamCreationPanel() {
 		heroes = new DefaultListModel<Hero>();
 		
-		setResizable(false);
-		setModal(true);
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -227,53 +200,10 @@ public class NewTeamDialog extends JDialog implements Returnable {
 				panel.add(btnRemoveHero);
 			}
 		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						setDialogResult(DialogResult.OK);
-						dispose();
-						
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						setDialogResult(DialogResult.CANCEL);
-						dispose();
-						
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
 		
 		this.teamName = "";
-	}
-
-	@Override
-	public DialogResult getDialogResult() {
 		
-		return this.result;
-		
-	}
-	
-	private void setDialogResult(DialogResult result) {
-		
-		this.result = result;
-		
+		updateButtons();
 	}
 	
 	private boolean isTeamNameValid() {

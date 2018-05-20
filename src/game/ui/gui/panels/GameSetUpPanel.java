@@ -23,7 +23,6 @@ import java.awt.Font;
 import game.ui.gui.components.DiePanel;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.dialogs.NewHeroDialog;
-import game.ui.gui.dialogs.NewTeamDialog;
 
 import java.awt.Component;
 import javax.swing.Box;
@@ -112,8 +111,8 @@ public class GameSetUpPanel extends JPanel {
 				
 				//(sliderNumberOfCities.getValue());
 				
-				NewTeamDialog dlg = new NewTeamDialog();
-				dlg.setVisible(true);
+//				NewTeamDialog dlg = new NewTeamDialog();
+//				dlg.setVisible(true);
 			}
 		});
 		btnCreateTeam.setFont(new Font("Dialog", Font.BOLD, 12));
