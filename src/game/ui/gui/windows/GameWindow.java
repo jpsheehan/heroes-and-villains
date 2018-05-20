@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import game.GameEnvironment;
 
 import java.awt.Dimension;
+import java.io.IOException;
 
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
@@ -16,6 +17,7 @@ import game.ui.gui.panels.GameSetUpPanel;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+
 import game.ui.gui.panels.MainMenuPanel;
 
 public class GameWindow implements GameEventListener {
@@ -84,6 +86,7 @@ public class GameWindow implements GameEventListener {
 	 */
 	@Override
 	public void gameEventPerformed(GameEvent event) {
+		GameEnvironment env;
 		
 		switch (event.getType()) {
 		
@@ -108,13 +111,24 @@ public class GameWindow implements GameEventListener {
 				break;
 				
 			case START_GAME:
-				GameEnvironment env = (GameEnvironment)event.getParameters();
+				env = (GameEnvironment)event.getParameters();
 				switchPanel(new MainGamePanel(env, this));
 				
 				break;
 				
 			case LOAD_GAME:
-				JOptionPane.showMessageDialog(null, "Not yet implemented.");
+				try {
+					
+					env = GameEnvironment.loadState();
+					switchPanel(new MainGamePanel(env, this));
+					
+				} catch (ClassNotFoundException | IOException e) {
+					
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(frmHeroesAndVillains, "Could not load the game state.");
+					
+				}
+				
 				break;
 				
 			case QUIT_GAME:

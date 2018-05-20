@@ -1,11 +1,16 @@
 package game;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
 
 import game.city.CityController;
 
@@ -86,7 +91,19 @@ public class GameEnvironment implements Serializable {
 		
 	}
 	
-	public void saveState(String filename) throws IOException {
+	public void saveState() throws IOException {
+		
+		File saveDir = new File(Paths.get(System.getProperty("user.home"), ".HeroesAndVillains").toString());
+		
+		if (!saveDir.isDirectory()) {
+			
+			saveDir.mkdir();
+			
+		}
+		
+		Path path = Paths.get(System.getProperty("user.home"), ".HeroesAndVillains", String.format("%d.ser", (new Date()).getTime()));
+		
+		String filename = path.toString();
 		
 		// get the random value
 		// TODO: RETHINK THIS PROBLEM!!!
@@ -99,7 +116,30 @@ public class GameEnvironment implements Serializable {
 		
 	}
 	
-	public static GameEnvironment loadState(String filename) throws IOException, ClassNotFoundException {
+	public static GameEnvironment loadState() throws IOException, ClassNotFoundException {
+		
+		String filename = null;
+		long latest = 0;
+		
+		for (File file : getSaveStates()) {
+			if (file.getName().indexOf(".ser") >= 0) {
+
+				try {
+					long timestamp = Long.parseLong(file.getName().substring(0, file.getName().indexOf(".ser")));
+					
+					if (timestamp > latest) {
+						latest = timestamp;
+						filename = file.getAbsolutePath();
+					}
+				} catch (NumberFormatException e) {
+					
+				}
+			}
+		}
+		
+		if (filename == null) {
+			throw new IOException("No save states found.");
+		}
 		
 		GameEnvironment env = null;
 		
@@ -110,11 +150,55 @@ public class GameEnvironment implements Serializable {
 		objIn.close();
 		
 		GeneralHelpers.seedRandom(env.randomSeedTemp);
+
+		(new File(filename)).delete();
 		
 		return env;
 		
 	}
 	
+	private static File[] getSaveStates() {
+		
+		File saveDir = new File(Paths.get(System.getProperty("user.home"), ".HeroesAndVillains").toString());
+		
+		if (!saveDir.isDirectory()) {
+			
+			return new File[0];
+			
+		}
+		
+		ArrayList<File> files = new ArrayList<File>();
+		
+		for (File file : saveDir.listFiles()) {
+			if (file.getName().indexOf(".ser") >= 0) {
+
+				try {
+					
+					String filename = file.getName().substring(0, file.getName().indexOf(".ser"));
+					Long.parseLong(filename);
+					files.add(file);
+					
+					
+				} catch (NumberFormatException e) {
+					
+				}
+			}
+		}
+		
+		File[] filesArray = new File[files.size()];
+		for (int i = 0; i < files.size(); i++) {
+			filesArray[i] = files.get(i);
+		}
+		
+		return filesArray;
+		
+	}
+	
+	public static boolean doesSaveStateExist() {
+		
+		return getSaveStates().length > 0;
+		
+	}
 
 }
  

@@ -3,6 +3,8 @@ package game.ui.gui.panels;
 import game.ui.gui.panels.NavigationPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import game.ui.gui.panels.TeamSummaryPanel;
 import game.ui.gui.panels.areas.GenericAreaPanel;
 import game.ui.gui.panels.areas.HomeBasePanel;
@@ -13,6 +15,8 @@ import game.ui.gui.panels.areas.VillainsLairPanel;
 import game.GameEnvironment;
 import game.GameWonException;
 import game.city.Area;
+import game.city.AreaType;
+import game.city.Direction;
 
 import javax.swing.JPanel;
 
@@ -29,8 +33,13 @@ import game.city.VillainsLair;
 import javax.swing.BoxLayout;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
 
 public class MainGamePanel extends JPanel implements GameEventListener {
 
@@ -53,6 +62,8 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 	private JLabel lblAreaSubtitle;
 	private ImagePanel imagePanel;
 	private GameEventListener window;
+	private JPanel panel;
+	private JButton btnSaveAndQuit;
 
 	/**
 	 * Create the application.
@@ -90,6 +101,32 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 		areaSummaryPanel = new AreaSummaryPanel(this.getGameEnvironment().getCityController());
 		add(areaSummaryPanel, BorderLayout.SOUTH);
 		
+		panel = new JPanel();
+		areaSummaryPanel.add(panel);
+		
+		btnSaveAndQuit = new JButton("Save and Quit");
+		btnSaveAndQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					
+					gameEnvironment.saveState();
+					window.gameEventPerformed(new GameEvent(GameEventType.MAIN_MENU));
+					
+				} catch (IOException e) {
+					
+					int res = JOptionPane.showConfirmDialog((Component) window, "Could not save the game. Are you sure you want to quit?");
+					
+					if (res == JOptionPane.YES_OPTION) {
+						
+						window.gameEventPerformed(new GameEvent(GameEventType.MAIN_MENU));
+						
+					}
+					
+				}
+			}
+		});
+		panel.add(btnSaveAndQuit);
+		
 		areaPanelHolderHolder = new JPanel();
 		add(areaPanelHolderHolder);
 		areaPanelHolderHolder.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -126,18 +163,17 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 	private void updateNavigation() {
 		
 		// Prompt for confirmation before entering a Villain's Lair
-		// TURNED OFF FOR TESTING!
-//		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR) {
-//			
-//			int res = JOptionPane.showConfirmDialog(null, "You are about to enter a Villain's Lair. Are you sure you want to enter?", null, JOptionPane.YES_NO_OPTION);
-//			
-//			if (res != JOptionPane.YES_OPTION) {
-//				
-//				getGameEnvironment().getCityController().goTo(Direction.CENTRE);
-//				
-//			}
-//			
-//		}
+		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR) {
+			
+			int res = JOptionPane.showConfirmDialog(null, "You are about to enter a Villain's Lair. Are you sure you want to enter?", null, JOptionPane.YES_NO_OPTION);
+			
+			if (res != JOptionPane.YES_OPTION) {
+				
+				getGameEnvironment().getCityController().goTo(Direction.CENTRE);
+				
+			}
+			
+		}
 		
 		if (currentAreaPanel != null) {
 			

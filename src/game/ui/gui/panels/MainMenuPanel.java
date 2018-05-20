@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 
+import game.GameEnvironment;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
@@ -122,7 +123,7 @@ public class MainMenuPanel extends JPanel {
 				
 			}
 		});
-		btnLoadGame.setEnabled(false);
+		btnLoadGame.setEnabled(GameEnvironment.doesSaveStateExist());
 		panel_3.add(btnLoadGame);
 		
 		JPanel panel_4 = new JPanel();
