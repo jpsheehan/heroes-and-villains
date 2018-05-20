@@ -15,6 +15,7 @@ public enum GameEventType {
 	QUIT_GAME,
 	NEW_GAME,
 	LOAD_GAME,
-	START_GAME;
+	START_GAME,
+	MAIN_MENU;
 
 }
