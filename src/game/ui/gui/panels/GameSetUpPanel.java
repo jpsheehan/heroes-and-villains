@@ -81,7 +81,6 @@ public class GameSetUpPanel extends JPanel {
 		
 		JPanel panel_5 = new JPanel();
 		panel_6.add(panel_5);
-		panel_5.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		
 		//OK takes user to the main game panel. 
 		// Could pop up a validation check window first: cancel would reEnable the New Game Menu and OK would continue to main game panel 
@@ -104,12 +103,20 @@ public class GameSetUpPanel extends JPanel {
 				}
 			}
 		});
+		panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		button_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		button_1.setActionCommand("OK");
 		panel_5.add(button_1);
 		
 		//cancel returns user back to Initial Startup Window 
 		JButton button_2 = new JButton("Cancel");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				parent.gameEventPerformed(new GameEvent(GameEventType.MAIN_MENU));
+				
+			}
+		});
 		button_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		button_2.setActionCommand("Cancel");
 		panel_5.add(button_2);
