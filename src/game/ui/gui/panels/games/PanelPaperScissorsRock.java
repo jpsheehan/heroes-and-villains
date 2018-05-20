@@ -1,45 +1,23 @@
 package game.ui.gui.panels.games;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import game.BattleScreen;
-import game.GeneralHelpers;
-import game.Team;
-import game.character.Hero;
-import game.ui.gui.DialogResult;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
-import game.ui.gui.dialogs.HeroSelectionDialog;
-import game.ui.gui.dialogs.ItemSelectionDialog;
-import game.ui.gui.panels.areas.GenericAreaPanel;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 
-import game.item.HealingItem;
-import game.item.ItemType;
-import game.minigame.DiceRolls;
-import game.minigame.GuessTheNumber;
-import game.minigame.Minigame;
 import game.minigame.PaperScissorsRock;
 import game.minigame.PaperScissorsRockMove;
 
-import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
@@ -49,7 +27,6 @@ public class PanelPaperScissorsRock extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 6569531617355279249L;
-	private GameEventListener villainsLairPanel;
 	private PaperScissorsRock paperScissorsRock;
 	JLabel lblWinner;
 	JButton btnStartTimer;
@@ -62,11 +39,7 @@ public class PanelPaperScissorsRock extends JPanel {
 	 */
 	public PanelPaperScissorsRock(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
-		this.villainsLairPanel = villainsLairPanel;
 		paperScissorsRock = (PaperScissorsRock)battleScreen.getMinigame();
-		ActionListener buttonPress = null;
-		
-		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 		JPanel panel_6 = new JPanel();
