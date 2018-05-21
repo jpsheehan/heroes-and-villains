@@ -1,6 +1,6 @@
 package game.ui.gui.panels.areas;
 
-import game.Team;
+import game.GameEnvironment;
 import game.character.Hero;
 import game.character.HeroDeadException;
 import game.character.VillainDeadException;
@@ -40,7 +40,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	private JLabel lblMessage, lblInformation;
 	private VillainsLair villainsLair;
 	private JButton btnGoToNextBuilding;
-	private Team team;
+	private GameEnvironment gameEnvironment;
 	
 	/**
 	 * 
@@ -50,11 +50,11 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	/**
 	 * Create the panel.
 	 */
-	public VillainsLairPanel(GameEventListener window, VillainsLair villainsLair, Team team) {
+	public VillainsLairPanel(GameEventListener window, VillainsLair villainsLair, GameEnvironment gameEnvironment) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.window = window;
 		this.villainsLair = villainsLair;
-		this.team = team;
+		this.gameEnvironment = gameEnvironment;
 		
 		// An alias of this
 		this.self = this;
@@ -96,7 +96,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		btnSelectAHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				HeroSelectionDialog dlg = new HeroSelectionDialog(team.getHeroes());
+				HeroSelectionDialog dlg = new HeroSelectionDialog(gameEnvironment.getTeam().getHeroes());
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -238,6 +238,10 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 
 					lblInformation.setText(String.format("%s has been defeated! You won $%d!", e.getVillain().getName(), e.getReward()));
 					
+					if (gameEnvironment.getCityController().isLastCity()) {
+						btnGoToNextBuilding.setText("Graduate!");
+					}
+					
 					btnGoToNextBuilding.setEnabled(true);
 					btnGoToNextBuilding.setVisible(true);
 					
@@ -246,7 +250,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					
 					btnSelectAHero.setEnabled(false);
 					
-					team.giveMoney(e.getReward());
+					gameEnvironment.getTeam().giveMoney(e.getReward());
 					
 					window.gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
 
@@ -279,7 +283,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					selectedHero = null;
 					update();
 					
-					if (team.getNumberOfAliveHeroes() == 0) {
+					if (gameEnvironment.getTeam().getNumberOfAliveHeroes() == 0) {
 						
 						this.window.gameEventPerformed(new GameEvent(GameEventType.GAME_LOST));
 						

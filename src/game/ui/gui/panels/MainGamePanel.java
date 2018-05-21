@@ -205,7 +205,7 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 				break;
 				
 			case VILLAINS_LAIR:
-				currentAreaPanel = new VillainsLairPanel(this, (VillainsLair)area, this.getGameEnvironment().getTeam());
+				currentAreaPanel = new VillainsLairPanel(this, (VillainsLair)area, this.getGameEnvironment());
 				break;
 		
 		}
