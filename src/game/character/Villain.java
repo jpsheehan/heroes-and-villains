@@ -7,7 +7,6 @@ import java.io.Serializable;
 import game.city.CityType;
 import game.minigame.*;
 
-
 /**
  * Represents a Villain as described in section 3.3 of the specification.
  */
@@ -54,8 +53,7 @@ public class Villain extends Character implements Serializable {
 	}
 
 	/**
-	 * Returns the number of wins required to defeat the Villain.
-	 * @return
+	 * @return The number of wins required to defeat the Villain.
 	 */
 	public int getNumberOfWinsToDefeat() {
 		
@@ -75,8 +73,7 @@ public class Villain extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns (single) favourite game or (multiple) games the Villain plays.
-	 * @return
+	 * @return The type of minigame the Villain likes to play.
 	 */
 	public MinigameType getFavouriteGame() {
 		
@@ -86,8 +83,7 @@ public class Villain extends Character implements Serializable {
 
 	/**
 	 * Updates the number of times the Villain has been beaten.
-	 * @return
-	 * @throws VillainDeadException 
+	 * @throws VillainDeadException if the Villain dies.
 	 */
 	public void beat() throws VillainDeadException {
 		
@@ -116,6 +112,9 @@ public class Villain extends Character implements Serializable {
 		
 	}
 	
+	/**
+	 * @return The number of times the Hero must beat the Villain in total.
+	 */
 	public static int getNumberOfRequiredWins() {
 		
 		return Villain.numberOfRequiredWins;
