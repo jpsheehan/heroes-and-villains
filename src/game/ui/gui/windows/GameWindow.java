@@ -5,6 +5,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import game.GameEnvironment;
+import game.Team;
+import game.TeamFullException;
+import game.character.Hero;
+import game.character.HeroType;
+import game.city.CityController;
 
 import java.awt.Dimension;
 import java.io.IOException;
@@ -21,7 +26,6 @@ import java.awt.BorderLayout;
 
 import game.ui.gui.panels.MainMenuPanel;
 import javax.swing.JMenuBar;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
@@ -37,11 +41,12 @@ public class GameWindow implements GameEventListener {
 	private JPanel shownPanel;
 	private JPanel panelHolder;
 	private JMenuBar menuBar;
-	private JLabel lblDebugMenu;
-	private JMenu mnTriggerGameEvent;
+	private JMenu mnTriggerEvent;
 	
 	private boolean debugMode;
 	private JMenuItem mntmGameLost;
+	private JMenu mnDebugMenu;
+	private JMenuItem mntmQuickStart;
 
 	/**
 	 * Create the application.
@@ -82,11 +87,33 @@ public class GameWindow implements GameEventListener {
 		menuBar = new JMenuBar();
 		frmHeroesAndVillains.setJMenuBar(menuBar);
 		
-		lblDebugMenu = new JLabel("Debug Menu:");
-		menuBar.add(lblDebugMenu);
+		mnDebugMenu = new JMenu("Debug Menu");
+		menuBar.add(mnDebugMenu);
 		
-		mnTriggerGameEvent = new JMenu("Trigger Game Event");
-		menuBar.add(mnTriggerGameEvent);
+		mntmQuickStart = new JMenuItem("Quick Start");
+		mntmQuickStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Team team = new Team("SENG201");
+				try {
+					team.addHero(new Hero("Jesse", HeroType.COMPUTER_SCIENCE_STUDENT));
+					team.addHero(new Hero("Manu", HeroType.ENGINEERING_STUDENT));
+					team.addHero(new Hero("Bob", HeroType.ARTS_STUDENT));
+				} catch (TeamFullException e) {
+					throw new AssertionError();
+				}
+				
+				GameEnvironment env = new GameEnvironment();
+				env.setTeam(team);
+				env.setCityController(new CityController(3));
+				
+				gameEventPerformed(new GameEvent(GameEventType.START_GAME, env));
+			}
+		});
+		mnDebugMenu.add(mntmQuickStart);
+		
+		mnTriggerEvent = new JMenu("Trigger Event");
+		menuBar.add(mnTriggerEvent);
 		
 		mntmGameLost = new JMenuItem("Game Lost");
 		mntmGameLost.addActionListener(new ActionListener() {
@@ -96,7 +123,7 @@ public class GameWindow implements GameEventListener {
 				
 			}
 		});
-		mnTriggerGameEvent.add(mntmGameLost);
+		mnTriggerEvent.add(mntmGameLost);
 		
 		if (!debugMode) {
 			
