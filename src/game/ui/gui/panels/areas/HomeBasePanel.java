@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -32,6 +33,8 @@ public class HomeBasePanel extends GenericAreaPanel {
 	 */
 	public HomeBasePanel(GameEventListener window, Inventory inventory, CityController cityController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		Component self = this;
 		
 		JPanel panel = new JPanel();
 		add(panel);
@@ -51,19 +54,20 @@ public class HomeBasePanel extends GenericAreaPanel {
 				
 				if (inventory.getMaps().length == 0) {
 					
-					JOptionPane.showMessageDialog(null, "You don't have any maps to use.");
+					JOptionPane.showMessageDialog(self, "You don't have any maps to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 					
 				}
 				
 				if (cityController.hasUsedMap()) {
 					
-					JOptionPane.showMessageDialog(null, "You have already used a map in this building!");
+					JOptionPane.showMessageDialog(self, "You have already used a map in this building!", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 					
 				}
 				
 				ItemSelectionDialog dlg = new ItemSelectionDialog(inventory, ItemType.MAP, false, true);
+				dlg.setLocationRelativeTo(self);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -79,9 +83,11 @@ public class HomeBasePanel extends GenericAreaPanel {
 					cityController.useMap(map);
 					inventory.remove(map);
 					
-					JOptionPane.showMessageDialog(null, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()));
+					JOptionPane.showMessageDialog(self, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
 
 					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
+					
+					update();
 					
 				}
 				
@@ -92,8 +98,10 @@ public class HomeBasePanel extends GenericAreaPanel {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		
+		revalidate();
 		repaint();
+		
 	}
 
 }
