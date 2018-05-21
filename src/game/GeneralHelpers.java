@@ -137,6 +137,9 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * The object to load the contents of the "strings.json" file into.
+	 */
 	private static Map<String, String> strings = null;
 
 	/**
@@ -193,6 +196,12 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Checks if the array contains a particular item.
+	 * @param array The array to iterate over.
+	 * @param item The item that is being sought.
+	 * @return True if the item is found, false otherwise.
+	 */
 	public static <T> boolean doesArrayContain(T[] array, T item) {
 		
 		for (T elem : array) {
@@ -209,6 +218,11 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Returns the largest of the doubles. 
+	 * @param args Any number of doubles.
+	 * @return The largest double.
+	 */
 	public static double max(double ...args) {
 		
 		double value = Double.MIN_VALUE;
@@ -227,6 +241,11 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Returns the smallest of the doubles.
+	 * @param args Any number of doubles.
+	 * @return The smallest double.
+	 */
 	public static double min(double ...args) {
 		
 		double value = Double.MAX_VALUE;
