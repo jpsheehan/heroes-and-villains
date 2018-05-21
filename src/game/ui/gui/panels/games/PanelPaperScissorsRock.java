@@ -29,10 +29,11 @@ public class PanelPaperScissorsRock extends JPanel {
 	private static final long serialVersionUID = 6569531617355279249L;
 	private PaperScissorsRock paperScissorsRock;
 	JLabel lblWinner;
-	JButton btnStartTimer;
+	JButton btnReady;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
-	int counterLoops = 5;
-	int paperScissorsRockCode = 0;
+
+	PaperScissorsRockMove move = PaperScissorsRockMove.SCISSORS;
+	JRadioButton rdbtnRock, rdbtnPaper, rdbtnScissors;
 	
 	/**
 	 * Create the panel.
@@ -49,7 +50,7 @@ public class PanelPaperScissorsRock extends JPanel {
 		JPanel panel = new JPanel();
 		panel_6.add(panel);
 		
-		JLabel lblGuessTheNumberGame = new JLabel("Paper Scissors Rock Game");
+		JLabel lblGuessTheNumberGame = new JLabel("Paper, Scissors, Rock! Game");
 		lblGuessTheNumberGame.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		panel.add(lblGuessTheNumberGame);
 		
@@ -62,44 +63,41 @@ public class PanelPaperScissorsRock extends JPanel {
 		JLabel lblClickStartToRoll = new JLabel("Click \"Start\", then click \"Paper\", \"Scissors\" or \"Rock\"");
 		panel_2.add(lblClickStartToRoll);
 		
-		btnStartTimer = new JButton("Start");
-		btnStartTimer.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		panel_1.add(btnStartTimer);
-		btnStartTimer.setActionCommand("OK");
+		btnReady = new JButton("Ready!");
+		btnReady.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		panel_1.add(btnReady);
 		
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
-		paperScissorsRockCode = 2; // scissors
-		
-		JRadioButton rdbtnPaper = new JRadioButton("Paper");
+		rdbtnPaper = new JRadioButton("Paper");
 		buttonGroup_1.add(rdbtnPaper);
 		rdbtnPaper.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		panel_3.add(rdbtnPaper);
 		rdbtnPaper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				paperScissorsRockCode = 1;
+				move = PaperScissorsRockMove.PAPER;
 			}	
 		});
 		
-		JRadioButton rdbtnScissors = new JRadioButton("Scissors");
+		rdbtnScissors = new JRadioButton("Scissors");
 		buttonGroup_1.add(rdbtnScissors);
 		rdbtnScissors.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		panel_3.add(rdbtnScissors);
 		rdbtnScissors.setSelected(true);
 		rdbtnScissors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				paperScissorsRockCode = 2;
+				move = PaperScissorsRockMove.SCISSORS;
 			}	
 		});
 		
-		JRadioButton rdbtnRock = new JRadioButton("Rock");
+		rdbtnRock = new JRadioButton("Rock");
 		buttonGroup_1.add(rdbtnRock);
 		rdbtnRock.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		panel_3.add(rdbtnRock);
 		rdbtnRock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				paperScissorsRockCode = 3;
+				move = PaperScissorsRockMove.ROCK;
 			}	
 		});
 		
@@ -109,83 +107,55 @@ public class PanelPaperScissorsRock extends JPanel {
 		JPanel panel_4 = new JPanel();
 		panel_6.add(panel_4);
 		
-		JLabel lblHeroChoice = new JLabel("Hero Choice");
+		JLabel lblHeroChoice = new JLabel();
 		lblHeroChoice.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		panel_4.add(lblHeroChoice);
 		lblHeroChoice.setHorizontalAlignment(SwingConstants.LEFT);
 		lblHeroChoice.setEnabled(false);
 		
-		JLabel lblVillainChoice = new JLabel("Villain choice");
+		JLabel lblVillainChoice = new JLabel();
 		lblVillainChoice.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		panel_4.add(lblVillainChoice);
 		lblVillainChoice.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVillainChoice.setEnabled(false);
 		
-		JLabel lblHeroChoose = new JLabel("Hero choose:");
+		JLabel lblHeroChoose = new JLabel("Hero's Choice:");
 		panel_5.add(lblHeroChoose);
 		
-		JLabel lblVillainChoose = new JLabel("Villain choose:");
+		JLabel lblVillainChoose = new JLabel("Villain's Choice:");
 		panel_5.add(lblVillainChoose);
 		
 		JPanel panel_7 = new JPanel();
 		panel_6.add(panel_7);
-		
-		JLabel lblGameResult = new JLabel("Hero won / Villain won / Draw");
-		panel_7.add(lblGameResult);
-		lblGameResult.setEnabled(false);
-		
-		btnStartTimer.addActionListener(new ActionListener() {
+				
+		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				btnStartTimer.setEnabled(false);
 				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
-					
-				switch (paperScissorsRockCode) {
-					case 1:
-						paperScissorsRock.doTurn(PaperScissorsRockMove.PAPER);
-						break;
-					case 2:
-						paperScissorsRock.doTurn(PaperScissorsRockMove.SCISSORS);
-						break;
-					case 3:
-						paperScissorsRock.doTurn(PaperScissorsRockMove.ROCK);
-						break;
-					default:
-						//do nothing - possibly generate exception
-						throw new AssertionError();
+				
+				if (move == null) {
+					throw new AssertionError();
 				}
-				lblHeroChoice.setText(paperScissorsRock.getHeroLastTurn().toString());				
-				lblHeroChoice.setEnabled(true);
+				
+				paperScissorsRock.doTurn(move);
+				
+				lblHeroChoice.setText(paperScissorsRock.getHeroLastTurn().toString());
 				lblVillainChoice.setText(paperScissorsRock.getVillainLastTurn().toString());
-				lblVillainChoice.setEnabled(true);
-				
-				//when user clicks start
-				//start timer say five seconds
-				//while timer running
-				//	show villain animation (continuously rolling icons of paper, scissors and rock
-				//	get the radio button selection (use button group?)
-				//	update the hero choice by showing icon of what they chose
-				//when timer runs out show icon of what the villain chose
-				//do all the rest, won / lost / draw update etc
-				
-				lblGameResult.setEnabled(true);
 				
 				//disable the start button if run out of turns
 				
 				if (paperScissorsRock.getRemainingTurns() == 0) {
 
+					disableAll();
+					
 					// Check the status of the game here and update components/trigger events in the villainsLairPanel
 					switch (paperScissorsRock.getState()) {
 						
 						case WON:
-							disableAll();
-							lblGameResult.setText("Hero won!");
 							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_WON));
 							break;
 							
 						case LOST:
-							disableAll();
-							lblGameResult.setText("Villain won!");
 							villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_LOST));
 							break;
 							
@@ -196,8 +166,6 @@ public class PanelPaperScissorsRock extends JPanel {
 					
 				} else {
 					
-					btnStartTimer.setEnabled(true);
-					lblGameResult.setText("Game drawn!");
 					villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.MINIGAME_DRAWN));
 						
 				}
@@ -208,8 +176,10 @@ public class PanelPaperScissorsRock extends JPanel {
 	
 	private void disableAll() {
 		
-		btnStartTimer.setEnabled(false);
-		buttonGroup_1.clearSelection();
+		rdbtnPaper.setEnabled(false);
+		rdbtnRock.setEnabled(false);
+		rdbtnScissors.setEnabled(false);
+		btnReady.setEnabled(false);
 		
 	}
 }
