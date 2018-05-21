@@ -124,8 +124,9 @@ public class GameWindow implements GameEventListener {
 				
 			case START_GAME:
 				env = (GameEnvironment)event.getParameters();
-				switchPanel(new MainGamePanel(env, this));
-				
+				MainGamePanel mainGamePanel = new MainGamePanel(env, this);
+				switchPanel(mainGamePanel);
+				menuBar.setMainGamePanel(mainGamePanel);
 				break;
 				
 			case LOAD_GAME:
@@ -156,6 +157,7 @@ public class GameWindow implements GameEventListener {
 				
 			case MAIN_MENU:
 				switchPanel(new MainMenuPanel(this));
+				menuBar.setMainGamePanel(null);
 				break;
 			
 			default:

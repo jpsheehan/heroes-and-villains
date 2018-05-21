@@ -16,6 +16,7 @@ import game.city.CityController;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
+import game.ui.gui.panels.MainGamePanel;
 
 public class DebugMenuBar extends JMenuBar {
 
@@ -23,6 +24,10 @@ public class DebugMenuBar extends JMenuBar {
 	 * 
 	 */
 	private static final long serialVersionUID = -6121526758784565183L;
+	
+	private MainGamePanel mainGamePanel;
+	
+	private JMenuItem mntmGoToNext;
 
 	public DebugMenuBar(GameEventListener parent) {
 		
@@ -73,6 +78,35 @@ public class DebugMenuBar extends JMenuBar {
 		});
 		mnTriggerEvent.add(mntmGameWon);
 		mnTriggerEvent.add(mntmGameLost);
+		
+		mntmGoToNext = new JMenuItem("Go to Next City");
+		mntmGoToNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainGamePanel.gameEventPerformed(new GameEvent(GameEventType.GO_TO_NEXT_CITY));
+			}
+		});
+		mnTriggerEvent.add(mntmGoToNext);
+		
+	}
+	
+	public void setMainGamePanel(MainGamePanel mainGamePanel) {
+		
+		this.mainGamePanel = mainGamePanel;
+		update();
+		
+	}
+	
+	public void update() {
+		
+		if (this.mainGamePanel == null) {
+			
+			mntmGoToNext.setEnabled(false);
+			
+		} else {
+			
+			mntmGoToNext.setEnabled(true);
+			
+		}
 		
 	}
 }
