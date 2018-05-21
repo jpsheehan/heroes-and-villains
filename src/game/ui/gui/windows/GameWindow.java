@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
+import game.ui.gui.GameEventType;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 
 import game.ui.gui.panels.GameSetUpPanel;
@@ -19,6 +20,12 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 import game.ui.gui.panels.MainMenuPanel;
+import javax.swing.JMenuBar;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameWindow implements GameEventListener {
 
@@ -29,11 +36,19 @@ public class GameWindow implements GameEventListener {
 	
 	private JPanel shownPanel;
 	private JPanel panelHolder;
+	private JMenuBar menuBar;
+	private JLabel lblDebugMenu;
+	private JMenu mnTriggerGameEvent;
+	
+	private boolean debugMode;
+	private JMenuItem mntmGameLost;
 
 	/**
 	 * Create the application.
 	 */
-	public GameWindow() {
+	public GameWindow(boolean debugMode) {
+		this.debugMode = debugMode;
+		
 		initialize();
 	}
 
@@ -63,6 +78,32 @@ public class GameWindow implements GameEventListener {
 		frmHeroesAndVillains.getContentPane().add(panelHolder, BorderLayout.CENTER);
 		
 		switchPanel(new MainMenuPanel(this));
+			
+		menuBar = new JMenuBar();
+		frmHeroesAndVillains.setJMenuBar(menuBar);
+		
+		lblDebugMenu = new JLabel("Debug Menu:");
+		menuBar.add(lblDebugMenu);
+		
+		mnTriggerGameEvent = new JMenu("Trigger Game Event");
+		menuBar.add(mnTriggerGameEvent);
+		
+		mntmGameLost = new JMenuItem("Game Lost");
+		mntmGameLost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				gameEventPerformed(new GameEvent(GameEventType.GAME_LOST));
+				
+			}
+		});
+		mnTriggerGameEvent.add(mntmGameLost);
+		
+		if (!debugMode) {
+			
+			menuBar.setVisible(false);
+			menuBar.setEnabled(false);
+			
+		}
 		
 	}
 	
