@@ -85,7 +85,7 @@ public class BattleScreen implements Serializable {
 		
 		// Consider adding an ability that grants more money.
 		
-		return (int)(GeneralHelpers.getRandom().nextInt(100) * rewardMultiplier * (this.cityIndex + 1));
+		return (int)(GeneralHelpers.getRandomNextInt(100) * rewardMultiplier * (this.cityIndex + 1));
 		
 	}
 	
@@ -103,7 +103,7 @@ public class BattleScreen implements Serializable {
 			
 		}
 		
-		return (int)(GeneralHelpers.getRandom().nextInt(10) * (this.cityIndex + 1) * damageMultiplier);
+		return (int)(GeneralHelpers.getRandomNextInt(10) * (this.cityIndex + 1) * damageMultiplier);
 		
 	}
 	
@@ -142,7 +142,7 @@ public class BattleScreen implements Serializable {
 				MinigameType.PAPER_SCISSORS_ROCK
 			};
 			
-			type = possibleTypes[GeneralHelpers.getRandom().nextInt(possibleTypes.length)];
+			type = possibleTypes[GeneralHelpers.getRandomNextInt(possibleTypes.length)];
 			
 		}
 		

@@ -36,7 +36,7 @@ public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	 */
 	private int rollDice() {
 
-		return GeneralHelpers.getRandom().nextInt(6) + 1;
+		return GeneralHelpers.getRandomNextInt(6) + 1;
 		
 	}
 	

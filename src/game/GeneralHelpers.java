@@ -7,6 +7,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -15,7 +16,15 @@ import javax.imageio.ImageIO;
 
 public final class GeneralHelpers {
 	
+	/**
+	 * The random seed to use.
+	 */
 	private static long randomSeed;
+	
+	/**
+	 * The number of times random.nextInt has been called.
+	 */
+	private static int randomIterations;
 	
 	/**
 	 * Gets the associated string from the strings.json file.
@@ -145,15 +154,27 @@ public final class GeneralHelpers {
 	 */
 	private static Random randomState = null;
 	
+	public static void seedRandom() {
+		
+		seedRandom((new Date()).getTime(), 0);
+		
+	}
+	
 	/**
 	 * Seeds the random state with a particular number (Useful for testing)
 	 * @param seed The seed to use.
 	 */
-	public static void seedRandom(long seed) {
+	public static void seedRandom(long seed, int iterations) {
 		
 		GeneralHelpers.randomSeed = seed;
-		GeneralHelpers.randomState = new Random();
+		GeneralHelpers.randomIterations = iterations;
 		randomState.setSeed(seed);
+		
+		for (int i = 0; i < GeneralHelpers.randomIterations; i++) {
+			
+			GeneralHelpers.getRandomNextInt();
+			
+		}
 		
 	}
 	
@@ -161,15 +182,31 @@ public final class GeneralHelpers {
 	 * Gets the random state for the game.
 	 * @return
 	 */
-	public static Random getRandom() {
+	public static int getRandomNextInt() {
 		
 		if (GeneralHelpers.randomState == null) {
 			
-			GeneralHelpers.randomState = new Random();
+			seedRandom();
 			
 		}
 		
-		return GeneralHelpers.randomState;
+		GeneralHelpers.randomIterations++;
+		
+		return GeneralHelpers.randomState.nextInt();
+		
+	}
+	
+	public static int getRandomNextInt(int bounds) {
+		
+		if (GeneralHelpers.randomState == null) {
+			
+			seedRandom();
+			
+		}
+
+		GeneralHelpers.randomIterations++;
+		
+		return GeneralHelpers.randomState.nextInt(bounds);
 		
 	}
 	
@@ -187,7 +224,7 @@ public final class GeneralHelpers {
 		
 		while (!copy.isEmpty()) {
 			
-			newList.add(copy.remove(GeneralHelpers.getRandom().nextInt(copy.size())));
+			newList.add(copy.remove(GeneralHelpers.getRandomNextInt(copy.size())));
 			
 		}
 		
@@ -251,10 +288,15 @@ public final class GeneralHelpers {
 	 * Gets the random number seed value.
 	 * @return
 	 */
-	public static long getSeed() {
+	public static long getRandomSeed() {
 		
 		return GeneralHelpers.randomSeed;
 		
 	}
 	
+	public static int getRandomIterations() {
+		
+		return GeneralHelpers.randomIterations;
+		
+	}
 }

@@ -51,7 +51,7 @@ public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScis
 	
 	private PaperScissorsRockMove getVillainMove() {
 		
-		return availableMoves[GeneralHelpers.getRandom().nextInt(3)];
+		return availableMoves[GeneralHelpers.getRandomNextInt(3)];
 		
 	}
 	

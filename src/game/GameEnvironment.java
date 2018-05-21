@@ -49,7 +49,13 @@ public class GameEnvironment implements Serializable {
 	 * Used to temporarily store the random seed when saving state.
 	 * Do not rely on this as the actual seed value, instead use game.GeneralHelpers.getSeed()
 	 */
-	private long randomSeedTemp;
+	private long randomSeed;
+	
+	/**
+	 * Used to temporarily store the number of calls to random.nextInt when saving state.
+	 * Do not rely on this as the actual seed value.
+	 */
+	private int randomIterations;
 	
 	/**
 	 * Gets the city controller.
@@ -105,9 +111,10 @@ public class GameEnvironment implements Serializable {
 		
 		String filename = path.toString();
 		
-		// get the random value
-		// TODO: RETHINK THIS PROBLEM!!!
-		this.randomSeedTemp = GeneralHelpers.getSeed();
+		// get the random value and number of iterations
+		this.randomSeed = GeneralHelpers.getRandomSeed();
+		this.randomIterations = GeneralHelpers.getRandomIterations();
+		
 		FileOutputStream fileOut = new FileOutputStream(filename);
 		ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 		objOut.writeObject(this);
@@ -149,7 +156,7 @@ public class GameEnvironment implements Serializable {
 		fileIn.close();
 		objIn.close();
 		
-		GeneralHelpers.seedRandom(env.randomSeedTemp);
+		GeneralHelpers.seedRandom(env.randomSeed, env.randomIterations);
 
 		(new File(filename)).delete();
 		
