@@ -20,6 +20,7 @@ import game.ui.gui.GameEventType;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.ui.gui.panels.GameLostPanel;
 import game.ui.gui.panels.GameSetUpPanel;
+import game.ui.gui.panels.GameWonPanel;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -47,6 +48,7 @@ public class GameWindow implements GameEventListener {
 	private JMenuItem mntmGameLost;
 	private JMenu mnDebugMenu;
 	private JMenuItem mntmQuickStart;
+	private JMenuItem mntmGameWon;
 
 	/**
 	 * Create the application.
@@ -123,6 +125,16 @@ public class GameWindow implements GameEventListener {
 				
 			}
 		});
+		
+		mntmGameWon = new JMenuItem("Game Won");
+		mntmGameWon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				gameEventPerformed(new GameEvent(GameEventType.GAME_WON));
+				
+			}
+		});
+		mnTriggerEvent.add(mntmGameWon);
 		mnTriggerEvent.add(mntmGameLost);
 		
 		if (!debugMode) {
@@ -160,10 +172,8 @@ public class GameWindow implements GameEventListener {
 		
 			case GAME_WON:
 				
-				// TODO: Make more better.
 				// Show a message saying that the game was won!
-				JOptionPane.showMessageDialog(frmHeroesAndVillains, "Game won!");
-				frmHeroesAndVillains.dispose();
+				switchPanel(new GameWonPanel(this));
 				break;
 				
 			case GAME_LOST:
@@ -199,9 +209,7 @@ public class GameWindow implements GameEventListener {
 				
 			case QUIT_GAME:
 				
-				// TODO: Fix for production
-				// int result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Are you sure you want to quit?");
-				int result = JOptionPane.YES_OPTION;
+				int result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Are you sure you want to quit?", "Quit Game", JOptionPane.YES_NO_OPTION);
 				
 				if (result == JOptionPane.YES_OPTION) {
 					
