@@ -49,7 +49,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	 */
 	private int generateRandomNumber() {
 		
-		int number = GeneralHelpers.getRandomNextInt(maxNumber) + 1;
+		int number = GeneralHelpers.getRandom().nextInt(maxNumber) + 1;
 		return number;
 		
 	}

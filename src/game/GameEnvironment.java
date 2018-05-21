@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import game.city.CityController;
 
@@ -49,13 +50,7 @@ public class GameEnvironment implements Serializable {
 	 * Used to temporarily store the random seed when saving state.
 	 * Do not rely on this as the actual seed value, instead use game.GeneralHelpers.getSeed()
 	 */
-	private long randomSeed;
-	
-	/**
-	 * Used to temporarily store the number of calls to random.nextInt when saving state.
-	 * Do not rely on this as the actual seed value.
-	 */
-	private int randomIterations;
+	private Random randomStateTemp;
 	
 	/**
 	 * Gets the city controller.
@@ -111,10 +106,9 @@ public class GameEnvironment implements Serializable {
 		
 		String filename = path.toString();
 		
-		// get the random value and number of iterations
-		this.randomSeed = GeneralHelpers.getRandomSeed();
-		this.randomIterations = GeneralHelpers.getRandomIterations();
-		
+		// get the random value
+		// TODO: RETHINK THIS PROBLEM!!!
+		this.randomStateTemp = GeneralHelpers.getRandom();
 		FileOutputStream fileOut = new FileOutputStream(filename);
 		ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 		objOut.writeObject(this);
@@ -156,7 +150,7 @@ public class GameEnvironment implements Serializable {
 		fileIn.close();
 		objIn.close();
 		
-		GeneralHelpers.seedRandom(env.randomSeed, env.randomIterations);
+		GeneralHelpers.setRandom(env.randomStateTemp);
 
 		(new File(filename)).delete();
 		
