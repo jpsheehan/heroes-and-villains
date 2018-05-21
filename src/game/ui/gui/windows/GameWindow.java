@@ -1,22 +1,16 @@
 package game.ui.gui.windows;
 
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import game.GameEnvironment;
-import game.Team;
-import game.TeamFullException;
-import game.character.Hero;
-import game.character.HeroType;
-import game.city.CityController;
 
 import java.awt.Dimension;
 import java.io.IOException;
 
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
-import game.ui.gui.GameEventType;
+import game.ui.gui.components.DebugMenuBar;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
 import game.ui.gui.panels.GameLostPanel;
 import game.ui.gui.panels.GameSetUpPanel;
@@ -26,11 +20,6 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 import game.ui.gui.panels.MainMenuPanel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class GameWindow implements GameEventListener {
 
@@ -41,14 +30,9 @@ public class GameWindow implements GameEventListener {
 	
 	private JPanel shownPanel;
 	private JPanel panelHolder;
-	private JMenuBar menuBar;
-	private JMenu mnTriggerEvent;
+	private DebugMenuBar menuBar;
 	
 	private boolean debugMode;
-	private JMenuItem mntmGameLost;
-	private JMenu mnDebugMenu;
-	private JMenuItem mntmQuickStart;
-	private JMenuItem mntmGameWon;
 
 	/**
 	 * Create the application.
@@ -86,56 +70,8 @@ public class GameWindow implements GameEventListener {
 		
 		switchPanel(new MainMenuPanel(this));
 			
-		menuBar = new JMenuBar();
+		menuBar = new DebugMenuBar(this);
 		frmHeroesAndVillains.setJMenuBar(menuBar);
-		
-		mnDebugMenu = new JMenu("Debug Menu");
-		menuBar.add(mnDebugMenu);
-		
-		mntmQuickStart = new JMenuItem("Quick Start");
-		mntmQuickStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				Team team = new Team("SENG201");
-				try {
-					team.addHero(new Hero("Jesse", HeroType.COMPUTER_SCIENCE_STUDENT));
-					team.addHero(new Hero("Manu", HeroType.ENGINEERING_STUDENT));
-					team.addHero(new Hero("Bob", HeroType.ARTS_STUDENT));
-				} catch (TeamFullException e) {
-					throw new AssertionError();
-				}
-				
-				GameEnvironment env = new GameEnvironment();
-				env.setTeam(team);
-				env.setCityController(new CityController(3));
-				
-				gameEventPerformed(new GameEvent(GameEventType.START_GAME, env));
-			}
-		});
-		mnDebugMenu.add(mntmQuickStart);
-		
-		mnTriggerEvent = new JMenu("Trigger Event");
-		menuBar.add(mnTriggerEvent);
-		
-		mntmGameLost = new JMenuItem("Game Lost");
-		mntmGameLost.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				gameEventPerformed(new GameEvent(GameEventType.GAME_LOST));
-				
-			}
-		});
-		
-		mntmGameWon = new JMenuItem("Game Won");
-		mntmGameWon.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				gameEventPerformed(new GameEvent(GameEventType.GAME_WON));
-				
-			}
-		});
-		mnTriggerEvent.add(mntmGameWon);
-		mnTriggerEvent.add(mntmGameLost);
 		
 		if (!debugMode) {
 			
