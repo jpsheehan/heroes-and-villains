@@ -23,7 +23,7 @@ import javax.swing.BoxLayout;
 public class HomeBasePanel extends GenericAreaPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 7383141118407290522L;
 

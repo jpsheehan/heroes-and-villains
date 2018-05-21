@@ -24,7 +24,7 @@ public class HeroSummaryPanel extends GenericAreaPanel {
 	private JButton btnMoreInfo;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 7510751669586968290L;
 

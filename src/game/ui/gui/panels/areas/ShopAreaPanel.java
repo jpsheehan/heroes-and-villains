@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 public class ShopAreaPanel extends GenericAreaPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 7862077770649661135L;
 

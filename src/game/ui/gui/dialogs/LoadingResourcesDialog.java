@@ -22,7 +22,7 @@ import java.util.Date;
 public class LoadingResourcesDialog extends JDialog implements ActionListener {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 4643099426304136218L;
 	private final JPanel contentPanel = new JPanel();

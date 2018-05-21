@@ -7,7 +7,7 @@ package game.city;
 public class Hospital extends Area {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6474105888220400469L;
 

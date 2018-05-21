@@ -32,7 +32,7 @@ import javax.swing.UIManager;
 public class HeroSelectionDialog extends JDialog implements Returnable, ActionListener {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 4536836729241929715L;
 	private final JPanel contentPanel = new JPanel();

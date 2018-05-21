@@ -8,7 +8,7 @@ package game;
 public class GameWonException extends Exception {
 
 	/**
-	 * Seems important...
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 441541958099216239L;
 }

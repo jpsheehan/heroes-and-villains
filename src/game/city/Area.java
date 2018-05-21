@@ -12,7 +12,7 @@ import game.Nameable;
 public abstract class Area implements Nameable, Describable, Serializable {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 8493046604045045279L;
 

@@ -24,7 +24,7 @@ import javax.swing.ButtonGroup;
 public class PanelPaperScissorsRock extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6569531617355279249L;
 	private PaperScissorsRock paperScissorsRock;

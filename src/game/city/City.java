@@ -16,7 +16,7 @@ import game.item.Item;
 public class City implements Nameable, Describable, Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -5115206042729739277L;
 

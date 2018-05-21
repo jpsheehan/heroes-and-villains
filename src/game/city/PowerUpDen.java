@@ -3,7 +3,7 @@ package game.city;
 public class PowerUpDen extends Area {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 2322987305678031051L;
 

@@ -24,7 +24,7 @@ import javax.swing.Box;
 public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -562504025376734580L;
 	private JLabel lblVillainRoll;

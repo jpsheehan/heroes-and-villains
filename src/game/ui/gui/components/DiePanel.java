@@ -31,7 +31,7 @@ public class DiePanel extends JPanel implements ActionListener {
 	private GameEventListener parent;
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 2335984350090502421L;
 

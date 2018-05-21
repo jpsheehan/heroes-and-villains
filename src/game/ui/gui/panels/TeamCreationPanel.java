@@ -36,7 +36,7 @@ import java.awt.event.KeyEvent;
 public class TeamCreationPanel extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -3165688514695170791L;
 	

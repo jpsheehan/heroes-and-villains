@@ -43,7 +43,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	private GameEnvironment gameEnvironment;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -921176693627897514L;
 

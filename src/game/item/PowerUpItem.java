@@ -11,7 +11,7 @@ import game.minigame.MinigameType;
 public class PowerUpItem extends Item implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -2511622060584756841L;
 

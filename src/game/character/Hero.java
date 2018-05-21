@@ -14,7 +14,7 @@ import game.item.PowerUpItem;
 public class Hero extends Character implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -4935741977219828138L;
 

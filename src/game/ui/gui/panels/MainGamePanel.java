@@ -44,7 +44,7 @@ import java.awt.event.ActionEvent;
 public class MainGamePanel extends JPanel implements GameEventListener {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6052659958229075403L;
 	

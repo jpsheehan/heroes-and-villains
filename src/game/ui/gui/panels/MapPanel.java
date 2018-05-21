@@ -26,7 +26,7 @@ public class MapPanel extends JPanel {
 	private CityController cityController;
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -986779385167529652L;
 

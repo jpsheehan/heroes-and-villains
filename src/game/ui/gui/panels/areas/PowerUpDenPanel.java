@@ -28,7 +28,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 	private JLabel lblSelectedHero, lblSelectedItem;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -6790779228677501246L;
 

@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 public class NavigationPanel extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 1933279948591949043L;
 	

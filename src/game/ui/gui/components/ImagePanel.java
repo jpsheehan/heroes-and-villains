@@ -12,7 +12,7 @@ import java.awt.event.ComponentEvent;
 public class ImagePanel extends JPanel {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 2127501600065258904L;
 	private Image image;

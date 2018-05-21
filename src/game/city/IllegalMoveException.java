@@ -3,7 +3,7 @@ package game.city;
 public class IllegalMoveException extends Exception {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6113836583855376653L;
 	

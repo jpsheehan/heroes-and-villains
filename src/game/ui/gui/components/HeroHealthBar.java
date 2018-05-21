@@ -7,7 +7,7 @@ public class HeroHealthBar extends HealthBar {
 	private Hero hero;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -7004751552534381921L;
 	

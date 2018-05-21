@@ -4,18 +4,12 @@ import game.character.Villain;
 import game.BattleScreen;
 
 public class VillainsLair extends Area {
-
-	//20180416 to do
-	//Needs a Villain and a battlescreen in it
-	// getters and setters
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -2893708442508659573L;
 
-	//20180417
-	// added Villain, battlescreen, getters
 	/**
 	 * The villain
 	 */

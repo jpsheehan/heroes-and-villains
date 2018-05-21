@@ -8,7 +8,7 @@ package game.character;
 public class VillainDeadException extends Exception {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6584038847570515698L;
 	

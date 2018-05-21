@@ -9,7 +9,7 @@ public class EditHeroDialog extends NewHeroDialog {
 	private final String titleText = "Edit Hero";
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -1359879411147433759L;
 

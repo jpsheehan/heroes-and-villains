@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Map extends Item implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 1682836575817898404L;
 

@@ -8,7 +8,7 @@ package game.character;
 public class HeroDeadException extends Exception {
 
 	/**
-	 * Exceptions need this for some reason.
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 2470738778819759982L;
 	

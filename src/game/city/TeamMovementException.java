@@ -3,7 +3,7 @@ package game.city;
 public class TeamMovementException extends Exception {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -8760264434797753277L;
 

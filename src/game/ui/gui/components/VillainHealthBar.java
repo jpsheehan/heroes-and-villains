@@ -7,7 +7,7 @@ public class VillainHealthBar extends HealthBar {
 	private Villain villain;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 1686860956476265548L;
 

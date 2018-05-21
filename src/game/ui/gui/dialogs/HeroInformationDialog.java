@@ -8,7 +8,7 @@ import game.character.HeroType;
 public class HeroInformationDialog extends HeroSelectionDialog {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 8771057294615620600L;
 

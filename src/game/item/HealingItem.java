@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class HealingItem extends Item implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -1452187370893053993L;
 

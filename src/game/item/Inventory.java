@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Inventory implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -177342150420127789L;
 

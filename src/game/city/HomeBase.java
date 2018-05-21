@@ -3,7 +3,7 @@ package game.city;
 public class HomeBase extends Area {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 3778410241998997381L;
 

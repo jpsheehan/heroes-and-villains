@@ -21,7 +21,7 @@ public class TeamSummaryPanel extends JPanel {
 	private JLabel lblMoney;
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -6866876273299198271L;
 

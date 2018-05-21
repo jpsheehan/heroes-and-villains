@@ -13,7 +13,7 @@ public class AreaSummaryPanel extends JPanel {
 	private JLabel lblCityFlavour, lblAreaFlavour;
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 7028985661468975792L;
 

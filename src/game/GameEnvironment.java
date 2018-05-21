@@ -32,7 +32,7 @@ import game.city.CityController;
 public class GameEnvironment implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 3013740228796469981L;
 

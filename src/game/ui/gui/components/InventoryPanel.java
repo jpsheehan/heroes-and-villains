@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 public class InventoryPanel extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;

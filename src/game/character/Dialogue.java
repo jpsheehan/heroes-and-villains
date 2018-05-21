@@ -11,8 +11,8 @@ import game.city.CityType;
  */
 public class Dialogue implements Serializable {
 	
-/**
-	 * 
+	/**
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -4548151420650313683L;
 

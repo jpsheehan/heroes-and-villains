@@ -15,7 +15,7 @@ import game.Ability;
 public abstract class Minigame<C, H, V> implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -98943080066864109L;
 	private Ability[] abilities;

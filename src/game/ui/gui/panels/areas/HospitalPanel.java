@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -6330847966216959076L;
 	

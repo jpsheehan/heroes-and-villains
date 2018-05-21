@@ -3,7 +3,7 @@ package game.character;
 public class InnKeeper extends Character {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -7255001793893507756L;
 	/**

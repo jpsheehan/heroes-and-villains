@@ -22,7 +22,7 @@ import javax.swing.JSlider;
 public class PanelGuessTheNumberGame extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 
 	private static final long serialVersionUID = -5763958068575027679L;

@@ -19,7 +19,7 @@ import game.GeneralHelpers;
 public class BattleScreen implements Serializable {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -8383399144385457589L;
 

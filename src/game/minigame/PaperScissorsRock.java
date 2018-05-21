@@ -20,7 +20,7 @@ import game.ui.text.UserQuitException;
 public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScissorsRockMove, PaperScissorsRockMove> {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -5401974394486244423L;
 

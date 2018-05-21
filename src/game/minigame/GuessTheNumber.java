@@ -12,7 +12,7 @@ import game.ui.text.UserQuitException;
 public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAnswer> {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 3480301625315389239L;
 	private int guessesRemaining = 2;

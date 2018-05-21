@@ -8,7 +8,7 @@ import game.item.ItemAbility;
 public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 5190016761538901187L;
 

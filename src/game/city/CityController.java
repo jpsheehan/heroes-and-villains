@@ -15,7 +15,7 @@ import game.item.Map;
 public class CityController implements Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -7347846701627560656L;
 

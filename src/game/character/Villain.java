@@ -14,7 +14,7 @@ import game.minigame.*;
 public class Villain extends Character implements Serializable {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -8995085959168801055L;
 

@@ -26,7 +26,7 @@ import java.awt.event.MouseEvent;
 public class MainMenuPanel extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 4137926196390658257L;
 	private KonamiQueue konami;

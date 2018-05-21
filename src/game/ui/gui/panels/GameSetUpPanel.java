@@ -30,7 +30,7 @@ import java.awt.BorderLayout;
 public class GameSetUpPanel extends JPanel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6625880562455508713L;
 

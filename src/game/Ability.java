@@ -9,6 +9,10 @@ import java.io.Serializable;
  */
 public interface Ability extends Serializable {
 	
+	/**
+	 * Returns the ability as a string.
+	 * @return A string.
+	 */
 	public String toString();
 	
 }

@@ -13,7 +13,7 @@ import static game.GeneralHelpers.getInt;
 public abstract class Item implements Buyable, Nameable, Describable, Serializable {
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -760574577254027710L;
 

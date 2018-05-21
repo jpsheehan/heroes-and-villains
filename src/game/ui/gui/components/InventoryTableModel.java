@@ -11,7 +11,7 @@ import game.item.PowerUpItem;
 public class InventoryTableModel extends AbstractTableModel {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 4593903796514515122L;
 	private ItemType filter;

@@ -8,7 +8,7 @@ import game.item.Inventory;
 public class Team implements Nameable, Serializable {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 6707222599623695683L;
 

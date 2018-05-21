@@ -38,7 +38,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	private DialogResult dialogResult;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 79073142309546932L;
 	private final JPanel contentPanel = new JPanel();

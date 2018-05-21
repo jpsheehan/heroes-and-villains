@@ -13,7 +13,7 @@ public abstract class HealthBar extends JProgressBar implements ActionListener {
 	private int max, value;
 	
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -7004751552534381921L;
 	

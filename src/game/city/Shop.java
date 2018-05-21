@@ -13,7 +13,7 @@ import game.item.Item;
 public class Shop extends Area {
 
 	/**
-	 * 
+	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = -1022651346182238023L;
 
