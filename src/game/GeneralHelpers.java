@@ -20,6 +20,39 @@ import javax.imageio.ImageIO;
  */
 public final class GeneralHelpers {
 	
+	// ######## IMAGES ########
+	
+	/**
+	 * The image manager used to store all data in the images directory.
+	 */
+	public static ImageManager imageManager = new ImageManager();
+	
+	/**
+	 * Returns an image from the images directory or null if an error occurred.
+	 * @param filename The filename of the image within the "images" directory.
+	 * @return
+	 */
+	public static BufferedImage getImage(String filename) {
+		
+		try {
+			
+			return ImageIO.read(GeneralHelpers.class.getClassLoader().getResourceAsStream("images/" + filename));
+			
+		} catch (Exception e) {
+			
+			return null;
+			
+		}
+	    
+	}
+	
+	// ######## STRINGS.JSON ########
+	
+	/**
+	 * The object to load the contents of the "strings.json" file into.
+	 */
+	private static Map<String, String> strings = null;
+	
 	/**
 	 * Gets the associated string from the strings.json file.
 	 * @param specifier The string to get.
@@ -52,68 +85,6 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * The image manager used to store all data in the images directory.
-	 */
-	public static ImageManager imageManager = new ImageManager();
-	
-	/**
-	 * Gets the associated integer from the strings.json file.
-	 * @param specifier The integer to get.
-	 * @return
-	 */
-	public static int getInt(String specifier) {
-		
-		try {
-			
-			return (int)Integer.parseInt(getString(specifier));
-			
-		} catch (NumberFormatException e) {
-			
-			throw new IllegalArgumentException(String.format("Invalid integer for specifier \"%s\".", specifier));
-			
-		}
-		
-	}
-	
-	/**
-	 * Returns an image from the images directory or null if an error occurred.
-	 * @param filename The filename of the image within the "images" directory.
-	 * @return
-	 */
-	public static BufferedImage getImage(String filename) {
-		
-		try {
-			
-			return ImageIO.read(GeneralHelpers.class.getClassLoader().getResourceAsStream("images/" + filename));
-			
-		} catch (Exception e) {
-			
-			return null;
-			
-		}
-	    
-	}
-	
-	/**
-	 * Gets the associated floating point number from the strings.json file.
-	 * @param specifier The float to get.
-	 * @return
-	 */
-	public static float getFloat(String specifier) {
-		
-		try {
-			
-			return (float)Float.parseFloat(getString(specifier));
-			
-		} catch (NumberFormatException e) {
-			
-			throw new IllegalArgumentException(String.format("Invalid float for specifier \"%s\".", specifier));
-			
-		}
-		
-	}
-	
-	/**
 	 * Loads the strings from the strings.json file.
 	 */
 	private static void loadStrings() {
@@ -138,10 +109,45 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * The object to load the contents of the "strings.json" file into.
+	 * Gets the associated integer from the strings.json file.
+	 * @param specifier The integer to get.
+	 * @return
 	 */
-	private static Map<String, String> strings = null;
+	public static int getInt(String specifier) {
+		
+		try {
+			
+			return (int)Integer.parseInt(getString(specifier));
+			
+		} catch (NumberFormatException e) {
+			
+			throw new IllegalArgumentException(String.format("Invalid integer for specifier \"%s\".", specifier));
+			
+		}
+		
+	}
+	
+	/**
+	 * Gets the associated floating point number from the strings.json file.
+	 * @param specifier The float to get.
+	 * @return
+	 */
+	public static float getFloat(String specifier) {
+		
+		try {
+			
+			return (float)Float.parseFloat(getString(specifier));
+			
+		} catch (NumberFormatException e) {
+			
+			throw new IllegalArgumentException(String.format("Invalid float for specifier \"%s\".", specifier));
+			
+		}
+		
+	}
 
+	// ######## RANDOM STATE METHODS ########
+	
 	/**
 	 * The random state used for the game.
 	 */
@@ -173,6 +179,18 @@ public final class GeneralHelpers {
 		return GeneralHelpers.randomState;
 		
 	}
+	
+	/**
+	 * Gets the random number seed value.
+	 * @return
+	 */
+	public static void setRandom(Random random) {
+		
+		GeneralHelpers.randomState = random;;
+		
+	}
+	
+	// ######## MISC. ########
 	
 	/**
 	 * Shuffles an ArrayList (poorly).
@@ -261,16 +279,6 @@ public final class GeneralHelpers {
 		}
 		
 		return value;
-		
-	}
-	
-	/**
-	 * Gets the random number seed value.
-	 * @return
-	 */
-	public static void setRandom(Random random) {
-		
-		GeneralHelpers.randomState = random;;
 		
 	}
 	
