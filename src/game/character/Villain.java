@@ -116,4 +116,10 @@ public class Villain extends Character implements Serializable {
 		
 	}
 	
+	public static int getNumberOfRequiredWins() {
+		
+		return Villain.numberOfRequiredWins;
+		
+	}
+	
 }

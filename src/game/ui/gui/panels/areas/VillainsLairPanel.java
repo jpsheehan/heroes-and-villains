@@ -227,12 +227,12 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 
 				lblMessage.setText("YOU WON!");
 				lblMessage.setForeground(Color.GREEN);
-
-				update();
 				
 				try {
 					
 					villainsLair.getBattleScreen().minigameStateChecker();
+
+					update();
 					
 				} catch (VillainDeadException e) {
 

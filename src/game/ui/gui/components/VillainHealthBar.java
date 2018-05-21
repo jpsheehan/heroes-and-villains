@@ -25,7 +25,7 @@ public class VillainHealthBar extends HealthBar {
 		if (villain != null ) {
 			
 			setCurrentValue(villain.getNumberOfWinsToDefeat());
-			setMaxValue(villain.getNumberOfWinsToDefeat());
+			setMaxValue(Villain.getNumberOfRequiredWins());
 			
 		}
 		
