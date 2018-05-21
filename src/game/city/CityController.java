@@ -271,7 +271,7 @@ public class CityController implements Serializable {
 	
 	public boolean isLastCity() {
 		
-		return this.cityIndex == this.cities.length;
+		return this.cityIndex == this.cities.length - 1;
 		
 	}
 }
