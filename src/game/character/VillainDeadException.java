@@ -36,8 +36,7 @@ public class VillainDeadException extends Exception {
 	}
 	
 	/**
-	 * Gets the Villain that has died.
-	 * @return
+	 * @return The Villain that has died.
 	 */
 	public Villain getVillain() {
 		
@@ -46,8 +45,7 @@ public class VillainDeadException extends Exception {
 	}
 	
 	/**
-	 * Gets the reward for defeating the Villain.
-	 * @return
+	 * @return The reward for defeating the Villain.
 	 */
 	public int getReward() {
 		
