@@ -39,11 +39,11 @@ public class City implements Nameable, Describable, Serializable {
 	 * Creates a new City.
 	 * @param type The type of city to create.
 	 */
-	public City(CityType type) {
+	public City(CityType type, int cityIndex) {
 		
 		this.type = type;
 		
-		generate();
+		generate(cityIndex);
 		
 	}
 	
@@ -52,7 +52,7 @@ public class City implements Nameable, Describable, Serializable {
 	 * @param type The type of city to get areas for.
 	 * @return Returns a list of Areas in the City.
 	 */
-	private static ArrayList<Area> getAreaList(CityType type) {
+	private static ArrayList<Area> getAreaList(CityType type, int cityIndex) {
 		
 		String buildingName = type.getProperName();
 		
@@ -66,7 +66,7 @@ public class City implements Nameable, Describable, Serializable {
 		
 		for (String properName : properNames) {
 			
-			items.add(Item.fromStrings(properName.trim()));
+			items.add(Item.fromStrings(properName.trim(), cityIndex + 1));
 			
 		}
 		
@@ -95,13 +95,13 @@ public class City implements Nameable, Describable, Serializable {
 	/**
 	 * Generates the City's name and areas.
 	 */
-	private void generate() {
+	private void generate(int cityIndex) {
 		
 		// Set the city name
 		this.name = City.getCityName(type);
 		
 		// Get the areas for this particular type of city
-		ArrayList<Area> areaList = City.getAreaList(type);
+		ArrayList<Area> areaList = City.getAreaList(type, cityIndex);
 		
 		if (areaList.size() != 5) {
 			

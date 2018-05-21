@@ -99,13 +99,13 @@ public class CityController implements Serializable {
 		
 		for (int i = 0; i < this.numberOfCities - 1; i++) {
 			
-			this.cities[i] = new City(shuffledCityTypes.get(i));
+			this.cities[i] = new City(shuffledCityTypes.get(i), i);
 			((VillainsLair)this.cities[i].getArea(AreaType.VILLAINS_LAIR)).getBattleScreen().setCityIndex(i);
 			
 		}
 		
 		// Add Erskine to the end of the array
-		this.cities[this.numberOfCities - 1] = new City(CityType.ERSKINE);
+		this.cities[this.numberOfCities - 1] = new City(CityType.ERSKINE, this.numberOfCities - 1);
 		
 	}
 	

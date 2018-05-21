@@ -14,9 +14,9 @@ class CityTest {
 	@Test
 	void testCity() {
 		
-		assertThrows(NullPointerException.class, () -> new City(null));
+		assertThrows(NullPointerException.class, () -> new City(null, 0));
 		
-		City city = new City(CityType.ERSKINE);
+		City city = new City(CityType.ERSKINE, 3);
 		assertEquals("Jack Erskine", city.getName());
 		assertEquals(AreaType.HOME_BASE, city.getArea(Direction.CENTRE).getType());
 		assertEquals(CityType.ERSKINE, city.getType());

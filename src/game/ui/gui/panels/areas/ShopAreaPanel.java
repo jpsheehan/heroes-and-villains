@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 public class ShopAreaPanel extends GenericAreaPanel {
@@ -35,6 +36,8 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	 */
 	public ShopAreaPanel(GameEventListener window, Shop shop, Team team) {
 
+		Component self = this;
+		
 		this.shop = shop;
 		this.team = team;
 		
@@ -64,6 +67,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				ItemSelectionDialog dlg = new ItemSelectionDialog(shop.getInventory(), null, true, true);
+				dlg.setLocationRelativeTo(self);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -80,22 +84,21 @@ public class ShopAreaPanel extends GenericAreaPanel {
 						
 						team.spendMoney(item.getPrice());
 						
+						// add the item to the inventory
+						team.getInventory().add(item);
+						
+						update();
+						
+						// Update the funds in the window
+						window.gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
+						
+						JOptionPane.showMessageDialog(self, String.format(shop.getInnKeeper().getDialogue().getPurchase(), item.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
+						
 					} catch (Exception e2) {
 						
-						JOptionPane.showMessageDialog(null, "You don't have enough money for that.");
+						JOptionPane.showMessageDialog(self, "You don't have enough money for that.", "Error", JOptionPane.ERROR_MESSAGE);
 						
-						return;
 					}
-					
-					// add the item to the inventory
-					team.getInventory().add(item);
-					
-					updateDialogue(String.format(shop.getInnKeeper().getDialogue().getPurchase()));
-					
-					update();
-					
-					// Update the funds in the window
-					window.gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
 					
 				}
 				
