@@ -85,7 +85,7 @@ public class BattleScreen implements Serializable {
 		
 		// Consider adding an ability that grants more money.
 		
-		return (int)(GeneralHelpers.getRandom().nextInt(100) * rewardMultiplier * (this.cityIndex + 1));
+		return (int)(GeneralHelpers.max(5, GeneralHelpers.getRandom().nextInt(10)) * rewardMultiplier * (this.cityIndex + 1));
 		
 	}
 	
