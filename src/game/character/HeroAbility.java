@@ -10,18 +10,47 @@ import java.io.Serializable;
 
 /**
  * Represents the different kinds of abilities that Heroes can have.
- * TODO: The exact abilities will need to be discussed.
- *
  */
 public enum HeroAbility implements Ability, Nameable, Describable, Serializable {
-	CHEAPER_ITEMS, // for commerce students
-	DAMAGE_REDUCTION, // (20%) engineering students (body odour)
-	INCREASED_RECOVERY_RATE, // (for team) science students
-	WITTY_PHRASES, // (team entertainment) arts students
-	IMPROVED_ODDS, // (for dice game and guess the number) mathematics students
-	PREVENTS_ROBBERY, // law students
-	HACK_MAINFRAME; // (allows the team to teleport to the next city (one time use)) compsoc. students
 	
+	/**
+	 * For commerce students.
+	 */
+	CHEAPER_ITEMS,
+	
+	/**
+	 * For engineering students.
+	 */
+	DAMAGE_REDUCTION,
+	
+	/**
+	 * For science students.
+	 */
+	INCREASED_RECOVERY_RATE,
+	
+	/**
+	 * For arts students.
+	 */
+	WITTY_PHRASES,
+	
+	/**
+	 * For maths students.
+	 */
+	IMPROVED_ODDS,
+	
+	/**
+	 * For law students.
+	 */
+	PREVENTS_ROBBERY,
+	
+	/**
+	 * For compsci students.
+	 */
+	HACK_MAINFRAME;
+	
+	/**
+	 * @return The name of this HeroAbility as it appears in the strings.json file.
+	 */
 	public String getProperName() {
 		
 		switch (this) {
@@ -54,6 +83,9 @@ public enum HeroAbility implements Ability, Nameable, Describable, Serializable 
 		
 	}
 	
+	/**
+	 * @return The name of the ability.
+	 */
 	@Override
 	public String getName() {
 		
@@ -61,6 +93,9 @@ public enum HeroAbility implements Ability, Nameable, Describable, Serializable 
 		
 	}
 	
+	/**
+	 * @return The description of the ability.
+	 */
 	@Override
 	public String getFlavourText() {
 		
