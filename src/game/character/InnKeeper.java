@@ -1,5 +1,10 @@
 package game.character;
 
+/**
+ * An innkeeper talks to the player and offers to sell them items.
+ * @author jesse
+ *
+ */
 public class InnKeeper extends Character {
 	
 	/**
