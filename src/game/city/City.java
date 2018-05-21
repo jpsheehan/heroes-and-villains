@@ -66,7 +66,7 @@ public class City implements Nameable, Describable, Serializable {
 		
 		for (String properName : properNames) {
 			
-			items.add(Item.fromStrings(properName.trim(), cityIndex + 1));
+			items.add(Item.fromStrings(properName.trim(), (cityIndex + 1) * 0.8f));
 			
 		}
 		

@@ -91,7 +91,7 @@ public abstract class Item implements Buyable, Nameable, Describable, Serializab
 	 * @param specifier The item to return.
 	 * @return
 	 */
-	public static Item fromStrings(String specifier, int scalePrice) {
+	public static Item fromStrings(String specifier, float scalePrice) {
 		
 		specifier = String.format("Item.%s.", specifier);
 		
@@ -100,7 +100,7 @@ public abstract class Item implements Buyable, Nameable, Describable, Serializab
 			String name = getString(specifier + "Name");
 			String flavour = getString(specifier + "Flavour");
 			String type = getString(specifier + "Type");
-			int price = getInt(specifier + "Price") * scalePrice;
+			int price = (int)(getInt(specifier + "Price") * scalePrice);
 			
 			switch (type) {
 			
