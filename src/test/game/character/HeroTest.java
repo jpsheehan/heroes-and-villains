@@ -104,7 +104,7 @@ class HeroTest {
 		PowerUpItem item = new PowerUpItem("Cool Power Up", "Does something awesome...", 0, ItemAbility.DAMAGE_PROTECTION, MinigameType.ALL);
 		
 		assertFalse(hero_1.hasPowerUpItem());
-		hero_1.usePowerUpItem(item);
+		hero_1.applyPowerUpItem(item);
 		assertTrue(hero_1.hasPowerUpItem());
 		
 		assertEquals(item, hero_1.getPowerUpItem());

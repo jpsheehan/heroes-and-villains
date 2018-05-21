@@ -136,7 +136,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 					
 				}
 				
-				selectedHero.usePowerUpItem(selectedItem);
+				selectedHero.applyPowerUpItem(selectedItem);
 				team.getInventory().remove(selectedItem);
 
 				JOptionPane.showMessageDialog(self, String.format("%s is holding %s!", selectedHero.getName(), selectedItem.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);

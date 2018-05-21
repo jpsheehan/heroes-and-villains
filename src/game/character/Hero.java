@@ -33,6 +33,11 @@ public class Hero extends Character implements Serializable {
 	private PowerUpItem item = null;
 	
 	/**
+	 * True if the hero is using the power up item in the current battle screen.
+	 */
+	private boolean isPowerUpItemActive = false;
+	
+	/**
 	 * The time (in milliseconds since the epoch) when the HealingItem is applied.
 	 */
 	private long healingStartTime;
@@ -211,9 +216,33 @@ public class Hero extends Character implements Serializable {
 	 * To be called when the team is in a power up den. Applies an item to a hero.
 	 * @param item The item to apply.
 	 */
-	public void usePowerUpItem(PowerUpItem item) {
+	public void applyPowerUpItem(PowerUpItem item) {
 		
 		this.item = item;
+		
+	}
+	
+	/**
+	 * To be called when the hero is in the villains lair. activates the power up item for the entire battle.
+	 */
+	public void activatePowerUpItem() {
+		
+		if (!hasPowerUpItem()) {
+			
+			throw new AssertionError();
+			
+		}
+		
+		this.isPowerUpItemActive = true;
+		
+	}
+	
+	/**
+	 * @return True if the power up item is active.
+	 */
+	public boolean getIsPowerUpItemActive() {
+		
+		return this.isPowerUpItemActive;
 		
 	}
 	
@@ -227,11 +256,16 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Removes the power up item after it has been "used". Called internally by the BattleScreen after the battle is over.
+	 * Removes the power up item only if it is active.
+	 * Called internally by the BattleScreen after the entire battle is over.
 	 */
 	public void destroyPowerUpItem() {
 		
-		this.item = null;
+		if (this.isPowerUpItemActive) {
+			
+			this.item = null;
+			
+		}
 		
 	}
 	

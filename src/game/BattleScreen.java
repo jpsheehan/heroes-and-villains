@@ -46,6 +46,11 @@ public class BattleScreen implements Serializable {
 	private int villainHealth;
 	
 	/**
+	 * A reference to the team.
+	 */
+	private Team team;
+	
+	/**
 	 * The number of times villain must be beaten.
 	 */
 	private static int DEFAULT_VILLAIN_HEALTH = 3;
@@ -61,11 +66,12 @@ public class BattleScreen implements Serializable {
 	 * @param villain The villain the hero is to battle.
 	 * @param cityIndex The index of the city the team is in.
 	 */
-	public BattleScreen(Villain villain) {
+	public BattleScreen(Villain villain, Team team) {
 		
 		this.villain = villain;
 		this.cityIndex = 0;
 		this.villainHealth = DEFAULT_VILLAIN_HEALTH;
+		this.team = team;
 		
 	}
 	
@@ -156,34 +162,26 @@ public class BattleScreen implements Serializable {
 	 */
 	private void setMinigame(MinigameType type) {
 		
-//		if (GeneralHelpers.doesArrayContain(this.villain.getFavouriteGames(), type) || this.villain.getFavouriteGames() ) {
-			
-			Ability[] abilities = this.calculateAbilities(type);
-			
-			switch (type) {
-			
-				case DICE_ROLLS:
-					this.minigame = new DiceRolls(abilities);
-					break;
-				
-				case GUESS_THE_NUMBER:
-					this.minigame = new GuessTheNumber(abilities);
-					break;
-				
-				case PAPER_SCISSORS_ROCK:
-					this.minigame = new PaperScissorsRock(abilities);
-					break;
-				
-				default:
-					throw new AssertionError("MinigameType is invalid.");
-					
-			}
+		Ability[] abilities = this.calculateAbilities(type);
 		
-//		} else {
-//		
-//			throw new IllegalArgumentException("Villain does not have this minigame as one of their favourites.");
-//			
-//		}
+		switch (type) {
+		
+			case DICE_ROLLS:
+				this.minigame = new DiceRolls(abilities);
+				break;
+			
+			case GUESS_THE_NUMBER:
+				this.minigame = new GuessTheNumber(abilities);
+				break;
+			
+			case PAPER_SCISSORS_ROCK:
+				this.minigame = new PaperScissorsRock(abilities);
+				break;
+			
+			default:
+				throw new AssertionError("MinigameType is invalid.");
+				
+		}
 		
 	}
 	
@@ -256,37 +254,42 @@ public class BattleScreen implements Serializable {
 	 */
 	public void minigameStateChecker() throws VillainDeadException, HeroDeadException {
 		
-		switch (this.minigame.getState()) {
-		
-			case WON:
-				// Deal "damage" to the villain and check if they are dead.
-				this.villain.beat();
-				
-				if (this.villain.getNumberOfWinsToDefeat() == 0) {
-					
-					throw new VillainDeadException(this.villain, calculateMoneyReward());
-				}
-
-				this.destroyHeroItem();
-				this.setMinigame();
-				break;
-				
-			case LOST:
-				// Deal damage to the hero and begin a new game.
-				this.hero.takeDamage(this.calculateDamage());
-				this.destroyHeroItem();
-				this.setMinigame();
-				break;
-				
-			case DRAWN:
-				
-				// Play the same game again.
-				// this.destroyHeroItem(); // don't destroy the power up if it's a draw??
-				this.setMinigame(this.getMinigameType());
-				break;
+		try {
+			switch (this.minigame.getState()) {
 			
-			default:
-				// do nothing...
+				case WON:
+					// Deal "damage" to the villain and check if they are dead.
+					this.villain.beat();
+					
+					if (this.villain.getNumberOfWinsToDefeat() == 0) {
+						
+						throw new VillainDeadException(this.villain, calculateMoneyReward());
+					}
+	
+					this.setMinigame();
+					break;
+					
+				case LOST:
+					// Deal damage to the hero and begin a new game.
+					this.hero.takeDamage(this.calculateDamage());
+					this.setMinigame();
+					break;
+					
+				case DRAWN:
+					
+					// Play the same game again.
+					this.setMinigame(this.getMinigameType());
+					break;
+					
+				default:
+					throw new AssertionError();
+					
+			}
+		} catch (VillainDeadException e) {
+			
+			this.destroyAllActiveHeroItems();
+			throw e;
+			
 		}
 		
 	}
@@ -295,19 +298,14 @@ public class BattleScreen implements Serializable {
 	 * Destroys the hero's power up item if it is being used in the current game.
 	 * To be called after the game is over.
 	 */
-	private void destroyHeroItem() {
+	private void destroyAllActiveHeroItems() {
 		
-		if (
-				hero != null &&
-				hero.hasPowerUpItem() &&
-				(hero.getPowerUpItem().getAppliesTo() == MinigameType.ALL ||
-				hero.getPowerUpItem().getAppliesTo() == this.getMinigameType())) {
+		for (Hero hero : team.getHeroes()) {
 			
-			this.hero.destroyPowerUpItem();
+			hero.destroyPowerUpItem();
 			
 		}
 		
 	}
-	
 	
 }
