@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import game.character.Hero;
 import game.item.Inventory;
 
+/**
+ * Contains a list of Hero objects and has a name.
+ * @author jesse
+ *
+ */
 public class Team implements Nameable, Serializable {
 
 	/**
@@ -54,8 +59,7 @@ public class Team implements Nameable, Serializable {
 	}
 	
 	/**
-	 * Returns the list of heroes.
-	 * @return
+	 * @return The array of heroes.
 	 */
 	public Hero[] getHeroes() {
 		
@@ -74,7 +78,7 @@ public class Team implements Nameable, Serializable {
 	/**
 	 * Adds a new hero to the list.
 	 * @param hero The hero to add.
-	 * @throws TeamFullException
+	 * @throws TeamFullException If there are too many heroes in the Team.
 	 */
 	public void addHero(Hero hero) throws TeamFullException {
 		
@@ -137,7 +141,7 @@ public class Team implements Nameable, Serializable {
 	}
 	
 	/**
-	 * Returns the name of the team.
+	 * @return The name of the team.
 	 */
 	@Override
 	public String getName() {
@@ -147,8 +151,7 @@ public class Team implements Nameable, Serializable {
 	}
 	
 	/**
-	 * Returns the amount of money the heroes have.
-	 * @return
+	 * @return Returns the amount of money the team has.
 	 */
 	public int getMoney() {
 		
@@ -158,7 +161,7 @@ public class Team implements Nameable, Serializable {
 	
 	/**
 	 * Gives the team an amount of money.
-	 * @param amount
+	 * @param amount The amound of money to give.
 	 */
 	public void giveMoney(int amount) {
 		
@@ -174,7 +177,7 @@ public class Team implements Nameable, Serializable {
 	
 	/**
 	 * Removes some amount of money from the team's money count.
-	 * @param amount
+	 * @param amount The amount of money to remove.
 	 */
 	public void spendMoney(int amount) {
 		
@@ -195,8 +198,7 @@ public class Team implements Nameable, Serializable {
 	}
 	
 	/**
-	 * Gets the team's inventory.
-	 * @return
+	 * @return Gets the team's inventory.
 	 */
 	public Inventory getInventory() {
 		
@@ -204,6 +206,9 @@ public class Team implements Nameable, Serializable {
 		
 	}
 	
+	/**
+	 * @return The number of heroes still alive in the team.
+	 */
 	public int getNumberOfAliveHeroes() {
 		
 		int alive = 0;
