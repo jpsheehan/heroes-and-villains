@@ -53,6 +53,11 @@ public class GameEnvironment implements Serializable {
 	private Random randomStateTemp;
 	
 	/**
+	 * The timestamp when the game was saved (or 0 if it was this is not a saved game)
+	 */
+	private long timeSaved;
+	
+	/**
 	 * Gets the city controller.
 	 * @return
 	 */
@@ -92,6 +97,11 @@ public class GameEnvironment implements Serializable {
 		
 	}
 	
+	/**
+	 * For a unique issue dealing with the "Are you sure you want to enter" confirm dialog appearing when loading into a Villains Lair.
+	 */
+	private boolean ignoreRoomPrompt;
+	
 	public void saveState() throws IOException {
 		
 		File saveDir = new File(Paths.get(System.getProperty("user.home"), ".HeroesAndVillains").toString());
@@ -106,8 +116,7 @@ public class GameEnvironment implements Serializable {
 		
 		String filename = path.toString();
 		
-		// get the random value
-		// TODO: RETHINK THIS PROBLEM!!!
+		// get the random state
 		this.randomStateTemp = GeneralHelpers.getRandom();
 		FileOutputStream fileOut = new FileOutputStream(filename);
 		ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
@@ -150,6 +159,8 @@ public class GameEnvironment implements Serializable {
 		fileIn.close();
 		objIn.close();
 		
+		env.setTimeSaved(latest);
+		env.ignoreRoomPrompt = true;
 		GeneralHelpers.setRandom(env.randomStateTemp);
 
 		(new File(filename)).delete();
@@ -198,6 +209,26 @@ public class GameEnvironment implements Serializable {
 	public static boolean doesSaveStateExist() {
 		
 		return getSaveStates().length > 0;
+		
+	}
+	
+	private void setTimeSaved(long time) {
+		
+		this.timeSaved = time;
+		
+	}
+	
+	public long getTimeSaved() {
+		
+		return this.timeSaved;
+		
+	}
+	
+	public boolean getIgnoreRoomPrompt() {
+		
+		boolean wasTrue = ignoreRoomPrompt;
+		ignoreRoomPrompt = false;
+		return wasTrue;
 		
 	}
 

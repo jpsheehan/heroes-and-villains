@@ -163,7 +163,7 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 	private void updateNavigation() {
 		
 		// Prompt for confirmation before entering a Villain's Lair
-		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR) {
+		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR && !gameEnvironment.getIgnoreRoomPrompt()) {
 			
 			int res = JOptionPane.showConfirmDialog(null, "You are about to enter a Villain's Lair. Are you sure you want to enter?", null, JOptionPane.YES_NO_OPTION);
 			
