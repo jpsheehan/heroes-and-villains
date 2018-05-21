@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -39,6 +40,8 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
+		Component self = this;
+		
 		JPanel panel = new JPanel();
 		add(panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -63,6 +66,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				HeroSelectionDialog dlg = new HeroSelectionDialog(team.getHeroes());
+				dlg.setLocationRelativeTo(self);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -93,14 +97,23 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 		btnSelectAnItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.POWER_UP_ITEM, false, true);
-				dlg.setVisible(true);
-				
-				if (dlg.getDialogResult() == DialogResult.OK) {
+				if (team.getInventory().getPowerUpItems().length == 0) {
 					
-					selectedItem = (PowerUpItem) dlg.getSelectedItem();
+					JOptionPane.showMessageDialog(self, "You don't have any power up items to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
 					
-					update();
+				} else {
+					
+					ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.POWER_UP_ITEM, false, true);
+					dlg.setLocationRelativeTo(self);
+					dlg.setVisible(true);
+					
+					if (dlg.getDialogResult() == DialogResult.OK) {
+						
+						selectedItem = (PowerUpItem) dlg.getSelectedItem();
+						
+						update();
+						
+					}
 					
 				}
 				
@@ -118,7 +131,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 				
 				if (selectedHero.hasPowerUpItem()) {
 					
-					JOptionPane.showMessageDialog(null, String.format("%s is already holding a power up item!"));
+					JOptionPane.showMessageDialog(self, String.format("%s is already holding a power up item!"), "Error", JOptionPane.INFORMATION_MESSAGE);
 					return;
 					
 				}
@@ -126,7 +139,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 				selectedHero.usePowerUpItem(selectedItem);
 				team.getInventory().remove(selectedItem);
 
-				JOptionPane.showMessageDialog(null, String.format("%s is holding %s!", selectedHero.getName(), selectedItem.getName()));
+				JOptionPane.showMessageDialog(self, String.format("%s is holding %s!", selectedHero.getName(), selectedItem.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
 				
 				selectedItem = null;
 				selectedHero = null;
