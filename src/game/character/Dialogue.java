@@ -16,38 +16,25 @@ public class Dialogue implements Serializable {
 	 */
 	private static final long serialVersionUID = -4548151420650313683L;
 
-	//	/**
-//	 * vPlate message
-//	 */
-//	private String vPlate;
-//	
 	/**
 	 * Greeting message when team enters inn 
 	 */
 	private String greeting;
 	
 	/**
-	 * Farewell message when team leaves inn 
-	 */
-	private String farewell;
-	
-	/**
-	 * Message when the team is presented with a list of items.
-	 */
-	private String options;
-	
-	/**
 	 * Message when the team purchases an item.
 	 */
 	private String purchase;
 	
-	 public Dialogue(CityType type) {
+	/**
+	 * Creates a new instance of Dialogue.
+	 * @param type The type of city to create the Dialogue for.
+	 */
+	public Dialogue(CityType type) {
 		 
 		 String specifier = type.getProperName() + ".InnKeeper.Dialogue";
 
 		 this.greeting = GeneralHelpers.getString(specifier + ".Greeting");
-		 this.farewell = GeneralHelpers.getString(specifier + ".Farewell");
-		 this.options = GeneralHelpers.getString(specifier + ".Options");
 		 this.purchase = GeneralHelpers.getString(specifier + ".Purchase");
 		 
 	 }
@@ -57,20 +44,6 @@ public class Dialogue implements Serializable {
 	 */
 	public String getGreeting() {
 		return greeting;
-	}
-	
-	/**
-	 * @return The message to display when the team exits the shop
-	 */
-	public String getFarewell() {
-		return farewell;
-	}
-
-	/**
-	 * @return The message to display when the team is presented with a list of items to buy
-	 */
-	public String getOptions() {
-		return options;
 	}
 
 	/**

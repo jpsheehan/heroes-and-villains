@@ -1,6 +1,6 @@
 package game.character;
 
-import static game.GeneralHelpers.getString;
+import static game.GeneralHelpers.*;
 
 import java.io.Serializable;
 
@@ -112,6 +112,12 @@ public enum HeroType implements Nameable, Describable, Serializable {
 	public float getRecoveryRate() {
 		
 		return getFloat(this.getProperName() + ".RecoveryRate");
+		
+	}
+	
+	public int getMaxHealth() {
+		
+		return getInt(this.getProperName() + ".MaxHealth");
 		
 	}
 	

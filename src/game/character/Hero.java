@@ -9,7 +9,6 @@ import game.item.PowerUpItem;
 
 /**
  * Represents a Hero as described in section 3.2 of the specification.
- *
  */
 public class Hero extends Character implements Serializable {
 	
@@ -33,7 +32,14 @@ public class Hero extends Character implements Serializable {
 	 */
 	private PowerUpItem item = null;
 	
+	/**
+	 * The time (in milliseconds since the epoch) when the HealingItem is applied.
+	 */
 	private long healingStartTime;
+	
+	/**
+	 * The HealingItem that is being used.
+	 */
 	private HealingItem healingItem;
 	
 	/**
@@ -96,9 +102,10 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns the recovery rate of the Hero (depends on its type). The recovery rate is the amount of health regained every 10 seconds.
-	 * TODO: Update this doc
-	 * @throws Exception 
+	 * Returns the recovery rate of the Hero (depends on its type).
+	 * The recovery rate is a multiplier used when calculating the amount of time to heal.
+	 * A value of < 1 means that the hero will heal slower.
+	 * A value of > 1 means that the hero will heal faster.
 	 */
 	public float getRecoveryRate() {
 		
@@ -107,23 +114,25 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns the current health of the Hero.
-	 * @return
+	 * @return The current health of the Hero.
 	 */
 	public int getHealth() {
 		
 		if (this.healingItem == null) {
 			
+			// If we aren't healing then the health attribute is accurate.
 			return this.health;
 			
 		} else {
 			
-			float percentHealed = (float) GeneralHelpers.min((float)((new Date()).getTime() - healingStartTime) / (1000 * healingItem.getApplicationTime()), 1f);
+			// Otherwise, the health must be calculated...
+			float percentHealed = (float) GeneralHelpers.min((float)((new Date()).getTime() - healingStartTime) / (1000 * healingItem.getApplicationTime() / this.getRecoveryRate()), 1f);
 			float amountToHeal = (float) (healingItem.getRestorationLevel() * 0.25 * getMaxHealth());
 			int calculatedHealth = (int) GeneralHelpers.min(this.health + (int)(percentHealed * amountToHeal), getMaxHealth());
 			
 			if (percentHealed == 1f || calculatedHealth == getMaxHealth()) {
-				
+
+				// if fully healed, set the health attribute accordingly (depending on whether the hero's health has exceed 100% or the time has run out on the healing item)
 				if (calculatedHealth > getMaxHealth()) {
 					
 					this.health = getMaxHealth();
@@ -134,6 +143,7 @@ public class Hero extends Character implements Serializable {
 					
 				}
 				
+				// reset the healing item stuff
 				this.healingItem = null;
 				this.healingStartTime = 0;
 				
@@ -146,8 +156,7 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Gets the remaining time (in seconds) that the healing item will take to be used.
-	 * @return
+	 * @return The remaining time (in seconds) that the healing item will take to be used.
 	 */
 	public int getRemainingHealingTime() {
 		
@@ -157,7 +166,7 @@ public class Hero extends Character implements Serializable {
 			
 		} else {
 			
-			return healingItem.getApplicationTime() - (int)(((float)((new Date()).getTime() - healingStartTime)) / 1000f);
+			return (int) ((healingItem.getApplicationTime() / this.getRecoveryRate()) - (int)(((float)((new Date()).getTime() - healingStartTime)) / 1000f));
 			
 		}
 		
@@ -180,6 +189,7 @@ public class Hero extends Character implements Serializable {
 		
 		if (this.getHealth() <= 0) {
 			
+			// if we have less than zero health, set it to zero
 			this.health = 0;
 			throw new HeroDeadException(this);
 			
@@ -189,7 +199,7 @@ public class Hero extends Character implements Serializable {
 	
 	/**
 	 * Gets whether the hero is alive or not.
-	 * @return True if the Hero is alive.
+	 * @return True if the Hero is alive. False otherwise.
 	 */
 	public boolean isAlive() {
 		
@@ -208,8 +218,7 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns true if the hero is holding an item.
-	 * @return
+	 * @return true if the hero is holding an item.
 	 */
 	public boolean hasPowerUpItem() {
 		
@@ -227,8 +236,7 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns the power up item.
-	 * @return
+	 * @return The currently held power up item.
 	 */
 	public PowerUpItem getPowerUpItem() {
 		
@@ -236,6 +244,9 @@ public class Hero extends Character implements Serializable {
 		
 	}
 	
+	/**
+	 * @return The name and major of the Hero.
+	 */
 	@Override
 	public String toString() {
 		
@@ -245,7 +256,7 @@ public class Hero extends Character implements Serializable {
 	
 	/**
 	 * Uses a healing item on the hero.
-	 * @param item
+	 * @param item The healing item to use.
 	 */
 	public void useHealingItem(HealingItem item) {
 		
@@ -261,8 +272,7 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns true if the hero is currently healing.
-	 * @return
+	 * @return True if the hero is currently healing.
 	 */
 	public boolean isHealing() {
 		
@@ -270,12 +280,18 @@ public class Hero extends Character implements Serializable {
 		
 	}
 	
+	/**
+	 * @return The maximum health of the hero.
+	 */
 	public int getMaxHealth() {
 		
-		return 100;
+		return type.getMaxHealth();
 		
 	}
 	
+	/**
+	 * @return The currently held healing item (or null).
+	 */
 	public HealingItem getHealingItem() {
 		
 		return this.healingItem;
