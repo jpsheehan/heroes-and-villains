@@ -43,6 +43,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	private VillainsLair villainsLair;
 	private JButton btnGoToNextBuilding, btnActivatePowerUp;
 	private GameEnvironment gameEnvironment;
+	private JLabel lblPowerUp;
 	
 	/**
 	 * Required for implementing the Serializable interface.
@@ -126,6 +127,13 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			}
 		});
 		panel_2.add(btnActivatePowerUp);
+		
+		JPanel panel_8 = new JPanel();
+		villainPanel.add(panel_8);
+		
+		lblPowerUp = new JLabel("lblPowerUp");
+		lblPowerUp.setForeground(Color.MAGENTA);
+		panel_8.add(lblPowerUp);
 		
 		JPanel panel_4 = new JPanel();
 		villainPanel.add(panel_4);
@@ -225,6 +233,17 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			
 			lblSelectedHero.setText(selectedHero.getName());
 			btnActivatePowerUp.setEnabled(!selectedHero.getIsPowerUpItemActive() && selectedHero.hasPowerUpItem());
+			
+		}
+		
+		if (selectedHero != null && selectedHero.getIsPowerUpItemActive()) {
+			
+			lblPowerUp.setText(selectedHero.getPowerUpItem().getName());
+			lblPowerUp.setVisible(true);
+			
+		} else {
+			
+			lblPowerUp.setVisible(false);
 			
 		}
 		
