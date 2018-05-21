@@ -120,4 +120,15 @@ public class Settings {
 		return Paths.get(System.getProperty("user.home"), getString("Game.SaveDirectory")).toString();
 		
 	}
+	
+	/**
+	 * Gets the directory name (within the JAR) where images are loaded from.
+	 * Denoted by "Game.ImagesDirectory" in the strings.json file. 
+	 * @return
+	 */
+	public static String getImagesDirectory() {
+		
+		return getString("Game.ImagesDirectory");
+		
+	}
 }
