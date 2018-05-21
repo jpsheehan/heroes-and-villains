@@ -104,7 +104,7 @@ public class GameEnvironment implements Serializable {
 	
 	public void saveState() throws IOException {
 		
-		File saveDir = new File(Paths.get(System.getProperty("user.home"), ".HeroesAndVillains").toString());
+		File saveDir = new File(Settings.getSaveDirectory());
 		
 		if (!saveDir.isDirectory()) {
 			
@@ -112,7 +112,7 @@ public class GameEnvironment implements Serializable {
 			
 		}
 		
-		Path path = Paths.get(System.getProperty("user.home"), ".HeroesAndVillains", String.format("%d.ser", (new Date()).getTime()));
+		Path path = Paths.get(Settings.getSaveDirectory(), String.format("%d.ser", (new Date()).getTime()));
 		
 		String filename = path.toString();
 		
@@ -171,7 +171,7 @@ public class GameEnvironment implements Serializable {
 	
 	private static File[] getSaveStates() {
 		
-		File saveDir = new File(Paths.get(System.getProperty("user.home"), ".HeroesAndVillains").toString());
+		File saveDir = new File(Settings.getSaveDirectory());
 		
 		if (!saveDir.isDirectory()) {
 			

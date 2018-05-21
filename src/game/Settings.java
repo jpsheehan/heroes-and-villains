@@ -2,6 +2,8 @@ package game;
 
 import static game.GeneralHelpers.*;
 
+import java.nio.file.Paths;
+
 /**
  * A class to hold the game settings as loaded from the "strings.json" file.
  * @author jesse
@@ -105,6 +107,17 @@ public class Settings {
 	public static int getTeamStartMoney() {
 		
 		return getInt("Game.Team.StartMoney");
+		
+	}
+	
+	/**
+	 * Gets the directory to which save states can be written to and read from.
+	 * Denoted by "Game.SaveDirectory" in the strings.json file and prepended with the user's home directory.
+	 * @return
+	 */
+	public static String getSaveDirectory() {
+		
+		return Paths.get(System.getProperty("user.home"), getString("Game.SaveDirectory")).toString();
 		
 	}
 }
