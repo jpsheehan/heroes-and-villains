@@ -15,17 +15,8 @@ import java.util.Random;
 
 import game.city.CityController;
 
-//20180416 to do
-// call the ui
-// handle exceptions
-// ??
-
 /**
  * Game Environment controls the game.
- * Calls the user interface for initial setups
- * Calls the CityController
- * Calls the user interface for navigation
- *  Calls areas
  * @author Manu
  *
  */
@@ -126,6 +117,12 @@ public class GameEnvironment implements Serializable {
 		
 	}
 	
+	/**
+	 * Loads the game state from a predetermined folder on the filesystem
+	 * @return A new Game Environment.
+	 * @throws IOException When the serialized data could not be read.
+	 * @throws ClassNotFoundException When a class hasn't been marked as Serializable.
+	 */
 	public static GameEnvironment loadState() throws IOException, ClassNotFoundException {
 		
 		String filename = null;
@@ -159,6 +156,7 @@ public class GameEnvironment implements Serializable {
 		fileIn.close();
 		objIn.close();
 		
+		// Set some metadata related to the loading of the game.
 		env.setTimeSaved(latest);
 		env.ignoreRoomPrompt = true;
 		GeneralHelpers.setRandom(env.randomStateTemp);
@@ -169,16 +167,22 @@ public class GameEnvironment implements Serializable {
 		
 	}
 	
+	/**
+	 * Gets an array of file objects found in the save directory.
+	 * @return An array of Files.
+	 */
 	private static File[] getSaveStates() {
 		
 		File saveDir = new File(Settings.getSaveDirectory());
 		
+		// Return an empty array if the directory doesn't exist
 		if (!saveDir.isDirectory()) {
 			
 			return new File[0];
 			
 		}
 		
+		// Read the files into an ArrayList
 		ArrayList<File> files = new ArrayList<File>();
 		
 		for (File file : saveDir.listFiles()) {
@@ -186,17 +190,20 @@ public class GameEnvironment implements Serializable {
 
 				try {
 					
+					// Get the filename and add it to the ArrayList if it has the correct filename format.
 					String filename = file.getName().substring(0, file.getName().indexOf(".ser"));
 					Long.parseLong(filename);
 					files.add(file);
 					
-					
 				} catch (NumberFormatException e) {
-					
+					// sometimes the filename might not be in the correct format
+					// ignore these files and continue
+					continue;
 				}
 			}
 		}
 		
+		// Convert the files list into an array
 		File[] filesArray = new File[files.size()];
 		for (int i = 0; i < files.size(); i++) {
 			filesArray[i] = files.get(i);
@@ -206,24 +213,43 @@ public class GameEnvironment implements Serializable {
 		
 	}
 	
+	/**
+	 * Gets whether or not any save states exist.
+	 * @return True if at least one save state exists. False otherwise.
+	 */
 	public static boolean doesSaveStateExist() {
 		
 		return getSaveStates().length > 0;
 		
 	}
 	
+	/**
+	 * Sets the time when the game was saved.
+	 * @param time The time in milliseconds since the epoch.
+	 */
 	private void setTimeSaved(long time) {
 		
 		this.timeSaved = time;
 		
 	}
 	
+	/**
+	 * Gets the time when the game was saved.
+	 * @return The time in (milliseconds since the epoch) when the game was saved.
+	 */
 	public long getTimeSaved() {
 		
 		return this.timeSaved;
 		
 	}
 	
+	/**
+	 * Gets whether the game should ignore the room prompt.
+	 * This is set to true internally when the game is loaded.
+	 * This is to fix a very specific edge case where the player saves the game from within a Villain's Lair.
+	 * Also sets the internal flag to false for subsequent calls.
+	 * @return True if the game should ignore the room prompt. False otherwise.
+	 */
 	public boolean getIgnoreRoomPrompt() {
 		
 		boolean wasTrue = ignoreRoomPrompt;
