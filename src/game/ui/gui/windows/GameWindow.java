@@ -13,7 +13,7 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
 import game.ui.gui.dialogs.LoadingResourcesDialog;
-
+import game.ui.gui.panels.GameLostPanel;
 import game.ui.gui.panels.GameSetUpPanel;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
@@ -141,10 +141,8 @@ public class GameWindow implements GameEventListener {
 				
 			case GAME_LOST:
 				
-				// TODO: Make more better.
 				// Show a message saying that the game was lost!
-				JOptionPane.showMessageDialog(frmHeroesAndVillains, "Game lost!");
-				frmHeroesAndVillains.dispose();
+				switchPanel(new GameLostPanel(this));
 				break;
 				
 			case NEW_GAME:
