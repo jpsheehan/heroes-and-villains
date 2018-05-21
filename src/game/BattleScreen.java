@@ -66,18 +66,24 @@ public class BattleScreen implements Serializable {
 	 * @param villain The villain the hero is to battle.
 	 * @param cityIndex The index of the city the team is in.
 	 */
-	public BattleScreen(Villain villain, Team team) {
+	public BattleScreen(Villain villain) {
 		
 		this.villain = villain;
 		this.cityIndex = 0;
 		this.villainHealth = DEFAULT_VILLAIN_HEALTH;
-		this.team = team;
+		this.team = null;
 		
 	}
 	
 	public void setCityIndex(int cityIndex) {
 		
 		this.cityIndex = cityIndex;
+		
+	}
+	
+	public void setTeam(Team team) {
+		
+		this.team = team;
 		
 	}
 	

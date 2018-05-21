@@ -17,6 +17,7 @@ import game.ui.gui.panels.games.PanelPaperScissorsRock;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ import javax.swing.JSplitPane;
 import game.ui.gui.components.VillainHealthBar;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 
 public class VillainsLairPanel extends GenericAreaPanel implements GameEventListener {
@@ -39,7 +41,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	private GameEventListener self;
 	private JLabel lblMessage, lblInformation;
 	private VillainsLair villainsLair;
-	private JButton btnGoToNextBuilding;
+	private JButton btnGoToNextBuilding, btnActivatePowerUp;
 	private GameEnvironment gameEnvironment;
 	
 	/**
@@ -51,10 +53,13 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	 * Create the panel.
 	 */
 	public VillainsLairPanel(GameEventListener window, VillainsLair villainsLair, GameEnvironment gameEnvironment) {
+		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.window = window;
 		this.villainsLair = villainsLair;
 		this.gameEnvironment = gameEnvironment;
+		
+		this.villainsLair.getBattleScreen().setTeam(gameEnvironment.getTeam());
 		
 		// An alias of this
 		this.self = this;
@@ -109,6 +114,18 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			}
 		});
 		panel_2.add(btnSelectAHero);
+		
+		btnActivatePowerUp = new JButton("Activate Power Up!");
+		btnActivatePowerUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				selectedHero.activatePowerUpItem();
+				JOptionPane.showMessageDialog((Component)self, String.format("You have activated %s! %s", selectedHero.getPowerUpItem().getName(), selectedHero.getPowerUpItem().getAbility().getFlavourText()), "Success", JOptionPane.INFORMATION_MESSAGE);
+				update();
+				
+			}
+		});
+		panel_2.add(btnActivatePowerUp);
 		
 		JPanel panel_4 = new JPanel();
 		villainPanel.add(panel_4);
@@ -202,10 +219,12 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		if (selectedHero == null) {
 			
 			lblSelectedHero.setText("None");
+			btnActivatePowerUp.setEnabled(false);
 			
 		} else {
 			
 			lblSelectedHero.setText(selectedHero.getName());
+			btnActivatePowerUp.setEnabled(!selectedHero.getIsPowerUpItemActive() && selectedHero.hasPowerUpItem());
 			
 		}
 		
