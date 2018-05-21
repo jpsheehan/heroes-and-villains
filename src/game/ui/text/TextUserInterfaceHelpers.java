@@ -471,19 +471,8 @@ public class TextUserInterfaceHelpers {
 	 */
 	public static void clear() {
 		
-		if (game.GeneralHelpers.isRunningInEclipse()) {
-			
-			// if the game is being run in eclipse, use this hack to "clear" the screen.
-			System.out.println(repeatString("\n", getConsoleHeight()));
-			
-		} else {
-		
-			// otherwise assume we are running in a terminal
-			//System.out.print("\033[H\033[2J");
-			System.out.println("!!!NEWLINE~HACKY~CHARACTER!!!");
-			System.out.flush();
-			
-		}
+		// Use this hack to "clear" the screen.
+		System.out.println(repeatString("\n", getConsoleHeight()));
 		
 	}
 	

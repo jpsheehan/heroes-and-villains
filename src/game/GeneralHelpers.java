@@ -13,6 +13,11 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Contains static methods dealing with random state, extracting values from the "strings.json" file and other common methods not covered by the standard library.
+ * @author jesse
+ *
+ */
 public final class GeneralHelpers {
 	
 	/**
@@ -46,6 +51,9 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * The image manager used to store all data in the images directory.
+	 */
 	public static ImageManager imageManager = new ImageManager();
 	
 	/**
@@ -67,6 +75,11 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Returns an image from the images directory or null if an error occurred.
+	 * @param filename The filename of the image within the "images" directory.
+	 * @return
+	 */
 	public static BufferedImage getImage(String filename) {
 		
 		try {
@@ -100,8 +113,6 @@ public final class GeneralHelpers {
 		
 	}
 	
-	private static boolean runningInEclipse;
-	
 	/**
 	 * Loads the strings from the strings.json file.
 	 */
@@ -127,16 +138,6 @@ public final class GeneralHelpers {
 	}
 	
 	private static Map<String, String> strings = null;
-	
-	public static boolean isRunningInEclipse() {
-		
-		return ("true".equalsIgnoreCase(System.getProperty("runningInEclipse")) || runningInEclipse);
-		
-	}
-	
-	public static void setIsRunningInEclipse(boolean value) {
-		runningInEclipse = value;
-	}
 
 	/**
 	 * The random state used for the game.

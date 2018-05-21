@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import game.GameEnvironment;
 import game.GameOverException;
 import game.GameWonException;
-import game.GeneralHelpers;
 import game.Settings;
 import game.Team;
 import game.TeamFullException;
@@ -1106,7 +1105,6 @@ public class TextUserInterface extends UserInterface {
 
 	public static void main(String[] args) throws UserQuitException, UserCancelException, TeamFullException {
 		
-		GeneralHelpers.setIsRunningInEclipse(true);
 		GameEnvironment ge = new GameEnvironment();
 		
 		Team team = new Team("Cool Team");
