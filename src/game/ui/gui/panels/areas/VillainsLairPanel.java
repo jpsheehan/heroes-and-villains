@@ -286,6 +286,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					btnReadyToBattle.setEnabled(false);
 					btnReadyToBattle.setVisible(false);
 					
+					btnActivatePowerUp.setEnabled(false);
+					btnActivatePowerUp.setVisible(false);
+					
 					btnSelectAHero.setEnabled(false);
 					
 					gameEnvironment.getTeam().giveMoney(e.getReward());
