@@ -12,7 +12,6 @@ import game.Nameable;
 
 /**
  * The types of Heroes that exist in the game.
- *
  */
 public enum HeroType implements Nameable, Describable, Serializable {
 	ENGINEERING_STUDENT,
@@ -23,6 +22,9 @@ public enum HeroType implements Nameable, Describable, Serializable {
 	COMMERCE_STUDENT,
 	SCIENCE_STUDENT;
 	
+	/**
+	 * @return The name of the HeroType.
+	 */
 	@Override
 	public String getName() {
 		
@@ -30,6 +32,9 @@ public enum HeroType implements Nameable, Describable, Serializable {
 		
 	}
 	
+	/**
+	 * @return The description of the HeroType.
+	 */
 	@Override
 	public String getFlavourText() {
 		
@@ -37,6 +42,9 @@ public enum HeroType implements Nameable, Describable, Serializable {
 		
 	}
 	
+	/**
+	 * @return The name of this HeroType as it appears in the strings.json file.
+	 */
 	public String getProperName() {
 		
 		switch (this) {
@@ -70,8 +78,7 @@ public enum HeroType implements Nameable, Describable, Serializable {
 	}
 	
 	/**
-	 * Returns the HeroAbility of the HeroType.
-	 * @return
+	 * @return The HeroAbility of the HeroType.
 	 */
 	public HeroAbility getAbility() {
 		
@@ -106,8 +113,7 @@ public enum HeroType implements Nameable, Describable, Serializable {
 	}
 	
 	/**
-	 * Returns the recovery rate of the HeroType.
-	 * @return
+	 * @return The recovery rate of the HeroType.
 	 */
 	public float getRecoveryRate() {
 		
@@ -115,6 +121,9 @@ public enum HeroType implements Nameable, Describable, Serializable {
 		
 	}
 	
+	/**
+	 * @return The maximum health this type of Hero has.
+	 */
 	public int getMaxHealth() {
 		
 		return getInt(this.getProperName() + ".MaxHealth");

@@ -52,7 +52,7 @@ public class Hero extends Character implements Serializable {
 		super(name);
 		
 		this.type = type;
-		this.health = 100;
+		this.health = this.type.getMaxHealth();
 		
 	}
 	
