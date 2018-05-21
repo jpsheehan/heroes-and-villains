@@ -168,7 +168,8 @@ public final class GeneralHelpers {
 		
 		GeneralHelpers.randomSeed = seed;
 		GeneralHelpers.randomIterations = iterations;
-		randomState.setSeed(seed);
+		GeneralHelpers.randomState = new Random();
+		GeneralHelpers.randomState.setSeed(seed);
 		
 		for (int i = 0; i < GeneralHelpers.randomIterations; i++) {
 			
