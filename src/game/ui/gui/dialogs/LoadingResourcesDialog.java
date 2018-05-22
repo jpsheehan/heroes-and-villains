@@ -58,8 +58,6 @@ public class LoadingResourcesDialog extends JDialog implements ActionListener {
 				
 				timer.start();
 				
-				GeneralHelpers.imageManager.loadAllImages();
-				
 			}
 		});
 		setTitle("Loading Resources");
@@ -99,9 +97,17 @@ public class LoadingResourcesDialog extends JDialog implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		
 		ImageManager im = GeneralHelpers.imageManager;
+		
+		try {
+			
+			im.loadNextImage();
+			
+		} catch (IndexOutOfBoundsException e) {
+			
+		}
 		
 		loadingBar.setMaximum(im.size());
 		loadingBar.setValue(im.getNumberOfLoadedImages());

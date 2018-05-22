@@ -38,6 +38,8 @@ public class ImageManager {
 	 * The number of images currently loaded.
 	 */
 	private int loadedCount;
+	
+	private String[] filenames;
 
 	/**
 	 * Creates a new ImageManager instance.
@@ -48,13 +50,11 @@ public class ImageManager {
 		loaded = false;
 		lastLoaded = null;
 		imageCount = 0;
+		filenames = null;
 		
 	}
 	
-	/**
-	 * Loads all images from the images subdirectory.
-	 */
-	public void loadAllImages() {
+	private void readImagesDirectory() {
 		
 		InputStream inStream = ImageManager.class.getClassLoader().getResourceAsStream(Settings.getImagesDirectory());
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
@@ -66,20 +66,41 @@ public class ImageManager {
 		// set the number of images we are looking to load
 		imageCount = objs.length;
 		
-		// begin loading images.
-		for (Object obj : objs) {
+		filenames = new String[objs.length];
+		
+		for (int i = 0; i < filenames.length; i++) {
 			
-			String filename = (String)obj;
-
+			filenames[i] = (String)objs[i];
+			
+		}
+		
+	}
+	
+	/**
+	 * Loads all images from the images subdirectory.
+	 */
+	public void loadNextImage() {
+		
+		if (filenames == null) {
+			
+			readImagesDirectory();
+			
+		}
+		
+		try {
+			String filename = filenames[loadedCount++];
+	
 			Image img = GeneralHelpers.getImage(filename);
 			
 			images.put(filename, img);
 			lastLoaded = filename;
-			loadedCount++;
+			
+		} catch (IndexOutOfBoundsException e) {
+			
+			loaded = true;
+			throw e;
 			
 		}
-		
-		loaded = true;
 		
 	}
 	

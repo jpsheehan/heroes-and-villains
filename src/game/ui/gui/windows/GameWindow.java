@@ -88,6 +88,7 @@ public class GameWindow implements GameEventListener {
 					}
 					
 					frmHeroesAndVillains.dispose();
+					// Thread.currentThread().stop();
 					
 				}
 			}
