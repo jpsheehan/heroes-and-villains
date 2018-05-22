@@ -14,6 +14,9 @@ public enum CityType implements Serializable {
 	LAW,
 	MATARIKI;
 	
+	/**
+	 * @return The name of the city as it appears in the strings file.
+	 */
 	public String getProperName() {
 		
 		switch (this) {
@@ -46,6 +49,9 @@ public enum CityType implements Serializable {
 		
 	}
 	
+	/**
+	 * @return The human-readable version of the city type.
+	 */
 	public String getName() {
 		
 		return GeneralHelpers.getString(this.getProperName() + ".Name");
