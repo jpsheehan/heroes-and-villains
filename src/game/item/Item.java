@@ -10,7 +10,12 @@ import java.io.Serializable;
 
 import static game.GeneralHelpers.getInt;
 
-public abstract class Item implements Buyable, Nameable, Describable, Serializable {
+/**
+ * An item such as a map, power up or healing item.
+ * @author jesse
+ *
+ */
+public abstract class Item implements Nameable, Describable, Serializable {
 	
 	/**
 	 * Required for implementing the Serializable interface.
@@ -50,7 +55,7 @@ public abstract class Item implements Buyable, Nameable, Describable, Serializab
 	}
 
 	/**
-	 * Returns the name of the Item.
+	 * @return The name of the Item.
 	 */
 	@Override
 	public final String getName() {
@@ -58,15 +63,14 @@ public abstract class Item implements Buyable, Nameable, Describable, Serializab
 	}
 
 	/**
-	 * Returns the price of the Item.
+	 * @return The price of the Item.
 	 */
-	@Override
 	public final int getPrice() {
 		return this.price;
 	}
 	
 	/**
-	 * Returns the flavour text describing this item.
+	 * @return The flavour text describing this item.
 	 */
 	@Override
 	public final String getFlavourText() {
@@ -74,22 +78,20 @@ public abstract class Item implements Buyable, Nameable, Describable, Serializab
 	}
 	
 	/**
-	 * Gets the type of the item.
-	 * @return
+	 * @return The type of the item.
 	 */
 	public final ItemType getType() {
 		return this.type;
 	}
 	
 	/**
-	 * Returns an item from the strings file.
 	 * All items must have Name, Flavour, Price and Type keys.
 	 * Valid type values are "Healing", "Map" and "PowerUp".
 	 * Healing items require ApplicationTime, RestorationLevel
 	 * PowerUp items require Ability, AppliesTo
 	 * Valid MinigameTypes for AppliesTo are "PaperScissorsRock", "DiceRolls", "GuessTheNumber" and "All".
 	 * @param specifier The item to return.
-	 * @return
+	 * @return An item from the strings file.
 	 */
 	public static Item fromStrings(String specifier, float scalePrice) {
 		
