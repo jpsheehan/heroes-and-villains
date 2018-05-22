@@ -55,13 +55,6 @@ public class Inventory implements Serializable {
 			
 		}
 		
-		// Uncomment to disallow purchase of identical items.
-//		if (this.exists(item)) {
-//			
-//			throw new IllegalArgumentException(String.format("item %s already exists in inventory", item.getName()));
-//			
-//		}
-		
 		if (item instanceof HealingItem) {
 			
 			listHealingItems.add(item);
@@ -144,7 +137,7 @@ public class Inventory implements Serializable {
 	/**
 	 * Checks to see if the item exists.
 	 * @param item The item to check for.
-	 * @return
+	 * @return True if the item exists. False otherwise.
 	 */
 	public boolean exists(Item item) {
 		
@@ -174,8 +167,7 @@ public class Inventory implements Serializable {
 	}
 	
 	/**
-	 * Returns an array of maps in the inventory.
-	 * @return
+	 * @return An array of maps in the inventory.
 	 */
 	public Map[] getMaps() {
 
@@ -186,8 +178,7 @@ public class Inventory implements Serializable {
 	}
 	
 	/**
-	 * Returns an array of power up items in the inventory.
-	 * @return
+	 * @return An array of power up items in the inventory.
 	 */
 	public PowerUpItem[] getPowerUpItems() {
 		
@@ -198,8 +189,7 @@ public class Inventory implements Serializable {
 	}
 	
 	/**
-	 * Returns an array of healing items in the inventory.
-	 * @return
+	 * @return An array of healing items in the inventory.
 	 */
 	public HealingItem[] getHealingItems() {
 
@@ -210,8 +200,7 @@ public class Inventory implements Serializable {
 	}
 	
 	/**
-	 * Returns an array of all items.
-	 * @return
+	 * @return An array of all items.
 	 */
 	public Item[] getAllItems() {
 		
@@ -240,8 +229,7 @@ public class Inventory implements Serializable {
 	}
 	
 	/**
-	 * Returns the number of items in the inventory.
-	 * @return
+	 * @return The number of items in the inventory.
 	 */
 	public int size() {
 		

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * The direction an area resides in. The home base always resides in the centre.
- *
  */
 public enum Direction implements Serializable {
 	NORTH,
@@ -13,6 +12,9 @@ public enum Direction implements Serializable {
 	WEST,
 	CENTRE;
 	
+	/**
+	 * @return The human-readable form of the direction.
+	 */
 	public String toString() {
 		
 		switch (this) {

@@ -120,7 +120,7 @@ public class CityController implements Serializable {
 	}
 	
 	/**
-	 * Gets the current City.
+	 * @return The current City.
 	 */
 	public City getCurrentCity() {
 		
@@ -129,8 +129,7 @@ public class CityController implements Serializable {
 	}
 	
 	/**
-	 * Returns the current area in the current city.
-	 * @return
+	 * @return The current area in the current city.
 	 */
 	public Area getCurrentArea() {
 		
@@ -139,7 +138,7 @@ public class CityController implements Serializable {
 	}
 	
 	/**
-	 * Returns the current direction in the current city. 
+	 * @return The current direction in the current city. 
 	 */
 	public Direction getDirection() {
 		
@@ -215,9 +214,8 @@ public class CityController implements Serializable {
 	}
 	
 	/**
-	 * Returns true if the team has visited a particular direction in this city.
 	 * @param direction The direction to check.
-	 * @return
+	 * @return True if the team has visited a particular direction in this city.
 	 */
 	public boolean hasVisitedDirection(Direction direction) {
 		
@@ -248,8 +246,8 @@ public class CityController implements Serializable {
 	}
 	
 	/**
-	 * Check whether or not the map has been used in this area.
-	 * @return
+	 * Check whether or not the map has been used in this city.
+	 * @return True if the team has used a map in this city.
 	 */
 	public boolean hasUsedMap() {
 		
@@ -257,6 +255,10 @@ public class CityController implements Serializable {
 		
 	}
 	
+	/**
+	 * Sends the team to a specific location.
+	 * @param direction The absolute direction to travel to.
+	 */
 	public void goTo(Direction direction) {
 		
 		this.direction = direction;
@@ -269,6 +271,9 @@ public class CityController implements Serializable {
 		
 	}
 	
+	/**
+	 * @return True if this is the last city.
+	 */
 	public boolean isLastCity() {
 		
 		return this.cityIndex == this.cities.length - 1;

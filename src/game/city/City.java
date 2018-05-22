@@ -156,6 +156,11 @@ public class City implements Nameable, Describable, Serializable {
 		
 	}
 	
+	/**
+	 * Gets the area based on the AreaType.
+	 * @param type The type of area to get.
+	 * @return The Area object.
+	 */
 	public Area getArea(AreaType type) {
 		
 		for (Area area : areas.values()) {
@@ -181,13 +186,16 @@ public class City implements Nameable, Describable, Serializable {
 	}
 	
 	/**
-	 * Returns the City's name.
+	 * @return The City's name.
 	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return The city's description.
+	 */
 	@Override
 	public String getFlavourText() {
 

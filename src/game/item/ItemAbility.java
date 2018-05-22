@@ -8,13 +8,42 @@ import static game.GeneralHelpers.getString;
 
 import java.io.Serializable;
 
+/**
+ * An ability that items have.
+ * @author jesse
+ */
 public enum ItemAbility implements Ability, Nameable, Describable, Serializable {
-	WIN_ON_DRAW, // for dice game and paper scissors rock
-	DAMAGE_PROTECTION, // (single use) stops a hero from taking damage once
-	INCREASE_GIFT_CHANCE,
-	DECREASE_ROBBERY_CHANCE, 
-	FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER; // applies to the next guess the number game
 	
+	/**
+	 * For Dice Game and Paper, Scissors, Rock.
+	 */
+	WIN_ON_DRAW,
+	
+	/**
+	 * Stops a single hero from taking damage once.
+	 * TODO: Implement
+	 */
+	DAMAGE_PROTECTION,
+	
+	/**
+	 * Increases the amount of money the hero gets if this hero defeats the villain.
+	 * TODO: Implement
+	 */
+	INCREASE_GIFT_CHANCE,
+	
+	/**
+	 * TODO: Change this!!!
+	 */
+	DECREASE_ROBBERY_CHANCE,
+	
+	/**
+	 * Applies to the Guess the Number game.
+	 */
+	FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER;
+	
+	/**
+	 * @return The human-readable name of the Item ability.
+	 */
 	@Override
 	public String getName() {
 		
@@ -22,6 +51,9 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 		
 	}
 	
+	/**
+	 * @return The name of the item ability as it appears in the strings.json file.
+	 */
 	public String getProperName() {
 
 		switch (this) {
@@ -48,6 +80,9 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 		
 	}
 	
+	/**
+	 * @return The description of the ability.
+	 */
 	@Override
 	public String getFlavourText() {
 		
@@ -55,6 +90,11 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 		
 	}
 	
+	/**
+	 * Converts the string into an ItemAbility.
+	 * @param name The name to convert.
+	 * @return A valid ItemAbility.
+	 */
 	public static ItemAbility fromProperName(String name) {
 		
 		switch (name) {
@@ -86,10 +126,3 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 		
 	}
 }
-
-
-// win on draw - Grade scaling
-// damage protection - Special consideration
-// increase gift chance - ??? TODO: think
-// decrease robbery chance - bike lock
-// four attempts at number game - Resit

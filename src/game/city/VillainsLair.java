@@ -3,6 +3,10 @@ package game.city;
 import game.character.Villain;
 import game.BattleScreen;
 
+/**
+ * Represents a Villain's Lair.
+ * @author jesse
+ */
 public class VillainsLair extends Area {
 	
 	/**
@@ -34,7 +38,7 @@ public class VillainsLair extends Area {
 	}
 
 	/**
-	 * @return the villain in this lair
+	 * @return The villain in this lair
 	 */
 	public Villain getVillain() {
 		
@@ -43,7 +47,7 @@ public class VillainsLair extends Area {
 	}
 
 	/**
-	 * @return the battleScreen
+	 * @return The battleScreen
 	 */
 	public BattleScreen getBattleScreen() {
 		
