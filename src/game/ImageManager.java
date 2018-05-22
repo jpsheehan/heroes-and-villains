@@ -39,6 +39,9 @@ public class ImageManager {
 	 */
 	private int loadedCount;
 	
+	/**
+	 * Holds all of the filenames in the images directory.
+	 */
 	private String[] filenames;
 
 	/**
@@ -112,6 +115,16 @@ public class ImageManager {
 	public Image get(String key) {
 		
 		return this.images.get(key);
+		
+	}
+	
+	/**
+	 * @param key The key to search for.
+	 * @return True if the image with the key exists, false otherwise.
+	 */
+	public boolean contains(String key) {
+		
+		return this.images.containsKey(key);
 		
 	}
 	

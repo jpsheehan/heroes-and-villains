@@ -14,8 +14,10 @@ import game.ui.gui.panels.areas.ShopAreaPanel;
 import game.ui.gui.panels.areas.VillainsLairPanel;
 import game.GameEnvironment;
 import game.GameWonException;
+import game.GeneralHelpers;
 import game.city.Area;
 import game.city.AreaType;
+import game.city.CityController;
 import game.city.Direction;
 
 import javax.swing.JPanel;
@@ -212,11 +214,23 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 		
 		if (currentAreaPanel != null) {
 			
+			CityController cc = getGameEnvironment().getCityController();
+			
 			areaPanelHolder.add(currentAreaPanel, BorderLayout.CENTER);
 			areaSummaryPanel.update();
-			lblAreaTitle.setText(String.format("%s > %s", getGameEnvironment().getCityController().getCurrentCity().getName(), getGameEnvironment().getCityController().getCurrentArea().getName()));
-			lblAreaSubtitle.setText(getGameEnvironment().getCityController().getCurrentArea().getType().toString());
+			lblAreaTitle.setText(String.format("%s > %s", cc.getCurrentCity().getName(), cc.getCurrentArea().getName()));
+			lblAreaSubtitle.setText(cc.getCurrentArea().getType().toString());
 			currentAreaPanel.update();
+			
+			// Load the image of the area if it exists, otherwise load the duck instead.
+			String imageName = String.format("%s.%s.jpg", cc.getCurrentCity().getType().getProperName(), cc.getCurrentArea().getType().toProperString());
+			if (!GeneralHelpers.imageManager.contains(imageName)) {
+				
+				imageName = "duck.jpg";
+				
+			}
+			
+			imagePanel.setImagePath(imageName);
 			
 		}
 		
