@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 import game.ui.gui.panels.MainMenuPanel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameWindow implements GameEventListener {
 
@@ -33,6 +35,8 @@ public class GameWindow implements GameEventListener {
 	private DebugMenuBar menuBar;
 	
 	private boolean debugMode;
+	
+	private GameEnvironment env;
 
 	/**
 	 * Create the application.
@@ -55,10 +59,43 @@ public class GameWindow implements GameEventListener {
 		
 		Dimension size = new Dimension(800, 600);
 		frmHeroesAndVillains = new JFrame();
+		frmHeroesAndVillains.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				
+				int result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Are you sure you want to quit?", "Quit Game", JOptionPane.YES_NO_OPTION);
+				
+				if (result == JOptionPane.YES_OPTION) {
+					
+					if (env != null) {
+						
+						try {
+							
+							env.saveState();
+							
+						} catch (IOException e) {
+							
+							result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Could not save the game. Are you sure you want to exit?", "Error", JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_OPTION);
+							
+							if (result == JOptionPane.NO_OPTION) {
+								
+								return;
+								
+							}
+							
+						}
+						
+					}
+					
+					frmHeroesAndVillains.dispose();
+					
+				}
+			}
+		});
 		frmHeroesAndVillains.setTitle("Heroes and Villains - Campus Edition");
 		
 		frmHeroesAndVillains.setBounds(100, 100, 450, 300);
-		frmHeroesAndVillains.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHeroesAndVillains.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmHeroesAndVillains.setMaximumSize(size);
 		frmHeroesAndVillains.setSize(size);
 		
@@ -102,7 +139,6 @@ public class GameWindow implements GameEventListener {
 	 */
 	@Override
 	public void gameEventPerformed(GameEvent event) {
-		GameEnvironment env;
 		
 		switch (event.getType()) {
 		
@@ -145,19 +181,13 @@ public class GameWindow implements GameEventListener {
 				break;
 				
 			case QUIT_GAME:
-				
-				int result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Are you sure you want to quit?", "Quit Game", JOptionPane.YES_NO_OPTION);
-				
-				if (result == JOptionPane.YES_OPTION) {
-					
-					frmHeroesAndVillains.dispose();
-					
-				}
+				frmHeroesAndVillains.dispatchEvent(new WindowEvent(frmHeroesAndVillains, WindowEvent.WINDOW_CLOSING));
 				break;
 				
 			case MAIN_MENU:
 				switchPanel(new MainMenuPanel(this));
 				menuBar.setMainGamePanel(null);
+				env = null;
 				break;
 			
 			default:
