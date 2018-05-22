@@ -32,18 +32,24 @@ There are several different types of Students in our game. Each student has a na
     The top of his class,
     He easily passed.
     And now he works down at the dairy.
+    
+    There was a young man called Simon,
+    Who wanted to be a lineman.
+    Engineering was his path.
+    But he failed the math.
+    Now works in the cafe as a pieman.
 
-**Ability:** *Throw Money* - Literally throws money away, having no positive effect on the game whatsoever. No one knows why they keep doing it. May occassionally have an additional effect *Waste Time* that hangs the game for several seconds.
+**Ability** *Witty Phrases* - updated such that the Arts Student does not carry an inherent ability but is good for the team by providing a source of witty phrases and other jokes thereby boosting team morale. 
 
 ### **Mathematics/Statistics**
 
-**Flavour Text:** TODO
+**Flavour Text:** Maths and Stats students manipulate and study numbers, and letters in place of numbers, in ways that are unimaginable. One wonders if there is a strange sense of satisfaction in watching other disciplines suffer through Mathes and Stats courses.
 
-**Ability:** *Improve Odds* - Using rigorous statistical method, these students have figured out how to improve their odds in some games.
+**Ability:** *Improve Odds* - Using rigorous statistical methods, these students have figured out how to improve their odds in some games.
 
 ### **Sciences**
 
-**Flavour Text:** TODO
+**Flavour Text:** Chemists, Physicists, Biologists etc can concoct, analyse, modify the physical world around them. 
 
 **Ability:** *Quick Recovery* - TODO ... doubling the recovery rate of all team members.
 
@@ -54,9 +60,9 @@ There are several different types of Students in our game. Each student has a na
 **Ability:** *Objection* - Your team cannot be robbed when travelling to a new building.
 
 
-### **Commerce**
+### **Commerce** 
 
-**Flavour Text:** TODO
+**Flavour Text:** Commerce students understand the ins and outs of profit and loss, EBITDA etc. Why do accountancy firms have double or triple barreled names?
 
 **Ability:** *Haggle* - Reduces the prices of all items in the game.
 
