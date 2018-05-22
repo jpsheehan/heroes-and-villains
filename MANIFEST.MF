@@ -1,0 +1,3 @@
+Main-Class: game.Main
+Class-Path: lib/gson-2.8.2.jar lib/jgoodies-common-1.8.0.jar lib/jgoodies-forms-1.8.0.jar
+
