@@ -44,23 +44,21 @@ public abstract class Area implements Nameable, Describable, Serializable {
 	}
 	
 	/**
-	 * Returns the name of the Area.
+	 * @return The name of the Area.
 	 */
 	public final String getName() {
 		return this.name;
 	}
 	
 	/**
-	 * Returns the type of Area this represents.
-	 * @return
+	 * @return The type of Area this represents.
 	 */
 	public final AreaType getType() {
 		return this.type;
 	}
 	
 	/**
-	 * Returns the description of the Area.
-	 * @return
+	 * @return The description of the Area.
 	 */
 	public final String getFlavourText() {
 		return this.description;

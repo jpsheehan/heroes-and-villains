@@ -4,15 +4,37 @@ import java.io.Serializable;
 
 /**
  * Denotes the type of area an Area object is.
- *
  */
 public enum AreaType implements Serializable {
+	
+	/**
+	 * Where the team can use a map.
+	 */
 	HOME_BASE,
+	
+	/**
+	 * Where the team can buy items.
+	 */
 	SHOP,
+	
+	/**
+	 * Where the team can battle the villain.
+	 */
 	VILLAINS_LAIR,
+	
+	/**
+	 * Where the team can apply healing items.
+	 */
 	HOSPITAL,
+	
+	/**
+	 * Where the team can apply power up items.
+	 */
 	POWER_UP_DEN;
 	
+	/**
+	 * @return A human readable string denoting the type of area.
+	 */
 	@Override
 	public String toString() {
 		
@@ -40,18 +62,17 @@ public enum AreaType implements Serializable {
 	}
 	
 	/**
-	 * Gets the AreaType as a string that can be used as a specifier in strings.json.
-	 * @return
+	 * @return The AreaType as a string that can be used as a specifier in strings.json.
 	 */
 	public String toProperString() {
 		
+		// Kind of lazy implementation lol
 		return this.toString().replaceAll(" ", "").replaceAll("'", "");
 		
 	}
 	
 	/**
-	 * Returns the letter to use as a legend on a map.
-	 * @return
+	 * @return The letter to use as a legend on a map.
 	 */
 	public String getMapLegend() {
 		
