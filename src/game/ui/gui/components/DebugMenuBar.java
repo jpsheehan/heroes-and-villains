@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import game.BattleScreen;
 import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
@@ -16,6 +17,7 @@ import game.character.Hero;
 import game.character.HeroType;
 import game.city.CityController;
 import game.item.Item;
+import game.minigame.MinigameType;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
@@ -106,6 +108,36 @@ public class DebugMenuBar extends JMenuBar {
 			}
 		});
 		mnTriggerEvent.add(mntmGoToNext);
+		
+		JMenu mnCheats = new JMenu("Cheats");
+		add(mnCheats);
+		
+		JMenu mnForceMinigame = new JMenu("Force Minigame");
+		mnCheats.add(mnForceMinigame);
+		
+		JMenuItem mntmForceDiceRolls = new JMenuItem("Dice Rolls");
+		mnForceMinigame.add(mntmForceDiceRolls);
+		
+		JMenuItem mntmForceGuessThe = new JMenuItem("Guess The Number");
+		mntmForceGuessThe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BattleScreen.forceMinigameType(MinigameType.GUESS_THE_NUMBER);
+			}
+		});
+		mnForceMinigame.add(mntmForceGuessThe);
+		
+		JMenuItem mntmForcePaperScissorsRock = new JMenuItem("Paper, Scissors, Rock");
+		mntmForcePaperScissorsRock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BattleScreen.forceMinigameType(MinigameType.PAPER_SCISSORS_ROCK);
+			}
+		});
+		mnForceMinigame.add(mntmForcePaperScissorsRock);
+		mntmForceDiceRolls.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BattleScreen.forceMinigameType(MinigameType.DICE_ROLLS);
+			}
+		});
 		
 	}
 	

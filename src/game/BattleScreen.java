@@ -62,6 +62,11 @@ public class BattleScreen implements Serializable {
 	private Minigame minigame;
 	
 	/**
+	 * The type of minigame to force (for debug menu).
+	 */
+	private static MinigameType forcedType;
+	
+	/**
 	 * Creates a new BattleScreen.
 	 * @param villain The villain the hero is to battle.
 	 * @param cityIndex The index of the city the team is in.
@@ -156,6 +161,10 @@ public class BattleScreen implements Serializable {
 			
 			type = possibleTypes[GeneralHelpers.getRandom().nextInt(possibleTypes.length)];
 			
+		}
+		
+		if (forcedType != null) {
+			type = forcedType;
 		}
 		
 		this.setMinigame(type);
@@ -312,6 +321,14 @@ public class BattleScreen implements Serializable {
 			
 		}
 		
+	}
+	
+	/**
+	 * Forces the minigame type across all Villain's Lairs.
+	 * @param type The type of minigame to force.
+	 */
+	public static void forceMinigameType(MinigameType type) {
+		forcedType = type;
 	}
 	
 }

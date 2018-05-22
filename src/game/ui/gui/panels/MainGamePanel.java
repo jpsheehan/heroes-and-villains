@@ -156,7 +156,7 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 		
 	}
 		
-	private GameEnvironment getGameEnvironment() {
+	public GameEnvironment getGameEnvironment() {
 		return this.gameEnvironment;
 	}
 	
