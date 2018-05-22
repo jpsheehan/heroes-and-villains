@@ -133,6 +133,14 @@ public class DebugMenuBar extends JMenuBar {
 			}
 		});
 		mnForceMinigame.add(mntmForcePaperScissorsRock);
+		
+		JMenuItem mntmForceReset = new JMenuItem("Reset");
+		mntmForceReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BattleScreen.forceMinigameType(null);
+			}
+		});
+		mnForceMinigame.add(mntmForceReset);
 		mntmForceDiceRolls.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BattleScreen.forceMinigameType(MinigameType.DICE_ROLLS);
