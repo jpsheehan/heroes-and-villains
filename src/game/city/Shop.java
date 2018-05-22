@@ -8,7 +8,6 @@ import game.item.Item;
 
 /**
  * The Shop class as described in section 2.3.2 of the specification.
- *
  */
 public class Shop extends Area {
 
@@ -48,14 +47,14 @@ public class Shop extends Area {
 	}
 	
 	/**
-	 * Returns the list of Items to sell.
+	 * @return The list of Items to sell.
 	 */
 	public Inventory getInventory() {
 		return this.inventory;
 	}
 	
 	/**
-	 * Returns the InnKeeper.
+	 * @return The InnKeeper.
 	 */
 	public InnKeeper getInnKeeper() {
 		return this.innKeeper;

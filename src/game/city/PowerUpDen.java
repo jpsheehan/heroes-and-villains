@@ -1,5 +1,9 @@
 package game.city;
 
+/**
+ * Represents a Power Up Den.
+ * @author jesse
+ */
 public class PowerUpDen extends Area {
 
 	/**

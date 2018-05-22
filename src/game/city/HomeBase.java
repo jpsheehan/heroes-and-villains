@@ -1,5 +1,9 @@
 package game.city;
 
+/**
+ * Represents a HomeBase.
+ * @author jesse
+ */
 public class HomeBase extends Area {
 
 	/**

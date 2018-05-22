@@ -1,5 +1,9 @@
 package game.city;
 
+/**
+ * Represents a failure of the team moving.
+ * @author jesse
+ */
 public class TeamMovementException extends Exception {
 
 	/**
@@ -23,8 +27,7 @@ public class TeamMovementException extends Exception {
 	}
 	
 	/**
-	 * Gets the direction the user intends to travel.
-	 * @return
+	 * @return The direction the user intends to travel.
 	 */
 	public Direction getIntendedDirection() {
 		
