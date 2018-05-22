@@ -50,15 +50,14 @@ public class HealingItem extends Item implements Serializable {
 	}
 	
 	/**
-	 * Returns the restoration level of the HealingItem. Health is restored in 25% increments, so a restoration level of 2 will restore 50% of the Hero's health.
+	 * @return The restoration level of the HealingItem. Health is restored in 25% increments, so a restoration level of 2 will restore 50% of the Hero's health.
 	 */
 	public int getRestorationLevel() {
 		return this.restorationLevel;
 	}
 	
 	/**
-	 * Returns the time (in seconds) for the Hero's health to be restored by the amount specified by the restoration level.
-	 * @return
+	 * @return The time (in seconds) for the Hero's health to be restored by the amount specified by the restoration level.
 	 */
 	public int getApplicationTime() {
 		return this.applicationTime;
@@ -66,9 +65,3 @@ public class HealingItem extends Item implements Serializable {
 
 }
 
-// types of healing items:
-/*
- * two dollar rice - heals for 25% - $2
- * shilling burger - 100% - $20
- * coffee and muffin - %50 - $5 // $8 when not a thursday
- */ // research required
