@@ -69,7 +69,7 @@
 	"JamesHight.Flavour": "UC campus central!",
 	"JamesHight.Shop.Name": "Shilling Club & Cafe 1864",
 	"JamesHight.Shop.Flavour": "Best coffee on campus",
-	"JamesHight.Shop.Items": "Coffee, Pie, SBurger, Salad, Wedges, Eggs, Map",
+	"JamesHight.Shop.Items": "Coffee, Pie, SBurger, Salad, Wedges, Eggs, Map, FourAttempts",
 	"JamesHight.HomeBase.Name": "Undercroft",
 	"JamesHight.HomeBase.Flavour": "Was once bicycle storage",
 	"JamesHight.PowerUpDen.Name": "Level 11",
@@ -173,7 +173,7 @@
 	"Ability.Item.DecreaseRobberyChance.Name": "Decrease Robbery Chance",
 	"Ability.Item.DecreaseRobberyChance.Flavour": "Less likely to be robbed",
 	"Ability.Item.FourAttemptsAtGuessTheNumber.Name": "Four Attempts At Guess The Number",
-	"Ability.Item.FourAttemptsAtGuessTheNumber.Flavour": "",
+	"Ability.Item.FourAttemptsAtGuessTheNumber.Flavour": "More turns, maybe you'll win",
 	"Ability.Item.IncreaseGiftChance.Name": "Increase Gift Chance",
 	"Ability.Item.IncreaseGiftChance.Flavour": "More likely to receive a gift",
 	"Ability.Item.WinOnDraw.Name": "Win On Draw",
@@ -186,7 +186,7 @@
     He easily passed.
     And now he works down at the dairy.
     
-    There was a young man called Simon,
+      There was a young man called Simon,
     Who wanted to be a lineman.
     Engineering was his path.
     But he failed the math.
@@ -443,6 +443,13 @@
 	"Item.VCurry.Price": "10",
 	"Item.VCurry.Type": "PowerUp",
 	"Item.VCurry.Ability": "DamageProtection",
-	"Item.VCurry.AppliesTo": "All"
+	"Item.VCurry.AppliesTo": "All",
+	
+	"Item.FourAttempts.Name": "IncreaseTurns",
+	"Item.FourAttempts.Flavour": "More chances to guess",
+	"Item.FourAttempts.Price": "18",
+	"Item.FourAttempts.Type": "PowerUp",
+	"Item.FourAttempts.Ability": "FourAttemptsAtGuessTheNumber",
+	"Item.FourAttempts.AppliesTo": "GuessTheNumber"
 	
 }
