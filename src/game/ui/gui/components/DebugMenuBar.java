@@ -1,11 +1,14 @@
 package game.ui.gui.components;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import game.GameEnvironment;
 import game.Team;
@@ -55,6 +58,21 @@ public class DebugMenuBar extends JMenuBar {
 			}
 		});
 		mnDebugMenu.add(mntmQuickStart);
+		
+		JMenuItem mntmClearSaveStates = new JMenuItem("Clear Save States");
+		mntmClearSaveStates.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for (File file : GameEnvironment.getSaveStates()) {
+					
+					file.delete();
+					
+				}
+				
+				JOptionPane.showMessageDialog(getRootPane(), "Cleared all save states.", "Success", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+		});
+		mnDebugMenu.add(mntmClearSaveStates);
 		
 		JMenu mnTriggerEvent = new JMenu("Trigger Event");
 		add(mnTriggerEvent);

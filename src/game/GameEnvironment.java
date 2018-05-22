@@ -171,7 +171,7 @@ public class GameEnvironment implements Serializable {
 	 * Gets an array of file objects found in the save directory.
 	 * @return An array of Files.
 	 */
-	private static File[] getSaveStates() {
+	public static File[] getSaveStates() {
 		
 		File saveDir = new File(Settings.getSaveDirectory());
 		
