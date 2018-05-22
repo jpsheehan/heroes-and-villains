@@ -1,6 +1,5 @@
 package game.ui.gui.components;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -16,6 +15,7 @@ import game.TeamFullException;
 import game.character.Hero;
 import game.character.HeroType;
 import game.city.CityController;
+import game.item.Item;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
@@ -49,6 +49,8 @@ public class DebugMenuBar extends JMenuBar {
 				} catch (TeamFullException e) {
 					throw new AssertionError();
 				}
+				
+				team.getInventory().add(Item.fromStrings("WinOnDraw", 1f));
 				
 				GameEnvironment env = new GameEnvironment();
 				env.setTeam(team);
