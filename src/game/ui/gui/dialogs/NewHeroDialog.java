@@ -50,20 +50,6 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	private JTextArea textAreaHeroTypeFlavourText;
 	private JTextArea textAreaHeroAbilityFlavourText;
 	private JProgressBar progressBarMaxHealth, progressBarRecoveryRate;
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			NewHeroDialog dialog = new NewHeroDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.

@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import game.Team;
 import game.character.Hero;
 import game.ui.gui.dialogs.ItemSelectionDialog;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -66,7 +67,9 @@ public class TeamSummaryPanel extends JPanel {
 		JButton btnInventory = new JButton("Inventory...");
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				(new ItemSelectionDialog(team.getInventory(), null, false, false)).setVisible(true);
+				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), null, false, false);
+				dlg.setLocationRelativeTo(GameWindow.getMainWindow());
+				dlg.setVisible(true);
 			}
 		});
 		inventoryPanel.add(btnInventory);

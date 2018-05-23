@@ -13,12 +13,12 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.ItemSelectionDialog;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -35,8 +35,6 @@ public class HomeBasePanel extends GenericAreaPanel {
 	 */
 	public HomeBasePanel(GameEventListener window, Team team, CityController cityController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		Component self = this;
 		
 		JPanel panel = new JPanel();
 		add(panel);
@@ -56,7 +54,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 				
 				if (cityController.hasUsedMap()) {
 					
-					JOptionPane.showMessageDialog(self, "You have already used a map in this building!", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "You have already used a map in this building!", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 					
 				}
@@ -71,7 +69,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 				
 				if (compSciHero != null) {
 					
-					JOptionPane.showMessageDialog(self, String.format("%s used their hacker abilities to break into the game's code and reveal the entire map of %s!", compSciHero.getName(), cityController.getCurrentCity().getName()), "Information", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s used their hacker abilities to break into the game's code and reveal the entire map of %s!", compSciHero.getName(), cityController.getCurrentCity().getName()), "Information", JOptionPane.INFORMATION_MESSAGE);
 					cityController.useMap(new Map("Fake Map", "Not real", 0));
 					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
 					update();
@@ -81,13 +79,13 @@ public class HomeBasePanel extends GenericAreaPanel {
 				
 				if (team.getInventory().getMaps().length == 0) {
 					
-					JOptionPane.showMessageDialog(self, "You don't have any maps to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "You don't have any maps to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 					
 				}
 				
 				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.MAP, false, true);
-				dlg.setLocationRelativeTo(self);
+				dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -103,7 +101,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 					cityController.useMap(map);
 					team.getInventory().remove(map);
 					
-					JOptionPane.showMessageDialog(self, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
 
 					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
 					

@@ -52,19 +52,6 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 	private Hero selectedHero;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			HeroSelectionDialog dialog = new HeroSelectionDialog(null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public HeroSelectionDialog(Hero[] heroes) {

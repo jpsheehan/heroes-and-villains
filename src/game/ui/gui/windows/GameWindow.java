@@ -50,6 +50,11 @@ public class GameWindow implements GameEventListener {
 	 * Create the application.
 	 */
 	public GameWindow(boolean debugMode) {
+		
+		if (GameWindow.window != null) {
+			throw new AssertionError("There can be only one window!");
+		}
+		
 		this.debugMode = debugMode;
 		
 		initialize();
@@ -236,6 +241,9 @@ public class GameWindow implements GameEventListener {
 		GameWindow.timers.add(timer);
 	}
 	
+	/**
+	 * @return The static window handle.
+	 */
 	public static Component getMainWindow() {
 		return GameWindow.window;
 	}

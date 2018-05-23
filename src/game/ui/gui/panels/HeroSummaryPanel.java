@@ -4,6 +4,7 @@ import game.character.Hero;
 import game.ui.gui.components.HeroHealthBar;
 import game.ui.gui.dialogs.HeroInformationDialog;
 import game.ui.gui.panels.areas.GenericAreaPanel;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.JLabel;
 
@@ -46,7 +47,9 @@ public class HeroSummaryPanel extends GenericAreaPanel {
 		btnMoreInfo = new JButton("More Info...");
 		btnMoreInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				(new HeroInformationDialog(hero)).setVisible(true);
+				HeroInformationDialog dlg = new HeroInformationDialog(hero);
+				dlg.setLocationRelativeTo(GameWindow.getMainWindow());
+				dlg.setVisible(true);
 			}
 		});
 		add(btnMoreInfo);

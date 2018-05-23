@@ -10,13 +10,13 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.ItemSelectionDialog;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
@@ -36,8 +36,6 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	 * Create the panel.
 	 */
 	public ShopAreaPanel(GameEventListener window, Shop shop, Team team) {
-
-		Component self = this;
 		
 		this.shop = shop;
 		this.team = team;
@@ -68,7 +66,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				ItemSelectionDialog dlg = new ItemSelectionDialog(shop.getInventory(), null, true, true);
-				dlg.setLocationRelativeTo(self);
+				dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -93,11 +91,11 @@ public class ShopAreaPanel extends GenericAreaPanel {
 						// Update the funds in the window
 						window.gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
 						
-						JOptionPane.showMessageDialog(self, String.format(shop.getInnKeeper().getDialogue().getPurchase(), item.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format(shop.getInnKeeper().getDialogue().getPurchase(), item.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
 						
 					} catch (Exception e2) {
 						
-						JOptionPane.showMessageDialog(self, "You don't have enough money for that.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "You don't have enough money for that.", "Error", JOptionPane.ERROR_MESSAGE);
 						
 					}
 					

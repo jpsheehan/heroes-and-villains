@@ -3,7 +3,6 @@ package game.ui.gui.panels;
 import game.ui.gui.panels.NavigationPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 
 import game.ui.gui.panels.TeamSummaryPanel;
 import game.ui.gui.panels.areas.GenericAreaPanel;
@@ -92,8 +91,6 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		Component self = this;
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -130,7 +127,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 					
 				} catch (IOException e) {
 					
-					int res = JOptionPane.showConfirmDialog((Component) self, "Could not save the game. Are you sure you want to quit?", "Error", JOptionPane.ERROR_MESSAGE);
+					int res = JOptionPane.showConfirmDialog(GameWindow.getMainWindow(), "Could not save the game. Are you sure you want to quit?", "Error", JOptionPane.ERROR_MESSAGE);
 					
 					if (res == JOptionPane.YES_OPTION) {
 						
@@ -184,7 +181,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 		// Prompt for confirmation before entering a Villain's Lair
 		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR && !gameEnvironment.getIgnoreRoomPrompt()) {
 			
-			int res = JOptionPane.showConfirmDialog((Component) this, "You are about to enter a Villain's Lair. You will not be able to leave until you beat the villain.\nAre you sure you want to enter?", "Caution", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int res = JOptionPane.showConfirmDialog(GameWindow.getMainWindow(), "You are about to enter a Villain's Lair. You will not be able to leave until you beat the villain.\nAre you sure you want to enter?", "Caution", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			
 			if (res != JOptionPane.YES_OPTION) {
 				
@@ -313,20 +310,20 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 			
 		} catch (RobberyPreventedException e) {
 			
-			JOptionPane.showMessageDialog((Component)this, String.format("A dodgy flatmate tried to take your %s! But %s used their knowledge of criminal law to deter them!", e.getItemNotRobbed().getName(), e.getLawStudent().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("A dodgy flatmate tried to take your %s! But %s used their knowledge of criminal law to deter them!", e.getItemNotRobbed().getName(), e.getLawStudent().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
 			
 		} catch (MoneyRobbedException e) {
 			
-			JOptionPane.showMessageDialog((Component)this, String.format("A dodgy flatmate went through %s's room and stole $%d. What a jerk!", nonDeadHero.getName(), e.getMoneyRobbed()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("A dodgy flatmate went through %s's room and stole $%d. What a jerk!", nonDeadHero.getName(), e.getMoneyRobbed()), "Random Event", JOptionPane.WARNING_MESSAGE);
 			gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
 			
 		} catch (ItemRobbedException e) {
 			
-			JOptionPane.showMessageDialog((Component)this, String.format("A dodgy flatmate went through %s's stuff and stole a %s. That's not nice!", nonDeadHero.getName(), e.getItemRobbed().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("A dodgy flatmate went through %s's stuff and stole a %s. That's not nice!", nonDeadHero.getName(), e.getItemRobbed().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
 			
 		} catch (ItemGiftedException e) {
 
-			JOptionPane.showMessageDialog((Component)this,  String.format("The government announced that every student shall receive a free %s! Thanks Aunty Cindy!", e.getItemGifted().getName()), "Random Event", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("The government announced that every student shall receive a free %s! Thanks Aunty Cindy!", e.getItemGifted().getName()), "Random Event", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		randomEventTimer.stop();

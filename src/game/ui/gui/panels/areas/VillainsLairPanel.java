@@ -29,7 +29,6 @@ import javax.swing.Timer;
 import game.ui.gui.components.VillainHealthBar;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
@@ -110,7 +109,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			public void actionPerformed(ActionEvent e) {
 				
 				HeroSelectionDialog dlg = new HeroSelectionDialog(gameEnvironment.getTeam().getHeroes());
-				dlg.setLocationRelativeTo((Component)self);
+				dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
@@ -129,7 +128,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			public void actionPerformed(ActionEvent arg0) {
 				
 				selectedHero.activatePowerUpItem();
-				JOptionPane.showMessageDialog((Component)self, String.format("You have activated %s! %s", selectedHero.getPowerUpItem().getName(), selectedHero.getPowerUpItem().getAbility().getFlavourText()), "Success", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("You have activated %s! %s", selectedHero.getPowerUpItem().getName(), selectedHero.getPowerUpItem().getAbility().getFlavourText()), "Success", JOptionPane.INFORMATION_MESSAGE);
 				update();
 				
 			}
@@ -389,7 +388,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
-		JOptionPane.showMessageDialog((Component) window, String.format("%s says \"%s\".", villainsLair.getVillain().getName(), villainsLair.getVillain().getTaunt()), "Villain's Taunt", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s says \"%s\".", villainsLair.getVillain().getName(), villainsLair.getVillain().getTaunt()), "Villain's Taunt", JOptionPane.WARNING_MESSAGE);
 		showDialogTimer.stop();
 		
 	}

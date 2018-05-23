@@ -33,19 +33,6 @@ public class LoadingResourcesDialog extends JDialog implements ActionListener {
 	private long openTime;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			LoadingResourcesDialog dialog = new LoadingResourcesDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public LoadingResourcesDialog() {

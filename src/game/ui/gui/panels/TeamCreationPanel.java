@@ -2,7 +2,6 @@ package game.ui.gui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +29,8 @@ import game.character.Hero;
 import game.ui.gui.DialogResult;
 import game.ui.gui.dialogs.EditHeroDialog;
 import game.ui.gui.dialogs.NewHeroDialog;
+import game.ui.gui.windows.GameWindow;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -53,7 +54,6 @@ public class TeamCreationPanel extends JPanel {
 	 */
 	public TeamCreationPanel() {
 		Color defaultTextFieldBackgroundColor;
-		Component self = this;
 		
 		heroes = new DefaultListModel<Hero>();
 		
@@ -127,6 +127,7 @@ public class TeamCreationPanel extends JPanel {
 						if (heroes.size() < Settings.getHeroesMax()) {
 							
 							NewHeroDialog dlg = new NewHeroDialog();
+							dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 							dlg.setVisible(true);
 							
 							if (dlg.getDialogResult() == DialogResult.OK) {
@@ -145,16 +146,16 @@ public class TeamCreationPanel extends JPanel {
 									} else {
 										
 										// a hero with that name exists
-										JOptionPane.showMessageDialog(self, "A hero already exists with that name.");
+										JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "A hero already exists with that name.", "Error", JOptionPane.ERROR_MESSAGE);
 										
 									}
 								
 								} else {
 									
 									// the hero name is not valid
-									JOptionPane.showMessageDialog(self, String.format(
+									JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format(
 											"The hero's name is not valid. It must contain between %d and %d characters.",
-											Settings.getHeroNameMin(), Settings.getHeroNameMax()));
+											Settings.getHeroNameMin(), Settings.getHeroNameMax()), "Error", JOptionPane.ERROR_MESSAGE);
 									
 								}
 								
@@ -163,9 +164,9 @@ public class TeamCreationPanel extends JPanel {
 						} else {
 							
 							// you have too many heroes in your team
-							JOptionPane.showMessageDialog(self,
+							JOptionPane.showMessageDialog(GameWindow.getMainWindow(),
 									String.format("You have too many heroes in your team. You can have, at most, %d.",
-											Settings.getHeroesMax()));
+											Settings.getHeroesMax()), "Error", JOptionPane.ERROR_MESSAGE);
 							
 						}
 						
@@ -181,6 +182,7 @@ public class TeamCreationPanel extends JPanel {
 						Hero originalHero = listHeroes.getSelectedValue();
 						
 						EditHeroDialog dlg = new EditHeroDialog(originalHero);
+						dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 						dlg.setVisible(true);
 						
 						if (dlg.getDialogResult() == DialogResult.OK) {
@@ -196,7 +198,7 @@ public class TeamCreationPanel extends JPanel {
 								
 							} else {
 								
-								JOptionPane.showMessageDialog(self, "No changes were made to the hero.");
+								JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "No changes were made to the hero.", "Information", JOptionPane.INFORMATION_MESSAGE);
 								
 							}
 							
@@ -213,7 +215,7 @@ public class TeamCreationPanel extends JPanel {
 						
 						Hero removedHero = listHeroes.getSelectedValue();
 						
-						int result = JOptionPane.showConfirmDialog(self, String.format("Are you sure you want to remove %s from the team?", removedHero));
+						int result = JOptionPane.showConfirmDialog(GameWindow.getMainWindow(), String.format("Are you sure you want to remove %s from the team?", removedHero), "Remove Hero", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
 						
 						if (result == JOptionPane.YES_OPTION) {
 							

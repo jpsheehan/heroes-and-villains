@@ -23,6 +23,7 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
 import game.ui.gui.panels.MainGamePanel;
+import game.ui.gui.windows.GameWindow;
 
 public class DebugMenuBar extends JMenuBar {
 
@@ -75,7 +76,7 @@ public class DebugMenuBar extends JMenuBar {
 					
 				}
 				
-				JOptionPane.showMessageDialog(getRootPane(), "Cleared all save states.", "Success", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "Cleared all save states.", "Success", JOptionPane.INFORMATION_MESSAGE);
 				
 			}
 		});

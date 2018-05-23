@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import game.item.HealingItem;
@@ -49,8 +48,6 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 		
 		this.healingLabels = new HashMap<Hero, JLabel>();
 		this.team = team;
-		
-		Component self = this;
 
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -71,13 +68,12 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				HeroSelectionDialog dlg = new HeroSelectionDialog(team.getHeroes());
-				dlg.setLocationRelativeTo(self);
+				dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
 					
 					selectedHero = dlg.getSelectedHero();
-					
 					update();
 					
 				}
@@ -114,12 +110,12 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 				
 				if (team.getInventory().getHealingItems().length == 0) {
 					
-					JOptionPane.showMessageDialog(self, "You have no healing items to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), "You have no healing items to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
 					
 				} else {
 					
 					ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.HEALING_ITEM, false, true);
-					dlg.setLocationRelativeTo(self);
+					dlg.setLocationRelativeTo(GameWindow.getMainWindow());
 					dlg.setVisible(true);
 					
 					if (dlg.getDialogResult() == DialogResult.OK) {
@@ -158,7 +154,7 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 				
 				if (selectedHero.isHealing()) {
 					
-					JOptionPane.showMessageDialog(self, String.format("%s is already healing!", selectedHero.getName()), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s is already healing!", selectedHero.getName()), "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 					
 				}
@@ -166,7 +162,7 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 				selectedHero.useHealingItem(selectedItem);
 				team.getInventory().remove(selectedItem);
 				
-				JOptionPane.showMessageDialog(self, String.format("%s is being healed with %s!", selectedHero.getName(), selectedItem.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s is being healed with %s!", selectedHero.getName(), selectedItem.getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
 				
 				selectedHero = null;
 				selectedItem = null;

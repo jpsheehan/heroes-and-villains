@@ -7,6 +7,7 @@ import game.Settings;
 import game.Team;
 import game.city.CityController;
 import game.ui.gui.GameEventType;
+import game.ui.gui.windows.GameWindow;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
@@ -21,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-import java.awt.Component;
 import javax.swing.JSlider;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
@@ -42,7 +42,6 @@ public class GameSetUpPanel extends JPanel {
 	public GameSetUpPanel(GameEventListener parent) {
 
 		this.parent = parent;
-		Component self = this;
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -91,7 +90,7 @@ public class GameSetUpPanel extends JPanel {
 				
 				if (team == null) {
 					
-					JOptionPane.showMessageDialog(self, teamCreationPanel.getTeamFailureReason());
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), teamCreationPanel.getTeamFailureReason(), "Error", JOptionPane.ERROR_MESSAGE);
 					
 				} else {
 				
@@ -129,19 +128,4 @@ public class GameSetUpPanel extends JPanel {
 		
 	}
 	
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		try {
-			GameSetUpPanel panel = new GameSetUpPanel(parent);
-			panel.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			panel.setVisible(true);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 }
