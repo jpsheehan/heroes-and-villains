@@ -6,6 +6,8 @@ import java.io.InputStream;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+import game.item.Item;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -143,6 +145,32 @@ public final class GeneralHelpers {
 			throw new IllegalArgumentException(String.format("Invalid float for specifier \"%s\".", specifier));
 			
 		}
+		
+	}
+	
+	/**
+	 * @return An array containing all the items in the strings.json file.
+	 */
+	public static Item[] getItemPool() {
+		
+		ArrayList<String> itemNames = new ArrayList<String>();
+		
+		for (String key : strings.keySet()) {
+			
+			if (key.startsWith("Item.")) {
+				
+				itemNames.add(key.split(".")[1]);
+				
+			}
+			
+		}
+		
+		Item[] items = new Item[itemNames.size()];
+		for (int i = 0; i < itemNames.size(); i++) {
+			items[i] = Item.fromStrings(itemNames.get(i), 1f);
+		}
+		
+		return items;
 		
 	}
 
