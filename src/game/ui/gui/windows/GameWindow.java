@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 
 import game.ui.gui.panels.MainMenuPanel;
 import java.awt.event.WindowAdapter;
@@ -40,6 +41,8 @@ public class GameWindow implements GameEventListener {
 	private boolean debugMode;
 	
 	private static ArrayList<Timer> timers  = new ArrayList<Timer>();
+	
+	private static Component window;
 	
 	private GameEnvironment env;
 
@@ -69,7 +72,7 @@ public class GameWindow implements GameEventListener {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				
-				int result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Are you sure you want to quit?", "Quit Game", JOptionPane.YES_NO_OPTION);
+				int result = JOptionPane.showConfirmDialog(GameWindow.window, "Are you sure you want to quit?", "Quit Game", JOptionPane.YES_NO_OPTION);
 				
 				if (result == JOptionPane.YES_OPTION) {
 					
@@ -81,7 +84,7 @@ public class GameWindow implements GameEventListener {
 							
 						} catch (IOException e) {
 							
-							result = JOptionPane.showConfirmDialog(frmHeroesAndVillains, "Could not save the game. Are you sure you want to exit?", "Error", JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_OPTION);
+							result = JOptionPane.showConfirmDialog(GameWindow.window, "Could not save the game. Are you sure you want to exit?", "Error", JOptionPane.ERROR_MESSAGE, JOptionPane.YES_NO_OPTION);
 							
 							if (result == JOptionPane.NO_OPTION) {
 								
@@ -112,6 +115,7 @@ public class GameWindow implements GameEventListener {
 		frmHeroesAndVillains.setSize(size);
 		
 		frmHeroesAndVillains.getContentPane().setLayout(new BorderLayout(0, 0));
+		GameWindow.window = (Component)frmHeroesAndVillains;
 		
 		panelHolder = new JPanel();
 		panelHolder.setLayout(new BorderLayout(0, 0));
@@ -192,7 +196,7 @@ public class GameWindow implements GameEventListener {
 				} catch (ClassNotFoundException | IOException e) {
 					
 					e.printStackTrace();
-					JOptionPane.showMessageDialog(frmHeroesAndVillains, "Could not load the game state.");
+					JOptionPane.showMessageDialog(GameWindow.window, "Could not load the game state.");
 					
 				}
 				
@@ -230,5 +234,9 @@ public class GameWindow implements GameEventListener {
 	
 	public static void addTimer(Timer timer) {
 		GameWindow.timers.add(timer);
+	}
+	
+	public static Component getMainWindow() {
+		return GameWindow.window;
 	}
 }

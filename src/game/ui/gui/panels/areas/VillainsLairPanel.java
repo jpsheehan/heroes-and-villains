@@ -110,6 +110,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			public void actionPerformed(ActionEvent e) {
 				
 				HeroSelectionDialog dlg = new HeroSelectionDialog(gameEnvironment.getTeam().getHeroes());
+				dlg.setLocationRelativeTo((Component)self);
 				dlg.setVisible(true);
 				
 				if (dlg.getDialogResult() == DialogResult.OK) {
