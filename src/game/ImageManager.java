@@ -60,23 +60,33 @@ public class ImageManager {
 	private void readImagesDirectory() {
 		
 		InputStream inStream = ImageManager.class.getClassLoader().getResourceAsStream(Settings.getImagesDirectory());
-		BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
 		
-		// we need to do this kind of awkwardly so that we can see the number of images in advance of actually reading them
-		Stream<String> lines = buffer.lines();
-		Object[] objs = lines.toArray();
-		
-		// set the number of images we are looking to load
-		imageCount = objs.length;
-		
-		filenames = new String[objs.length];
-		
-		for (int i = 0; i < filenames.length; i++) {
+		if (inStream == null) {
 			
-			filenames[i] = (String)objs[i];
+			System.out.println("Could not load images.");
+			loaded = true;
+			imageCount = 0;
 			
+		} else {
+			
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+			
+			// we need to do this kind of awkwardly so that we can see the number of images in advance of actually reading them
+			Stream<String> lines = buffer.lines();
+			Object[] objs = lines.toArray();
+			
+			// set the number of images we are looking to load
+			imageCount = objs.length;
+			
+			filenames = new String[objs.length];
+			
+			for (int i = 0; i < filenames.length; i++) {
+				
+				filenames[i] = (String)objs[i];
+				
+			}
+		
 		}
-		
 	}
 	
 	/**
@@ -88,6 +98,10 @@ public class ImageManager {
 			
 			readImagesDirectory();
 			
+		}
+		
+		if (loaded) {
+			return;
 		}
 		
 		try {
