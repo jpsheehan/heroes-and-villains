@@ -96,9 +96,6 @@ public class GameWindow implements GameEventListener {
 					for (Timer timer : timers) {
 						if (timer.isRunning()) {
 							timer.stop();
-							System.out.println("Stopped timer " + timer.toString());
-						} else {
-							System.out.println("Timer " + timer.toString() + " already stopped");
 						}
 					}
 					
