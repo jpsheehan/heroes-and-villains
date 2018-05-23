@@ -121,7 +121,7 @@ public class BattleScreen implements Serializable {
 		
 		if (hero.getAbility() == HeroAbility.DAMAGE_REDUCTION) {
 			
-			damageMultiplier = 0.8f;
+			damageMultiplier = 0.5f;
 			
 		}
 		
