@@ -62,7 +62,7 @@ public class DiceRollsGamePanel extends JPanel implements GameEventListener {
 		
 		JPanel panel_1 = new JPanel();
 		
-		btnStart = new JButton("Roll (the dice) ..");
+		btnStart = new JButton("Roll!");
 		btnStart.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
