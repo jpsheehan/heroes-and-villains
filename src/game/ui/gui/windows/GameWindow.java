@@ -57,7 +57,7 @@ public class GameWindow implements GameEventListener {
 		dlg.setLocationRelativeTo(frmHeroesAndVillains);
 		dlg.setVisible(true);
 		
-		Dimension size = new Dimension(800, 600);
+		Dimension size = new Dimension(1024, 768);
 		frmHeroesAndVillains = new JFrame();
 		frmHeroesAndVillains.addWindowListener(new WindowAdapter() {
 			@Override
