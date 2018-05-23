@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSplitPane;
+import javax.swing.Timer;
+
 import game.ui.gui.components.VillainHealthBar;
 
 import java.awt.Color;
@@ -29,7 +31,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
-public class VillainsLairPanel extends GenericAreaPanel implements GameEventListener {
+public class VillainsLairPanel extends GenericAreaPanel implements GameEventListener, ActionListener {
 	
 	private Hero selectedHero;
 	private JLabel lblSelectedHero;
@@ -45,6 +47,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 	private JButton btnGoToNextBuilding, btnActivatePowerUp;
 	private GameEnvironment gameEnvironment;
 	private JLabel lblPowerUp;
+	private Timer showDialogTimer;
 	
 	/**
 	 * Required for implementing the Serializable interface.
@@ -220,6 +223,8 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		splitPane.setRightComponent(gamePanel);
 		splitPane.setDividerLocation(0.5);
 		
+		showDialogTimer = new Timer(100, this);
+		showDialogTimer.start();
 		
 	}
 
@@ -368,6 +373,14 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 				window.gameEventPerformed(event);
 		
 		}
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+
+		JOptionPane.showMessageDialog((Component) window, String.format("%s says \"%s\".", villainsLair.getVillain().getName(), villainsLair.getVillain().getTaunt()), "Villain's Taunt", JOptionPane.WARNING_MESSAGE);
+		showDialogTimer.stop();
 		
 	}
 }
