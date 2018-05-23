@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 
 public class ShopAreaPanel extends GenericAreaPanel {
 
@@ -54,7 +55,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 		
 		JPanel panel = new JPanel();
 		add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		textAreaDialogue = new JLabel();
 		panel.add(textAreaDialogue);
@@ -146,7 +147,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	
 	private void updateDialogue(String str) {
 		
-		this.textAreaDialogue.setText(str);
+		this.textAreaDialogue.setText("<html>" + str + "</html>");
 		
 	}
 }
