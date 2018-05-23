@@ -108,7 +108,7 @@ public class BattleScreen implements Serializable {
 			}
 		}
 		
-		return (int)(GeneralHelpers.max(5, GeneralHelpers.getRandom().nextInt(10)) * rewardMultiplier * (this.cityIndex + 1));
+		return (int)((5 + GeneralHelpers.getRandom().nextInt(10)) * rewardMultiplier * (this.cityIndex + 1)) * 2;
 		
 	}
 	
@@ -133,7 +133,7 @@ public class BattleScreen implements Serializable {
 			
 		}
 		
-		return (int)(GeneralHelpers.max(2, GeneralHelpers.getRandom().nextInt(10)) * (this.cityIndex + 1) * damageMultiplier);
+		return (int)((2 + GeneralHelpers.getRandom().nextInt(10)) * (this.cityIndex + 1) * damageMultiplier);
 		
 	}
 	
