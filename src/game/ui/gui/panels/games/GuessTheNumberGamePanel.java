@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JSlider;
 
-public class PanelGuessTheNumberGame extends JPanel {
+public class GuessTheNumberGamePanel extends JPanel {
 
 	/**
 	 * Required for implementing the Serializable interface.
@@ -34,7 +34,7 @@ public class PanelGuessTheNumberGame extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelGuessTheNumberGame(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
+	public GuessTheNumberGamePanel(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
 		guessTheNumber = (GuessTheNumber)battleScreen.getMinigame();
 		
