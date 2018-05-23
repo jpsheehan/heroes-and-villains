@@ -6,6 +6,7 @@ import java.io.InputStream;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
+import game.character.Hero;
 import game.item.Item;
 
 import java.util.ArrayList;
@@ -317,4 +318,24 @@ public final class GeneralHelpers {
 		
 	}
 	
+	public static float getGPA(GameEnvironment env) {
+		
+		int numberOfCities = (env.getCityController().getCityIndex() + 1);
+		
+		float heroHealthPercentage = 0f;
+		for (Hero hero : env.getTeam().getHeroes()) {
+			if (hero.isAlive()) {
+				heroHealthPercentage += (float) (hero.getHealth() / hero.getMaxHealth());
+			}
+		}
+		
+		return (float) max(9, 9 * (numberOfCities / 6f) * (heroHealthPercentage / (float) env.getTeam().getHeroes().length) * (env.getNumberOfSeconds() / 120f * numberOfCities));
+		
+	}
+	
+//	public String getGradeLetter(float gpa) {
+//	
+//		// if (gpa < )
+//		
+//	}
 }

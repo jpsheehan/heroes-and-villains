@@ -3,6 +3,7 @@ package game.ui.gui.panels;
 import javax.swing.JPanel;
 
 import game.GameEnvironment;
+import game.GeneralHelpers;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
@@ -48,12 +49,25 @@ public class GameWonPanel extends JPanel {
 		int minutes = (int) (env.getNumberOfSeconds() / 60);
 		int seconds = (int) (env.getNumberOfSeconds() % 60);
 		
-		JLabel lblGpa = new JLabel(String.format("%s:%s",
+		JLabel lblTime = new JLabel(String.format("%s:%s",
 				TextUserInterfaceHelpers.padLeft(new Integer(minutes).toString(), '0', 2),
 				TextUserInterfaceHelpers.padLeft(new Integer(seconds).toString(), '0', 2)));
 		
+		lblTime.setFont(new Font("Dialog", Font.BOLD, 24));
+		panel_2.add(lblTime);
+		
+		JPanel panel_4 = new JPanel();
+		add(panel_4);
+		
+		JLabel lblTheTeamHad = new JLabel("The team had an average GPA of:");
+		panel_4.add(lblTheTeamHad);
+		
+		JPanel panel_5 = new JPanel();
+		add(panel_5);
+		
+		JLabel lblGpa = new JLabel(String.format("%.2f", GeneralHelpers.getGPA(env)));
 		lblGpa.setFont(new Font("Dialog", Font.BOLD, 24));
-		panel_2.add(lblGpa);
+		panel_5.add(lblGpa);
 		
 		JPanel panel_3 = new JPanel();
 		add(panel_3);
