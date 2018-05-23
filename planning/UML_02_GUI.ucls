@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <enumeration id="1" language="java" name="game.ui.gui.DialogResult" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/DialogResult.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="150" x="4744" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="2" language="java" name="game.ui.gui.GameEvent" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/GameEvent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="225" x="310" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="game.ui.gui.GameEventListener" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/GameEventListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1867" y="2081"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="4" language="java" name="game.ui.gui.GameEventType" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/GameEventType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="353" width="321" x="310" y="430"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="5" language="java" name="game.ui.gui.GraphicalUserInterface" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/GraphicalUserInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="201" x="3034" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="game.ui.gui.KonamiQueue" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/KonamiQueue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="299" width="165" x="3411" y="430"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="game.ui.gui.Returnable" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/Returnable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="83" width="191" x="4934" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="game.ui.gui.components.ImagePanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/ImagePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="263" width="196" x="1506" y="1252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="game.ui.gui.components.InventoryTableModel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/InventoryTableModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="281" width="292" x="1497" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="game.ui.gui.components.VillainHealthBar" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/VillainHealthBar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="151" x="2279" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="game.ui.gui.components.InventoryPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/InventoryPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="262" x="5165" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="game.ui.gui.components.HeroHealthBar" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/HeroHealthBar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="145" x="2744" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="game.ui.gui.components.HealthBar" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/HealthBar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2606" y="1759"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="game.ui.gui.components.DebugMenuBar" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/DebugMenuBar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="255" x="1820" y="430"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="game.ui.gui.components.DiePanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/components/DiePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1391" y="1720"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="game.ui.gui.dialogs.NewHeroDialog" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/dialogs/NewHeroDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="407" width="253" x="4831" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="game.ui.gui.dialogs.HeroSelectionDialog" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/dialogs/HeroSelectionDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="443" width="241" x="4281" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="game.ui.gui.dialogs.LoadingResourcesDialog" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/dialogs/LoadingResourcesDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="227" width="212" x="988" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="game.ui.gui.dialogs.HeroInformationDialog" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/dialogs/HeroInformationDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="181" x="4281" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="game.ui.gui.dialogs.ItemSelectionDialog" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/dialogs/ItemSelectionDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="334" x="5124" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="game.ui.gui.dialogs.EditHeroDialog" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/dialogs/EditHeroDialog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="202" x="4502" y="2038"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="game.ui.gui.panels.GameLostPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/GameLostPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="227" x="1829" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="game.ui.gui.panels.MainMenuPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/MainMenuPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="101" width="227" x="3411" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="game.ui.gui.panels.AreaSummaryPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/AreaSummaryPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="173" width="215" x="1742" y="1252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="game.ui.gui.panels.NavigationPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/NavigationPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="209" width="303" x="3152" y="1252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="game.ui.gui.panels.TeamSummaryPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/TeamSummaryPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="175" x="2243" y="1252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="game.ui.gui.panels.MapPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/MapPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="227" width="229" x="4562" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="game.ui.gui.panels.GameWonPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/GameWonPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="101" width="228" x="42" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="game.ui.gui.panels.MainGamePanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/MainGamePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="389" width="333" x="1742" y="823"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="game.ui.gui.panels.TeamCreationPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/TeamCreationPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="353" width="217" x="1240" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="game.ui.gui.panels.GameSetUpPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/GameSetUpPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1082" y="1826"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="game.ui.gui.panels.HeroSummaryPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/HeroSummaryPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="173" width="169" x="2744" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="game.ui.gui.panels.areas.HomeBasePanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/areas/HomeBasePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="358" x="2953" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="game.ui.gui.panels.areas.ShopAreaPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/areas/ShopAreaPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="209" width="288" x="3351" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="game.ui.gui.panels.areas.VillainsLairPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/areas/VillainsLairPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="425" width="392" x="2060" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="game.ui.gui.panels.areas.GenericAreaPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/areas/GenericAreaPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="145" x="2953" y="1252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="game.ui.gui.panels.areas.PowerUpDenPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/areas/PowerUpDenPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="209" width="275" x="3966" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="game.ui.gui.panels.areas.HospitalPanel" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/panels/areas/HospitalPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="299" width="247" x="3679" y="1555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="game.ui.gui.windows.GameWindow" project="HeroesAndVillains" 
+    file="/HeroesAndVillains/src/game/ui/gui/windows/GameWindow.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="245" width="240" x="2096" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="40">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="41" name="healthBar"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="44" name="parent"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="47" name="currentAreaPanel"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="50">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="51" name="dialogResult"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="54" name="window"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="56">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <generalization id="57">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="58">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="59" name="villainHealthBar"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="61">    
+    <bendpoint x="1987" y="1252"/>    
+    <bendpoint x="1987" y="1555"/>    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="62">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="63" name="inventoryPanel"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="65">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="66" name="navigationPanel"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="69" name="imagePanel"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="72" name="teamSummaryPanel"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="74">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="75">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="76" name="dialogResult"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="79" name="summaries"/>      
+      <multiplicity id="80" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="81">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="82">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="83" name="type"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="85">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="86">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="87" name="areaSummaryPanel"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="89">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="90">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="91" name="parent"/>      
+      <multiplicity id="92" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="93">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="94" name="konami"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="97" name="dialogResult"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="100" name="menuBar"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="102">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="104">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="105" name="healthBar"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="108" name="mainGamePanel"/>      
+      <multiplicity id="109" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <bendpoint x="2008" y="1252"/>    
+    <bendpoint x="2008" y="1555"/>    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="111" name="window"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="114">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="115" name="self"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="117">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="118" name="mapPanel"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="120">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <realization id="121">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <realization id="123">    
+    <bendpoint x="2105" y="430"/>    
+    <bendpoint x="2105" y="823"/>    
+    <bendpoint x="2067" y="1252"/>    
+    <bendpoint x="2029" y="1555"/>    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="124">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
