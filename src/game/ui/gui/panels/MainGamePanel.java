@@ -308,19 +308,20 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 			
 		} catch (RobberyPreventedException e) {
 			
-			JOptionPane.showMessageDialog((Component)window, String.format("A dodgy flatmate tried to take your %s! But %s used their knowledge of criminal law to deter them!", e.getItemNotRobbed().getName(), e.getLawStudent().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog((Component)this, String.format("A dodgy flatmate tried to take your %s! But %s used their knowledge of criminal law to deter them!", e.getItemNotRobbed().getName(), e.getLawStudent().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
 			
 		} catch (MoneyRobbedException e) {
 			
-			JOptionPane.showMessageDialog((Component)window, String.format("A dodgy flatmate went through %s's room and stole $%d. What a jerk!", nonDeadHero.getName(), e.getMoneyRobbed()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog((Component)this, String.format("A dodgy flatmate went through %s's room and stole $%d. What a jerk!", nonDeadHero.getName(), e.getMoneyRobbed()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
 			
 		} catch (ItemRobbedException e) {
 			
-			JOptionPane.showMessageDialog((Component)window, String.format("A dodgy flatmate went through %s's stuff and stole a %s. That's not nice!", nonDeadHero.getName(), e.getItemRobbed().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog((Component)this, String.format("A dodgy flatmate went through %s's stuff and stole a %s. That's not nice!", nonDeadHero.getName(), e.getItemRobbed().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
 			
 		} catch (ItemGiftedException e) {
 
-			JOptionPane.showMessageDialog((Component)window,  String.format("The government announced that every student shall receive a free %s! Thanks Aunty Cindy!", e.getItemGifted().getName()), "Random Event", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog((Component)this,  String.format("The government announced that every student shall receive a free %s! Thanks Aunty Cindy!", e.getItemGifted().getName()), "Random Event", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		randomEventTimer.stop();
