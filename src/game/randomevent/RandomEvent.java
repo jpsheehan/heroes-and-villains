@@ -22,7 +22,7 @@ public class RandomEvent implements Serializable {
 	/**
 	 * The probability that any event occurs when entering a new City.
 	 */
-	private static float probability = 1f;
+	private static float probability = 0.4f;
 	
 	/**
 	 * Whether or not an event actually took place.
@@ -136,7 +136,7 @@ public class RandomEvent implements Serializable {
 		// check if there is a law student in the team
 		for (Hero hero : team.getHeroes()) {
 			if (hero.getType() == HeroType.LAW_STUDENT && hero.isAlive()) {
-				lawStudent = null;
+				lawStudent = hero;
 				break;
 			}
 		}
