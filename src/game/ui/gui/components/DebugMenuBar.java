@@ -14,6 +14,7 @@ import game.GameEnvironment;
 import game.Team;
 import game.TeamFullException;
 import game.character.Hero;
+import game.character.HeroDeadException;
 import game.character.HeroType;
 import game.city.CityController;
 import game.item.Item;
@@ -33,6 +34,8 @@ public class DebugMenuBar extends JMenuBar {
 	private MainGamePanel mainGamePanel;
 	
 	private JMenuItem mntmGoToNext;
+	
+	private GameEnvironment gameEnvironment;
 
 	public DebugMenuBar(GameEventListener parent) {
 		
@@ -141,6 +144,23 @@ public class DebugMenuBar extends JMenuBar {
 			}
 		});
 		mnForceMinigame.add(mntmForceReset);
+		
+		JMenuItem mntmDealDamage = new JMenuItem("Deal Damage");
+		mntmDealDamage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for (Hero hero: gameEnvironment.getTeam().getHeroes()) {
+					
+					try {
+						hero.takeDamage(50);
+					} catch (HeroDeadException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		});
+		mnCheats.add(mntmDealDamage);
 		mntmForceDiceRolls.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BattleScreen.forceMinigameType(MinigameType.DICE_ROLLS);
@@ -154,6 +174,10 @@ public class DebugMenuBar extends JMenuBar {
 		this.mainGamePanel = mainGamePanel;
 		update();
 		
+	}
+	
+	public void setGameEnvironment(GameEnvironment env) {
+		this.gameEnvironment = env;
 	}
 	
 	public void update() {

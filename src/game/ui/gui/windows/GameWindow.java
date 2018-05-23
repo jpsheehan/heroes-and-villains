@@ -166,6 +166,7 @@ public class GameWindow implements GameEventListener {
 				mainGamePanel = new MainGamePanel(env, this);
 				switchPanel(mainGamePanel);
 				menuBar.setMainGamePanel(mainGamePanel);
+				menuBar.setGameEnvironment(env);
 				break;
 				
 			case LOAD_GAME:
@@ -175,6 +176,7 @@ public class GameWindow implements GameEventListener {
 					mainGamePanel = new MainGamePanel(env, this);
 					switchPanel(mainGamePanel);
 					menuBar.setMainGamePanel(mainGamePanel);
+					menuBar.setGameEnvironment(env);
 					
 				} catch (ClassNotFoundException | IOException e) {
 					
