@@ -47,7 +47,7 @@ public class DebugMenuBar extends JMenuBar {
 				try {
 					team.addHero(new Hero("Jesse", HeroType.COMPUTER_SCIENCE_STUDENT));
 					team.addHero(new Hero("Manu", HeroType.ENGINEERING_STUDENT));
-					team.addHero(new Hero("Bob", HeroType.ARTS_STUDENT));
+					team.addHero(new Hero("Bob Loblaw", HeroType.LAW_STUDENT));
 				} catch (TeamFullException e) {
 					throw new AssertionError();
 				}
