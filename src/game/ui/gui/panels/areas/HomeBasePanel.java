@@ -2,8 +2,10 @@ package game.ui.gui.panels.areas;
 
 import javax.swing.JPanel;
 
+import game.Team;
+import game.character.Hero;
+import game.character.HeroType;
 import game.city.CityController;
-import game.item.Inventory;
 import game.item.ItemType;
 import game.item.Map;
 import game.ui.gui.DialogResult;
@@ -31,7 +33,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HomeBasePanel(GameEventListener window, Inventory inventory, CityController cityController) {
+	public HomeBasePanel(GameEventListener window, Team team, CityController cityController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		Component self = this;
@@ -52,13 +54,6 @@ public class HomeBasePanel extends GenericAreaPanel {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if (inventory.getMaps().length == 0) {
-					
-					JOptionPane.showMessageDialog(self, "You don't have any maps to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-					
-				}
-				
 				if (cityController.hasUsedMap()) {
 					
 					JOptionPane.showMessageDialog(self, "You have already used a map in this building!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -66,7 +61,32 @@ public class HomeBasePanel extends GenericAreaPanel {
 					
 				}
 				
-				ItemSelectionDialog dlg = new ItemSelectionDialog(inventory, ItemType.MAP, false, true);
+				Hero compSciHero = null;
+				for (Hero hero : team.getHeroes()) {
+					if (hero.getType() == HeroType.COMPUTER_SCIENCE_STUDENT) {
+						compSciHero = hero;
+						break;
+					}
+				}
+				
+				if (compSciHero != null) {
+					
+					JOptionPane.showMessageDialog(self, String.format("%s used their hacker abilities to break into the game's code and reveal the entire map of %s!", compSciHero.getName(), cityController.getCurrentCity().getName()), "Information", JOptionPane.INFORMATION_MESSAGE);
+					cityController.useMap(new Map("Fake Map", "Not real", 0));
+					window.gameEventPerformed(new GameEvent(GameEventType.NAVIGATION_CHANGED));
+					update();
+					return;
+					
+				}
+				
+				if (team.getInventory().getMaps().length == 0) {
+					
+					JOptionPane.showMessageDialog(self, "You don't have any maps to choose from.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+					
+				}
+				
+				ItemSelectionDialog dlg = new ItemSelectionDialog(team.getInventory(), ItemType.MAP, false, true);
 				dlg.setLocationRelativeTo(self);
 				dlg.setVisible(true);
 				
@@ -81,7 +101,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 					Map map = (Map)dlg.getSelectedItem();
 					
 					cityController.useMap(map);
-					inventory.remove(map);
+					team.getInventory().remove(map);
 					
 					JOptionPane.showMessageDialog(self, String.format("You used a %s to reveal all the areas in %s!", map.getName(), cityController.getCurrentCity().getName()), "Success", JOptionPane.INFORMATION_MESSAGE);
 

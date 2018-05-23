@@ -206,7 +206,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 		switch (area.getType()) {
 		
 			case HOME_BASE:
-				currentAreaPanel = new HomeBasePanel(this, this.getGameEnvironment().getTeam().getInventory(), this.getGameEnvironment().getCityController());
+				currentAreaPanel = new HomeBasePanel(this, this.getGameEnvironment().getTeam(), this.getGameEnvironment().getCityController());
 				break;
 				
 			case HOSPITAL:
