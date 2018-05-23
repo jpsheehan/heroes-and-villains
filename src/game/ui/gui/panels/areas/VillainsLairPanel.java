@@ -10,9 +10,9 @@ import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventType;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
-import game.ui.gui.panels.games.PanelDiceRollsGame;
-import game.ui.gui.panels.games.PanelGuessTheNumberGame;
-import game.ui.gui.panels.games.PanelPaperScissorsRock;
+import game.ui.gui.panels.games.DiceRollsGamePanel;
+import game.ui.gui.panels.games.GuessTheNumberGamePanel;
+import game.ui.gui.panels.games.PaperScissorsRockPanel;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
@@ -158,15 +158,15 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 				switch (villainsLair.getBattleScreen().getMinigameType()) {
 				
 					case DICE_ROLLS:
-						gamePanel = new PanelDiceRollsGame(self, villainsLair.getBattleScreen());
+						gamePanel = new DiceRollsGamePanel(self, villainsLair.getBattleScreen());
 						break;
 						
 					case GUESS_THE_NUMBER:
-						gamePanel = new PanelGuessTheNumberGame(self, villainsLair.getBattleScreen());
+						gamePanel = new GuessTheNumberGamePanel(self, villainsLair.getBattleScreen());
 						break;
 						
 					case PAPER_SCISSORS_ROCK:
-						gamePanel = new PanelPaperScissorsRock(self, villainsLair.getBattleScreen());
+						gamePanel = new PaperScissorsRockPanel(self, villainsLair.getBattleScreen());
 						break;
 						
 					default:

@@ -21,7 +21,7 @@ import game.ui.gui.components.DiePanel;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class PanelDiceRollsGame extends JPanel implements GameEventListener {
+public class DiceRollsGamePanel extends JPanel implements GameEventListener {
 
 	/**
 	 * Required for implementing the Serializable interface.
@@ -38,7 +38,7 @@ public class PanelDiceRollsGame extends JPanel implements GameEventListener {
 	/**
 	 * Create the panel.
 	 */
-	public PanelDiceRollsGame(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
+	public DiceRollsGamePanel(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
 		diceRolls = (DiceRolls)battleScreen.getMinigame();
 		

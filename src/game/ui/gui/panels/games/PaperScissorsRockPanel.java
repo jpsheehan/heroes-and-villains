@@ -21,7 +21,7 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
-public class PanelPaperScissorsRock extends JPanel {
+public class PaperScissorsRockPanel extends JPanel {
 
 	/**
 	 * Required for implementing the Serializable interface.
@@ -38,7 +38,7 @@ public class PanelPaperScissorsRock extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelPaperScissorsRock(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
+	public PaperScissorsRockPanel(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		
 		paperScissorsRock = (PaperScissorsRock)battleScreen.getMinigame();
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
