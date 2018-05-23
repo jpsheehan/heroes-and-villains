@@ -67,13 +67,21 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 				
 				if (heroes != null && heroes.length > 0) {
 					
+					Hero firstNonDeadHero = null;
+					
 					for (Hero hero : heroes) {
 						
 						comboBox.addItem(hero);
 						
+						if (hero.isAlive() && firstNonDeadHero == null) {
+							
+							firstNonDeadHero = hero;
+							
+						}
+						
 					}
 					
-					comboBox.setSelectedIndex(0);
+					comboBox.setSelectedItem(firstNonDeadHero);
 					
 					if (heroes.length == 1) {
 						
