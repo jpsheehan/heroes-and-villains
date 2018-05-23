@@ -12,6 +12,7 @@ import game.character.Dialogue;
 import game.character.InnKeeper;
 import game.character.Villain;
 import game.item.Item;
+import game.randomevent.RandomEvent;
 
 public class City implements Nameable, Describable, Serializable {
 	
@@ -34,6 +35,11 @@ public class City implements Nameable, Describable, Serializable {
 	 * The type of city.
 	 */
 	private CityType type;
+	
+	/**
+	 * The random event that occurs at the start of this city.
+	 */
+	private RandomEvent randomEvent;
 
 	/**
 	 * Creates a new City.
@@ -42,6 +48,8 @@ public class City implements Nameable, Describable, Serializable {
 	public City(CityType type, int cityIndex) {
 		
 		this.type = type;
+
+		this.randomEvent = new RandomEvent();
 		
 		generate(cityIndex);
 		
@@ -203,4 +211,12 @@ public class City implements Nameable, Describable, Serializable {
 		
 	}
 	
+	/**
+	 * @return The city's random event.
+	 */
+	public RandomEvent getRandomEvent() {
+		
+		return this.randomEvent;
+		
+	}
 }

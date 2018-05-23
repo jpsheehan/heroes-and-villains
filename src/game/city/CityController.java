@@ -198,7 +198,6 @@ public class CityController implements Serializable {
 	 */
 	public void goToNextCity() throws GameWonException {
 		
-		
 		if (this.cityIndex + 1 >= this.cities.length) {
 			
 			throw new game.GameWonException();

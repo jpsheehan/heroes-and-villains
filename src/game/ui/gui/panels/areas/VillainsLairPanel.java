@@ -325,6 +325,8 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					
 					villainsLair.getBattleScreen().minigameStateChecker();
 					
+					this.window.gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
+					
 				} catch (HeroDeadException e) {
 					
 					lblInformation.setText(String.format("%s has died! Please select another hero.", e.getHero().getName()));
@@ -334,10 +336,6 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					if (gameEnvironment.getTeam().getNumberOfAliveHeroes() == 0) {
 						
 						this.window.gameEventPerformed(new GameEvent(GameEventType.GAME_LOST));
-						
-					} else {
-					
-						this.window.gameEventPerformed(new GameEvent(GameEventType.TEAM_CHANGED));
 						
 					}
 					
