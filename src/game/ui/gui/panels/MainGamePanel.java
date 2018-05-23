@@ -272,8 +272,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 					
 					this.getGameEnvironment().getCityController().goToNextCity();
 					updateNavigation();
-					
-					
+					randomEventTimer.start();
 					
 				} catch (GameWonException e) {
 					

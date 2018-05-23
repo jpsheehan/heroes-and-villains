@@ -101,6 +101,14 @@ public class RandomEvent implements Serializable {
 			throw new AssertionError("Cannot perform the same random event twice (because then it's not random, but constant)");
 		}
 		
+		performed = true;
+		
+		if (type == null) {
+			
+			return;
+			
+		}
+		
 		switch (type) {
 		
 			case GIFT:
@@ -111,13 +119,7 @@ public class RandomEvent implements Serializable {
 				performRobbery(team);
 				break;
 				
-			default:
-				// no event to perform
-				break;
-				
 		}
-		
-		performed = true;
 		
 	}
 	
