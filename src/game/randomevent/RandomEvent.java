@@ -22,7 +22,7 @@ public class RandomEvent implements Serializable {
 	/**
 	 * The probability that any event occurs when entering a new City.
 	 */
-	private static float probability = 0.4f;
+	private static float probability = 1f;
 	
 	/**
 	 * Whether or not an event actually took place.
