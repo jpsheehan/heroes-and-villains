@@ -60,7 +60,7 @@ public class GuessTheNumberGamePanel extends JPanel {
 		panel_2.add(lblClickStartToRoll);
 		
 		panel_6.add(panel_1);
-		slider.setValue(3);
+		slider.setValue(guessTheNumber.getMaxNumber()/2);
 		slider.setMajorTickSpacing(1);
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
@@ -72,55 +72,48 @@ public class GuessTheNumberGamePanel extends JPanel {
 		JPanel panel_3 = new JPanel();
 		panel_6.add(panel_3);
 		
-		JPanel panel_5 = new JPanel();
-		panel_6.add(panel_5);
-		
 		JPanel panel_4 = new JPanel();
 		panel_6.add(panel_4);
 		
 		JLabel lblTurnsLeftText = new JLabel("Turns left:");
 		panel_4.add(lblTurnsLeftText);
 		
-		JLabel lblTurnsLeft = new JLabel("Turns Left");
+		JLabel lblTurnsLeft = new JLabel(new Integer(guessTheNumber.getRemainingTurns()).toString());
 		panel_4.add(lblTurnsLeft);
 		lblTurnsLeft.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTurnsLeft.setEnabled(false);
-		
-		JLabel lblGuessText = new JLabel("Hero Guess:");
-		panel_5.add(lblGuessText);
-		
-		JLabel lblHeroGuess = new JLabel("Hero Guess");
-		panel_5.add(lblHeroGuess);
-		lblHeroGuess.setHorizontalAlignment(SwingConstants.LEFT);
-		lblHeroGuess.setEnabled(false);
 		
 		JPanel panel_7 = new JPanel();
 		panel_6.add(panel_7);
 		
-		JLabel lblGuessResult = new JLabel("Guess High / Low / Correct");
+		JLabel lblGuessResult = new JLabel();
 		panel_7.add(lblGuessResult);
-		lblGuessResult.setEnabled(false);
 		
 		btnGuess = new JButton("Guess");
 		btnGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblHeroGuess.setText((String.format("%d", slider.getValue())));
-				guessTheNumber.doTurn(slider.getValue());
+				int guess = slider.getValue();
+				
+				guessTheNumber.doTurn(guess);
 				lblTurnsLeft.setText(new Integer(guessTheNumber.getRemainingTurns()).toString());
 				lblTurnsLeft.setEnabled(true);
-				lblHeroGuess.setEnabled(true);
 				
 				villainsLairPanel.gameEventPerformed(new GameEvent(GameEventType.VILLAINS_LAIR_CLEAR_MESSAGE));
 				
 				switch (guessTheNumber.getVillainLastTurn()) {
 						case TOO_HIGH:
-							lblGuessResult.setText("Hero guess too high!");
+							lblGuessResult.setText(String.format("%s guessed too high!", battleScreen.getHero().getName()));
+							if (guessTheNumber.getRemainingTurns() > 0) {
+								slider.setMaximum(guess - 1);
+							}
 							break;
 						case TOO_LOW:
-							lblGuessResult.setText("Hero guess too low!");
+							lblGuessResult.setText(String.format("%s guessed too low!", battleScreen.getHero().getName()));
+							if (guessTheNumber.getRemainingTurns() > 0) {
+								slider.setMinimum(guess + 1);
+							}
 							break;
 						case CORRECT:
-							lblGuessResult.setText("Hero guess correct!");
+							lblGuessResult.setText(String.format("%s guessed correct!", battleScreen.getHero().getName()));
 							break;
 							
 				}
