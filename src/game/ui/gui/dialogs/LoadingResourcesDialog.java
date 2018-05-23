@@ -90,7 +90,7 @@ public class LoadingResourcesDialog extends JDialog implements ActionListener {
 			JPanel panel = new JPanel();
 			contentPanel.add(panel);
 			{
-				lblInformation = new JLabel("lblInformation");
+				lblInformation = new JLabel();
 				panel.add(lblInformation);
 			}
 		}
