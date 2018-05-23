@@ -242,7 +242,7 @@ public class Hero extends Character implements Serializable {
 	 */
 	public boolean getIsPowerUpItemActive() {
 		
-		return this.isPowerUpItemActive;
+		return this.item != null && this.isPowerUpItemActive;
 		
 	}
 	
