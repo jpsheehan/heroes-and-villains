@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.ui.gui.GameEventType;
+import game.ui.gui.windows.GameWindow;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 
@@ -51,6 +52,7 @@ public class DiePanel extends JPanel implements ActionListener {
 		
 		isRolling = false;
 		timer = new Timer(delay, this);
+		GameWindow.addTimer(timer);
 
 	}
 	

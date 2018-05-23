@@ -9,6 +9,7 @@ import game.ui.gui.DialogResult;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.dialogs.ItemSelectionDialog;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -176,7 +177,8 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 		
 		update();
 		
-		(new Timer(500, this)).start();
+		Timer timer = new Timer(500, this);
+		GameWindow.addTimer(timer);
 		
 	}
 	

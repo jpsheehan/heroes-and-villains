@@ -6,6 +6,7 @@ import javax.swing.Timer;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -64,7 +65,9 @@ public class GameLostPanel extends JPanel implements ActionListener {
 		});
 		panel_2.add(btnReturnToMenu);
 		
-		(new Timer(200, this)).start();
+		Timer timer = new Timer(200, this);
+		timer.start();
+		GameWindow.addTimer(timer);
 		
 	}
 

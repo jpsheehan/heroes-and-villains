@@ -8,6 +8,8 @@ import javax.swing.JProgressBar;
 import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
+import game.ui.gui.windows.GameWindow;
+
 public abstract class HealthBar extends JProgressBar implements ActionListener {
 
 	private int max, value;
@@ -34,7 +36,9 @@ public abstract class HealthBar extends JProgressBar implements ActionListener {
 		setMinimum(0);
 		
 		// Start a timer to update the healthbar automatically
-		(new Timer(updateDelay, this)).start();
+		Timer timer = new Timer(updateDelay, this);
+		timer.start();
+		GameWindow.addTimer(timer);
 		
 	}
 	

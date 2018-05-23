@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import game.GeneralHelpers;
 import game.ImageManager;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.BoxLayout;
 import java.awt.Font;
@@ -49,6 +50,7 @@ public class LoadingResourcesDialog extends JDialog implements ActionListener {
 	 */
 	public LoadingResourcesDialog() {
 		timer = new Timer(100, this);
+		GameWindow.addTimer(timer);
 		
 		addWindowListener(new WindowAdapter() {
 			@Override

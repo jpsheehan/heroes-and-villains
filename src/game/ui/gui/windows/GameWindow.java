@@ -7,6 +7,7 @@ import game.GameEnvironment;
 
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
@@ -17,6 +18,8 @@ import game.ui.gui.panels.GameSetUpPanel;
 import game.ui.gui.panels.GameWonPanel;
 import game.ui.gui.panels.MainGamePanel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import java.awt.BorderLayout;
 
 import game.ui.gui.panels.MainMenuPanel;
@@ -36,6 +39,8 @@ public class GameWindow implements GameEventListener {
 	
 	private boolean debugMode;
 	
+	private static ArrayList<Timer> timers  = new ArrayList<Timer>();
+	
 	private GameEnvironment env;
 
 	/**
@@ -45,6 +50,7 @@ public class GameWindow implements GameEventListener {
 		this.debugMode = debugMode;
 		
 		initialize();
+		
 	}
 
 	/**
@@ -87,8 +93,16 @@ public class GameWindow implements GameEventListener {
 						
 					}
 					
+					for (Timer timer : timers) {
+						if (timer.isRunning()) {
+							timer.stop();
+							System.out.println("Stopped timer " + timer.toString());
+						} else {
+							System.out.println("Timer " + timer.toString() + " already stopped");
+						}
+					}
+					
 					frmHeroesAndVillains.dispose();
-					// Thread.currentThread().stop();
 					
 				}
 			}
@@ -215,5 +229,9 @@ public class GameWindow implements GameEventListener {
 		
 		frmHeroesAndVillains.revalidate();
 		frmHeroesAndVillains.repaint();
+	}
+	
+	public static void addTimer(Timer timer) {
+		GameWindow.timers.add(timer);
 	}
 }

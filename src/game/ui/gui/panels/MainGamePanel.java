@@ -12,6 +12,7 @@ import game.ui.gui.panels.areas.HospitalPanel;
 import game.ui.gui.panels.areas.PowerUpDenPanel;
 import game.ui.gui.panels.areas.ShopAreaPanel;
 import game.ui.gui.panels.areas.VillainsLairPanel;
+import game.ui.gui.windows.GameWindow;
 import game.GameEnvironment;
 import game.GameWonException;
 import game.GeneralHelpers;
@@ -170,6 +171,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 		updateNavigation();
 		
 		randomEventTimer = new Timer(100, this);
+		GameWindow.addTimer(randomEventTimer);
 		
 	}
 		

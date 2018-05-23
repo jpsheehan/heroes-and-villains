@@ -26,6 +26,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import game.ui.gui.components.HeroHealthBar;
+import game.ui.gui.windows.GameWindow;
+
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
@@ -292,7 +294,9 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 			
 		}
 		
-		(new Timer(500, this)).start();
+		Timer timer = new Timer(500, this);
+		timer.start();
+		GameWindow.addTimer(timer);
 		
 	}
 	

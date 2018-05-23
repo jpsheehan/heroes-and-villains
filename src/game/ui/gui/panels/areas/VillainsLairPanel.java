@@ -14,6 +14,7 @@ import game.ui.gui.dialogs.HeroSelectionDialog;
 import game.ui.gui.panels.games.DiceRollsGamePanel;
 import game.ui.gui.panels.games.GuessTheNumberGamePanel;
 import game.ui.gui.panels.games.PaperScissorsRockPanel;
+import game.ui.gui.windows.GameWindow;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
@@ -226,6 +227,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		
 		showDialogTimer = new Timer(100, this);
 		showDialogTimer.start();
+		GameWindow.addTimer(showDialogTimer);
 		
 	}
 
