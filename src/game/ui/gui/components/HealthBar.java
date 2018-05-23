@@ -1,11 +1,8 @@
 package game.ui.gui.components;
 
-import java.awt.AWTEvent;
 import java.awt.Color;
-import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
@@ -37,18 +34,7 @@ public abstract class HealthBar extends JProgressBar implements ActionListener {
 		setMinimum(0);
 		
 		// Start a timer to update the healthbar automatically
-		Timer timer = new Timer(updateDelay, this);
-		timer.start();
-		
-		// Fixes an issue where the application would continue to run after the GameWindow was closed.
-		// This stops the timer when the window is closed so the application can exit.
-		this.getToolkit().addAWTEventListener(new AWTEventListener() {
-			public void eventDispatched(AWTEvent event) {
-				if (event.getID() == WindowEvent.WINDOW_CLOSED) {
-					timer.stop();
-				}
-			}
-		}, AWTEvent.WINDOW_EVENT_MASK);
+		(new Timer(updateDelay, this)).start();
 		
 	}
 	
