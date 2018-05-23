@@ -21,7 +21,6 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 	
 	/**
 	 * Stops a single hero from taking damage once.
-	 * TODO: Implement
 	 */
 	DAMAGE_PROTECTION,
 	

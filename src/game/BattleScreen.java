@@ -6,6 +6,7 @@ import game.character.HeroDeadException;
 import game.character.HeroType;
 import game.character.Villain;
 import game.character.VillainDeadException;
+import game.item.ItemAbility;
 import game.minigame.DiceRolls;
 import game.minigame.GuessTheNumber;
 import game.minigame.Minigame;
@@ -122,6 +123,13 @@ public class BattleScreen implements Serializable {
 		if (hero.getAbility() == HeroAbility.DAMAGE_REDUCTION) {
 			
 			damageMultiplier = 0.5f;
+			
+		}
+		
+		if (hero.getIsPowerUpItemActive() && hero.getPowerUpItem().getAbility() == ItemAbility.DAMAGE_PROTECTION) {
+			
+			hero.destroyPowerUpItem();
+			return 0;
 			
 		}
 		
