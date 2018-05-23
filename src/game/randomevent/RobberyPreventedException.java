@@ -1,5 +1,6 @@
 package game.randomevent;
 
+import game.character.Hero;
 import game.item.Item;
 
 public class RobberyPreventedException extends Exception {
@@ -11,15 +12,24 @@ public class RobberyPreventedException extends Exception {
 
 	private Item itemNotRobbed;
 	
-	public RobberyPreventedException(Item itemNotRobbed) {
+	private Hero lawStudent;
+	
+	public RobberyPreventedException(Hero lawStudent, Item itemNotRobbed) {
 		
 		this.itemNotRobbed = itemNotRobbed;
+		this.lawStudent = lawStudent;
 		
 	}
 	
 	public Item getItemNotRobbed() {
 		
 		return this.itemNotRobbed;
+		
+	}
+	
+	public Hero getLawStudent() {
+		
+		return this.lawStudent;
 		
 	}
 }

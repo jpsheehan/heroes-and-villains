@@ -15,12 +15,14 @@ import game.ui.gui.panels.areas.VillainsLairPanel;
 import game.GameEnvironment;
 import game.GameWonException;
 import game.GeneralHelpers;
+import game.character.Hero;
 import game.city.Area;
 import game.city.AreaType;
 import game.city.CityController;
 import game.city.Direction;
 
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import java.awt.GridLayout;
 
@@ -31,6 +33,10 @@ import game.ui.gui.components.ImagePanel;
 import game.ui.gui.panels.AreaSummaryPanel;
 import game.city.Shop;
 import game.city.VillainsLair;
+import game.randomevent.ItemGiftedException;
+import game.randomevent.ItemRobbedException;
+import game.randomevent.MoneyRobbedException;
+import game.randomevent.RobberyPreventedException;
 
 import javax.swing.BoxLayout;
 import javax.swing.border.BevelBorder;
@@ -43,7 +49,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class MainGamePanel extends JPanel implements GameEventListener {
+public class MainGamePanel extends JPanel implements GameEventListener, ActionListener {
 
 	/**
 	 * Required for implementing the Serializable interface.
@@ -66,6 +72,11 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 	private GameEventListener window;
 	private JPanel panel;
 	private JButton btnSaveAndQuit;
+	
+	/**
+	 * A timer for performing the random event and showing a dialog box when travelling to the next city.
+	 */
+	private Timer randomEventTimer;
 
 	/**
 	 * Create the application.
@@ -155,6 +166,8 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 		areaPanelHolder.setLayout(new BorderLayout(0, 0));
 				
 		updateNavigation();
+		
+		randomEventTimer = new Timer(100, this);
 		
 	}
 		
@@ -260,6 +273,8 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 					this.getGameEnvironment().getCityController().goToNextCity();
 					updateNavigation();
 					
+					
+					
 				} catch (GameWonException e) {
 					
 					window.gameEventPerformed(new GameEvent(GameEventType.GAME_WON));
@@ -273,6 +288,43 @@ public class MainGamePanel extends JPanel implements GameEventListener {
 				window.gameEventPerformed(event);
 			
 		}
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		
+		// get the first non-dead hero
+		Hero nonDeadHero = null;
+		for (Hero hero : getGameEnvironment().getTeam().getHeroes()) {
+			if (hero.isAlive()) {
+				nonDeadHero = hero;
+				break;
+			}
+		}
+		
+		try {
+			
+			this.getGameEnvironment().getCityController().getCurrentCity().getRandomEvent().performEvent(getGameEnvironment().getTeam());
+			
+		} catch (RobberyPreventedException e) {
+			
+			JOptionPane.showMessageDialog((Component)window, String.format("A dodgy flatmate tried to take your %s! But %s used their knowledge of criminal law to deter them!", e.getItemNotRobbed().getName(), e.getLawStudent().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			
+		} catch (MoneyRobbedException e) {
+			
+			JOptionPane.showMessageDialog((Component)window, String.format("A dodgy flatmate went through %s's room and stole $%d. What a jerk!", nonDeadHero.getName(), e.getMoneyRobbed()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			
+		} catch (ItemRobbedException e) {
+			
+			JOptionPane.showMessageDialog((Component)window, String.format("A dodgy flatmate went through %s's stuff and stole a %s. That's not nice!", nonDeadHero.getName(), e.getItemRobbed().getName()), "Random Event", JOptionPane.WARNING_MESSAGE);
+			
+		} catch (ItemGiftedException e) {
+
+			JOptionPane.showMessageDialog((Component)window,  String.format("The government announced that every student shall receive a free %s! Thanks Aunty Cindy!", e.getItemGifted().getName()), "Random Event", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		randomEventTimer.stop();
 		
 	}
 	

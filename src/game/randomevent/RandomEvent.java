@@ -25,11 +25,6 @@ public class RandomEvent implements Serializable {
 	private static float probability = 0.4f;
 	
 	/**
-	 * A reference to the Team.
-	 */
-	private Team team;
-	
-	/**
 	 * Whether or not an event actually took place.
 	 */
 	private boolean occurred;
@@ -49,9 +44,8 @@ public class RandomEvent implements Serializable {
 	 * Also calculates whether or not the event happens.
 	 * @param team The team that is visiting the City.
 	 */
-	public RandomEvent(Team team) {
+	public RandomEvent() {
 		
-		this.team = team;
 		this.performed = false;
 		
 		this.occurred = (GeneralHelpers.getRandom().nextInt(100) <= probability * 100f);
@@ -101,7 +95,7 @@ public class RandomEvent implements Serializable {
 	 * @throws ItemRobbedException When the team is robbed.
 	 * @throws ItemGiftedException When the team is gifted an item.
 	 */
-	public void performEvent() throws RobberyPreventedException, MoneyRobbedException, ItemRobbedException, ItemGiftedException {
+	public void performEvent(Team team) throws RobberyPreventedException, MoneyRobbedException, ItemRobbedException, ItemGiftedException {
 		
 		if (performed) {
 			throw new AssertionError("Cannot perform the same random event twice (because then it's not random, but constant)");
@@ -110,11 +104,11 @@ public class RandomEvent implements Serializable {
 		switch (type) {
 		
 			case GIFT:
-				performGifting();
+				performGifting(team);
 				break;
 				
 			case ROBBERY:
-				performRobbery();
+				performRobbery(team);
 				break;
 				
 			default:
@@ -133,8 +127,18 @@ public class RandomEvent implements Serializable {
 	 * @throws MoneyRobbedException When the team has no items in their inventory.
 	 * @throws ItemRobbedException When an item is taken from the team.
 	 */
-	private void performRobbery() throws RobberyPreventedException, MoneyRobbedException, ItemRobbedException {
-
+	private void performRobbery(Team team) throws RobberyPreventedException, MoneyRobbedException, ItemRobbedException {
+		
+		Hero lawStudent = null;
+		
+		// check if there is a law student in the team
+		for (Hero hero : team.getHeroes()) {
+			if (hero.getType() == HeroType.LAW_STUDENT && hero.isAlive()) {
+				lawStudent = null;
+				break;
+			}
+		}
+		
 		if (team.getInventory().getAllItems().length == 0) {
 			
 			// if the team has no items then take half of their money instead.
@@ -148,25 +152,29 @@ public class RandomEvent implements Serializable {
 			
 			int moneyTaken = team.getMoney() / 2;
 			
-			team.spendMoney(moneyTaken);
+			if (lawStudent != null) {
+				
+				// not implementing this exception class or anything because we don't want to be too pedantic.
+				// just pretend that the team never got robbed in the first place!
+				// throw new MoneyRobberyPreventedException(lawStudent, moneyTaken);
+				return;
+				
+			}
 			
+			team.spendMoney(moneyTaken);
 			throw new MoneyRobbedException(moneyTaken);
 			
 		}
 		
 		// select a random item from the team's inventory.
 		Item itemToRemove = team.getInventory().getAllItems()[GeneralHelpers.getRandom().nextInt(team.getInventory().size())];
-		
-		// check if there is a law student in the team
-		for (Hero hero : team.getHeroes()) {
-			if (hero.getType() == HeroType.LAW_STUDENT) {
-				throw new RobberyPreventedException(itemToRemove);
-			}
-		}
 
+		if (lawStudent != null) {
+			throw new RobberyPreventedException(lawStudent, itemToRemove);
+		}
+		
 		// remove it
 		team.getInventory().remove(itemToRemove);
-		
 		throw new ItemRobbedException(itemToRemove);
 		
 	}
@@ -175,7 +183,7 @@ public class RandomEvent implements Serializable {
 	 * Attempts to gift the team an item.
 	 * @throws ItemGiftedException When the team is gifted an item.
 	 */
-	private void performGifting() throws ItemGiftedException {
+	private void performGifting(Team team) throws ItemGiftedException {
 		
 		// select a random item from the item pool
 		Item[] itemPool = GeneralHelpers.getItemPool();
@@ -183,6 +191,7 @@ public class RandomEvent implements Serializable {
 		if (itemPool.length > 0) {
 			
 			Item selectedItem = itemPool[GeneralHelpers.getRandom().nextInt(itemPool.length)];
+			team.getInventory().add(selectedItem);
 			throw new ItemGiftedException(selectedItem);
 			
 		}
