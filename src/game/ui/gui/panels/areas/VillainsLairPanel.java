@@ -3,6 +3,7 @@ package game.ui.gui.panels.areas;
 import game.GameEnvironment;
 import game.character.Hero;
 import game.character.HeroDeadException;
+import game.character.HeroType;
 import game.character.VillainDeadException;
 import game.city.VillainsLair;
 import game.ui.gui.DialogResult;
@@ -280,8 +281,16 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					update();
 					
 				} catch (VillainDeadException e) {
+					
+					boolean hasCommerceStudents = false;
+					for (Hero hero : gameEnvironment.getTeam().getHeroes()) {
+						if (hero.getType() == HeroType.COMMERCE_STUDENT) {
+							hasCommerceStudents = true;
+							break;
+						}
+					}
 
-					lblInformation.setText(String.format("%s has been defeated! You won $%d!", e.getVillain().getName(), e.getReward()));
+					lblInformation.setText(String.format("%s has been defeated! You won %s$%d!", e.getVillain().getName(), hasCommerceStudents ? "a boosted " : "" ,e.getReward()));
 					
 					if (gameEnvironment.getCityController().isLastCity()) {
 						btnGoToNextBuilding.setText("Graduate!");

@@ -3,6 +3,7 @@ package game;
 import game.character.Hero;
 import game.character.HeroAbility;
 import game.character.HeroDeadException;
+import game.character.HeroType;
 import game.character.Villain;
 import game.character.VillainDeadException;
 import game.minigame.DiceRolls;
@@ -100,7 +101,11 @@ public class BattleScreen implements Serializable {
 		
 		float rewardMultiplier = 1.0f;
 		
-		// Consider adding an ability that grants more money.
+		for (Hero hero : team.getHeroes()) {
+			if (hero.getType() == HeroType.COMMERCE_STUDENT) {
+				rewardMultiplier *= 1.5f;
+			}
+		}
 		
 		return (int)(GeneralHelpers.max(5, GeneralHelpers.getRandom().nextInt(10)) * rewardMultiplier * (this.cityIndex + 1));
 		
