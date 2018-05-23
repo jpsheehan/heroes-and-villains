@@ -30,6 +30,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
+import javax.swing.JProgressBar;
 
 public class NewHeroDialog extends JDialog implements Returnable {
 
@@ -48,7 +49,8 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	private Color defaultTextFieldBackgroundColor;
 	private JTextArea textAreaHeroTypeFlavourText;
 	private JTextArea textAreaHeroAbilityFlavourText;
-
+	private JProgressBar progressBarMaxHealth, progressBarRecoveryRate;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -89,7 +91,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				
 			}
 		});
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 400);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -113,6 +115,10 @@ public class NewHeroDialog extends JDialog implements Returnable {
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -224,6 +230,24 @@ public class NewHeroDialog extends JDialog implements Returnable {
 			textAreaHeroAbilityFlavourText.setEditable(false);
 			contentPanel.add(textAreaHeroAbilityFlavourText, "4, 14, 1, 5, fill, fill");
 		}
+		{
+			JLabel lblMaxHealth = new JLabel("Max Health:");
+			contentPanel.add(lblMaxHealth, "2, 20");
+		}
+		{
+			progressBarMaxHealth = new JProgressBar();
+			progressBarMaxHealth.setMaximum(200);
+			contentPanel.add(progressBarMaxHealth, "4, 20");
+		}
+		{
+			JLabel lblRecoveryRate = new JLabel("Recovery Rate:");
+			contentPanel.add(lblRecoveryRate, "2, 22");
+		}
+		{
+			progressBarRecoveryRate = new JProgressBar();
+			progressBarRecoveryRate.setMaximum(200);
+			contentPanel.add(progressBarRecoveryRate, "4, 22");
+		}
 
 	}
 	
@@ -292,10 +316,12 @@ public class NewHeroDialog extends JDialog implements Returnable {
 		if (this.heroType == null)
 			return;
 		
-		
 		textAreaHeroTypeFlavourText.setText(this.heroType.getFlavourText());
 		lblHeroAbilityName.setText(this.heroType.getAbility().getName());
 		textAreaHeroAbilityFlavourText.setText(this.heroType.getAbility().getFlavourText());
+		
+		progressBarMaxHealth.setValue(heroType.getMaxHealth());
+		progressBarRecoveryRate.setValue((int) (100 * heroType.getRecoveryRate())); 
 		
 	}
 	
