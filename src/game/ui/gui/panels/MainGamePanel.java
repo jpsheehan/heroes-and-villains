@@ -91,6 +91,8 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		Component self = this;
 
 		setLayout(new BorderLayout(0, 0));
 		
@@ -127,7 +129,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 					
 				} catch (IOException e) {
 					
-					int res = JOptionPane.showConfirmDialog((Component) window, "Could not save the game. Are you sure you want to quit?");
+					int res = JOptionPane.showConfirmDialog((Component) self, "Could not save the game. Are you sure you want to quit?", "Error", JOptionPane.ERROR_MESSAGE);
 					
 					if (res == JOptionPane.YES_OPTION) {
 						
@@ -180,7 +182,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 		// Prompt for confirmation before entering a Villain's Lair
 		if (getGameEnvironment().getCityController().getCurrentArea().getType() == AreaType.VILLAINS_LAIR && !gameEnvironment.getIgnoreRoomPrompt()) {
 			
-			int res = JOptionPane.showConfirmDialog(null, "You are about to enter a Villain's Lair. Are you sure you want to enter?", null, JOptionPane.YES_NO_OPTION);
+			int res = JOptionPane.showConfirmDialog((Component) this, "You are about to enter a Villain's Lair. You will not be able to leave until you beat the villain.\nAre you sure you want to enter?", "Caution", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			
 			if (res != JOptionPane.YES_OPTION) {
 				
