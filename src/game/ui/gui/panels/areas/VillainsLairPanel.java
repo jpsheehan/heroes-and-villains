@@ -27,6 +27,7 @@ import game.ui.gui.components.VillainHealthBar;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.FlowLayout;
 
 public class VillainsLairPanel extends GenericAreaPanel implements GameEventListener {
 	
@@ -71,7 +72,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		JPanel panel = new JPanel();
 		villainPanel.add(panel);
 		
-		JLabel lblVillainName = new JLabel(villainsLair.getVillain().getName());
+		JLabel lblVillainName = new JLabel("Villain Name: " + villainsLair.getVillain().getName());
 		panel.add(lblVillainName);
 		
 		JPanel panel_5 = new JPanel();
@@ -82,8 +83,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 		
 		JPanel panel_3 = new JPanel();
 		villainPanel.add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblTauntPhrase = new JLabel(villainsLair.getVillain().getTaunt());
+		JLabel lblTauntPhrase = new JLabel("<html>\"" + villainsLair.getVillain().getTaunt() + "\"</html>");
 		panel_3.add(lblTauntPhrase);
 		
 		JPanel panel_1 = new JPanel();
