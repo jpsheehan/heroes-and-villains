@@ -159,7 +159,14 @@ public final class GeneralHelpers {
 			
 			if (key.startsWith("Item.")) {
 				
-				itemNames.add(key.split(".")[1]);
+				try {
+					String itemName = key.split("\\.")[1];
+					
+					if (!itemNames.contains(key)) {
+						itemNames.add(itemName);
+					}
+					
+				} catch (IndexOutOfBoundsException e) {}
 				
 			}
 			

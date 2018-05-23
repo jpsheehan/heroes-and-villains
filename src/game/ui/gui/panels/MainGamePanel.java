@@ -304,6 +304,7 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 		
 		try {
 			
+			// perform the random event and handle the outcome appropriately
 			this.getGameEnvironment().getCityController().getCurrentCity().getRandomEvent().performEvent(getGameEnvironment().getTeam());
 			
 		} catch (RobberyPreventedException e) {
