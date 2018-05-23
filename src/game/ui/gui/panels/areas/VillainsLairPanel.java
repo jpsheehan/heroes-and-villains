@@ -355,9 +355,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 					throw new AssertionError(e);
 					
 				}
-
+				
 				update();
-				lblInformation.setText(String.format("%s dealt some damage to %s!", villainsLair.getVillain().getName(), selectedHero.getName()));
+				lblInformation.setText(String.format("%s dealt %s damage to %s!", villainsLair.getVillain().getName(), selectedHero.getType() == HeroType.ENGINEERING_STUDENT ? "reduced" : "lots of", selectedHero.getName()));
 				
 				break;
 				
