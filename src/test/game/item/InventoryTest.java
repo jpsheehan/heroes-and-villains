@@ -21,7 +21,7 @@ class InventoryTest {
 		
 		map = new Map("Old Map", "A dusty old map.", 10);
 		healingItem = new HealingItem("Healing Potion", "It's red!", 10, 3, 3);
-		powerUpItem = new PowerUpItem("Lucky Potion", "It's green!", 10, ItemAbility.INCREASE_GIFT_CHANCE, MinigameType.ALL);
+		powerUpItem = new PowerUpItem("Lucky Potion", "It's green!", 10, ItemAbility.FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER, MinigameType.ALL);
 		
 	}
 

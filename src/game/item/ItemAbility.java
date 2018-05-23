@@ -26,17 +26,6 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 	DAMAGE_PROTECTION,
 	
 	/**
-	 * Increases the amount of money the hero gets if this hero defeats the villain.
-	 * TODO: Implement
-	 */
-	INCREASE_GIFT_CHANCE,
-	
-	/**
-	 * TODO: Change this!!!
-	 */
-	DECREASE_ROBBERY_CHANCE,
-	
-	/**
 	 * Applies to the Guess the Number game.
 	 */
 	FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER;
@@ -61,14 +50,8 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 			case DAMAGE_PROTECTION:
 				return "Ability.Item.DamageProtection";
 				
-			case DECREASE_ROBBERY_CHANCE:
-				return "Ability.Item.DecreaseRobberyChance";
-				
 			case FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER:
 				return "Ability.Item.FourAttemptsAtGuessTheNumber";
-				
-			case INCREASE_GIFT_CHANCE:
-				return "Ability.Item.IncreaseGiftChance";
 				
 			case WIN_ON_DRAW:
 				return "Ability.Item.WinOnDraw";
@@ -103,17 +86,9 @@ public enum ItemAbility implements Ability, Nameable, Describable, Serializable 
 			case "Ability.Item.DamageProtection":
 				return DAMAGE_PROTECTION;
 				
-			case "DecreaseRobberyChance":
-			case "Ability.Item.DecreaseRobberyChance":
-				return ItemAbility.DECREASE_ROBBERY_CHANCE;
-				
 			case "FourAttemptsAtGuessTheNumber":
 			case "Ability.Item.FourAttemptsAtGuessTheNumber":
 				return FOUR_ATTEMPTS_AT_GUESS_THE_NUMBER;
-				
-			case "IncreaseGiftChance":
-			case "Ability.Item.IncreaseGiftChance":
-				return INCREASE_GIFT_CHANCE;
 				
 			case "WinOnDraw":
 			case "Ability.Item.WinOnDraw":

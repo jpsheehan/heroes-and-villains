@@ -25,6 +25,7 @@ public enum HeroAbility implements Ability, Nameable, Describable, Serializable 
 	
 	/**
 	 * For science students.
+	 * TODO: Remove!
 	 */
 	INCREASED_RECOVERY_RATE,
 	

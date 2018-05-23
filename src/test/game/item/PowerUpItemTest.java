@@ -16,7 +16,7 @@ class PowerUpItemTest {
 		new PowerUpItem("Cool PowerUpItem", "it's pretty", 10, ItemAbility.DAMAGE_PROTECTION, MinigameType.DICE_ROLLS);
 
 		assertThrows(NullPointerException.class, () -> new PowerUpItem("Cool PowerUpItem", "it's pretty", 10, null, MinigameType.DICE_ROLLS));
-		assertThrows(NullPointerException.class, () -> new PowerUpItem("Cool PowerUpItem", "it's pretty", 10, ItemAbility.DECREASE_ROBBERY_CHANCE, null));
+		assertThrows(NullPointerException.class, () -> new PowerUpItem("Cool PowerUpItem", "it's pretty", 10, ItemAbility.DAMAGE_PROTECTION, null));
 		
 	}
 	
