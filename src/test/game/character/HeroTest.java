@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 class HeroTest {
 	
-	private Hero hero_1, hero_2, hero_3, hero_4, hero_5, hero_6, hero_7;
+	private Hero hero_1, hero_2, hero_3, hero_4, hero_5, hero_6;
 	
 	@BeforeEach
 	void setup() {
@@ -26,7 +26,6 @@ class HeroTest {
 		hero_4 = new Hero("Hero 4", HeroType.COMPUTER_SCIENCE_STUDENT);
 		hero_5 = new Hero("Hero 5", HeroType.ENGINEERING_STUDENT);
 		hero_6 = new Hero("Hero 6", HeroType.LAW_STUDENT);
-		hero_7 = new Hero("Hero 7", HeroType.SCIENCE_STUDENT);
 	}
 
 	@Test
@@ -37,7 +36,6 @@ class HeroTest {
 		assertEquals(HeroType.COMPUTER_SCIENCE_STUDENT, hero_4.getType());
 		assertEquals(HeroType.ENGINEERING_STUDENT, hero_5.getType());
 		assertEquals(HeroType.LAW_STUDENT, hero_6.getType());
-		assertEquals(HeroType.SCIENCE_STUDENT, hero_7.getType());
 	}
 
 	@Test
@@ -48,7 +46,6 @@ class HeroTest {
 		assertEquals(HeroAbility.HACK_MAINFRAME, hero_4.getAbility());
 		assertEquals(HeroAbility.DAMAGE_REDUCTION, hero_5.getAbility());
 		assertEquals(HeroAbility.PREVENTS_ROBBERY, hero_6.getAbility());
-		assertEquals(HeroAbility.INCREASED_RECOVERY_RATE, hero_7.getAbility());
 	}
 
 	@Test
@@ -60,7 +57,6 @@ class HeroTest {
 		assertEquals(1f, hero_4.getRecoveryRate());
 		assertEquals(1f, hero_5.getRecoveryRate());
 		assertEquals(1f, hero_6.getRecoveryRate());
-		assertEquals(1f, hero_7.getRecoveryRate());
 		
 	}
 
@@ -95,7 +91,6 @@ class HeroTest {
 		assertEquals("Hero 4", hero_4.getName());
 		assertEquals("Hero 5", hero_5.getName());
 		assertEquals("Hero 6", hero_6.getName());
-		assertEquals("Hero 7", hero_7.getName());
 	}
 	
 	@Test

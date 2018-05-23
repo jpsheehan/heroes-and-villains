@@ -24,12 +24,6 @@ public enum HeroAbility implements Ability, Nameable, Describable, Serializable 
 	DAMAGE_REDUCTION,
 	
 	/**
-	 * For science students.
-	 * TODO: Remove!
-	 */
-	INCREASED_RECOVERY_RATE,
-	
-	/**
 	 * For arts students.
 	 */
 	WITTY_PHRASES,
@@ -61,9 +55,6 @@ public enum HeroAbility implements Ability, Nameable, Describable, Serializable 
 				
 			case IMPROVED_ODDS:
 				return ("Ability.Hero.ImprovedOdds");
-				
-			case INCREASED_RECOVERY_RATE:
-				return ("Ability.Hero.IncreasedRecoveryRate");
 				
 			case PREVENTS_ROBBERY:
 				return ("Ability.Hero.PreventsRobbery");

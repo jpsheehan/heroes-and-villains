@@ -19,8 +19,7 @@ public enum HeroType implements Nameable, Describable, Serializable {
 	ARTS_STUDENT,
 	MATHS_STUDENT,
 	LAW_STUDENT,
-	COMMERCE_STUDENT,
-	SCIENCE_STUDENT;
+	COMMERCE_STUDENT;
 	
 	/**
 	 * @return The name of the HeroType.
@@ -66,9 +65,6 @@ public enum HeroType implements Nameable, Describable, Serializable {
 				
 			case MATHS_STUDENT:
 				return ("HeroType.Maths");
-				
-			case SCIENCE_STUDENT:
-				return ("HeroType.Science");
 			
 			default:
 				throw new AssertionError();
@@ -101,9 +97,6 @@ public enum HeroType implements Nameable, Describable, Serializable {
 				
 			case MATHS_STUDENT:
 				return HeroAbility.IMPROVED_ODDS;
-				
-			case SCIENCE_STUDENT:
-				return HeroAbility.INCREASED_RECOVERY_RATE;
 			
 			default:
 				throw new AssertionError();

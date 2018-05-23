@@ -96,9 +96,6 @@ public class Hero extends Character implements Serializable {
 			case MATHS_STUDENT:
 				return HeroAbility.IMPROVED_ODDS;
 				
-			case SCIENCE_STUDENT:
-				return HeroAbility.INCREASED_RECOVERY_RATE;
-				
 			default:
 				throw new AssertionError("You shouldn't get this. Is there another HeroType that we don't know about?");
 			
