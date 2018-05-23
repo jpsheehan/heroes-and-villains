@@ -141,12 +141,14 @@ public class GameWindow implements GameEventListener {
 	@Override
 	public void gameEventPerformed(GameEvent event) {
 		
+		MainGamePanel mainGamePanel;
+		
 		switch (event.getType()) {
 		
 			case GAME_WON:
 				
 				// Show a message saying that the game was won!
-				switchPanel(new GameWonPanel(this));
+				switchPanel(new GameWonPanel(this, env));
 				break;
 				
 			case GAME_LOST:
@@ -161,7 +163,7 @@ public class GameWindow implements GameEventListener {
 				
 			case START_GAME:
 				env = (GameEnvironment)event.getParameters();
-				MainGamePanel mainGamePanel = new MainGamePanel(env, this);
+				mainGamePanel = new MainGamePanel(env, this);
 				switchPanel(mainGamePanel);
 				menuBar.setMainGamePanel(mainGamePanel);
 				break;
@@ -170,7 +172,9 @@ public class GameWindow implements GameEventListener {
 				try {
 					
 					env = GameEnvironment.loadState();
-					switchPanel(new MainGamePanel(env, this));
+					mainGamePanel = new MainGamePanel(env, this);
+					switchPanel(mainGamePanel);
+					menuBar.setMainGamePanel(mainGamePanel);
 					
 				} catch (ClassNotFoundException | IOException e) {
 					

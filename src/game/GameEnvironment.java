@@ -46,7 +46,26 @@ public class GameEnvironment implements Serializable {
 	/**
 	 * The timestamp when the game was saved (or 0 if it was this is not a saved game)
 	 */
-	private long timeSaved;
+	private transient long timeSaved;
+	
+	/**
+	 * The time the game environment was loaded/created.
+	 */
+	private transient long timeStarted;
+	
+	/**
+	 * The time (in seconds) since the game was started/loaded. This is used only for loading and saving.
+	 */
+	private long timeTakenTemp;
+	
+	/**
+	 * Creates a new instance of GameEnvironment.
+	 */
+	public GameEnvironment() {
+		
+		this.timeStarted = (new Date()).getTime();
+		
+	}
 	
 	/**
 	 * Gets the city controller.
@@ -109,6 +128,8 @@ public class GameEnvironment implements Serializable {
 		
 		// get the random state
 		this.randomStateTemp = GeneralHelpers.getRandom();
+		this.timeTakenTemp = (new Date()).getTime() - timeStarted;
+		
 		FileOutputStream fileOut = new FileOutputStream(filename);
 		ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
 		objOut.writeObject(this);
@@ -230,6 +251,7 @@ public class GameEnvironment implements Serializable {
 	private void setTimeSaved(long time) {
 		
 		this.timeSaved = time;
+		this.timeStarted = (new Date()).getTime() - timeTakenTemp;
 		
 	}
 	
@@ -255,6 +277,14 @@ public class GameEnvironment implements Serializable {
 		boolean wasTrue = ignoreRoomPrompt;
 		ignoreRoomPrompt = false;
 		return wasTrue;
+		
+	}
+	
+	/**
+	 * @return The number of seconds since the game began.
+	 */
+	public long getNumberOfSeconds() {
+		return ((new Date()).getTime() - this.timeStarted) / 1000;
 		
 	}
 

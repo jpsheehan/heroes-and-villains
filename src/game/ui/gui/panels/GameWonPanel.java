@@ -2,9 +2,11 @@ package game.ui.gui.panels;
 
 import javax.swing.JPanel;
 
+import game.GameEnvironment;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
 import game.ui.gui.GameEventType;
+import game.ui.text.TextUserInterfaceHelpers;
 
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -23,7 +25,7 @@ public class GameWonPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GameWonPanel(GameEventListener parent) {
+	public GameWonPanel(GameEventListener parent, GameEnvironment env) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panel = new JPanel();
@@ -36,13 +38,20 @@ public class GameWonPanel extends JPanel {
 		JPanel panel_1 = new JPanel();
 		add(panel_1);
 		
-		JLabel lblYouGraduatedUniversity = new JLabel("You graduated university with a GPA of");
+		JLabel lblYouGraduatedUniversity = new JLabel(String.format("%s graduated university in:", env.getTeam().getName()));
 		panel_1.add(lblYouGraduatedUniversity);
 		
 		JPanel panel_2 = new JPanel();
 		add(panel_2);
 		
-		JLabel lblGpa = new JLabel("GPA");
+		// format the time nicely
+		int minutes = (int) (env.getNumberOfSeconds() / 60);
+		int seconds = (int) (env.getNumberOfSeconds() % 60);
+		
+		JLabel lblGpa = new JLabel(String.format("%s:%s",
+				TextUserInterfaceHelpers.padLeft(new Integer(minutes).toString(), '0', 2),
+				TextUserInterfaceHelpers.padLeft(new Integer(seconds).toString(), '0', 2)));
+		
 		lblGpa.setFont(new Font("Dialog", Font.BOLD, 24));
 		panel_2.add(lblGpa);
 		
