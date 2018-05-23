@@ -35,7 +35,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 		// Lower the maximum number if applicable.
 		if (hasAbility(HeroAbility.IMPROVED_ODDS)) {
 			
-			maxNumber = 9;
+			maxNumber = 8;
 			
 		}
 		
