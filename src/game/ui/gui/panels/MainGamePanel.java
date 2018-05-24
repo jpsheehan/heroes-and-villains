@@ -15,6 +15,7 @@ import game.ui.gui.windows.GameWindow;
 import game.GameEnvironment;
 import game.GameWonException;
 import game.GeneralHelpers;
+import game.character.Dialogue;
 import game.character.Hero;
 import game.city.Area;
 import game.city.AreaType;
@@ -264,6 +265,16 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 				break;
 				
 			case NAVIGATION_CHANGED:
+				
+				if (getGameEnvironment().getCityController().getPreviousAreaType() == AreaType.SHOP) {
+					
+					Shop shop = (Shop)getGameEnvironment().getCityController().getCurrentCity().getArea(AreaType.SHOP);
+					Dialogue dialogue = shop.getInnKeeper().getDialogue();
+					
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s says \"%s\"", shop.getInnKeeper().getName(), dialogue.getFarewell()), "Shop", JOptionPane.INFORMATION_MESSAGE);
+					
+				}
+				
 				updateNavigation();
 				break;
 				

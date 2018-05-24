@@ -45,6 +45,11 @@ public class CityController implements Serializable {
 	private boolean _hasUsedMap;
 	
 	/**
+	 * The area the team was in previously.
+	 */
+	private AreaType previousAreaType;
+	
+	/**
 	 * A list of directions visited in this city.
 	 */
 	private ArrayList<Direction> visitedDirections;
@@ -153,6 +158,8 @@ public class CityController implements Serializable {
 	 */
 	public void move(Direction newDirection) throws IllegalMoveException {
 
+		previousAreaType = getCurrentArea().getType();
+		
 		Direction absoluteDirection;
 		
 		if (newDirection == null) {
@@ -205,6 +212,7 @@ public class CityController implements Serializable {
 		}
 
 		this.cityIndex++;
+		this.previousAreaType = getCurrentArea().getType();
 		this.direction = Direction.CENTRE;
 		this.visitedDirections = new ArrayList<Direction>();
 		this.visitedDirections.add(Direction.CENTRE);
@@ -277,5 +285,12 @@ public class CityController implements Serializable {
 		
 		return this.cityIndex == this.cities.length - 1;
 		
+	}
+	
+	/**
+	 * @return The area the team was in previously.
+	 */
+	public AreaType getPreviousAreaType() {
+		return previousAreaType;
 	}
 }
