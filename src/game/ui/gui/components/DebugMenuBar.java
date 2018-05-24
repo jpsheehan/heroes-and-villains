@@ -17,7 +17,6 @@ import game.character.Hero;
 import game.character.HeroDeadException;
 import game.character.HeroType;
 import game.city.CityController;
-import game.item.Item;
 import game.minigame.MinigameType;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventListener;
@@ -55,8 +54,6 @@ public class DebugMenuBar extends JMenuBar {
 				} catch (TeamFullException e) {
 					throw new AssertionError();
 				}
-				
-				team.getInventory().add(Item.fromStrings("WinOnDraw", 1f));
 				
 				GameEnvironment env = new GameEnvironment();
 				env.setTeam(team);

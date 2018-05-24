@@ -105,7 +105,19 @@ public final class GeneralHelpers {
 			
 			// Convert that string into a Map<String, String>
 			Gson gson = new Gson();
-			GeneralHelpers.strings = gson.fromJson(fileString, new TypeToken<Map<String, String>>(){}.getType());
+			
+			try {
+				
+				GeneralHelpers.strings = gson.fromJson(fileString, new TypeToken<Map<String, String>>(){}.getType());
+				
+			} catch (JsonSyntaxException e) {
+				
+				System.err.println(String.format("Yo, Jesse or Manu! Fix the syntax in the strings.json file."));
+				e.printStackTrace();
+				
+				throw new AssertionError();
+				
+			}
 
 		}
 		
