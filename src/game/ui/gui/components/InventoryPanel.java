@@ -11,6 +11,7 @@ import game.item.ItemType;
 
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
 
 /**
  * version 0.3
@@ -29,6 +30,7 @@ public class InventoryPanel extends JPanel {
 	private JTable table;
 	
 	private Item selectedItem;
+	private JLabel lblDescription;
 	
 	/**
 	 * Create the panel.
@@ -48,14 +50,37 @@ public class InventoryPanel extends JPanel {
 				
 				selectedItem = model.getSelectedItem(table.getSelectedRow());
 				
+				if (selectedItem != null) {
+					lblDescription.setText(selectedItem.getFlavourText());
+				}
+				
 			}
 		});
 		
+		int effectsColumnWidth = 300;
+		
 		if (filter == null) {
-			table.getColumnModel().getColumn(2).setPreferredWidth(300);
+			
+			if (showPrices) {
+				
+				table.getColumnModel().getColumn(0).setPreferredWidth(20);
+				table.getColumnModel().getColumn(3).setPreferredWidth(effectsColumnWidth);
+				
+			} else {
+				
+				table.getColumnModel().getColumn(2).setPreferredWidth(effectsColumnWidth);
+				
+			}
+		
 		}
 		
 		add(new JScrollPane(table));
+		
+		JPanel panel = new JPanel();
+		add(panel, BorderLayout.SOUTH);
+		
+		lblDescription = new JLabel("");
+		panel.add(lblDescription);
 		
 		if (model.getRowCount() > 0) {
 			
