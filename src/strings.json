@@ -135,7 +135,7 @@
 	"Matariki.Flavour": "Where it all starts?",
 	"Matariki.Shop.Name": "The foundry",
 	"Matariki.Shop.Flavour": "Beer and more ..",
-	"Matariki.Shop.Items": "Coffee, Coke, Wedges, CurlyFries, Pizza, Map, MineralWater, Guinness ",
+	"Matariki.Shop.Items": "Coffee, Coke, Wedges, CurlyFries, Pizza, Map, MineralWater, Guinness",
 	"Matariki.HomeBase.Name": "The common room, new UCSA building",
 	"Matariki.HomeBase.Flavour": "Relax ..",
 	"Matariki.PowerUpDen.Name": "The Rec. Centre",
@@ -231,28 +231,28 @@
 	"Item.Coffee.Price": "4",
 	"Item.Coffee.Type": "Healing",
 	"Item.Coffee.RestorationLevel": "1",
-	"Item.Coffee.ApplicationTime": "30",
+	"Item.Coffee.ApplicationTime": "60",
 	
 	"Item.Pie.Name": "Steak and Cheese Pie",
 	"Item.Pie.Flavour": "Stodgy, boost health by 50%",
 	"Item.Pie.Price": "6",
 	"Item.Pie.Type": "Healing",
 	"Item.Pie.RestorationLevel": "2",
-	"Item.Pie.ApplicationTime": "90",
+	"Item.Pie.ApplicationTime": "180",
 	
 	"Item.SBurger.Name": "Shilling Club Burger",
 	"Item.SBurger.Flavour": "The business, max health boost",
 	"Item.SBurger.Price": "20",
 	"Item.SBurger.Type": "Healing",
 	"Item.SBurger.RestorationLevel": "4",
-	"Item.SBurger.ApplicationTime": "240",
+	"Item.SBurger.ApplicationTime": "300",
 	
 	"Item.Eggs.Name": "Poached Eggs, bacon on toast",
 	"Item.Eggs.Flavour": "Protein to keep you going ",
 	"Item.Eggs.Price": "14",
 	"Item.Eggs.Type": "Healing",
 	"Item.Eggs.RestorationLevel": "4",
-	"Item.Eggs.ApplicationTime": "180",
+	"Item.Eggs.ApplicationTime": "300",
 	
 	"Item.Salad.Name": "Ceaser salad (c/w bacon)",
 	"Item.Salad.Flavour": "Healthy option",
@@ -273,7 +273,7 @@
 	"Item.NBurger.Price": "17",
 	"Item.NBurger.Type": "Healing",
 	"Item.NBurger.RestorationLevel": "4",
-	"Item.NBurger.ApplicationTime": "240",
+	"Item.NBurger.ApplicationTime": "260",
 	
 	"Item.Curry.Name": "Curry n Rice",
 	"Item.Curry.Flavour": "Do villains like garlic?",
@@ -378,7 +378,7 @@
 	"Item.TeaChilli.Price": "5",
 	"Item.TeaChilli.Type": "Healing",
 	"Item.TeaChilli.RestorationLevel": "2",
-	"Item.TeaChilli.ApplicationTime": "1",
+	"Item.TeaChilli.ApplicationTime": "30",
 	
 	"Item.Pancakes.Name": "Pancakes",
 	"Item.Pancakes.Flavour": "Maple syrup - fantastic!",
@@ -392,35 +392,35 @@
 	"Item.Muesli.Price": "7",
 	"Item.Muesli.Type": "Healing",
 	"Item.Muesli.RestorationLevel": "2",
-	"Item.Muesli.ApplicationTime": "90",
+	"Item.Muesli.ApplicationTime": "110",
 	
 	"Item.Bagel.Name": "Toasted Bagel",
 	"Item.Bagel.Flavour": "Bacon or Salmon?",
 	"Item.Bagel.Price": "7",
 	"Item.Bagel.Type": "Healing",
 	"Item.Bagel.RestorationLevel": "2",
-	"Item.Bagel.ApplicationTime": "120",
+	"Item.Bagel.ApplicationTime": "150",
 	
 	"Item.Tortilla.Name": "Spicy Bean Tortilla",
 	"Item.Tortilla.Flavour": "Sweet or Sour?",
 	"Item.Tortilla.Price": "7",
 	"Item.Tortilla.Type": "Healing",
 	"Item.Tortilla.RestorationLevel": "2",
-	"Item.Tortilla.ApplicationTime": "120",
+	"Item.Tortilla.ApplicationTime": "130",
 	
 	"Item.EggsToast.Name": "Eggs on Toast",
 	"Item.EggsToast.Flavour": "With bacon",
 	"Item.EggsToast.Price": "8",
 	"Item.EggsToast.Type": "Healing",
 	"Item.EggsToast.RestorationLevel": "3",
-	"Item.EggsToast.ApplicationTime": "150",
+	"Item.EggsToast.ApplicationTime": "190",
 	
 	"Item.BlackCurrent.Name": "Hot Blackcurrent drink",
 	"Item.BlackCurrent.Flavour": "With secret ingredients",
 	"Item.BlackCurrent.Price": "4",
 	"Item.BlackCurrent.Type": "Healing",
 	"Item.BlackCurrent.RestorationLevel": "2",
-	"Item.BlackCurrent.ApplicationTime": "120",
+	"Item.BlackCurrent.ApplicationTime": "130",
 	
 	"Item.Map.Name": "Map of City",
 	"Item.Map.Flavour": "To find your way",
@@ -453,7 +453,7 @@
 	"Item.Strudel.Price": "8",
 	"Item.Strudel.Type": "Healing",
 	"Item.Strudel.RestorationLevel": "2",
-	"Item.Strudel.ApplicationTime": "120",
+	"Item.Strudel.ApplicationTime": "150",
 	
 	"Item.VegePie.Name": "Spicy Vegetable Pie",
 	"Item.VegePie.Flavour": "More kick than a horse",
@@ -524,6 +524,5 @@
 	"Item.CaramelSlice.Type": "PowerUp",
 	"Item.CaramelSlice.Ability": "FourAttemptsAtGuessTheNumber",
 	"Item.CaramelSlice.AppliesTo": "GuessTheNumber"
-	
 	
 }
