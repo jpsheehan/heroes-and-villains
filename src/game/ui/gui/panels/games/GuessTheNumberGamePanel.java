@@ -19,6 +19,15 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JSlider;
 
+/**
+ * GUI to Guess The Number (mini)Game 
+ * @version 1.0
+ * @author manuh
+ * 
+ * @version 2.0
+ * @author jesse
+ * Added turns left
+ */
 public class GuessTheNumberGamePanel extends JPanel {
 
 	/**
@@ -65,6 +74,7 @@ public class GuessTheNumberGamePanel extends JPanel {
 		slider.setPaintLabels(true);
 		slider.setPaintTicks(true);
 		slider.setSnapToTicks(true);
+		//read in min and max numbers from guessTheNumber game
 		slider.setMinimum(guessTheNumber.getMinNumber());
 		slider.setMaximum(guessTheNumber.getMaxNumber());
 		panel_1.add(slider);
@@ -91,6 +101,7 @@ public class GuessTheNumberGamePanel extends JPanel {
 		btnGuess = new JButton("Guess");
 		btnGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//only need to get slider value when Guess button is acivated
 				int guess = slider.getValue();
 				
 				guessTheNumber.doTurn(guess);

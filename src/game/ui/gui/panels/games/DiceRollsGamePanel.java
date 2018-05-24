@@ -21,6 +21,16 @@ import game.ui.gui.components.DiePanel;
 import java.awt.Component;
 import javax.swing.Box;
 
+/**
+ * GUI to Dice Rolls (mini)Game 
+ * @version 1.0
+ * @author manuh
+ * 
+ * @version 2.0
+ * @author jesse
+ * Added animation, 
+ *
+ */
 public class DiceRollsGamePanel extends JPanel implements GameEventListener {
 
 	/**

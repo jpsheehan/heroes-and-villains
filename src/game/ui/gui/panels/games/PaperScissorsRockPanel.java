@@ -1,7 +1,6 @@
 package game.ui.gui.panels.games;
 
 import javax.swing.JPanel;
-
 import game.BattleScreen;
 import game.ui.gui.GameEvent;
 import game.ui.gui.GameEventType;
@@ -21,6 +20,15 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
+/**
+ * GUI to Paper Scissors Rock (mini)Game 
+ * @version 1.0
+ * @author manuh
+ * 
+ * @version 2.0
+ * @author jesse
+ * Improved the flow / layout
+ */
 public class PaperScissorsRockPanel extends JPanel {
 
 	/**

@@ -27,6 +27,10 @@ import game.ui.gui.panels.MainMenuPanel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+//TODO
+/**
+ * 
+ */
 public class GameWindow implements GameEventListener {
 
 	/**
