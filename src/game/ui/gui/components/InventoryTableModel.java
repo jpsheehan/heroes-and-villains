@@ -33,7 +33,7 @@ public class InventoryTableModel extends AbstractTableModel {
 		
 		this.filter = filter;
 		this.showPrices = showPrices;
-		this.numberOfColumns = 2;
+		this.numberOfColumns = 3;
 		
 		if (showPrices) {
 			
@@ -100,17 +100,25 @@ public class InventoryTableModel extends AbstractTableModel {
 				return "Name";
 				
 			case 3:
-				switch (filter) {
 				
-					case HEALING_ITEM:
-						return "Restoration";
-						
-					case POWER_UP_ITEM:
-						return "Ability";
-						
-					default:
-						break;
-				
+				if (filter == null) {
+					
+					return "Effect";
+					
+				} else {
+					
+					switch (filter) {
+					
+						case HEALING_ITEM:
+							return "Restoration";
+							
+						case POWER_UP_ITEM:
+							return "Ability";
+							
+						default:
+							break;
+					
+					}
 				}
 				break;
 				
@@ -158,17 +166,24 @@ public class InventoryTableModel extends AbstractTableModel {
 				return item.getName();
 				
 			case 3:
-				switch (filter) {
 				
-					case HEALING_ITEM:
-						return String.format("%d%%", ((HealingItem) item).getRestorationLevel() * 25);
-						
-					case POWER_UP_ITEM:
-						return ((PowerUpItem)item).getAbility().getName();
-						
-					default:
-						break;
-				
+				if (filter == null) {
+					
+					return item.getEffect();
+					
+				} else {
+					switch (filter) {
+					
+						case HEALING_ITEM:
+							return String.format("%d%%", ((HealingItem) item).getRestorationLevel() * 25);
+							
+						case POWER_UP_ITEM:
+							return ((PowerUpItem)item).getAbility().getName();
+							
+						default:
+							break;
+					
+					}
 				}
 				break;
 				
