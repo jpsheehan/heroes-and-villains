@@ -88,7 +88,7 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Loads the strings from the strings.json file.
+	 * Loads the strings from the Strings.json file.
 	 */
 	private static void loadStrings() {
 		
@@ -112,7 +112,7 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the associated integer from the strings.json file.
+	 * Gets the associated integer from the Strings.json file.
 	 * @param specifier The integer to get.
 	 * @return
 	 */
@@ -131,7 +131,7 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the associated floating point number from the strings.json file.
+	 * Gets the associated floating point number from the Strings.json file.
 	 * @param specifier The float to get.
 	 * @return
 	 */
@@ -318,6 +318,11 @@ public final class GeneralHelpers {
 		
 	}
 	
+	/**
+	 * Gets the GPA for the team, used once the game has been won
+	 * @param the GameEnvironment
+	 * @return
+	 */
 	public static float getGPA(GameEnvironment env) {
 		
 		int numberOfCities = (env.getCityController().getCityIndex() + 1);

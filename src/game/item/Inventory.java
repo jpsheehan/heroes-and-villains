@@ -5,7 +5,13 @@ import java.util.ArrayList;
 
 /**
  * The Inventory class holds lists of items for the teams and the shop as referenced in section 2.3.3 of the specification.
- *
+ * Maintains internal ArrayList for each ItemType
+ * @author manu
+ * @version 1.0
+ * 
+ * @author jesse
+ * @version 2.0
+ * adds exceptions, serializable, modify getAllItems
  */
 public class Inventory implements Serializable {
 	

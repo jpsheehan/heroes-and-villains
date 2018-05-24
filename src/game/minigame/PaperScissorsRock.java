@@ -17,6 +17,14 @@ import game.ui.text.UserCancelException;
 import game.ui.text.UserContinueException;
 import game.ui.text.UserQuitException;
 
+/**
+ * @author manuh
+ * @version 1.0
+ * 
+ * @author jesse
+ * @version 2.0
+ * Fixed if statements and added isolated tests in main()
+ */
 public class PaperScissorsRock extends Minigame<PaperScissorsRockMove, PaperScissorsRockMove, PaperScissorsRockMove> {
 
 	/**

@@ -3,6 +3,10 @@ package game.randomevent;
 import game.character.Hero;
 import game.item.Item;
 
+/**
+ * Prevents a team from being robbed if there is a Law Student in the team
+ * @author jesse
+ */
 public class RobberyPreventedException extends Exception {
 
 	/**

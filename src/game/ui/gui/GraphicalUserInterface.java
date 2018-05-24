@@ -5,6 +5,12 @@ import java.awt.EventQueue;
 import game.ui.UserInterface;
 import game.ui.gui.windows.GameWindow;
 
+//TODO
+/**
+ * 
+ * @author jesse
+ *
+ */
 public class GraphicalUserInterface extends UserInterface {
 	
 	private boolean debugMode;

@@ -48,9 +48,7 @@ public class City implements Nameable, Describable, Serializable {
 	public City(CityType type, int cityIndex) {
 		
 		this.type = type;
-
 		this.randomEvent = new RandomEvent();
-		
 		generate(cityIndex);
 		
 	}
@@ -208,7 +206,6 @@ public class City implements Nameable, Describable, Serializable {
 	public String getFlavourText() {
 
 		return getString(type.getProperName() + ".Flavour");
-		
 	}
 	
 	/**
@@ -217,6 +214,5 @@ public class City implements Nameable, Describable, Serializable {
 	public RandomEvent getRandomEvent() {
 		
 		return this.randomEvent;
-		
 	}
 }

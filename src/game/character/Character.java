@@ -14,6 +14,7 @@ public abstract class Character implements Nameable, Serializable {
 	 * Required for implementing the Serializable interface.
 	 */
 	private static final long serialVersionUID = 8369375027658819446L;
+	
 	/**
 	 * The name of the Character.
 	 */

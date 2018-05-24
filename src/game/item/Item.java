@@ -91,7 +91,7 @@ public abstract class Item implements Nameable, Describable, Serializable {
 	 * PowerUp items require Ability, AppliesTo
 	 * Valid MinigameTypes for AppliesTo are "PaperScissorsRock", "DiceRolls", "GuessTheNumber" and "All".
 	 * @param specifier The item to return.
-	 * @return An item from the strings file.
+	 * @return An item from the Strings file.
 	 */
 	public static Item fromStrings(String specifier, float scalePrice) {
 		

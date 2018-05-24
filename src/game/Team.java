@@ -161,7 +161,7 @@ public class Team implements Nameable, Serializable {
 	
 	/**
 	 * Gives the team an amount of money.
-	 * @param amount The amound of money to give.
+	 * @param amount The amount of money to give.
 	 */
 	public void giveMoney(int amount) {
 		

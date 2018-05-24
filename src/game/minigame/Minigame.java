@@ -26,6 +26,12 @@ public abstract class Minigame<C, H, V> implements Serializable {
 		state = MinigameState.PLAYING;
 	}
 	
+	//TODO
+	/**
+	 * 
+	 * @param ability
+	 * @return
+	 */
 	public final boolean hasAbility(Ability ability) {
 		
 		for (Ability ourAbility : abilities) {

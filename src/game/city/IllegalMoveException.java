@@ -1,5 +1,9 @@
 package game.city;
 
+/**
+ * The exception to be thrown if there is an illegal movement direction
+ * @author jesse
+ */
 public class IllegalMoveException extends Exception {
 
 	/**

@@ -18,7 +18,11 @@ import game.city.CityController;
 /**
  * Game Environment controls the game.
  * @author Manu
- *
+ * @version 1.0
+ * 
+ * @author Jessee
+ * @version 2.0
+ * Adds variables and methods for loading / saving games
  */
 public class GameEnvironment implements Serializable {
 	

@@ -2,6 +2,12 @@ package game.ui.gui;
 
 import java.util.ArrayList;
 
+//TODO
+/**
+ * 
+ * @author jesse
+ *
+ */
 public class KonamiQueue {
 
 	private ArrayList<Integer> queue;

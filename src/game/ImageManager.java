@@ -63,6 +63,10 @@ public class ImageManager {
 		
 	}
 	
+	//TODO
+	/**
+	 *
+	 */
 	private void readImagesDirectory() {
 		
 		// this method is from https://stackoverflow.com/questions/1429172/how-do-i-list-the-files-inside-a-jar-file

@@ -2,6 +2,10 @@ package game.randomevent;
 
 import game.item.Item;
 
+/**
+ * Represents the random event that a Team gets an Item robbed per Section 2.3 of the specification
+ * @author jesse
+ */
 public class ItemRobbedException extends Exception {
 
 	/**

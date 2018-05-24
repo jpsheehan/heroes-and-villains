@@ -1,5 +1,9 @@
 package game.randomevent;
 
+/**
+ * Represents the random event that a Team gets money robbed per Section 2.3 of the specification
+ * @author jesse
+ */
 public class MoneyRobbedException extends Exception {
 
 	/**

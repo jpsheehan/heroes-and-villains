@@ -1,5 +1,11 @@
 package game.ui.gui;
 
+//TODO
+/**
+ * 
+ * @author jesse
+ *
+ */
 public class GameEvent {
 
 	private GameEventType type;

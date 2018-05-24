@@ -5,6 +5,17 @@ import game.GeneralHelpers;
 import game.character.HeroAbility;
 import game.item.ItemAbility;
 
+/**
+ * Implements the DiceRolls (mini)game as listed in section 3.4 of the specification 
+ * @author jesse
+ * @version 1.0
+ * 
+ * @author jesse
+ * @version 2.0
+ * Added exception Error if doTurn() is called on a game that has already finished
+ * Added isolated tests in main()
+ */
+
 public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	
 	/**

@@ -1,5 +1,8 @@
 package game.item;
 
+/**
+ * Denotes the type of item an Item object is.
+ */
 import java.io.Serializable;
 
 public enum ItemType implements Serializable {

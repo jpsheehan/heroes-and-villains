@@ -9,6 +9,16 @@ import game.ui.text.UserCancelException;
 import game.ui.text.UserContinueException;
 import game.ui.text.UserQuitException;
 
+/**
+ * Implements the Guess The Number between 1 - 10 (mini)game as listed in section 3.4 of the specification 
+ * @author jesse
+ * @version 1.0
+ * 
+ * @author jesse
+ * @version 2.0
+ * Added exception Error if doTurn() is called on a game that has already finished
+ * Added isolated tests in main()
+ */
 public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAnswer> {
 	
 	/**
@@ -238,8 +248,6 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 			System.out.println(String.format("You lost the game! The number was %d.", game.getSecretNumber()));
 			
 		}
-		
-		
 		
 	}
 

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 import game.GeneralHelpers;
 
+/**
+ * The type of cities that exist in the game
+ * @author jesse
+ */
 public enum CityType implements Serializable {
 	
 	JAMES_HIGHT,

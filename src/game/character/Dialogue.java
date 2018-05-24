@@ -17,7 +17,7 @@ public class Dialogue implements Serializable {
 	private static final long serialVersionUID = -4548151420650313683L;
 
 	/**
-	 * Greeting message when team enters inn 
+	 * Greeting message when team enters inn / shop
 	 */
 	private String greeting;
 	
