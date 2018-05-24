@@ -27,7 +27,7 @@
 	"Erskine.Shop.Items": "Coffee, MacCheese, VCurry, Quiche, Map, VegePie, Strudel",
 	"Erskine.Shop.Flavour": "Back to the code",
 	"Erskine.HomeBase.Name": "Basement, seating area",
-	"Erskine.HomeBase.Flavour": "Surprisingly light and airy for a basement ",
+	"Erskine.HomeBase.Flavour": "Surprisingly light and airy for a basement",
 	"Erskine.PowerUpDen.Name": "Lab 133",
 	"Erskine.PowerUpDen.Flavour": "Linux only!",
 	"Erskine.Hospital.Name": "Level 4 Maths & Stats help area",
@@ -60,9 +60,9 @@
 	"EngCore.InnKeeper.Dialogue.Greeting": "Nuts and Bolts you are",
 	"EngCore.InnKeeper.Dialogue.Farewell": "\"Scientists investigate that which already is; Engineers create that which has never been\" (Einstein)",
 	"EngCore.InnKeeper.Dialogue.Options": "Spend wisely on",
-	"EngCore.InnKeeper.Dialogue.Purchase": "Tomato sauce or mayonnaise with your %s",
+	"EngCore.InnKeeper.Dialogue.Purchase": "Tomato sauce or mayonnaise with your %s?",
 	"EngCore.Villain.Name": "Administration",
-	"EngCore.Villain.Taunt": "No you cannot change. Apply in writing within five working days.",
+	"EngCore.Villain.Taunt": "No you cannot change. Apply in writing within five working days",
     "EngCore.Villain.Game": "All",
 	
 	"JamesHight.Name": "James Hight",
@@ -160,7 +160,7 @@
 	"Ability.Hero.IncreasedRecoveryRate.Name": "Increased Recovery Rate",
 	"Ability.Hero.IncreasedRecoveryRate.Flavour": "Team recovers from damage faster, if Science student in team.",
 	"Ability.Hero.HackMainframe.Name": "Hack The Mainframe",
-	"Ability.Hero.HackMainframe.Flavour": "Team teleport to the next city (one time use), if Compsoc. student in team.",
+	"Ability.Hero.HackMainframe.Flavour": "A Map of the city can be revealed in the Home Base, if Compsoc. student in team.",
 	"Ability.Hero.PreventsRobbery.Name": "Prevents Robbery",
 	"Ability.Hero.PreventsRobbery.Flavour": "Team cannot be robbed, if Law student in the team.",
 	"Ability.Hero.DamageReduction.Name": "Damage Reduction",
@@ -176,17 +176,11 @@
 	"Ability.Item.WinOnDraw.Flavour": "If dice equal, Hero wins",
 	
 	"HeroType.Arts.Name": "Arts",
-	"HeroType.Arts.Flavour": "There once was a fella named Terry,
+	"HeroType.Arts.Flavour": "  There once was a fella named Terry,
     Who thought that English sounded rather cheery.
     The top of his class,
     He easily passed.
-    And now he works at the dairy.
-    
-    There was a young man called Simon,
-      Who wanted to be a lineman.
-      Engineering was his path,
-      But he failed the math.
-      So now he works as a pieman.",
+    And now he works at the dairy.",
 	"HeroType.Arts.RecoveryRate": "2.0",
 	"HeroType.Arts.MaxHealth": "90",
 	"HeroType.Commerce.Name": "Commerce",
