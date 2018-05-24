@@ -193,6 +193,9 @@ public class Hero extends Character implements Serializable {
 			
 			// if we have less than zero health, set it to zero
 			this.health = 0;
+			this.healingItem = null;
+			this.healingStartTime = 0;
+			
 			throw new HeroDeadException(this);
 			
 		}
