@@ -23,6 +23,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 
+/**
+ * GUI for the Home Base area 
+ * @author jesse
+ *
+ */
 public class HomeBasePanel extends GenericAreaPanel {
 
 	/**
@@ -32,6 +37,7 @@ public class HomeBasePanel extends GenericAreaPanel {
 
 	/**
 	 * Create the panel.
+	 * @param GameEventListener, Team, CityController
 	 */
 	public HomeBasePanel(GameEventListener window, Team team, CityController cityController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

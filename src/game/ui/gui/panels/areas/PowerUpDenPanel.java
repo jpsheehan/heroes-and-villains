@@ -20,6 +20,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Implements the GUI interface for the Power Up Den area
+ * @author jesse
+ *
+ */
 public class PowerUpDenPanel extends GenericAreaPanel {
 
 	private Hero selectedHero;
@@ -35,6 +40,7 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 
 	/**
 	 * Create the panel.
+	 * @param GameEventListener, Team
 	 */
 	public PowerUpDenPanel(GameEventListener window, Team team) {
 		

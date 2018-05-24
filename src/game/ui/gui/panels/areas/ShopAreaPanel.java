@@ -20,6 +20,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
+/**
+ * Implements the GUI interface for the Shop area
+ * @author jesse
+ *
+ */
 public class ShopAreaPanel extends GenericAreaPanel {
 
 	/**
@@ -34,6 +39,7 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param GameEventListener, Shop, Team
 	 */
 	public ShopAreaPanel(GameEventListener window, Shop shop, Team team) {
 		

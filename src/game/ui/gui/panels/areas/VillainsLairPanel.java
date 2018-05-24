@@ -32,6 +32,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
+/**
+ * Implements the GUI interface for the Villains Lair
+ * @author jesse
+ *
+ */
 public class VillainsLairPanel extends GenericAreaPanel implements GameEventListener, ActionListener {
 	
 	private Hero selectedHero;
@@ -57,6 +62,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 
 	/**
 	 * Create the panel.
+	 * @param GameEventListener, VillainsLair, GameEnvironment
 	 */
 	public VillainsLairPanel(GameEventListener window, VillainsLair villainsLair, GameEnvironment gameEnvironment) {
 		

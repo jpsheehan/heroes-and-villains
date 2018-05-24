@@ -24,6 +24,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+/**
+ * GUI for the Hospital area
+ * @author jesse
+ *
+ */
 public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 
 	/**
@@ -43,6 +48,7 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 
 	/**
 	 * Create the panel.
+	 * @param GameEventListener, Team
 	 */
 	public HospitalPanel(GameEventListener window, Team team) {
 		
