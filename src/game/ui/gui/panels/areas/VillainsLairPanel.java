@@ -134,7 +134,7 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 			public void actionPerformed(ActionEvent arg0) {
 				
 				selectedHero.activatePowerUpItem();
-				JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("You have activated %s! %s", selectedHero.getPowerUpItem().getName(), selectedHero.getPowerUpItem().getAbility().getFlavourText()), "Success", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("You have activated %s! %s", selectedHero.getPowerUpItem().getName(), selectedHero.getPowerUpItem().getEffect()), "Success", JOptionPane.INFORMATION_MESSAGE);
 				update();
 				
 			}
