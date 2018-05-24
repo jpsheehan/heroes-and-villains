@@ -1,5 +1,9 @@
 package game.ui.gui;
 
+/**
+ * Possible types of events that can occur during the game 
+ * @author jesse
+ */
 public enum GameEventType {
 	
 	ANIMATION_COMPLETE,

@@ -12,6 +12,14 @@ import game.item.ItemType;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 
+/**
+ * version 0.3
+ * @author manuh
+ * 
+ * @version 1.0
+ * @author manuh
+ * Adds ItemType and Boolean to allow for display of different Item Types and hiding / showing price
+ */
 public class InventoryPanel extends JPanel {
 
 	/**
@@ -24,6 +32,7 @@ public class InventoryPanel extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param Inventory, ItemType, boolean
 	 */
 	public InventoryPanel(Inventory inventory, ItemType filter, boolean showPrices) {
 		

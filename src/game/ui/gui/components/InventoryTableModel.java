@@ -8,6 +8,11 @@ import game.item.Item;
 import game.item.ItemType;
 import game.item.PowerUpItem;
 
+/**
+* Panel with custom display to line up the item name, description, price and allow for user selection
+* @version 1.0
+* @author jesse
+* */
 public class InventoryTableModel extends AbstractTableModel {
 
 	/**
@@ -20,6 +25,10 @@ public class InventoryTableModel extends AbstractTableModel {
 	
 	private Item[] items;
 	
+	/**
+	* Create the panel
+	* @param Inventory, ItemType, boolean
+	*/
 	public InventoryTableModel(Inventory inventory, ItemType filter, boolean showPrices) {
 		
 		this.filter = filter;
