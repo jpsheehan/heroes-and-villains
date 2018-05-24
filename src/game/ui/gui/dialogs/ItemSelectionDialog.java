@@ -39,7 +39,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 		setModal(true);
 		setTitle("Item Selection Menu");
 		
-		setBounds(100, 100, 639, 429);
+		setBounds(100, 100, 799, 429);
 		getContentPane().setLayout(new BorderLayout());
 		
 		JPanel panel = new JPanel();

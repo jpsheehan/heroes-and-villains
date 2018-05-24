@@ -37,14 +37,14 @@ public class HeroSummaryPanel extends GenericAreaPanel {
 		this.hero = hero;
 		setLayout(new GridLayout(0, 3, 0, 0));
 		
-		lblHeroName = new JLabel("<lblHeroName>");
+		lblHeroName = new JLabel();
 		lblHeroName.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblHeroName);
 		
 		healthBar = new HeroHealthBar(this.hero);
 		add(healthBar);
 		
-		btnMoreInfo = new JButton("More Info...");
+		btnMoreInfo = new JButton("More Info");
 		btnMoreInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HeroInformationDialog dlg = new HeroInformationDialog(hero);

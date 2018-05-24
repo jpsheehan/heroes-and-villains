@@ -51,6 +51,10 @@ public class InventoryPanel extends JPanel {
 			}
 		});
 		
+		if (filter == null) {
+			table.getColumnModel().getColumn(2).setPreferredWidth(300);
+		}
+		
 		add(new JScrollPane(table));
 		
 		if (model.getRowCount() > 0) {
