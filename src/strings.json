@@ -224,7 +224,7 @@
     "Game.Hero.Name.Min": "2",
     "Game.Hero.Name.Max": "10",
     "Game.SaveDirectory": ".HeroesAndVillains",
-    "Game.ImagesDirectory": "images",
+    "Game.ImagesDirectory": "/images",
     
     "Item.Coffee.Name": "Coffee",
 	"Item.Coffee.Flavour": "Quick fix or stave off headaches",

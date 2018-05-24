@@ -1,10 +1,16 @@
 package game;
 
 import java.awt.Image;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.stream.Stream;
 
 /**
@@ -59,20 +65,26 @@ public class ImageManager {
 	
 	private void readImagesDirectory() {
 		
-		InputStream inStream = ImageManager.class.getClassLoader().getResourceAsStream(Settings.getImagesDirectory());
-		
-		if (inStream == null) {
+		// this method is from https://stackoverflow.com/questions/1429172/how-do-i-list-the-files-inside-a-jar-file
+		try {
+			URI uri = ImageManager.class.getResource(Settings.getImagesDirectory()).toURI();
+			Path path;
 			
-			System.out.println("Could not load images.");
-			loaded = true;
-			imageCount = 0;
-			
-		} else {
-			
-			BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+			if (uri.getScheme().equals("jar")) {
+				FileSystem fs = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+				path = fs.getPath(Settings.getImagesDirectory());
+			} else {
+				path = Paths.get(uri);
+			}
+	
+			ArrayList<String> lines = new ArrayList<String>();
+			Stream<Path> walk = Files.walk(path, 1);
+			for (Iterator<Path> it = walk.iterator(); it.hasNext();) {
+				lines.add(it.next().getFileName().toString());
+			}
+			walk.close();
 			
 			// we need to do this kind of awkwardly so that we can see the number of images in advance of actually reading them
-			Stream<String> lines = buffer.lines();
 			Object[] objs = lines.toArray();
 			
 			// set the number of images we are looking to load
@@ -86,6 +98,10 @@ public class ImageManager {
 				
 			}
 		
+		} catch (Exception e) {
+			
+			System.out.println(e.getStackTrace());
+			
 		}
 	}
 	
