@@ -138,5 +138,27 @@ public abstract class Item implements Nameable, Describable, Serializable {
 		}
 		
 	}
+	
+	/**
+	 * @return The effect that this item has on gameplay.
+	 */
+	public String getEffect() {
+		
+		switch (type) {
+		
+			case MAP:
+				return "Reveals all the areas in a building";
+				
+			case HEALING_ITEM:
+				return String.format("Heals %d%% health over %d seconds", ((HealingItem)this).getRestorationLevel() * 25, ((HealingItem)this).getApplicationTime());
+				
+			case POWER_UP_ITEM:
+				return String.format("Gives a hero the %s ability during %s minigames", ((PowerUpItem)this).getAbility().getName(), ((PowerUpItem)this).getAppliesTo().toString());
+		
+		}
+		
+		return null;
+		
+	}
 
 }
