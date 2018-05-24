@@ -8,17 +8,17 @@
 	"Rutherford.HomeBase.Flavour": "Shaken and stirred",
 	"Rutherford.PowerUpDen.Name": "Level 2 chill zone",
 	"Rutherford.PowerUpDen.Flavour": "Modern and red", 
-	"Rutherford.Hospital.Name": "",
-	"Rutherford.Hospital.Flavour": "",
-	"Rutherford.VillainsLair.Name": "West 610.3",
-	"Rutherford.VillainsLair.Flavour": "Dated but relevant",
+	"Rutherford.Hospital.Name": "Gas storage",
+	"Rutherford.Hospital.Flavour": "Helium anyone?",
+	"Rutherford.VillainsLair.Name": "West 610",
+	"Rutherford.VillainsLair.Flavour": "Villains and views",
 	"Rutherford.InnKeeper.Name": "Isaac N.",
 	"Rutherford.InnKeeper.Dialogue.Greeting": "Welcome sir / madam, to the humble Ancestral cafe",
 	"Rutherford.InnKeeper.Dialogue.Farewell": "Bye bye, remember the fourth law: \"if you drink too much you will fall over\"",
 	"Rutherford.InnKeeper.Dialogue.Options": "We have the following quality items available",
 	"Rutherford.InnKeeper.Dialogue.Purchase": "%s. Wise choice.",
 	"Rutherford.Villain.Name": "Simon Brown",
-	"Rutherford.Villain.Taunt": "Physics IS fun!",
+	"Rutherford.Villain.Taunt": "Physics Is Fun!",
     "Rutherford.Villain.Game": "GuessTheNumber",
 	
 	"Erskine.Name": "Jack Erskine",
@@ -180,11 +180,11 @@
     Who thought that English sounded rather cheery.
     The top of his class,
     He easily passed.
-    And now he works down at the dairy.
+    And now he works at the dairy.
     
     There was a young man called Simon,
       Who wanted to be a lineman.
-      Engineering was his path.
+      Engineering was his path,
       But he failed the math.
       So now he works as a pieman.",
 	"HeroType.Arts.RecoveryRate": "2.0",
@@ -206,7 +206,7 @@
 	"HeroType.Law.RecoveryRate": "1.0",
 	"HeroType.Law.MaxHealth": "85",
 	"HeroType.Maths.Name": "Maths/Stats",
-	"HeroType.Maths.Flavour": "Maths and Stats students manipulate numbers, and letters in place of numbers, in ways that are unimaginable. Do they feel pity in watching others suffer through Maths and Stats courses?",
+	"HeroType.Maths.Flavour": "Maths and Stats students manipulate numbers, and letters in place of numbers, in ways that are unimaginable. Do they feel pity in others suffering through Maths and Stats courses?",
 	"HeroType.Maths.RecoveryRate": "1.0",
 	"HeroType.Maths.MaxHealth": "100",
 	"HeroType.Science.Name": "Sciences",
