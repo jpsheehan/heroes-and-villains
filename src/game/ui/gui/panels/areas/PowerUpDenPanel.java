@@ -128,8 +128,8 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 					
 				
 				if (selectedHero.hasPowerUpItem()) {
-					
-					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s is already holding a power up item!"), "Error", JOptionPane.INFORMATION_MESSAGE);
+				
+					JOptionPane.showMessageDialog(GameWindow.getMainWindow(), String.format("%s is already holding a power up item!", selectedHero.getName()), "Error", JOptionPane.INFORMATION_MESSAGE);
 					return;
 					
 				}
