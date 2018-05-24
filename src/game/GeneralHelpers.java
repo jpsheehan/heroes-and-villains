@@ -319,7 +319,10 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the GPA for the team, used once the game has been won
+	 * Gets the GPA for the team, used once the game has been won. To get a good GPA, you should have good team health and have completed each city in 3 minutes or less
+	 * The GPA is calculated by the following algorithm:
+	 * GPA = 9 * [current team health]/[total team health] * max(1, [number of seconds elapsed]/[3 minutes per each city])
+	 * You cannot get a GPA of less than 1
 	 * @param the GameEnvironment
 	 * @return
 	 */
@@ -327,20 +330,65 @@ public final class GeneralHelpers {
 		
 		int numberOfCities = (env.getCityController().getCityIndex() + 1);
 		
-		float heroHealthPercentage = 0f;
+		float healthCoefficient = 0f;
 		for (Hero hero : env.getTeam().getHeroes()) {
-			if (hero.isAlive()) {
-				heroHealthPercentage += (float) (hero.getHealth() / hero.getMaxHealth());
-			}
+			healthCoefficient += (float) ((float)hero.getHealth() / (float)hero.getMaxHealth());
 		}
+		healthCoefficient /= (float)env.getTeam().getHeroes().length;
 		
-		return (float) max(9, 9 * (numberOfCities / 6f) * (heroHealthPercentage / (float) env.getTeam().getHeroes().length) * (env.getNumberOfSeconds() / 120f * numberOfCities));
+		float timeCoefficient = (float) min(1, ((float)env.getNumberOfSeconds() / (float)(60 * 3 * numberOfCities)));
+		
+		return (float) min(9f, max((9f * (timeCoefficient + healthCoefficient)), 1f));
 		
 	}
 	
-//	public String getGradeLetter(float gpa) {
-//	
-//		// if (gpa < )
-//		
-//	}
+	/**
+	 * Calculates the grade letter based on the UC grade scale found here: http://www.canterbury.ac.nz/study/grading-scale/
+	 * @param gpa The GPA level between -1 and 9
+	 * @return The grade letter as a string.
+	 */
+	public static String getGradeLetter(float gpa) {
+	
+		if (gpa < 0) {
+			return "E";
+		}
+		
+		if (gpa < 1) {
+			return "D";
+		}
+		
+		if (gpa < 2) {
+			return "C-";
+		}
+		
+		if (gpa < 3) {
+			return "C";
+		}
+		
+		if (gpa < 4) {
+			return "C+";
+		}
+		
+		if (gpa < 5) {
+			return "B-";
+		}
+		
+		if (gpa < 6) {
+			return "B";
+		}
+		
+		if (gpa < 7) {
+			return "B+";
+		}
+		
+		if (gpa < 8) {
+			return "A-";
+		}
+		
+		if (gpa < 9) {
+			return "A";
+		}
+		
+		return "A+";
+	}
 }

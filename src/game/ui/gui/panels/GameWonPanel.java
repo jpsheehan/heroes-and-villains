@@ -65,7 +65,8 @@ public class GameWonPanel extends JPanel {
 		JPanel panel_5 = new JPanel();
 		add(panel_5);
 		
-		JLabel lblGpa = new JLabel(String.format("%.2f", GeneralHelpers.getGPA(env)));
+		float gpa = GeneralHelpers.getGPA(env);
+		JLabel lblGpa = new JLabel(String.format("%.2f  %s", gpa, GeneralHelpers.getGradeLetter(gpa)));
 		lblGpa.setFont(new Font("Dialog", Font.BOLD, 24));
 		panel_5.add(lblGpa);
 		
