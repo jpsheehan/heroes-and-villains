@@ -321,8 +321,8 @@ public final class GeneralHelpers {
 	/**
 	 * Gets the GPA for the team, used once the game has been won. To get a good GPA, you should have good team health and have completed each city in 3 minutes or less
 	 * The GPA is calculated by the following algorithm:
-	 * GPA = 9 * [current team health]/[total team health] * max(1, [number of seconds elapsed]/[3 minutes per each city])
-	 * You cannot get a GPA of less than 1
+	 * GPA = 9 * ([current team health]/[total team health] + max(1, [number of seconds elapsed]/[3 minutes per each city]))
+	 * You cannot get a GPA of less than 1 or greater than 9
 	 * @param the GameEnvironment
 	 * @return
 	 */
