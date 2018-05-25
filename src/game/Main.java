@@ -15,7 +15,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		GraphicalUserInterface gui = new GraphicalUserInterface(true);
+		GraphicalUserInterface gui = new GraphicalUserInterface(false);
 		gui.start();
 
 	}
