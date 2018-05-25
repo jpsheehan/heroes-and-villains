@@ -14,5 +14,6 @@ Running the JAR:
 
   Navigate to the export destination directory from when you created the JAR and run:
   	
-  	java -jar ./HeroesAndVillains.jar
+  	java -jar $filename
 
+  Where $filename is the filename you chose when creating the jar.
