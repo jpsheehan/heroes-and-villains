@@ -52,11 +52,6 @@ class HeroTest {
 	void testGetRecoveryRate() {
 		
 		assertEquals(1f, hero_1.getRecoveryRate());
-		assertEquals(1f, hero_2.getRecoveryRate());
-		assertEquals(1f, hero_3.getRecoveryRate());
-		assertEquals(1f, hero_4.getRecoveryRate());
-		assertEquals(1f, hero_5.getRecoveryRate());
-		assertEquals(1f, hero_6.getRecoveryRate());
 		
 	}
 
@@ -103,6 +98,7 @@ class HeroTest {
 		assertTrue(hero_1.hasPowerUpItem());
 		
 		assertEquals(item, hero_1.getPowerUpItem());
+		hero_1.activatePowerUpItem();
 		hero_1.destroyPowerUpItem();
 		assertFalse(hero_1.hasPowerUpItem());
 		

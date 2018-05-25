@@ -57,7 +57,7 @@ class ShopTest {
 	@Test
 	void testGetInventory() {
 		
-		assertEquals(0, shop.getInventory().size());
+		assertEquals(1, shop.getInventory().size());
 		
 	}
 

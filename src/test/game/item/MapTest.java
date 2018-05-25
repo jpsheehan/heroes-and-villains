@@ -6,10 +6,12 @@ import game.item.Map;
 
 class MapTest {
 
+	Map map;
+	
 	@Test
-	void testMap() {
+	void beforeEach() {
 		
-		new Map("Old map", "It's torn", 10);
+		map = new Map("Old map", "It's torn", 10);
 		
 	}
 

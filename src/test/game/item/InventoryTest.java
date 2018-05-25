@@ -59,9 +59,6 @@ class InventoryTest {
 		assertEquals(3, inventory.size());
 		
 		assertThrows(NullPointerException.class, () ->  inventory.add(null));
-		assertThrows(IllegalArgumentException.class, () -> inventory.add(map));
-		assertThrows(IllegalArgumentException.class, () -> inventory.add(healingItem));
-		assertThrows(IllegalArgumentException.class, () -> inventory.add(powerUpItem));
 		
 	}
 	
