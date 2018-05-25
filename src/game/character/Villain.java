@@ -83,7 +83,7 @@ public class Villain extends Character implements Serializable {
 	 * Updates the number of times the Villain has been beaten.
 	 * @throws VillainDeadException if the Villain dies.
 	 */
-	public void beat() throws VillainDeadException {
+	public void beat() {
 		
 		this.timesBeaten++;
 		
