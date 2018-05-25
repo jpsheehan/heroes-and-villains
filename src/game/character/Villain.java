@@ -61,11 +61,8 @@ public class Villain extends Character implements Serializable {
 		
 	}
 	
-	//TODO
 	/**
-	 * Returns the Villain's taunt phrase (depends on Villain Type).
-	 * Currently hardcoded in this class to Villain Type.
-	 * @return
+	 * @return The Villain's taunt phrase (depends on Villain Type).
 	 */
 	public String getTaunt() {
 		

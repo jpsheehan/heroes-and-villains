@@ -47,16 +47,14 @@ public class NewGameParameters {
 	}
 	
 	/**
-	 * Returns the number of cities/villains the player wishes to battle.
-	 * @return
+	 * @return The number of cities/villains the player wishes to battle.
 	 */
 	public int getCityCount() {
 		return this.cityCount;
 	}
 	
 	/**
-	 * Returns the team the player has assembled.
-	 * @return
+	 * @return The team the player has assembled.
 	 */
 	public Team getTeam() {
 		return this.team;

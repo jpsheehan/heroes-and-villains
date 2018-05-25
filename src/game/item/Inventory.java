@@ -50,7 +50,7 @@ public class Inventory implements Serializable {
 	
 	/**
 	 * Adds an item to the inventory. 
-	 * @param Item The item to add.
+	 * @param item The item to add.
 	 */
 	public void add(Item item) {
 
@@ -85,7 +85,7 @@ public class Inventory implements Serializable {
 
 	/**
 	 * Removes an item from the inventory.
-	 * @param Item The item to remove.
+	 * @param item The item to remove.
 	 */
 	public void remove(Item item) {
 		

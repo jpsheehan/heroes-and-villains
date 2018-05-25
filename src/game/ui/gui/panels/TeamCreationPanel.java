@@ -298,8 +298,7 @@ public class TeamCreationPanel extends JPanel {
 	}
 	
 	/**
-	 * Returns the team.
-	 * @return
+	 * @return The team.
 	 */
 	public Team getTeam() {
 		
@@ -333,8 +332,7 @@ public class TeamCreationPanel extends JPanel {
 	}
 	
 	/**
-	 * Returns a reason for why getTeam returns null.
-	 * @return
+	 * @return A reason for why getTeam returns null.
 	 */
 	public String getTeamFailureReason() {
 		

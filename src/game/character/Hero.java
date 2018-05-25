@@ -62,8 +62,7 @@ public class Hero extends Character implements Serializable {
 	}
 	
 	/**
-	 * Returns the type of the Hero.
-	 * @return
+	 * @return The type of the Hero.
 	 */
 	public HeroType getType() {
 		

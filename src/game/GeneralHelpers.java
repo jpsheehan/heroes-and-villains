@@ -31,9 +31,8 @@ public final class GeneralHelpers {
 	public static ImageManager imageManager = new ImageManager();
 	
 	/**
-	 * Returns an image from the images directory or null if an error occurred.
 	 * @param filename The filename of the image within the "images" directory.
-	 * @return
+	 * @return An image from the images directory or null if an error occurred.
 	 */
 	public static BufferedImage getImage(String filename) {
 		
@@ -57,9 +56,8 @@ public final class GeneralHelpers {
 	private static Map<String, String> strings = null;
 	
 	/**
-	 * Gets the associated string from the strings.json file.
 	 * @param specifier The string to get.
-	 * @returns
+	 * @return The associated string from the strings.json file.
 	 */
 	public static String getString(String specifier) {
 		
@@ -124,9 +122,8 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the associated integer from the Strings.json file.
 	 * @param specifier The integer to get.
-	 * @return
+	 * @return The associated integer from the Strings.json file.
 	 */
 	public static int getInt(String specifier) {
 		
@@ -143,9 +140,8 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the associated floating point number from the Strings.json file.
 	 * @param specifier The float to get.
-	 * @return
+	 * @return The associated floating point number from the Strings.json file.
 	 */
 	public static float getFloat(String specifier) {
 		
@@ -213,8 +209,7 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the random state for the game.
-	 * @return
+	 * @return The random state for the game.
 	 */
 	public static Random getRandom() {
 		
@@ -229,8 +224,7 @@ public final class GeneralHelpers {
 	}
 	
 	/**
-	 * Gets the random number seed value.
-	 * @return
+	 * @param random The random object to set.
 	 */
 	public static void setRandom(Random random) {
 		
@@ -335,8 +329,8 @@ public final class GeneralHelpers {
 	 * The GPA is calculated by the following algorithm:
 	 * GPA = 9 * ([current team health]/[total team health] + max(1, [number of seconds elapsed]/[3 minutes per each city]))
 	 * You cannot get a GPA of less than 1 or greater than 9
-	 * @param the GameEnvironment
-	 * @return
+	 * @param env The GameEnvironment
+	 * @return The GPA of the play through
 	 */
 	public static float getGPA(GameEnvironment env) {
 		

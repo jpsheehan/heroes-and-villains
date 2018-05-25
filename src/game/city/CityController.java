@@ -115,8 +115,7 @@ public class CityController implements Serializable {
 	}
 	
 	/**
-	 * Gets the index of the current city.
-	 * @return
+	 * @return The index of the current city.
 	 */
 	public int getCityIndex() {
 		

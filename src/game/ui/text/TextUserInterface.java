@@ -39,7 +39,6 @@ public class TextUserInterface extends UserInterface {
 	
 	/**
 	 * Create a new TextUserInterface object.
-	 * @param env A reference to the parent GameEnvironment.
 	 */
 	public TextUserInterface() {
 		
@@ -137,9 +136,9 @@ public class TextUserInterface extends UserInterface {
 
 	/**
 	 * Shows a prompt for letting the user decide how many cities/villains to fight.
-	 * @return
-	 * @throws UserQuitException
-	 * @throws UserCancelException
+	 * @return The number of villains the user wishes to battle.
+	 * @throws UserQuitException If the user quits
+	 * @throws UserCancelException If the user cancels.
 	 */
 	public int showGetNumberOfVillainsScreen() throws UserQuitException, UserCancelException {
 		
@@ -487,7 +486,7 @@ public class TextUserInterface extends UserInterface {
 	 * @param message A message to prompt the user with.
 	 * @param title The title of the dialog
 	 * @param heroes A list of heroes to choose from.
-	 * @return
+	 * @return The hero that is selected.
 	 * @throws UserQuitException
 	 */
 	public static Hero showHeroSelectionMenu(String message, String title, Hero[] heroes) throws UserQuitException {

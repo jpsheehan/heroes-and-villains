@@ -14,7 +14,7 @@ public enum Affirmation {
 	/**
 	 * Converts an yes/no string into an affirmation.
 	 * @param input The string to test against.
-	 * @return
+	 * @return The result of this affirmation test.
 	 */
 	public static Affirmation fromString(String input) {
 		

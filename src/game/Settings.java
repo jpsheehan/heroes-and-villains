@@ -12,9 +12,8 @@ import java.nio.file.Paths;
 public class Settings {
 
 	/**
-	 * Gets the minimum number of cities (inclusive) that the team can fight through.
 	 * Denoted by "Game.Cities.Min" in strings.json.
-	 * @return
+	 * @return The minimum number of cities (inclusive) that the team can fight through.
 	 */
 	public static int getCitiesMin() {
 		
@@ -23,9 +22,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the maximum number of cities (inclusive) that the team can fight through.
 	 * Denoted by "Game.Cities.Max" in strings.json.
-	 * @return
+	 * @return The maximum number of cities (inclusive) that the team can fight through.
 	 */
 	public static int getCitiesMax() {
 		
@@ -34,9 +32,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the minimum number of heroes (inclusive) that the team must have.
 	 * Denoted by "Game.Heroes.Min" in strings.json.
-	 * @return
+	 * @return The minimum number of heroes (inclusive) that the team must have.
 	 */
 	public static int getHeroesMin() {
 		
@@ -45,9 +42,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the maximum number of heroes (inclusive) that the team must have.
 	 * Denoted by "Game.Heroes.Max" in strings.json.
-	 * @return
+	 * @return The maximum number of heroes (inclusive) that the team must have.
 	 */
 	public static int getHeroesMax() {
 		
@@ -56,9 +52,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the minimum number of characters the team name can have.
 	 * Denoted by "Game.Team.Name.Min" in strings.json.
-	 * @return
+	 * @return The minimum number of characters the team name can have.
 	 */
 	public static int getTeamNameMin() {
 		
@@ -67,9 +62,8 @@ public class Settings {
 	}
 
 	/**
-	 * Gets the maximum number of characters the team name can have.
 	 * Denoted by "Game.Team.Name.Max" in strings.json.
-	 * @return
+	 * @return The maximum number of characters the team name can have.
 	 */
 	public static int getTeamNameMax() {
 		
@@ -78,9 +72,8 @@ public class Settings {
 	}
 
 	/**
-	 * Gets the minimum number of characters the hero name can have.
 	 * Denoted by "Game.Hero.Name.Min" in strings.json.
-	 * @return
+	 * @return The minimum number of characters the hero name can have.
 	 */
 	public static int getHeroNameMin() {
 		
@@ -89,9 +82,8 @@ public class Settings {
 	}
 
 	/**
-	 * Gets the maximum number of characters the hero name can have.
 	 * Denoted by "Game.Hero.Name.Max" in strings.json.
-	 * @return
+	 * @return The maximum number of characters the hero name can have.
 	 */
 	public static int getHeroNameMax() {
 		
@@ -100,9 +92,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the amount of money the team starts with.
 	 * Denoted by "Game.Team.StartMoney" in strings.json.
-	 * @return
+	 * @return The amount of money the team starts with.
 	 */
 	public static int getTeamStartMoney() {
 		
@@ -111,9 +102,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the directory to which save states can be written to and read from.
 	 * Denoted by "Game.SaveDirectory" in the strings.json file and prepended with the user's home directory.
-	 * @return
+	 * @return The directory to which save states can be written to and read from.
 	 */
 	public static String getSaveDirectory() {
 		
@@ -122,9 +112,8 @@ public class Settings {
 	}
 	
 	/**
-	 * Gets the directory name (within the JAR) where images are loaded from.
 	 * Denoted by "Game.ImagesDirectory" in the strings.json file. 
-	 * @return
+	 * @return The directory name (within the JAR) where images are loaded from.
 	 */
 	public static String getImagesDirectory() {
 		

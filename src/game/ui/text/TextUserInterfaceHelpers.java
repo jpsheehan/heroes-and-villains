@@ -271,8 +271,7 @@ public class TextUserInterfaceHelpers {
 	}
 	
 	/**
-	 * Returns one line of text from the standard input.
-	 * @return
+	 * @return One line of text from the standard input.
 	 * @throws UserQuitException 
 	 * @throws UserCancelException 
 	 * @throws UserContinueException 
@@ -282,9 +281,8 @@ public class TextUserInterfaceHelpers {
 	}
 	
 	/**
-	 * Returns one line of text from the standard input.
 	 * @param prelude The text to place before entering something.
-	 * @return
+	 * @return One line of text from the standard input.
 	 * @throws UserCancelException 
 	 * @throws UserQuitException 
 	 * @throws UserContinueException 
@@ -477,10 +475,9 @@ public class TextUserInterfaceHelpers {
 	}
 	
 	/**
-	 * Returns a copy of a String repeated n times.
 	 * @param str The String to repeat.
 	 * @param n The number of times to repeat the String.
-	 * @return
+	 * @return A copy of a String repeated n times.
 	 */
 	public static String repeatString(String str, Integer n) {
 		

@@ -42,7 +42,6 @@ public class RandomEvent implements Serializable {
 	/**
 	 * Creates a new instance of RandomEvent.
 	 * Also calculates whether or not the event happens.
-	 * @param team The team that is visiting the City.
 	 */
 	public RandomEvent() {
 		

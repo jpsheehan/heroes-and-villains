@@ -71,7 +71,6 @@ public class BattleScreen implements Serializable {
 	/**
 	 * Creates a new BattleScreen.
 	 * @param villain The villain the hero is to battle.
-	 * @param cityIndex The index of the city the team is in.
 	 */
 	public BattleScreen(Villain villain) {
 		

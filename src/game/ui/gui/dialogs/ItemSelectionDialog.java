@@ -31,7 +31,9 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	 * Create the dialog
 	 * Dialog only displays Items of the specified ItemType from the inventory
 	 * If Boolean is set to false, price is not shown
-	 * @param Inventory, ItemType, Boolean
+	 * @param inventory The inventory to display
+	 * @param itemType The types of items to only show.
+	 * @param showOkButton If we want to display the OK button.
 	 */
 	public ItemSelectionDialog(Inventory inventory, ItemType itemType, boolean showPrice, boolean showOkButton) {
 
