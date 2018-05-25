@@ -72,8 +72,7 @@ public class GameEnvironment implements Serializable {
 	}
 	
 	/**
-	 * Gets the city controller.
-	 * @return
+	 * @return The city controller.
 	 */
 	public CityController getCityController() {
 		
@@ -82,8 +81,7 @@ public class GameEnvironment implements Serializable {
 	}
 	
 	/**
-	 * Gets the team.
-	 * @return
+	 * @return The team.
 	 */
 	public Team getTeam() {
 		
@@ -93,7 +91,7 @@ public class GameEnvironment implements Serializable {
 	
 	/**
 	 * Sets the cities. To be called from the UserInterface.
-	 * @param cities
+	 * @param cities The city controller to use.
 	 */
 	public void setCityController(CityController cities) {
 		
@@ -103,7 +101,7 @@ public class GameEnvironment implements Serializable {
 	
 	/**
 	 * Sets the team. To be called from the UserInterface.
-	 * @param team
+	 * @param team The team to use.
 	 */
 	public void setTeam(Team team) {
 		
@@ -116,6 +114,10 @@ public class GameEnvironment implements Serializable {
 	 */
 	private boolean ignoreRoomPrompt;
 	
+	/**
+	 * Saves the state of the game in a particular location.
+	 * @throws IOException If something went wrong.
+	 */
 	public void saveState() throws IOException {
 		
 		File saveDir = new File(Settings.getSaveDirectory());

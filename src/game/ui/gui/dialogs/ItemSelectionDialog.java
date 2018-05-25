@@ -90,7 +90,7 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	
 	/**
 	 * Sets the result of this dialog.
-	 * @param dialogResult
+	 * @param dialogResult The result of this dialog.
 	 */
 	private void setDialogResult(DialogResult dialogResult) {
 		
@@ -98,16 +98,14 @@ public class ItemSelectionDialog extends JDialog implements Returnable {
 	}
 	
 	/**
-	 * Gets the result of this dialog.
-	 * @return
+	 * @return The result of this dialog.
 	 */
 	public DialogResult getDialogResult() {
 		
 		return this.dialogResult;
 	}
 	/**
-	 * Gets the result of this Item Selection.
-	 * @return
+	 * @return The result of this Item Selection.
 	 */
 	public Item getSelectedItem() {
 		

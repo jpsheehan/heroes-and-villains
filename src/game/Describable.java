@@ -3,8 +3,7 @@ package game;
 public interface Describable {
 	
 	/**
-	 * Gets the flavour text describing this object.
-	 * @return
+	 * @return The flavour text describing this object.
 	 */
 	public String getFlavourText();
 

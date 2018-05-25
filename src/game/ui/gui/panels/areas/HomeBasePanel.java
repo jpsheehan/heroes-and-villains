@@ -37,7 +37,9 @@ public class HomeBasePanel extends GenericAreaPanel {
 
 	/**
 	 * Create the panel.
-	 * @param GameEventListener, Team, CityController
+	 * @param window The parent event listener.
+	 * @param team The team that the game is running.
+	 * @param cityController The city controller that the game is working with.
 	 */
 	public HomeBasePanel(GameEventListener window, Team team, CityController cityController) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

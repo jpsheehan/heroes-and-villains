@@ -39,7 +39,9 @@ public class ShopAreaPanel extends GenericAreaPanel {
 	
 	/**
 	 * Create the panel.
-	 * @param GameEventListener, Shop, Team
+	 * @param window The parent event listener.
+	 * @param shop The shop this area is based on.
+	 * @param team The team that is visiting the shop.
 	 */
 	public ShopAreaPanel(GameEventListener window, Shop shop, Team team) {
 		

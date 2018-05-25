@@ -48,7 +48,8 @@ public class HospitalPanel extends GenericAreaPanel implements ActionListener {
 
 	/**
 	 * Create the panel.
-	 * @param GameEventListener, Team
+	 * @param window The parent event listener.
+	 * @param team The team that is playing the game.
 	 */
 	public HospitalPanel(GameEventListener window, Team team) {
 		

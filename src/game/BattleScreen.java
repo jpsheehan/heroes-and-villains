@@ -138,8 +138,7 @@ public class BattleScreen implements Serializable {
 	}
 	
 	/**
-	 * Returns the Hero that is currently battling.
-	 * @return
+	 * @return The Hero that is currently battling.
 	 */
 	public Hero getHero() {
 		
@@ -149,7 +148,7 @@ public class BattleScreen implements Serializable {
 	
 	/**
 	 * Sets the Hero that is currently battling.
-	 * @param hero
+	 * @param hero The hero that is battling.
 	 */
 	public void setHero(Hero hero) {
 		
@@ -245,8 +244,7 @@ public class BattleScreen implements Serializable {
 	}
 	
 	/**
-	 * Returns the minigame being played.
-	 * @return
+	 * @return The minigame being played.
 	 */
 	@SuppressWarnings("rawtypes")
 	public Minigame getMinigame() {
@@ -256,8 +254,7 @@ public class BattleScreen implements Serializable {
 	}
 	
 	/**
-	 * Returns the type of minigame being played.
-	 * @return
+	 * @return The type of minigame being played.
 	 */
 	public MinigameType getMinigameType() {
 		
@@ -266,8 +263,7 @@ public class BattleScreen implements Serializable {
 	}
 	
 	/**
-	 * Returns the current villain health.
-	 * @return
+	 * @return The current villain health.
 	 */
 	public int getVillainHealth() {
 		
@@ -277,8 +273,8 @@ public class BattleScreen implements Serializable {
 	
 	/**
 	 * To be called after running getMinigame().doTurn(). Checks what actions should be taken depending on the outcome of the minigame.
-	 * @throws VillainDeadException 
-	 * @throws HeroDeadException 
+	 * @throws VillainDeadException If the villain dies
+	 * @throws HeroDeadException If the hero dies.
 	 */
 	public void minigameStateChecker() throws VillainDeadException, HeroDeadException {
 		

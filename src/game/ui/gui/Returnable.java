@@ -3,8 +3,7 @@ package game.ui.gui;
 public interface Returnable {
 	
 	/**
-	 * Returns the result of the JDialog.
-	 * @return
+	 * @return The result of the JDialog.
 	 */
 	public DialogResult getDialogResult();
 	

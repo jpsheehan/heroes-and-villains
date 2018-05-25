@@ -34,7 +34,9 @@ public class InventoryPanel extends JPanel {
 	
 	/**
 	 * Create the panel.
-	 * @param Inventory, ItemType, boolean
+	 * @param inventory The inventory of the team visiting the shop
+	 * @param filter The type of item to filter by
+	 * @param showPrices Whether or not to show prices.
 	 */
 	public InventoryPanel(Inventory inventory, ItemType filter, boolean showPrices) {
 		

@@ -257,8 +257,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	}
 	
 	/**
-	 * Returns the Hero object if all attributes are valid, otherwise null.
-	 * @return
+	 * @return The Hero object if all attributes are valid, otherwise null.
 	 */
 	public Hero getHero() {
 		
@@ -275,8 +274,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	}
 	
 	/**
-	 * Gets the result of this dialog.
-	 * @return
+	 * @return The result of this dialog.
 	 */
 	public DialogResult getDialogResult() {
 		
@@ -286,7 +284,7 @@ public class NewHeroDialog extends JDialog implements Returnable {
 	
 	/**
 	 * Sets the result of this dialog.
-	 * @param dialogResult
+	 * @param dialogResult The result of the dialog.
 	 */
 	private void setDialogResult(DialogResult dialogResult) {
 		

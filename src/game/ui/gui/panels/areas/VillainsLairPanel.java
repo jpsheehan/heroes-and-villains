@@ -62,7 +62,9 @@ public class VillainsLairPanel extends GenericAreaPanel implements GameEventList
 
 	/**
 	 * Create the panel.
-	 * @param GameEventListener, VillainsLair, GameEnvironment
+	 * @param window The parent event listener
+	 * @param villainsLair The VillainsLair that this area is based on.
+	 * @param gameEnvironment The game environment.
 	 */
 	public VillainsLairPanel(GameEventListener window, VillainsLair villainsLair, GameEnvironment gameEnvironment) {
 		

@@ -27,7 +27,9 @@ public class InventoryTableModel extends AbstractTableModel {
 	
 	/**
 	* Create the panel
-	* @param Inventory, ItemType, boolean
+	* @param inventory The inventory to display the info of.
+	* @param filter The type of item to filter by
+	* @param showPrices Whether or not to also display prices.
 	*/
 	public InventoryTableModel(Inventory inventory, ItemType filter, boolean showPrices) {
 		

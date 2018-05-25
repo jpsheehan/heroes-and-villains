@@ -40,7 +40,8 @@ public class PowerUpDenPanel extends GenericAreaPanel {
 
 	/**
 	 * Create the panel.
-	 * @param GameEventListener, Team
+	 * @param window The parent event listener.
+	 * @param team The team the game is working with.
 	 */
 	public PowerUpDenPanel(GameEventListener window, Team team) {
 		
