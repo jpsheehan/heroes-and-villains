@@ -4,10 +4,6 @@ import game.Ability;
 import game.GeneralHelpers;
 import game.character.HeroAbility;
 import game.item.ItemAbility;
-import game.ui.text.TextUserInterfaceHelpers;
-import game.ui.text.UserCancelException;
-import game.ui.text.UserContinueException;
-import game.ui.text.UserQuitException;
 
 /**
  * Implements the Guess The Number between 1 - 10 (mini)game as listed in section 3.4 of the specification 
@@ -143,7 +139,7 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	}
 
 	/**
-	 * Returns MinigameType.GUESS_THE_NUMBER.
+	 * @return MinigameType.GUESS_THE_NUMBER.
 	 */
 	@Override
 	public MinigameType getType() {
@@ -151,24 +147,21 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 	}
 	
 	/**
-	 * Returns the maximum number that can be guessed.
-	 * @return
+	 * @return The maximum number that can be guessed.
 	 */
 	public int getMaxNumber() {
 		return maxNumber;
 	}
 	
 	/**
-	 * Returns the minimum number that can be guessed (always 1).
-	 * @return
+	 * @return The minimum number that can be guessed (always 1).
 	 */
 	public int getMinNumber() {
 		return 1;
 	}
 	
 	/**
-	 * Returns the secret number if the game is over.
-	 * @return
+	 * @return The secret number if the game is over.
 	 */
 	public int getSecretNumber() {
 		
@@ -179,73 +172,6 @@ public class GuessTheNumber extends Minigame<Integer, Integer, GuessTheNumberAns
 		} else {
 			
 			throw new Error("You can't see the secret number without finishing the game!");
-			
-		}
-		
-	}
-	
-	/**
-	 * Runs a test of the GuessTheNumber game.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		Ability[] abilities = new Ability[] {
-				
-		};
-		
-		GuessTheNumber game = new GuessTheNumber(abilities);
-		
-		System.out.println(String.format("Guess a number between %d and %d:", game.getMinNumber(), game.getMaxNumber()));
-		
-		while (game.getState() == MinigameState.PLAYING) {
-			
-			int guess;
-			
-			try {
-				
-				guess = TextUserInterfaceHelpers.getNumberWithBounds(game.getMinNumber(), game.getMaxNumber());
-				
-			} catch (UserCancelException | UserQuitException e) {
-				
-				return; // the user wants to quit
-				
-			} catch (UserContinueException e) {
-				
-				System.out.println(String.format("Guess a number between %d and %d:", game.getMinNumber(), game.getMaxNumber()));
-				continue;
-				
-			}
-			
-			game.doTurn(guess);
-			
-			if (game.getVillainLastTurn() == GuessTheNumberAnswer.TOO_HIGH) {
-				
-				System.out.println("Your answer was too high!");
-				
-			} else {
-				
-				if (game.getVillainLastTurn() == GuessTheNumberAnswer.TOO_LOW) {
-					
-					System.out.println("Your answer was too low!");
-					
-				} else {
-					
-					System.out.println("Your answer was right!");
-					
-				}
-				
-			}
-			
-		}
-		
-		if (game.getState() == MinigameState.WON) {
-			
-			System.out.println("You won the game!");
-			
-		} else {
-			
-			System.out.println(String.format("You lost the game! The number was %d.", game.getSecretNumber()));
 			
 		}
 		

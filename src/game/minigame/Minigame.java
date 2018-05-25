@@ -26,11 +26,9 @@ public abstract class Minigame<C, H, V> implements Serializable {
 		state = MinigameState.PLAYING;
 	}
 	
-	//TODO
 	/**
-	 * 
-	 * @param ability
-	 * @return
+	 * @param ability The ability to check if the minigame has access to.
+	 * @return True if the ability exists. False otherwise.
 	 */
 	public final boolean hasAbility(Ability ability) {
 		
