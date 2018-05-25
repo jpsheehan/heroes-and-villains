@@ -76,7 +76,7 @@ public class MainMenuPanel extends JPanel {
 		JPanel panel_3 = new JPanel();
 		add(panel_3);
 		
-		JButton btnLoadGame = new JButton("Load Game");
+		JButton btnLoadGame = new JButton("Continue");
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
