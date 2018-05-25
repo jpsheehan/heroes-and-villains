@@ -54,6 +54,7 @@ public class PowerUpItem extends Item implements Serializable {
 	
 	/**
 	 * Returns the ability that this PowerUpItem has.
+	 * @return the Ability the Item provides
 	 */
 	public ItemAbility getAbility() {
 		return this.ability;
@@ -61,6 +62,7 @@ public class PowerUpItem extends Item implements Serializable {
 	
 	/**
 	 * Returns the type of minigame that the ability applies to.
+	 * @return the MiniGame type
 	 */
 	public MinigameType getAppliesTo() {
 		return this.appliesTo;

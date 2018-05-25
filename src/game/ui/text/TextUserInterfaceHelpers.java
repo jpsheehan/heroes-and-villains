@@ -119,8 +119,8 @@ public class TextUserInterfaceHelpers {
 	 * Shows a yes/no question to the user.
 	 * @param question The question to prompt them with.
 	 * @return True if the user said yes.
-	 * @throws UserCancelException 
-	 * @throws UserQuitException 
+	 * @throws UserCancelException User has entered/selected a Q or Quit 
+	 * @throws UserQuitException User has entered/selected a C or Cancel 
 	 */
 	public static boolean showYesNo(String question) throws UserQuitException, UserCancelException {
 		
@@ -229,8 +229,8 @@ public class TextUserInterfaceHelpers {
 	 * @param message The message to show to the user.
 	 * @param options The options to display.
 	 * @return Returns the index of the Array that the user chose.
-	 * @throws UserQuitException 
-	 * @throws UserCancelException 
+	 * @throws UserQuitException User entered/selected quit
+	 * @throws UserCancelException Cancel has been entered/selected
 	 */
 	public static int showChoice(String message, String[] options) throws UserCancelException, UserQuitException {
 		
@@ -272,9 +272,9 @@ public class TextUserInterfaceHelpers {
 	
 	/**
 	 * @return One line of text from the standard input.
-	 * @throws UserQuitException 
-	 * @throws UserCancelException 
-	 * @throws UserContinueException 
+	 * @throws UserQuitException Quit has been entered/selected
+	 * @throws UserCancelException Cancel has been entered/selected
+	 * @throws UserContinueException Continue has been entered/selected
 	 */
 	public static String readLine() throws UserCancelException, UserQuitException, UserContinueException {
 		return readLine("");
@@ -283,9 +283,9 @@ public class TextUserInterfaceHelpers {
 	/**
 	 * @param prelude The text to place before entering something.
 	 * @return One line of text from the standard input.
-	 * @throws UserCancelException 
-	 * @throws UserQuitException 
-	 * @throws UserContinueException 
+	 * @throws UserQuitException Quit has been entered/selected
+	 * @throws UserCancelException Cancel has been entered/selected
+	 * @throws UserContinueException Continue has been entered/selected
 	 */
 	public static String readLine(String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
@@ -527,9 +527,9 @@ public class TextUserInterfaceHelpers {
 	 * @param min The minimum bound (inclusive).
 	 * @param max The maximum bound (inclusive).
 	 * @return Returns the entered number.
-	 * @throws UserQuitException 
-	 * @throws UserCancelException 
-	 * @throws UserContinueException 
+	 @throws UserQuitException Quit has been entered/selected
+	 * @throws UserCancelException Cancel has been entered/selected
+	 * @throws UserContinueException Continue has been entered/selected
 	 */
 	public static Integer getNumberWithBounds(Integer min, Integer max) throws UserCancelException, UserQuitException, UserContinueException {
 		
@@ -543,9 +543,9 @@ public class TextUserInterfaceHelpers {
 	 * @param max The maximum bound (inclusive).
 	 * @param prelude The prompt beginning each line.
 	 * @return Returns the entered number.
-	 * @throws UserQuitException 
-	 * @throws UserCancelException 
-	 * @throws UserContinueException 
+	 * @throws UserQuitException Quit has been entered/selected
+	 * @throws UserCancelException Cancel has been entered/selected
+	 * @throws UserContinueException Continue has been entered/selected
 	 */
 	public static Integer getNumberWithBounds(Integer min, Integer max, String prelude) throws UserCancelException, UserQuitException, UserContinueException {
 		
@@ -672,7 +672,7 @@ public class TextUserInterfaceHelpers {
 	
 	/**
 	 * Returns a string containing all the input options.
-	 * @param option
+	 * @param option String of possible options
 	 * @return The string containing all the input options including cancel and quit.
 	 */
 	public static String getInputOptions(String option) {

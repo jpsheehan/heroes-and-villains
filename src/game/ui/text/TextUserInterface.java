@@ -172,8 +172,9 @@ public class TextUserInterface extends UserInterface {
 	/**
 	 * Displays a menu that is used to start a new game. Offers the user options of setting the number of villains, team name and adding/removing heroes.
 	 * Upon returning, the game is started.
-	 * @throws UserQuitException
-	 * @throws UserCancelException
+	 * @throws UserQuitException If the user tries to quit
+	 * @throws UserCancelException If the user tries to cancel
+	 * @return NewGameParameters Parameters to start the new game with
 	 */
 	public NewGameParameters showNewGameScreen() throws UserQuitException, UserCancelException {
 		
@@ -487,7 +488,7 @@ public class TextUserInterface extends UserInterface {
 	 * @param title The title of the dialog
 	 * @param heroes A list of heroes to choose from.
 	 * @return The hero that is selected.
-	 * @throws UserQuitException
+	 * @throws UserQuitException User wishes to quit
 	 */
 	public static Hero showHeroSelectionMenu(String message, String title, Hero[] heroes) throws UserQuitException {
 		

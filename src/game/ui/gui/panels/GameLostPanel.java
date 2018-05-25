@@ -30,6 +30,7 @@ public class GameLostPanel extends JPanel implements ActionListener {
 
 	/**
 	 * Create the panel.
+	 * @param parent The parent who called this panel
 	 */
 	public GameLostPanel(GameEventListener parent) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

@@ -19,6 +19,7 @@ public class AreaSummaryPanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param cityController The controller for the cities
 	 */
 	public AreaSummaryPanel(CityController cityController) {
 	

@@ -38,6 +38,7 @@ public class GameSetUpPanel extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param parent The parent who called this panel
 	 */
 	public GameSetUpPanel(GameEventListener parent) {
 

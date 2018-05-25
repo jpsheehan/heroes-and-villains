@@ -45,6 +45,8 @@ public class PaperScissorsRockPanel extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param villainsLairPanel The parent
+	 * @param battleScreen Current BattleScreen
 	 */
 	public PaperScissorsRockPanel(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		

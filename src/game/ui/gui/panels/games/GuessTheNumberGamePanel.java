@@ -42,6 +42,8 @@ public class GuessTheNumberGamePanel extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param villainsLairPanel Parent who called this
+	 * @param battleScreen Current BattleScreen
 	 */
 	public GuessTheNumberGamePanel(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		

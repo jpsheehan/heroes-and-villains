@@ -25,6 +25,8 @@ public class GameWonPanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param parent The parent who called this panel
+	 * @param env The current GameEnvironment
 	 */
 	public GameWonPanel(GameEventListener parent, GameEnvironment env) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
