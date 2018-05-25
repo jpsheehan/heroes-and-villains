@@ -50,7 +50,7 @@ class VillainsLairTest {
 	@Test
 	void testGetBattleScreen() {
 		
-		assertNull(villainsLair.getBattleScreen());
+		assertNotNull(villainsLair.getBattleScreen());
 		
 	}
 
