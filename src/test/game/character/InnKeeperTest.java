@@ -20,9 +20,15 @@ class InnKeeperTest {
 	}
 	
 	@Test
-	void testGetters() {
-		
+	void testGetName() {
+
 		assertEquals("Steve", innKeeper.getName());
+		
+	}
+	
+	@Test
+	void testGetDialogue() {
+
 		assertEquals("Nuts and Bolts you are", innKeeper.getDialogue().getGreeting());
 		
 	}
