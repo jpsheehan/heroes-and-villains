@@ -45,7 +45,9 @@ public abstract class Item implements Nameable, Describable, Serializable {
 	/**
 	 * Creates a new Item.
 	 * @param name The name of the Item.
+	 * @param flavourText Information about the item
 	 * @param price The price of the Item.
+	 * @param type the ItemType of the Item
 	 */
 	public Item(String name, String flavourText, int price, ItemType type) {
 		this.name = name;
