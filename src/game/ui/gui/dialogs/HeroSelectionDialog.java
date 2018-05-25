@@ -53,6 +53,7 @@ public class HeroSelectionDialog extends JDialog implements Returnable, ActionLi
 
 	/**
 	 * Create the dialog.
+	 * @param heroes An ArrayList of Hero which will be displayed for the user to select from
 	 */
 	public HeroSelectionDialog(Hero[] heroes) {
 		

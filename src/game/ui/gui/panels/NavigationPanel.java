@@ -29,6 +29,8 @@ public class NavigationPanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param window
+	 * @param cityController
 	 */
 	public NavigationPanel(GameEventListener window, CityController cityController) {
 		

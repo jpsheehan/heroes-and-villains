@@ -32,6 +32,7 @@ public class MapPanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param cityController
 	 */
 	public MapPanel(CityController cityController) {
 		setBackground(Color.BLACK);

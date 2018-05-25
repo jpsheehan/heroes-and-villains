@@ -45,7 +45,9 @@ public abstract class Item implements Nameable, Describable, Serializable {
 	/**
 	 * Creates a new Item.
 	 * @param name The name of the Item.
+	 * @param flavourText Information about the item
 	 * @param price The price of the Item.
+	 * @param type the ItemType of the Item
 	 */
 	public Item(String name, String flavourText, int price, ItemType type) {
 		this.name = name;
@@ -91,6 +93,7 @@ public abstract class Item implements Nameable, Describable, Serializable {
 	 * PowerUp items require Ability, AppliesTo
 	 * Valid MinigameTypes for AppliesTo are "PaperScissorsRock", "DiceRolls", "GuessTheNumber" and "All".
 	 * @param specifier The item to return.
+	 * @param scalePrice Scaling factor to apply to prices
 	 * @return An item from the Strings file.
 	 */
 	public static Item fromStrings(String specifier, float scalePrice) {

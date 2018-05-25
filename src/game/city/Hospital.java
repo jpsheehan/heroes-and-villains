@@ -14,6 +14,7 @@ public class Hospital extends Area {
 	/**
 	 * Creates a new Hospital.
 	 * @param name The name of the Hospital.
+	 * @param description The information that relates to the Hospital
 	 */
 	public Hospital(String name, String description) {
 		super(name, description, AreaType.HOSPITAL);

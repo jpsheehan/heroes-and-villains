@@ -11,6 +11,7 @@ public class HeroInformationDialog extends HeroSelectionDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param hero The Hero whose information will be displayed
 	 */
 	public HeroInformationDialog(Hero hero) {
 		

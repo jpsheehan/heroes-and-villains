@@ -72,6 +72,7 @@ public class Hero extends Character implements Serializable {
 	
 	/**
 	 * Returns the ability of the Hero (depends on its type).
+	 * @return HeroAbility the Ability the Hero has
 	 */
 	public HeroAbility getAbility() {
 		
@@ -105,8 +106,9 @@ public class Hero extends Character implements Serializable {
 	/**
 	 * Returns the recovery rate of the Hero (depends on its type).
 	 * The recovery rate is a multiplier used when calculating the amount of time to heal.
-	 * A value of < 1 means that the hero will heal slower.
-	 * A value of > 1 means that the hero will heal faster.
+	 * A value of &lt; 1 means that the hero will heal slower.
+	 * A value of &gt; 1 means that the hero will heal faster.
+	 * @return RecoveryRate of the Hero
 	 */
 	public float getRecoveryRate() {
 		

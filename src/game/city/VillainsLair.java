@@ -27,6 +27,8 @@ public class VillainsLair extends Area {
 	/**
 	 * Creates a new Villains Lair.
 	 * @param name The name of the Villains Lair.
+	 * @param description The information that relates to the Villains Lair
+	 * @param villain The Villain who resides in this Villains Lair
 	 */
 	public VillainsLair(String name, String description, Villain villain) {
 		

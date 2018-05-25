@@ -44,6 +44,7 @@ public class City implements Nameable, Describable, Serializable {
 	/**
 	 * Creates a new City.
 	 * @param type The type of city to create.
+	 * @param cityIndex The integer for the number of cities to be played
 	 */
 	public City(CityType type, int cityIndex) {
 		

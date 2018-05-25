@@ -152,8 +152,8 @@ public class CityController implements Serializable {
 	
 	/**
 	 * Moves in a particular direction relative to the current area within the city.
-	 * @param newDirection
-	 * @throws IllegalMoveException 
+	 * @param newDirection The direction the user wishes to move in
+	 * @throws IllegalMoveException If user tries to move in an invalid direction  
 	 */
 	public void move(Direction newDirection) throws IllegalMoveException {
 

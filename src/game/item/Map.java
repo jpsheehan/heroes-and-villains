@@ -16,6 +16,7 @@ public class Map extends Item implements Serializable {
 	/**
 	 * Creates a new Map.
 	 * @param name The name of the Map.
+	 * @param flavourText Information about the Mao
 	 * @param price The price of the Map.
 	 */
 	public Map(String name, String flavourText, int price) {

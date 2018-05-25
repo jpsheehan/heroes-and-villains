@@ -177,7 +177,7 @@ public class DiceRolls extends Minigame<Object, Integer, Integer> {
 	
 	/**
 	 * An isolated test of the DiceRolls minigame.
-	 * @param args
+	 * @param args Not used
 	 */
 	public static void main(String[] args) {
 		
