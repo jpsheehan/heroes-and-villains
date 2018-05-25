@@ -1,12 +1,18 @@
-Compile the source:
+Creating the JAR file:
 
-    javac ???
+  With the project open in Eclipse,
+  
+  1) Click File > Export...
+  2) Navigate to "JAR Runnable File" in the "Java" subtree. Click "Next".
+  3) Select "Main - HeroesAndVillains" as the launch configuration.
+  4) Choose the export destination as you like.
+  5) Make sure "Extract required libraries into generated JAR" is selected.
+  6) Click "Finish".
+  7) Click "OK" for any warnings that appear.
 
-Create the JAR:
+Running the JAR:
 
-  jar -cfm ./HeroesAndVillains.jar MANIFEST.MF -C ./bin/ .
-
-Run the JAR:
-
-  java -jar ./HeroesAndVillains.jar
+  Navigate to the export destination directory from when you created the JAR and run:
+  	
+  	java -jar ./HeroesAndVillains.jar
 
