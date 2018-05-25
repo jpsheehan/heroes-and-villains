@@ -47,6 +47,8 @@ public class DiceRollsGamePanel extends JPanel implements GameEventListener {
 	
 	/**
 	 * Create the panel.
+	 * @param villainsLairPanel The parent panel
+	 * @param battleScreen The current BattleScreen
 	 */
 	public DiceRollsGamePanel(GameEventListener villainsLairPanel, BattleScreen battleScreen) {
 		

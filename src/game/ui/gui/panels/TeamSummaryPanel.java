@@ -28,7 +28,7 @@ public class TeamSummaryPanel extends JPanel {
 
 	/**
 	 * Create the panel.
-	 * @param team
+	 * @param team The team whose information is to be displayed
 	 */
 	public TeamSummaryPanel(Team team) {
 		

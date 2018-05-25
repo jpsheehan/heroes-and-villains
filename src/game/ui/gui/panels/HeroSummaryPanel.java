@@ -31,7 +31,7 @@ public class HeroSummaryPanel extends GenericAreaPanel {
 
 	/**
 	 * Create the panel.
-	 * @param hero The here whose information is being displayed
+	 * @param hero The hero whose information is being displayed
 	 */
 	public HeroSummaryPanel(Hero hero) {
 		

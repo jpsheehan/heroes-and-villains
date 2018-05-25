@@ -52,6 +52,7 @@ public class GameWindow implements GameEventListener {
 
 	/**
 	 * Create the application.
+	 * @param debugMode If true debugMode is to be enabled
 	 */
 	public GameWindow(boolean debugMode) {
 		

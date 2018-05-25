@@ -25,7 +25,7 @@ public class MainMenuPanel extends JPanel {
 
 	/**
 	 * Create the panel.
-	 * @param parent
+	 * @param parent Who called this
 	 */
 	public MainMenuPanel(GameEventListener parent) {
 		

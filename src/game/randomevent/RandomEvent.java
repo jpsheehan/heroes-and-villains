@@ -89,6 +89,7 @@ public class RandomEvent implements Serializable {
 	
 	/**
 	 * Performs the random event.
+	 * @param team The Team who is subject to a random event
 	 * @throws RobberyPreventedException When a law student is in the team and the team was robbed.
 	 * @throws MoneyRobbedException When the team has no items to rob.
 	 * @throws ItemRobbedException When the team is robbed.

@@ -81,8 +81,8 @@ public class MainGamePanel extends JPanel implements GameEventListener, ActionLi
 
 	/**
 	 * Create the application.
-	 * @param env
-	 * @param window
+	 * @param env Current GameEnvironment
+	 * @param window The parent
 	 */
 	public MainGamePanel(GameEnvironment env, GameEventListener window) {
 		this.gameEnvironment = env;
