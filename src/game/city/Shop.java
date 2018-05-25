@@ -31,6 +31,7 @@ public class Shop extends Area {
 	 * @param name The name of the Shop.
 	 * @param items The items the Shop sells.
 	 * @param innKeeper The InnKeeper sells the Items.
+	 * @param description The information that relates to the Shop
 	 */
 	public Shop(String name, String description, ArrayList<Item> items, InnKeeper innKeeper) {
 		super(name, description, AreaType.SHOP);

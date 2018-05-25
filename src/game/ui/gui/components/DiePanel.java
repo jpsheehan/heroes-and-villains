@@ -38,6 +38,7 @@ public class DiePanel extends JPanel implements ActionListener {
 
 	/**
 	 * Create the panel.
+	 * @param parent The parent that called this panel
 	 */
 	public DiePanel(GameEventListener parent) {
 		

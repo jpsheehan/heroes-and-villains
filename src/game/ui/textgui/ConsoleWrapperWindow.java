@@ -29,6 +29,7 @@ public class ConsoleWrapperWindow {
 
 	/**
 	 * Launch the application.
+	 * @param args not used
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

@@ -29,6 +29,7 @@ public class InnKeeper extends Character {
 	
 	/**
 	 * Returns the ShopDialogue of the InnKeeper
+	 * @return the phrases (text) that the Inkeeper uses 
 	 */
 	public Dialogue getDialogue() {
 		return this.dialogue;

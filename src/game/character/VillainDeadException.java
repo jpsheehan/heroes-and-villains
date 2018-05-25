@@ -25,6 +25,7 @@ public class VillainDeadException extends Exception {
 	/**
 	 * Creates a new VillainDeadException.
 	 * @param villain The villain that has died.
+	 * @param reward money the team has been rewarded with for defeating the Villain
 	 */
 	public VillainDeadException(Villain villain, int reward) {
 		

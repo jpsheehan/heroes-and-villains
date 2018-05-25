@@ -27,6 +27,7 @@ public class HealingItem extends Item implements Serializable {
 	/**
 	 * Creates a new HealingItem.
 	 * @param name The name of the HealingItem.
+	 * @param flavourText The information (description) about the HealingItem
 	 * @param price The price of the HealingItem.
 	 * @param restorationLevel The restoration level of the HealingItem. Health is restored in 25% segments, e.g. a restoration level of 2 restores 50% of the Hero's health.
 	 * @param applicationTime The time (in seconds) to restore the specified amount of health.

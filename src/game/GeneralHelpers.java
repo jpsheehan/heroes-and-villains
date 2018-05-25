@@ -237,6 +237,7 @@ public final class GeneralHelpers {
 	/**
 	 * Shuffles an ArrayList (poorly).
 	 * @param list The list to shuffle.
+	 * @param <T> The data type of the array
 	 * @return Returns a copy of the list shuffled.
 	 */
 	public static <T> ArrayList<T> shuffleArrayList(ArrayList<T> list) {
@@ -260,6 +261,7 @@ public final class GeneralHelpers {
 	 * Checks if the array contains a particular item.
 	 * @param array The array to iterate over.
 	 * @param item The item that is being sought.
+	 * @param <T> The data type of the array
 	 * @return True if the item is found, false otherwise.
 	 */
 	public static <T> boolean doesArrayContain(T[] array, T item) {

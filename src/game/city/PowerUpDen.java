@@ -14,6 +14,7 @@ public class PowerUpDen extends Area {
 	/**
 	 * Creates a new Power Up Den.
 	 * @param name The name of the area.
+	 * @param description The information that relates to the PowerUPDen
 	 */
 	public PowerUpDen(String name, String description) {
 		super(name, description, AreaType.POWER_UP_DEN);
